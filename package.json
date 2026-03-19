@@ -1,0 +1,20 @@
+{
+  "name": "nexus-quiz",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "vite build",
+    "cap:build": "npx cap sync android"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "lucide-react": "latest",
+    "@capacitor/core": "latest",
+    "@capacitor/android": "latest"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "latest",
+    "vite": "latest",
+    "@vitejs/plugin-react": "latest"
+  }
+}
