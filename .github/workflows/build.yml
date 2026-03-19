@@ -45,5 +45,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: NexusQuiz-v2.0-Fixed
+          name: NexusQuiz-v2.0-FINAL
           path: android/app/build/outputs/apk/debug/app-debug.apk
