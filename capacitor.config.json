@@ -1,0 +1,7 @@
+{
+  "appId": "com.theinfinitystudios.nexusquiz",
+  "appName": "Nexus Quiz",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
+
