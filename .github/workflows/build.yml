@@ -34,9 +34,9 @@ jobs:
           npx cap add android
           npx cap sync android
 
-      # FIXED: Generate icons AFTER the android folder is created
+            # 6. Generate Mobile Icons (Fixed Command)
       - name: Generate Mobile Icons
-        run: npx @capacitor/assets generate --android --iconSource assets/icon.png
+        run: npx @capacitor/assets generate --android
 
       - name: Build APK
         working-directory: ./android
