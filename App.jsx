@@ -804,12 +804,21 @@ export default function App() {
         </div>
       )}
 
-      {gameState === 'results' && (
-        <div className="text-center p-10 bg-slate-900 border border-slate-800 rounded-[40px] w-full max-w-sm">
+            {gameState === 'results' && (
+        <div className="text-center p-10 bg-slate-900 border border-slate-800 rounded-[40px] w-full max-w-sm animate-in zoom-in duration-300 shadow-2xl">
           <Trophy className="mx-auto mb-4 text-amber-400" size={80} />
-          <h2 className="text-3xl font-black mb-2">Quiz Over!</h2>
-          <p className="text-6xl font-black my-8">{score}<span className="text-xl text-slate-700">/{questions.length}</span></p>
-          <button onClick={() => setGameState('subject_select')} className="w-full py-5 bg-blue-600 rounded-2xl font-black text-xl shadow-lg">Return to Hub</button>
+          <h2 className="text-3xl font-black mb-2 text-white">Quiz Over!</h2>
+          <p className="text-6xl font-black my-8 text-white">{score}<span className="text-xl text-slate-700">/{questions.length}</span></p>
+          
+          <div className="space-y-3">
+            {/* THIS IS THE NEW SHARE BUTTON */}
+            <button onClick={handleShare} className="w-full py-4 bg-emerald-600 rounded-2xl font-black text-lg flex items-center justify-center shadow-lg">
+              <Share2 className="mr-2" size={20}/> Share My Score
+            </button>
+            <button onClick={() => setGameState('subject_select')} className="w-full py-4 bg-blue-600 rounded-2xl font-black text-xl shadow-lg">
+              Return to Hub
+            </button>
+          </div>
         </div>
       )}
 
