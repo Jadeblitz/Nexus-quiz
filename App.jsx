@@ -523,14 +523,6 @@ export default function App() {
     setGameState('playing');
   };
 
-  const finishQuiz = (finalScore) => {
-    const baseGain = isTimeAttack ? finalScore * 20 : finalScore * 10;
-    const newStats = { totalXp: stats.totalXp + baseGain, completed: stats.completed + 1 };
-    setStats(newStats);
-    localStorage.setItem('nexus_stats', JSON.stringify(newStats));
-    setGameState('results');
-  };
-
   const handleAnswer = async (index, isCorrect) => {
     if (isChecking) return;
     setSelectedAnswerIndex(index);
@@ -570,13 +562,6 @@ export default function App() {
         setSelectedAnswerIndex(null);
       }
     }, isTimeAttack ? 500 : 1200);
-  };
-
-  const getRank = (xp) => {
-    if (xp > 15000) return "Omniverse Legend";
-    if (xp > 8000) return "Rank 13 (God)";
-    if (xp > 3000) return "Rank 10 (Sage)";
-    return "Mortal";
   };
 
   const Modal = ({ title, children, onClose, icon: Icon, iconColor }) => (
