@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   Brain, Cpu, Trophy, ArrowRight, RotateCcw, ChevronLeft, Swords, 
   Trophy as SportIcon, Languages, Home, Settings, Volume2, VolumeX, 
-  Smartphone, BarChart3, Users, Timer, Zap, Book, BookOpen, Lightbulb, Film, Flame 
+  Smartphone, BarChart3, Users, Timer, Zap, Book, BookOpen, Lightbulb, Film, Flame, Share2
 } from 'lucide-react';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 
@@ -12,6 +12,16 @@ import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 const rawQuizData = {
   lore: {
     foundational: [
+      ["Matchup: Jayden (Age 13) vs a Rank 2 Advanced Warrior?", "Jayden wins instantly via Reality Factor (RF) override", "The Warrior wins using technique", "Stalemate", "Jayden loses his memories"],
+      ["Matchup: Michelle (with Ring) vs Standard Chrysealean Steel?", "The Ring provides absolute defense; the steel shatters", "The steel pierces the ring", "The ring turns the steel into Aetherium", "Michelle is forced to retreat"],
+      ["Who are the 'Mad Gods'?", "Deities who lost their sanity trying to comprehend the Triune", "Former Kings of Chrysealis", "Human rebels in Detroit", "The creators of Polyvenium"],
+      ["What is the primary role of the Prime Creator?", "Maintaining the existence of the Ordverse through the Vessel", "Destroying lower dimensions", "Ruling the House of War", "Training Astraea"],
+      ["Matchup: Mystic Kid vs 1,000 Earth Soldiers?", "Mystic Kid wins without taking a scratch", "The soldiers win using tactics", "Mystic Kid is captured", "Mystic Kid reverses time to avoid the fight"],
+      ["What happens if a Mortal Anchor is destroyed?", "The connected deity loses their link to humanity and may become a Mad God", "The deity becomes Rank 14", "The Ordverse restarts", "Nothing happens"],
+      ["Matchup: Jayden (Pre-Meditation) vs Mephistopheles?", "Jayden wins but dies from exhaustion", "Mephistopheles wins effortlessly", "They become allies", "Jayden erases him from history"],
+      ["What is the 'House of War'?", "The lineage responsible for Chrysealis's military dominance", "A prison for Mad Gods", "Jayden's home in Detroit", "The source of the Memory Lock"],
+      ["Who is the second pillar of the Triune?", "Supremus Daragvener", "Aetherius Dominus", "τὸ ἄγνωστον", "Valthar"],
+      ["Matchup: Nichothéos vs an Army of Rank 7 Kings?", "Nichothéos dissolves their entire war by simply existing near them", "The Kings win by numbers", "Nichothéos is forced to use 100% AD power", "The Kings trap him in a seal"]
       ["Who makes up the Triune Symmetry?", "Aetherius Dominus, Supremus Daragvener, and τὸ ἄγνωστον", "Nicholas, Astraea, and Valthar", "The 1st, 4th, and 6th Kings", "Jayden, Mephistopheles, and Kailus"],
       ["What is a 'Mad God' in the Ordverse?", "A deity corrupted by absorbing too much chaotic dimensional energy", "A god of war who lost a battle", "A ruler of the Supreme Universe", "A human who drank Chrysealean blood"],
       ["Who is known as the Prime Creator?", "Aetherius Dominus", "Supremus Daragvener", "King Kailus", "Valthar Demetrius"],
@@ -79,6 +89,16 @@ const rawQuizData = {
       ["Who is the new Chrysealean War-God following Nicholas's banishment?", "Astraea Demetrius", "Valthar", "Yveldinjar", "Miknelah"]
     ],
     intermediate: [
+      ["Matchup: Mystic Kid (HIMMAGE active) vs Rank 9 Saint?", "HIMMAGE automates the Saint's defeat in milliseconds", "The Saint wins through magical experience", "It's a tie", "Mystic Kid's vessel collapses"],
+      ["What is the defining trait of a 'Reality Breaker'?", "Their presence alone cracks the space-time of lower-priority dimensions", "They can eat Polyvenium", "They are Rank 15", "They created the 1st King"],
+      ["What is the Triune Symmetry?", "The fundamental three-fold Godhead of the Ordverse", "A weapon used by Kailus", "A ranking system for soldiers", "A bridge between Earth and Chrysealis"],
+      ["Matchup: Astraea vs Nichothéos (0% AD)?", "Nichothéos wins; Astraea is just a 'manageable' version of his power", "Astraea wins as the current War-God", "They are exactly equal", "The King stops the fight"],
+      ["Why are the Rank 3 Authorities terrified of Nicholas?", "He simplified the complexity of the Omniverse into one empire alone", "He stole their Reality Factor", "He is actually their creator", "He plans to destroy the Supreme Universe"],
+      ["What is the 'Perfected Combined State'?", "The synchronization of Jayden’s humanity and Nichothéos’s divinity", "Rank 14 status", "The result of the Memory Lock breaking", "A state only Valthar achieved"],
+      ["Matchup: Mephistopheles vs The Rank 3 Authorities?", "Mephistopheles is a 'Fixed Point' they cannot easily remove", "The Authorities delete him", "Mephistopheles becomes an Authority", "They ignore him"],
+      ["What is the 'Aetheridom Expanse'?", "The infinite divine territory ruled by Chrysealis", "A desert on Earth", "The gap between the Triune pillars", "Mephistopheles's prison"],
+      ["Matchup: Valthar the Lost Prince vs Rank 13 Beginner?", "Valthar wins effortlessly due to God of Raw Strength status", "The Rank 13 wins", "It's a stalemate", "Valthar is banished"],
+      ["What represents 'Finality' in the title God of Death?", "The arrival of Nichothéos means the war is already over", "His ability to kill immortals", "His rule over the afterlife", "His black trench coat"]
       ["Matchup: Jayden vs Mephistopheles on Earth?", "Jayden won but died from extreme exhaustion", "Mephistopheles destroyed Earth", "Astraea intervened to save them both", "James Cameron defeated Mephistopheles"],
       ["What defines a 'Destroyer Deity' in Chrysealean history?", "A god whose domain naturally erases matter rather than conquering it", "A rebel who fights the Triune Symmetry", "Any Rank 10 Sage", "A mortal who wields an Aetherium weapon"],
       ["Who is Supremus Daragvener?", "The second pillar of the Triune Symmetry", "The lost 2nd King of Chrysealis", "The creator of the Memory Lock", "The true identity of James Cameron"],
@@ -145,6 +165,16 @@ const rawQuizData = {
       ["Which generation of Chrysealean Kings does Kailus Demetrius represent?", "The 6th King", "The 5th King", "The 4th King", "The 7th King"]
     ],
     advanced: [
+      ["Matchup: Nichothéos (1% AD Power) vs The 666 Mad Gods?", "Nichothéos overrides their chaotic RF and erases them", "The Mad Gods win by corruption", "The Triune Symmetry intervenes", "Nichothéos becomes a Mad God"],
+      ["What is τὸ ἄγνωστον?", "The Unknown—the pillar of the Triune that defies even divine logic", "The name of the Memory Lock", "The planet Jayden was born on", "Mephistopheles's real name"],
+      ["Matchup: Aetherius Dominus vs Supremus Daragvener?", "They are balanced pillars of the same Symmetry; no winner exists", "Aetherius wins", "Supremus wins", "The Ordverse collapses if they clash"],
+      ["What is the mechanical function of the 'Vessel'?", "To process infinite power into finite actions without destroying the universe", "To store Polyvenium", "To shield the King from the Mad Gods", "To allow mortals to become gods"],
+      ["Matchup: Nichothéos vs The Concept of Time?", "Nichothéos exists as a Reality Breaker beyond temporal priority", "Time slows him down", "He is trapped in a loop", "He uses a watch to control it"],
+      ["Why did Kailus choose Astraea over Nicholas?", "He wanted a War-God of 'Technique' he could control, not a God of 'Existence'", "Astraea was stronger", "Nicholas refused to fight", "Nicholas was dead"],
+      ["Matchup: The Prime Creator vs a Rank 14 Progenitor?", "The Prime Creator is the source; the Progenitor is merely a reflection", "The Progenitor wins", "It is a fair fight", "They cannot interact"],
+      ["What is the 'X+1' Scaling Logic?", "Nichothéos becomes exactly one level higher than any resistance he meets", "It’s a math formula for XP", "The rule for the Memory Lock", "How Polyvenium is mined"],
+      ["Matchup: Jayden (Detroit Era) vs A Reality Breaker?", "Jayden loses unless he breaks the Memory Lock to become Nichothéos", "Jayden wins with his sword", "The Breaker ignores him", "James Cameron saves him"],
+      ["What is the 'Supreme Universe' randomization?", "A security measure that stripped Nichothéos of his specific identity upon banishment", "A game mode in NexusQuiz", "The way stars are born", "How Mephistopheles was created"]
       ["What happens when a Reality Breaker enters a lower dimension?", "Their base RF exceeds the dimensional cap, causing space-time tears", "They lose all their powers", "They instantly become the King of that realm", "They trigger a Polyvenium meteor strike"],
       ["Matchup: Nichothéos (0% AD) vs Valthar the Lost Prince?", "Nichothéos wins because his 'Existence' overrides Valthar's 'Technique'", "Valthar wins due to mastering all weapons", "It is a perfect stalemate", "Valthar wins using the Triune Symmetry"],
       ["What is the mechanical difference between a Reality Breaker and a True God (Rank 14)?", "A True God naturally encompasses all realities, while a Breaker forcibly shatters them", "A Reality Breaker is Rank 15", "True Gods require a Vessel; Breakers do not", "There is no difference"],
@@ -250,6 +280,21 @@ const rawQuizData = {
       ["Points for a free throw in basketball?", "1", "2", "3", "4"],
       ["Which sport uses a shuttlecock?", "Badminton", "Tennis", "Squash", "Table Tennis"],
       ["Color of the middle ring on the Olympic flag?", "Black", "Red", "Blue", "Green"]
+      ["Which sport is known as the 'Beautiful Game'?", "Football", "Basketball", "Tennis", "Golf"],
+      ["How many players are on a standard basketball team on the court?", "5", "6", "11", "7"],
+      ["What color is the middle ring on the Olympic flag?", "Black", "Red", "Blue", "Green"],
+      ["In which sport would you use a shuttlecock?", "Badminton", "Tennis", "Table Tennis", "Squash"],
+      ["Which country has won the most FIFA World Cups?", "Brazil", "Germany", "Italy", "Argentina"],
+      ["How many minutes is a standard professional football match (excluding extra time)?", "90", "45", "60", "100"],
+      ["What is the highest possible break in a standard game of Snooker?", "147", "155", "140", "160"],
+      ["Which city hosts the Wimbledon tennis tournament?", "London", "Paris", "New York", "Melbourne"],
+      ["In American Football, how many points is a touchdown worth?", "6", "3", "7", "2"],
+      ["Which planet-themed team does LeBron James currently play for?", "Lakers", "Warriors", "Heat", "Cavaliers"]
+      ["Which Super Eagle was known as 'The Bull'?", "Daniel Amokachi", "Rashidi Yekini", "Jay-Jay Okocha", "Finidi George"],
+      ["In what year did Nigeria win the Olympic Gold in football?", "1996", "1994", "2000", "1992"],
+      ["Who scored Nigeria's first-ever World Cup goal?", "Rashidi Yekini", "Amuneke", "Siasia", "Ikpeba"],
+      ["How many AFCON titles has Nigeria won as of 2024?", "3", "2", "4", "5"],
+      ["Who is the most capped Super Eagles player?", "Ahmed Musa", "Vincent Enyeama", "Joseph Yobo", "Mikel Obi"]
     ],
     intermediate: [
       ["Most Ballon d'Or awards?", "Messi", "Ronaldo", "Zidane", "Pele"], 
@@ -258,6 +303,16 @@ const rawQuizData = {
       ["2023/24 Premier League winner?", "Manchester City", "Arsenal", "Liverpool", "Chelsea"],
       ["Record for most PL goals in a season (36)?", "Erling Haaland", "Mo Salah", "Alan Shearer", "Luis Suarez"],
       ["2023 African Footballer of the Year?", "Victor Osimhen", "Victor Boniface", "Ademola Lookman", "Alex Iwobi"]
+      ["Who is the all-time top scorer for the Nigerian Super Eagles?", "Rashidi Yekini", "Segun Odegbami", "Yakubu Aiyegbeni", "Obafemi Martins"],
+      ["Which club has won the most UEFA Champions League titles?", "Real Madrid", "AC Milan", "Liverpool", "Bayern Munich"],
+      ["Who won the 2023 African Footballer of the Year award?", "Victor Osimhen", "Mohamed Salah", "Sadio Mane", "Riyad Mahrez"],
+      ["In which year did Nigeria's 'Dream Team' win Olympic Football gold?", "1996", "1994", "2000", "1992"],
+      ["Which manager led Leicester City to their miracle Premier League title in 2016?", "Claudio Ranieri", "Jose Mourinho", "Pep Guardiola", "Arsene Wenger"],
+      ["Who holds the record for the most goals in a single Premier League season (38-game)?", "Erling Haaland", "Mohamed Salah", "Alan Shearer", "Luis Suarez"],
+      ["Which tennis player is known as the 'King of Clay'?", "Rafael Nadal", "Roger Federer", "Novak Djokovic", "Andy Murray"],
+      ["How many AFCON titles has Nigeria won?", "3", "2", "4", "5"],
+      ["Which stadium is the home of the Super Eagles?", "Godswill Akpabio Stadium", "Teslim Balogun Stadium", "Lagos National Stadium", "Nnamdi Azikiwe Stadium"],
+      ["Who was the first African to play in the English Premier League?", "Peter Ndlovu", "Jay-Jay Okocha", "Nwankwo Kanu", "George Weah"]
     ],
     advanced: [
       ["First African Ballon d'Or?", "George Weah", "Eto'o", "Drogba", "Okocha"],
@@ -266,6 +321,21 @@ const rawQuizData = {
       ["First player sold for over £100 million?", "Neymar", "Pogba", "Ronaldo", "Bale"],
       ["Country with the most Olympic medals?", "USA", "Russia", "China", "Germany"],
       ["In cricket, what is a batsman being out for zero called?", "Duck", "Goose", "Wide", "Dot"]
+      ["Who is the most expensive football player in history (transfer fee)?", "Neymar Jr", "Kylian Mbappé", "Philippe Coutinho", "Enzo Fernández"],
+      ["Which player holds the record for most assists in a single Premier League season?", "Kevin De Bruyne / Thierry Henry", "Cesc Fabregas", "Mesut Ozil", "Frank Lampard"],
+      ["Who was the first African to win the Ballon d'Or?", "George Weah", "Samuel Eto'o", "Didier Drogba", "Abedi Pele"],
+      ["Which country hosted the first-ever FIFA World Cup in 1930?", "Uruguay", "Italy", "France", "Brazil"],
+      ["Which goalkeeper has the most clean sheets in Premier League history?", "Petr Cech", "David James", "Mark Schwarzer", "David De Gea"],
+      ["Who won the first-ever Formula 1 World Championship in 1950?", "Giuseppe Farina", "Juan Manuel Fangio", "Alberto Ascari", "Stirling Moss"],
+      ["Which player scored the 'Hand of God' goal?", "Diego Maradona", "Pele", "Zico", "Lionel Messi"],
+      ["Which club was the first to win 'The Treble' in English football?", "Manchester United", "Manchester City", "Liverpool", "Arsenal"],
+      ["How many Grand Slam titles did Serena Williams win in her career?", "23", "22", "24", "21"],
+      ["Who is the youngest player to ever score in a World Cup final?", "Pelé", "Kylian Mbappé", "Lionel Messi", "Cristiano Ronaldo"]
+      ["Which player has the most goals in UCL history?", "Cristiano Ronaldo", "Lionel Messi", "Robert Lewandowski", "Karim Benzema"],
+      ["Which club won 3 consecutive UCL titles between 2016-2018?", "Real Madrid", "Barcelona", "Bayern Munich", "Liverpool"],
+      ["Who is the most expensive football player of all time?", "Neymar Jr", "Kylian Mbappé", "Philippe Coutinho", "Ousmane Dembélé"],
+      ["Which team won the first-ever Premier League title in 1992?", "Manchester United", "Blackburn Rovers", "Arsenal", "Leeds United"],
+      ["Who holds the record for most goals in a single calendar year (91)?", "Lionel Messi", "Cristiano Ronaldo", "Pele", "Gerd Müller"]
     ]
   },
   languages: {
@@ -357,11 +427,22 @@ const VAULT_CONSTANTS = [
 ];
 
 export default function App() {
-  const [gameState, setGameState] = useState('subject_select'); 
+  // --- 📦 CORE STATES ---
+  const [gameState, setGameState] = useState('subject_select');
   const [showSettings, setShowSettings] = useState(false);
   const [showVault, setShowVault] = useState(false);
   const [settings, setSettings] = useState({ musicEnabled: true, sfxEnabled: true, hapticsEnabled: true });
   const [stats, setStats] = useState({ totalXp: 0, completed: 0 });
+
+  // --- 🌟 ANIMATION STATES ---
+  const [showRankUp, setShowRankUp] = useState(false);
+  const [newRankInfo, setNewRankInfo] = useState({ title: '', level: '' });
+
+  // --- 🔥 STREAK ENGINE ---
+  const [streak, setStreak] = useState(0);
+  const [showStreakBonus, setShowStreakBonus] = useState(false);
+
+  // --- 🕹️ GAMEPLAY STATES ---
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
   const [questions, setQuestions] = useState([]);
@@ -371,10 +452,6 @@ export default function App() {
   const [isTimeAttack, setIsTimeAttack] = useState(false);
   const [isChecking, setIsChecking] = useState(false);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
-  
-  // 🔥 STREAK ENGINE
-  const [streak, setStreak] = useState(0);
-  const [showStreakBonus, setShowStreakBonus] = useState(false);
 
   const bgMusic = useRef(new Audio('/music.mp3'));
   const correctSfx = useRef(new Audio('/correct.mp3'));
@@ -511,6 +588,72 @@ export default function App() {
       </div>
     </div>
   );
+
+    // --- 🏆 THE 14 RANK ENGINE ---
+  const getRank = (xp) => {
+    const RANKS = ["Basic", "Advanced Rank", "Elite", "Veteran", "Commander", "Knight", "King", "Emperor", "Saint", "Sage", "Primordial", "Progenitor", "God"];
+    if (xp >= 50000) return { title: "Rank 14", level: "True God", color: "text-amber-400 font-black" };
+    
+    const xpPerSubStep = 1250; 
+    const stepIndex = Math.floor(xp / xpPerSubStep);
+    const rankIndex = Math.floor(stepIndex / 3);
+    const subLevelIndex = stepIndex % 3;
+    const subLevels = ["Beginner", "Advanced", "Peak"];
+    
+    const rankName = RANKS[rankIndex] || "Basic";
+    const subName = subLevels[subLevelIndex] || "Beginner";
+    
+    return {
+      title: `Rank ${rankIndex + 1}`,
+      level: `${rankName} (${subName})`,
+      color: rankIndex >= 10 ? "text-rose-500" : rankIndex >= 8 ? "text-purple-400" : "text-blue-400"
+    };
+  };
+
+  // --- 📲 THE SHARE ENGINE ---
+  const handleShare = async () => {
+    const rankData = getRank(stats.totalXp);
+    const streakMsg = streak >= 5 ? `🔥 Max Streak: ${streak}` : '';
+    const shareText = `I just reached ${rankData.title}: ${rankData.level} on NexusQuiz! 🏆\n${streakMsg}\n✨ Total XP: ${stats.totalXp}\n\nCan you beat an Engineering Legend? #NexusQuiz #Ordverse`;
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'NexusQuiz Achievement', text: shareText });
+      } catch (err) { console.log("Cancelled"); }
+    } else {
+      await navigator.clipboard.writeText(shareText);
+      alert("Score copied to clipboard!");
+    }
+  };
+
+  // YOUR PASTE ENDS HERE - THE NEXT LINE SHOULD BE: return (
+
+    // --- 🏁 THE FINISH LINE LOGIC ---
+  const finishQuiz = (finalScore) => {
+    // 1. Calculate the XP gain (Time Attack gives double!)
+    const baseGain = isTimeAttack ? finalScore * 20 : finalScore * 10;
+    const oldXp = stats.totalXp;
+    const newXp = oldXp + baseGain;
+
+    // 2. Rank Up Check: Did we cross a 1,250 XP milestone?
+    const oldStep = Math.floor(oldXp / 1250);
+    const newStep = Math.floor(newXp / 1250);
+
+    if (newStep > oldStep) {
+      const rankData = getRank(newXp);
+      setNewRankInfo(rankData); // Load the Rank Up screen info
+      setShowRankUp(true);      // Trigger the gold flash animation
+      setTimeout(() => setShowRankUp(false), 4000); // Hide after 4 seconds
+    }
+
+    // 3. Save the new progress
+    const newStats = { ...stats, totalXp: newXp, completed: stats.completed + 1 };
+    setStats(newStats);
+    localStorage.setItem('nexus_stats', JSON.stringify(newStats));
+    
+    // 4. Move to the results screen
+    setGameState('results');
+  };
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-200 p-6 flex flex-col items-center">
@@ -663,6 +806,21 @@ export default function App() {
           <button onClick={() => setGameState('subject_select')} className="w-full mt-10 py-4 font-bold text-slate-500 underline">Back Home</button>
         </div>
       )}
+            {/* 🌟 CELESTIAL RANK UP OVERLAY */}
+      {showRankUp && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 animate-in fade-in duration-500">
+          <div className="absolute inset-0 bg-amber-500/10 animate-pulse" />
+          <div className="relative text-center p-12 rounded-[50px] border-2 border-amber-400/50 bg-slate-900 shadow-[0_0_50px_rgba(251,191,36,0.4)] animate-in zoom-in duration-700">
+            <Zap className="mx-auto mb-6 text-amber-400 animate-bounce" size={80} />
+            <h2 className="text-sm font-black text-amber-500 uppercase tracking-[0.3em] mb-2 text-center">Evolution Complete</h2>
+            <h1 className="text-5xl font-black text-white mb-4 italic text-center">RANK UP!</h1>
+            <div className="h-px w-32 bg-amber-400/30 mx-auto mb-6" />
+            <p className="text-2xl font-bold text-white mb-1 text-center">{newRankInfo.title}</p>
+            <p className="text-lg text-amber-400 italic text-center">{newRankInfo.level}</p>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
