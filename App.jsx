@@ -295,32 +295,37 @@ const rawQuizData = {
 };
 
 // ==========================================
-// 🛡️ BULLETPROOF PARSING ENGINE
+// 🛡️ TRUE BULLETPROOF PARSING ENGINE
 // ==========================================
 const parseData = (data) => {
   const parsed = {};
-  try {
-    for (const subject in data) {
-      parsed[subject] = {};
-      for (const diff in data[subject]) {
-        if (Array.isArray(data[subject][diff])) {
-          parsed[subject][diff] = data[subject][diff].map((q, idx) => ({
-            id: `${subject}_${diff}_${idx}`, 
-            text: q[0] || "Question text missing",
-            options: [
-              {text: q[1] || "A", isCorrect: true}, 
-              {text: q[2] || "B", isCorrect: false}, 
-              {text: q[3] || "C", isCorrect: false}, 
-              {text: q[4] || "D", isCorrect: false}
-            ]
-          }));
-        } else {
-          parsed[subject][diff] = [];
-        }
+  for (const subject in data) {
+    parsed[subject] = {};
+    for (const diff in data[subject]) {
+      parsed[subject][diff] = []; // Always create the category to prevent crashes
+      
+      if (Array.isArray(data[subject][diff])) {
+        data[subject][diff].forEach((q, idx) => {
+          try {
+            // Only load the question if it actually has text inside it
+            if (q && Array.isArray(q) && q.length > 1) {
+              parsed[subject][diff].push({
+                id: `${subject}_${diff}_${idx}`, 
+                text: q[0] || "Question text missing",
+                options: [
+                  {text: q[1] || "A", isCorrect: true}, 
+                  {text: q[2] || "B", isCorrect: false}, 
+                  {text: q[3] || "C", isCorrect: false}, 
+                  {text: q[4] || "D", isCorrect: false}
+                ]
+              });
+            }
+          } catch (err) {
+            console.log(`Skipped a broken question in ${subject}`);
+          }
+        });
       }
     }
-  } catch (err) {
-    console.error("Data parsing error protected", err);
   }
   return parsed;
 };
@@ -649,7 +654,7 @@ export default function App() {
               <div><p className="font-bold">You</p><p className="text-xs text-blue-400 italic">Level {Math.floor(stats.totalXp/100)}</p></div>
               <p className="text-2xl font-black text-white">{stats.totalXp} XP</p>
             </div>
-            {[{n: "Nichothéos", x: 99999}, {n: "Daragvener", x: 25000}, {n: "Akure_Dev", x: 12000}].map((u, i) => (
+            {[{n: "Nichothéos", x: 99999}, {n: "Daragvener", x: 25000}, {n: "Thril_ler", x: 12000}].map((u, i) => (
               <div key={i} className="p-5 bg-slate-900/50 border border-slate-800 rounded-3xl flex justify-between items-center opacity-60 text-left">
                 <p className="font-bold">{u.n}</p><p className="font-black">{u.x} XP</p>
               </div>
