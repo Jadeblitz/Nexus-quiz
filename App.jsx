@@ -1051,6 +1051,235 @@ export default function App() {
                   localStorage.setItem('nexus_settings', JSON.stringify(ns));
                 }} className={`w-12 h-6 rounded-full ${settings[key] ? 'bg-blue-500' : 'bg-slate-700'}`}>
                   <div className={`w-4 h-4 bg-white rounded-full transition-all ${settings[key] ? 'translate-x-7' : 'translate-x-1'}`} />
+// ==========================================
+// 🛡️ BULLETPROOF ENGINE LOGIC
+// ==========================================
+const parseData = (data) => {
+  const parsed = {};
+  try {
+    for (const subject in data) {
+      parsed[subject] = {};
+      for (const diff in data[subject]) {
+        // Safety check to prevent crashes on broken questions
+        if (Array.isArray(data[subject][diff])) {
+          parsed[subject][diff] = data[subject][diff].map((q, idx) => ({
+            id: `${subject}_${diff}_${idx}`, 
+            text: q[0] || "Question text missing",
+            options: [
+              {text: q[1] || "A", isCorrect: true}, 
+              {text: q[2] || "B", isCorrect: false}, 
+              {text: q[3] || "C", isCorrect: false}, 
+              {text: q[4] || "D", isCorrect: false}
+            ]
+          }));
+        } else {
+          parsed[subject][diff] = [];
+        }
+      }
+    }
+  } catch (err) {
+    console.error("Data parsing error protected", err);
+  }
+  return parsed;
+};
+
+const quizData = parseData(rawQuizData);
+
+const SUBJECTS = [
+  { id: 'science', title: 'Science', icon: Brain, color: 'text-blue-400' },
+  { id: 'tech', title: 'Tech & Math', icon: Cpu, color: 'text-indigo-400' },
+  { id: 'history', title: 'History', icon: BookOpen, color: 'text-amber-600' },
+  { id: 'funfact', title: 'Fun Facts', icon: Lightbulb, color: 'text-yellow-400' },
+  { id: 'entertainment', title: 'Entertainment', icon: Film, color: 'text-purple-400' },
+  { id: 'sports', title: 'Sports', icon: SportIcon, color: 'text-orange-500' },
+  { id: 'languages', title: 'Languages', icon: Languages, color: 'text-pink-400' },
+  { id: 'lore', title: 'Ordverse Lore', icon: Swords, color: 'text-rose-500' }
+];
+
+const DIFFICULTIES = [
+  { id: 'foundational', title: 'Foundational', color: 'text-emerald-400', border: 'border-emerald-500/30' },
+  { id: 'intermediate', title: 'Intermediate', color: 'text-blue-400', border: 'border-blue-500/30' },
+  { id: 'advanced', title: 'Advanced', color: 'text-rose-400', border: 'border-rose-500/30' }
+];
+
+const VAULT_CONSTANTS = [
+  { name: "Gas Constant (R)", value: "8.314 J/(mol·K)", formula: "PV = nRT" },
+  { name: "Gravity (g)", value: "9.81 m/s²", formula: "F = mg" },
+  { name: "Water Density (ρ)", value: "1000 kg/m³", formula: "at 4°C" },
+  { name: "Faraday (F)", value: "96,485 C/mol", formula: "Q = nF" }
+];
+
+export default function App() {
+  const [gameState, setGameState] = useState('subject_select'); 
+  const [showSettings, setShowSettings] = useState(false);
+  const [showVault, setShowVault] = useState(false);
+  const [settings, setSettings] = useState({ musicEnabled: true, sfxEnabled: true, hapticsEnabled: true });
+  const [stats, setStats] = useState({ totalXp: 0, completed: 0 });
+  const [selectedSubject, setSelectedSubject] = useState(null);
+  const [selectedDifficulty, setSelectedDifficulty] = useState(null);
+  const [questions, setQuestions] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(60);
+  const [isTimeAttack, setIsTimeAttack] = useState(false);
+  const [isChecking, setIsChecking] = useState(false);
+  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
+  
+  const [streak, setStreak] = useState(0);
+  const [showStreakBonus, setShowStreakBonus] = useState(false);
+
+  const bgMusic = useRef(new Audio('/music.mp3'));
+  const correctSfx = useRef(new Audio('/correct.mp3'));
+  const wrongSfx = useRef(new Audio('/wrong.mp3'));
+
+  useEffect(() => {
+    // 🛡️ Safety Net: If save data is corrupted, wipe it and start fresh instead of crashing
+    try {
+      const s1 = localStorage.getItem('nexus_stats');
+      const s2 = localStorage.getItem('nexus_settings');
+      if (s1) setStats(JSON.parse(s1));
+      if (s2) setSettings(JSON.parse(s2));
+    } catch (e) {
+      console.log("Corrupted save data detected. Resetting.");
+      localStorage.removeItem('nexus_stats');
+      localStorage.removeItem('nexus_settings');
+    }
+    bgMusic.current.loop = true;
+  }, []);
+
+  useEffect(() => {
+    if (settings.musicEnabled && gameState !== 'playing') {
+      bgMusic.current.play().catch(() => {});
+    } else {
+      bgMusic.current.pause();
+    }
+  }, [settings.musicEnabled, gameState]);
+
+  useEffect(() => {
+    let timer;
+    if (gameState === 'playing' && isTimeAttack && timeLeft > 0) {
+      timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
+    } else if (timeLeft === 0 && gameState === 'playing') {
+      finishQuiz(score);
+    }
+    return () => clearInterval(timer);
+  }, [gameState, timeLeft, isTimeAttack]);
+
+  const shuffle = (array) => {
+    let shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  const startQuiz = (timeMode) => {
+    setIsTimeAttack(timeMode);
+    setTimeLeft(60);
+    setStreak(0);
+    setShowStreakBonus(false);
+    
+    // 🛡️ Safety Net: Check if the category exists before loading
+    const subjectData = quizData[selectedSubject.id];
+    if (!subjectData || !subjectData[selectedDifficulty.id] || subjectData[selectedDifficulty.id].length === 0) {
+       alert("No questions available for this level yet!");
+       setGameState('subject_select');
+       return;
+    }
+
+    let pool = subjectData[selectedDifficulty.id];
+    const limit = timeMode ? 20 : 10;
+    const randomized = shuffle(pool).slice(0, Math.min(pool.length, limit)).map(q => ({
+      ...q, options: shuffle(q.options)
+    }));
+    
+    setQuestions(randomized);
+    setCurrentIndex(0);
+    setScore(0);
+    setGameState('playing');
+  };
+
+  const finishQuiz = (finalScore) => {
+    const baseGain = isTimeAttack ? finalScore * 20 : finalScore * 10;
+    const newStats = { totalXp: stats.totalXp + baseGain, completed: stats.completed + 1 };
+    setStats(newStats);
+    localStorage.setItem('nexus_stats', JSON.stringify(newStats));
+    setGameState('results');
+  };
+
+  const handleAnswer = async (index, isCorrect) => {
+    if (isChecking) return;
+    setSelectedAnswerIndex(index);
+    setIsChecking(true);
+
+    if (isCorrect) {
+      setScore(s => s + 1);
+      
+      const newStreak = streak + 1;
+      setStreak(newStreak);
+      if (newStreak > 0 && newStreak % 5 === 0) {
+         setShowStreakBonus(true);
+         setTimeout(() => setShowStreakBonus(false), 2000);
+         setStats(prev => {
+             const updated = { ...prev, totalXp: prev.totalXp + 50 };
+             localStorage.setItem('nexus_stats', JSON.stringify(updated));
+             return updated;
+         });
+      }
+
+      if (settings.sfxEnabled) correctSfx.current.play();
+      if (settings.hapticsEnabled) await Haptics.notification({ type: NotificationType.Success });
+    } else {
+      setStreak(0);
+      if (settings.sfxEnabled) wrongSfx.current.play();
+      if (settings.hapticsEnabled) await Haptics.impact({ style: ImpactStyle.Heavy });
+    }
+
+    setTimeout(() => {
+      if (currentIndex < questions.length - 1) {
+        setCurrentIndex(c => c + 1);
+        setSelectedAnswerIndex(null);
+        setIsChecking(false);
+      } else {
+        finishQuiz(score + (isCorrect ? 1 : 0));
+        setIsChecking(false);
+        setSelectedAnswerIndex(null);
+      }
+    }, isTimeAttack ? 500 : 1200);
+  };
+
+  const getRank = (xp) => {
+    if (xp > 15000) return "Omniverse Legend";
+    if (xp > 8000) return "Rank 13 (God)";
+    if (xp > 3000) return "Rank 10 (Sage)";
+    return "Mortal";
+  };
+
+  const Modal = ({ title, children, onClose, icon: Icon, iconColor }) => (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/90 backdrop-blur-md">
+      <div className="w-full max-w-sm bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl overflow-y-auto max-h-[85vh]">
+        <h2 className="text-2xl font-black mb-6 flex items-center">{Icon && <Icon className={`mr-3 ${iconColor}`} />} {title}</h2>
+        {children}
+        <button onClick={onClose} className="w-full mt-8 py-4 bg-slate-800 rounded-xl font-bold">Close</button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-200 p-6 flex flex-col items-center">
+      {showSettings && (
+        <Modal title="Settings" onClose={() => setShowSettings(false)} icon={Settings} iconColor="text-blue-400">
+           <div className="space-y-6">
+            {['musicEnabled', 'sfxEnabled', 'hapticsEnabled'].map((key) => (
+              <div key={key} className="flex items-center justify-between">
+                <span className="capitalize">{key.replace('Enabled', '')}</span>
+                <button onClick={() => {
+                  const ns = {...settings, [key]: !settings[key]};
+                  setSettings(ns);
+                  localStorage.setItem('nexus_settings', JSON.stringify(ns));
+                }} className={`w-12 h-6 rounded-full ${settings[key] ? 'bg-blue-500' : 'bg-slate-700'}`}>
+                  <div className={`w-4 h-4 bg-white rounded-full transition-all ${settings[key] ? 'translate-x-7' : 'translate-x-1'}`} />
                 </button>
               </div>
             ))}
@@ -1072,7 +1301,6 @@ export default function App() {
         </Modal>
       )}
 
-      {/* --- Header --- */}
       <div className="w-full max-w-4xl flex justify-between items-center mb-8">
         <div className="flex items-center space-x-2" onClick={() => setGameState('subject_select')}>
           <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-2 rounded-lg"><Brain className="text-white" size={20} /></div>
@@ -1084,7 +1312,6 @@ export default function App() {
         </div>
       </div>
 
-      {/* --- State 1: Subject Select --- */}
       {gameState === 'subject_select' && (
         <div className="w-full max-w-2xl space-y-6">
           <div className="bg-slate-900/50 p-6 rounded-3xl border border-slate-800 flex justify-around">
@@ -1106,7 +1333,6 @@ export default function App() {
         </div>
       )}
 
-      {/* --- State 2: Difficulty Select --- */}
       {gameState === 'difficulty_select' && (
         <div className="w-full max-w-sm space-y-4">
            <button onClick={() => setGameState('subject_select')} className="text-slate-500 flex items-center mb-4"><ChevronLeft size={16}/> Back</button>
@@ -1121,7 +1347,6 @@ export default function App() {
         </div>
       )}
 
-      {/* --- State 3: Mode Select --- */}
       {gameState === 'mode_select' && (
         <div className="w-full max-w-sm space-y-4 text-center">
            <button onClick={() => setGameState('difficulty_select')} className="text-slate-500 flex items-center mb-4"><ChevronLeft size={16}/> Back</button>
@@ -1134,11 +1359,8 @@ export default function App() {
         </div>
       )}
 
-      {/* --- State 4: Playing --- */}
       {gameState === 'playing' && (
         <div className="w-full max-w-xl relative">
-          
-          {/* 🔥 STREAK POPUP ANIMATION */}
           {showStreakBonus && (
              <div className="absolute top-[-40px] left-1/2 transform -translate-x-1/2 text-orange-400 font-black flex items-center bg-orange-500/20 px-4 py-2 rounded-full border border-orange-500/50 animate-bounce">
                <Flame className="mr-2" size={20}/> +50 XP STREAK!
@@ -1169,7 +1391,6 @@ export default function App() {
         </div>
       )}
 
-      {/* --- State 5: Results --- */}
       {gameState === 'results' && (
         <div className="text-center p-10 bg-slate-900 border border-slate-800 rounded-[40px] w-full max-w-sm">
           <Trophy className="mx-auto mb-4 text-amber-400" size={80} />
@@ -1179,7 +1400,6 @@ export default function App() {
         </div>
       )}
 
-      {/* --- State 6: Leaderboard --- */}
       {gameState === 'leaderboard' && (
         <div className="w-full max-w-md">
           <h2 className="text-3xl font-black mb-8 flex items-center"><Users className="mr-3 text-purple-400" /> Hall of Fame</h2>
@@ -1188,7 +1408,7 @@ export default function App() {
               <div><p className="font-bold">You</p><p className="text-xs text-blue-400 italic">Level {Math.floor(stats.totalXp/100)}</p></div>
               <p className="text-2xl font-black text-white">{stats.totalXp} XP</p>
             </div>
-            {[{n: "Nichothéos", x: 99999}, {n: "Daragvener", x: 25000}, {n: "Thriller", x: 1200}].map((u, i) => (
+            {[{n: "Nichothéos", x: 99999}, {n: "Daragvener", x: 25000}, {n: "Akure_Dev", x: 12000}].map((u, i) => (
               <div key={i} className="p-5 bg-slate-900/50 border border-slate-800 rounded-3xl flex justify-between items-center opacity-60 text-left">
                 <p className="font-bold">{u.n}</p><p className="font-black">{u.x} XP</p>
               </div>
@@ -1200,4 +1420,3 @@ export default function App() {
     </div>
   );
 }
-
