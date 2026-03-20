@@ -2,53 +2,195 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   Brain, Cpu, Trophy, ArrowRight, RotateCcw, ChevronLeft, Swords, 
   Trophy as SportIcon, Languages, Home, Settings, Volume2, VolumeX, 
-  Smartphone, BarChart3, GraduationCap, Users, Timer, Zap, Book, BookOpen, Lightbulb, Film 
+  Smartphone, BarChart3, Users, Timer, Zap, Book, BookOpen, Lightbulb, Film, Flame 
 } from 'lucide-react';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 
 // ==========================================
-// 📚 THE MEGA REPOSITORY (850+ QUESTIONS TOTAL)
+// 📚 THE MEGA REPOSITORY
 // ==========================================
 const rawQuizData = {
-  futa_eng: {
+  lore: {
     foundational: [
-      ["What does FUTA stand for?", "Federal University of Technology, Akure", "Federal University of Trade, Akure", "First University of Tech, Akure", "Federal Union of Tech, Akure"],
-      ["Which law states Energy cannot be created or destroyed?", "First Law of Thermodynamics", "Newton's Second Law", "Ohm's Law", "Hooke's Law"],
-      ["What is the standard unit of Pressure?", "Pascal", "Newton", "Watt", "Joule"],
-      ["What is the density of pure water at 4°C?", "1000 kg/m³", "100 kg/m³", "500 kg/m³", "2000 kg/m³"],
-      ["Which gate is the main entrance to FUTA?", "North Gate", "South Gate", "West Gate", "East Gate"],
-      ["What is the value of the Universal Gas Constant (R)?", "8.314 J/mol·K", "0.0821 J/mol·K", "9.81 J/mol·K", "1.38 J/mol·K"],
-      ["In Engineering, what does 'CAD' stand for?", "Computer-Aided Design", "Central Access Data", "Control and Design", "Common Applied Design"],
-      ["Which element is the primary component of steel?", "Iron", "Copper", "Aluminum", "Zinc"],
-      ["What is the SI unit of work?", "Joule", "Watt", "Newton", "Pascal"],
-      ["What is the boiling point of water in Kelvin?", "373.15 K", "100 K", "273.15 K", "212 K"],
-      ["Which instrument measures atmospheric pressure?", "Barometer", "Thermometer", "Hygrometer", "Anemometer"],
-      ["What is the value of gravity 'g' to two decimal places?", "9.81 m/s²", "9.80 m/s²", "10.0 m/s²", "3.14 m/s²"]
+      ["Who makes up the Triune Symmetry?", "Aetherius Dominus, Supremus Daragvener, and τὸ ἄγνωστον", "Nicholas, Astraea, and Valthar", "The 1st, 4th, and 6th Kings", "Jayden, Mephistopheles, and Kailus"],
+      ["What is a 'Mad God' in the Ordverse?", "A deity corrupted by absorbing too much chaotic dimensional energy", "A god of war who lost a battle", "A ruler of the Supreme Universe", "A human who drank Chrysealean blood"],
+      ["What happens when a Reality Breaker enters a lower dimension?", "Their base RF exceeds the dimensional cap, causing space-time tears", "They lose all their powers", "They instantly become the King of that realm", "They trigger a Polyvenium meteor strike"],
+      ["Who is known as the Prime Creator?", "Aetherius Dominus", "Supremus Daragvener", "King Kailus", "Valthar Demetrius"],
+      ["Matchup: Mystic Kid (Age 13) vs Average Earth Military?", "Mystic Kid wins effortlessly", "The Military wins using Polyvenium", "It's a tie", "Mystic Kid retreats"],
+      ["Who are the Rank 3 Authorities?", "Cosmic administrators terrified of Nichothéos's existence", "The personal guard of King Kailus", "Earth's highest superhero team", "The creators of the Memory Lock"]
+      ["Who is known as the Prime Creator in the Ordverse?", "Aetherius Dominus", "Supremus Daragvener", "King Kailus", "Valthar Demetrius"],
+      ["What name did the protagonist choose to honor his mother?", "Caelestine", "Demetrius", "Zichri", "Chrysealis"],
+      ["Who is the current King of Chrysealis?", "King Kailus", "King Tirath", "King Miknelah", "King Ziphus"],
+      ["What is the name of the Divine Empire?", "Chrysealis", "The Aetheridom Expanse", "The Supreme Universe", "The House of War"],
+      ["Who was reinstated as the Crown Prince of Chrysealis?", "Yveldinjar (Mephistopheles)", "Valthar", "Nicholas", "Astraea"],
+      ["What system is used to measure power progression in the Ordverse instead of traditional EXP?", "Reality Factor (RF)", "Power Level (PL)", "Divine Energy", "Aura Points"],
+      ["What is the 14th and absolute highest rank in the Ordverse power hierarchy?", "True God", "Progenitor", "Primordial", "God"],
+      ["What was Nichothéos's human identity when he was first banished to Earth?", "Jayden Cameron (The Mystic Kid)", "Nicholas Caelestine", "Yveldinjar", "Valthar Demetrius"],
+      ["Who did Jayden fall in love with during his time as a mortal on Earth?", "Michelle", "Astraea", "Aelunira", "He never fell in love"],
+      ["What is the name of the protagonist's older brother who fell from grace?", "Yveldinjar (Mephistopheles)", "Valthar", "Kailus", "Ziphus"],
+      ["How long did Jayden's refinement process in Chrysealis take to achieve his Perfected State?", "14 days", "7 days", "30 days", "3 days"],
+      ["How long did it take Nichothéos to end Mephistopheles's threat upon returning to Earth?", "Under three minutes", "Fourteen days", "One hour", "He couldn't defeat him"],
+      ["What rank corresponds to a 'Saint' in the Ordverse hierarchy?", "Rank 9", "Rank 10", "Rank 7", "Rank 12"],
+      ["What rank corresponds to a 'Sage' in the Ordverse hierarchy?", "Rank 10", "Rank 9", "Rank 11", "Rank 8"],
+      ["What is the lowest rank (Rank 1) in the Ordverse hierarchy?", "Basic", "Novice", "Advanced", "Expert"],
+      ["Who were Jayden Cameron's adoptive parents on Earth?", "Dr. Steve & Rachel Cameron", "James & Evelyn", "Michael & Aimi", "Draco & Michelle"],
+      ["What was Jayden's superhero moniker when he debuted at age 13 by saving students from giants?", "Mystic Kid", "The Ultimate Warrior", "Grand Champion", "Kim Hyuk Jae"],
+      ["Who was Jayden's biological brother on Earth?", "Draco Cameron", "Bradley Draxler", "Michael Larmarck", "Prince Edmundus"],
+      ["What celestial event at age 12 granted Jayden invulnerability and super-strength?", "A Polyvenium meteorite striking Lake Michigan", "A solar flare", "A magical spell from James", "A lightning strike in Detroit"],
+      ["What tragic event pushed Jayden to vow revenge at age 17.6?", "His uncle James was killed in the magical realm", "He lost his powers", "He was expelled from school", "He was banished to Japan"],
+      ["How old was Jayden when he died saving Earth from Mephistopheles?", "18", "17", "21", "14"],
+      ["Who did Jayden fall in love with during his time at the Michigan Group of Schools?", "Michelle", "Aimi", "Evelyn", "Rachel"],
+      ["What bound Jayden to the ground during his grueling battle with Mephistopheles?", "Divine chains with the weight of Universes", "A gravity spell", "Polyvenium cuffs", "Chrysealean steel"],
+      ["Whose murder did Mephistopheles confess to, which ultimately sent Jayden into a rage?", "James Cameron", "Dr. Steve Cameron", "Evelyn Williams", "Rachel Cameron"],
+      ["What did Jayden need to activate the forbidden sigil against Mephistopheles?", "His life-force and his blood", "A Chrysealean incantation", "The power of the Sun", "Aetherium crystals"],
+      ["Who was revealed to be the true identity of Mephistopheles?", "Yveldinjar Demetrius, Jayden's older brother", "Valthar, the Lost Prince", "King Kailus's brother", "A rogue Primordial"],
+      ["After his death on Earth, where did Jayden wake up?", "Chrysealis", "The Aetheridom Expanse", "The Supreme Universe", "The Void"],
+      ["How long did it take Nichothéos to defeat Mephistopheles during their rematch on Earth?", "Less than 3 minutes", "Fourteen days", "18 hours", "An entire day"],
+      ["What terrifying moniker did Nichothéos adopt as he permanently left Chrysealis?", "The Crimson-haired God of Death", "The Lost Prince", "The Ultimate Conduit", "The Mystic Kid"],
+      ["How did Nichothéos conquer defiant realms for Chrysealis before his banishment?", "Single-handedly without an army", "By leading the legendary Vanguard", "Using the combined power of the six lineages", "Through political diplomacy"],
+      ["What was the 'official' reason given by the Chrysealean courts for Nichothéos's banishment?", "He was 'soft' and needed to learn the value of divine authority", "He tried to assassinate the King", "He lost a battle to a Primordial", "He refused to master weapons"],
+      ["What terrifying visual omen appeared in lower verses when the Crimson God of War approached?", "The sky turned a deep, bruised red", "The sun would instantly set", "Oceans would turn to blood", "Gravity would reverse"],
+      ["Which title was Nichothéos's official state rank and 'job description' in the House of Demetrius?", "Chrysealean God of War", "Crimson God of War", "God of Death", "The Lost Prince"],
+      ["What does the title 'God of Death' specifically represent to the fallen?", "The absolute end and finality of his arrival", "The unstoppable force of his armies", "His mastery of dark magic", "His right to the throne"],
+      ["Who did Nichothéos train, passing on his technical mastery of war?", "Astraea", "Yveldinjar", "Valthar", "King Kailus"],
+      ["What did King Kailus actually want when he banished Nichothéos to Earth with a memory lock?", "A dead legend", "A better, more obedient son", "A spy in the Supreme Universe", "To protect him from Mephistopheles"],
+      ["Who is Nicholas's biological daughter?", "Claire Emilia Cameron", "Kira Athlea", "Astraea", "Aelunira"],
+      ["Who is Nicholas's adopted daughter and Claire's childhood best friend?", "Kira Athlea Hunter-Cameron", "Evelyn Williams", "Michelle", "Aimi"],
+      ["What name is Kira Athlea Hunter-Cameron known by to her enemies?", "Kaeltharya", "Astraea", "Mephistopheles", "Aelunira"],
+      ["Who is King Kailus Demetrius to Nicholas?", "His Father", "His Grandfather", "His Brother", "His Uncle"],
+      ["Who is Queen Aelunira Caelestine?", "Nicholas's Mother", "Nicholas's Step-sister", "Michelle's Mother", "The Goddess of War"],
+      ["Who is the 6th King of Chrysealis and the God of Light and Purity?", "King Kailus Demetrius", "King Tirath", "King Ziphus", "King Miknelah"],
+      ["What special artifact did Jayden give to Michelle?", "A wedding ring forged from his essence", "The Aetherium Crown", "The Scepter of Ord", "A Polyvenium dagger"],
+      ["Who is Evelyn Williams to Jayden?", "His Sister-in-law", "His Adopted Daughter", "His Mother", "His Ex-wife"],
+      ["Who is the 1st King of Chrysealis and God of Creation?", "King Demetrius Zichri", "King Klarius", "King Kailus", "Valthar"],
+      ["What is the name of the mortal who is Jayden's primary anchor to humanity?", "Michelle Williams", "Rachel Cameron", "Evelyn Williams", "Aimi"],
+      ["Who is considered the 'True Source' and ultimate progenitor of Nicholas?", "Aetherius Dominus", "Supremus Daragvener", "King Kailus", "Valthar"],
+      ["Who is Jayden's older brother and the current Crown Prince?", "Yveldinjar (Mephistopheles)", "Draco Cameron", "Valthar", "Klarius"],
+      ["What is the relation of James Cameron to Jayden?", "Earthly Father Figure / Guardian", "Biological Father", "Uncle from Chrysealis", "Older Brother"],
+      ["Who is the new Chrysealean War-God following Nicholas's banishment?", "Astraea Demetrius", "Valthar", "Yveldinjar", "Miknelah"]
     ],
     intermediate: [
-      ["What is the Reynolds number for laminar flow in a pipe?", "Below 2100", "Above 4000", "Exactly 3000", "Over 10,000"],
-      ["What is the chemical formula for Methane?", "CH4", "C2H6", "CO2", "H2O"],
-      ["Which device is used to measure fluid flow rate?", "Venturi Meter", "Manometer", "Thermometer", "Hygrometer"],
-      ["What does 'CSTR' stand for in Reactor Design?", "Continuous Stirred-Tank Reactor", "Chemical Standard Tank", "Cold Static Tank", "Combined State Reactor"],
-      ["Which thermodynamic cycle is used in steam power plants?", "Rankine Cycle", "Otto Cycle", "Diesel Cycle", "Carnot Cycle"],
-      ["What is the main purpose of a cooling tower?", "Heat rejection to the atmosphere", "Pumping water", "Storing chemicals", "Generating steam"],
-      ["What does 'NPSH' stand for in pump selection?", "Net Positive Suction Head", "Net Power Source Head", "Nominal Pump Suction", "New Pressure Source"],
-      ["In heat transfer, what is 'Fourier's Law' associated with?", "Conduction", "Convection", "Radiation", "Evaporation"],
-      ["What is the molar mass of Carbon Dioxide (CO2)?", "44 g/mol", "32 g/mol", "28 g/mol", "18 g/mol"],
-      ["Which dimensionless number relates inertia to viscous forces?", "Reynolds Number", "Nusselt Number", "Prandtl Number", "Froude Number"]
+      ["Matchup: Jayden Cameron vs Mephistopheles on Earth?", "Jayden won but died from extreme exhaustion", "Mephistopheles destroyed Earth", "Astraea intervened to save them both", "James Cameron defeated Mephistopheles"],
+      ["What defines a 'Destroyer Deity' in Chrysealean history?", "A god whose domain naturally erases matter rather than conquering it", "A rebel who fights the Triune Symmetry", "Any Rank 10 Sage", "A mortal who wields an Aetherium weapon"],
+      ["Who is Supremus Daragvener?", "The second pillar of the Triune Symmetry", "The lost 2nd King of Chrysealis", "The creator of the Memory Lock", "The true identity of James Cameron"],
+      ["Matchup: Mystic Kid vs a Rank 8 Emperor?", "Mystic Kid neutralizes them instantly using HIMMAGE automation", "The Emperor wins due to higher base stats", "Mystic Kid needs James's help to win", "They destroy the dimension fighting"],
+      ["How did the Rank 3 Authorities react when Nichothéos simplified the Omniverse?", "With sheer terror, treating him as an unstoppable anomaly", "They awarded him a seat on their council", "They banished him to Earth", "They created the Rank 14 tier to contain him"],
+      ["What makes the 3rd pillar, τὸ ἄγνωστον, unique?", "It is 'The Unknown', an enigmatic force even beyond the Prime Creator's standard vessels", "It is the source of all Polyvenium", "It is the physical embodiment of Earth", "It rules the House of War"]
+      ["Who is the third, enigmatic pillar of the Triune Symmetry?", "τὸ ἄγνωστον (The Unknown)", "Supremus Daragvener", "The Vessel", "The Ultimate Conduit"],
+      ["Which King is known as the God of Chrysealean Magic?", "King Miknelah", "King Klarius", "King Tirath", "King Zichri"],
+      ["Who is the current Chrysealean War-God following Nicholas's departure?", "Astraea", "Valthar", "Queen Aelunira", "Yveldinjar"],
+      ["What is the penalty for a Chrysealean entering the Supreme Universe?", "Total Annihilation", "Memory Wipe", "Banishment to Earth", "Loss of Divine Domains"],
+      ["What was the remnant of Nicholas's first Earth banishment?", "His brown hair", "His trench coat", "His mortal vulnerability", "His lost memories"],
+      ["Except for Rank 14, what are the three sub-levels within each power rank?", "Beginner, Advanced, Peak", "Low, Mid, High", "Initiate, Master, Grandmaster", "Alpha, Beta, Omega"],
+      ["Which rank does Saitama occupy at his Peak in the Ordverse scaling?", "Rank 10 (Sage)", "Rank 9 (Saint)", "Rank 11 (Primordial)", "Rank 8 (Emperor)"],
+      ["Where do Cosmic Armor Superman and Rune King Thor sit in the Ordverse hierarchy?", "Peak-level Saint (Rank 9)", "Peak-level Sage (Rank 10)", "Advanced-level Emperor (Rank 8)", "Beginner-level God (Rank 13)"],
+      ["In the Ordverse, transitioning between levels is not just a strength gain, but an increase in what?", "Dimensional Priority", "Physical Mass", "Magical Capacity", "Divine Right"],
+      ["At Rank 13 (God), a newly promoted Advanced warrior can simultaneously defeat how many Prime Beginners?", "100,000+", "15", "1,000", "1,000,000"],
+      ["Who currently holds the absolute highest Peak level of Rank 13 (God)?", "Jayden", "Valthar", "King Kailus", "Astraea"],
+      ["What title was stripped from Nichothéos and given to his stepsister Astraea?", "War-God", "Crown Prince", "God of Light", "The Vessel"],
+      ["What did King Kailus demand Nichothéos do to be reinstated in Chrysealis?", "Conquer Earth", "Kill Mephistopheles", "Marry a Chrysealean", "Give up his humanity"],
+      ["What is the base 'Multiple' for a newly promoted Advanced warrior at Rank 1 (Basic)?", "Can defeat 5 Prime Beginners", "Can defeat 10 Prime Beginners", "Can defeat 15 Prime Beginners", "Can defeat 2 Prime Beginners"],
+      ["Which rank is occupied by the Chrysealean Immortals?", "Rank 12 (Progenitor)", "Rank 11 (Primordial)", "Rank 13 (God)", "Rank 14 (True God)"],
+      ["At age 11, Jayden won the World Swordsmanship Competition in South Korea under what alias?", "Kim Hyuk Jae", "Bradley Draxler", "Prince Edmundus", "Draco"],
+      ["Who became Jayden's confidante after he revealed his identity as the Mystic Kid at age 13.5?", "Evelyn Williams", "Aimi", "Rachel Cameron", "Bradley Draxler"],
+      ["Which two characters connived to successfully ruin Jayden's relationship with Michelle?", "Aimi and Prince Edmundus", "Mephistopheles and Draco", "James and Evelyn", "Bradley and Michael"],
+      ["After 'The Incident' at age 7 in Denver, who did Jayden move to Detroit to live with?", "His uncle, James Cameron", "Dr. Steve Cameron", "A martial arts master in Japan", "Prince Edmundus"],
+      ["At age 13.25, Jayden was forcibly transported to a higher dimension and won what title?", "Grand Champion of the Supreme Universe", "The Ultimate Warrior", "God of War", "Prime Creator"],
+      ["On what specific days did Jayden experience recurring nightmares of dying to Mephistopheles?", "On his birthdays", "On New Year's Eve", "On the anniversary of his adoption", "On the day the meteorite struck"],
+      ["Who were Jayden's first friends in Denver, Colorado?", "Bradley Draxler & Michael Larmarck", "Steve & Draco", "Evelyn & Michelle", "Edmundus & Aimi"],
+      ["How did Jayden secretly draw the forbidden sigil without drawing Mephistopheles's attention?", "He used his battle movements over several hours", "He used a cloaking spell", "He had James draw it before he died", "He used his telekinesis"],
+      ["How did Jayden acquire the blood needed to activate his forbidden sigil?", "He intentionally created an opening to be stabbed", "He bit his own hand", "He used Mephistopheles's blood", "He cut himself with his own sword"],
+      ["After dying from exhaustion, which powerful Chrysealean gatekeeper helped Jayden recover his powers and memories?", "Sethys", "Astraea", "Miknelah", "Klarius"],
+      ["Why did King Kailus so desperately want Yveldinjar brought back?", "He was his firstborn and son of his favorite queen", "He possessed the Royal Seal", "He was the only one who could defeat Jayden", "He needed him to activate the Memory Lock"],
+      ["How did Jayden actually spend his 14 days of 'meditation' in Chrysealis?", "Secretly transferring his godly power into his axe to absorb as Jayden", "Praying to Aetherius Dominus", "Healing his mortal wounds", "Learning Chrysealean Magic"],
+      ["What title was stripped from Nichothéos and given to Astraea?", "Chrysealean War-God", "Crown Prince", "God of Light", "Supreme Protector"],
+      ["Who was given the title of Crown Prince after King Kailus disowned Nichothéos?", "Yveldinjar", "Astraea", "Valthar", "Ziphus"],
+      ["How did Nichothéos mathematically guarantee the dismantling of resistance upon entering a new realm?", "He became X+1, where X is the realm's upper power limit", "He drained 50% of the realm's magic", "He multiplied his RF by the number of enemies", "He froze time indefinitely"],
+      ["What was the true, political reason King Kailus banished Nichothéos?", "Fear of his overwhelming power and potential rebellion", "Nichothéos refused to conquer Earth", "To hide the truth about Yveldinjar", "To save Chrysealis from a resource drought"],
+      ["Jayden's aversion to 'conquering' on Earth actually stemmed from what?", "Subconscious guilt and rejection of the monster his father made him", "A magical curse placed by James Cameron", "A side effect of the Polyvenium meteor", "Fear of his own mortality"],
+      ["How did the title 'Crimson God of War' differ from standard War-Gods like Ares or Yveldinjar?", "He didn't use armies or tactics; his mere existence dissolved the enemy's war", "He relied entirely on weapon mastery rather than magic", "He only fought during the day", "He required the King's permission to strike"],
+      ["What did choosing the name 'Nicholas' (Victory of the People) signify for the protagonist?", "Choosing to protect the very beings he once subjugated", "A tribute to his biological brother Draco", "An insult to Astraea", "Acceptance of his Chrysealean destiny"],
+      ["What specific trait did Nichothéos inherit from the legacy of Valthar?", "The mastery of every weapon in the Expanse", "His 57:43 crimson-to-brown hair ratio", "The ability to manipulate time", "His invulnerability to Polyvenium"],
+      ["Why did Kailus replace Nichothéos with Astraea as the Chrysealean God of War?", "He wanted a God of Technique he could control, rather than a God of Existence", "Astraea defeated Nichothéos in combat", "Astraea had a higher Reality Factor", "Nichothéos requested the transfer"],
+      ["Which King was the God of Love and Wisdom?", "King Ziphus Demetrius", "King Klarius", "King Tirath", "King Miknelah"],
+      ["King Miknelah Demetrius (the 3rd King) held which divine domain?", "God of Chrysealean Magic", "God of Mysteries and Courage", "God of Light and Purity", "God of Raw Strength"],
+      ["What is the unique property of Michelle's wedding ring regarding Jayden's power?", "It acts as a key allowing her to use his divine abilities", "It makes her invisible", "It grants her Chrysealean Magic", "It turns her into a True God"],
+      ["Who was the 5th King and the God of Beauty, Charm, Wealth, and Power?", "King Tirath Demetrius", "King Klarius", "King Ziphus", "King Zichri"],
+      ["What was Valthar Demetrius's title and domain before he vanished?", "The Lost Prince and God of Raw Strength", "The 4th King and God of Courage", "The Crown Prince and God of Light", "The Founder and God of Creation"],
+      ["What does Michelle's ring provide that ordinary weapons in the Supreme Universe cannot penetrate?", "The Ultimate Defense directly linked to his perfected form", "Complete immortality", "A shield of Polyvenium", "The power of the Triune Symmetry"],
+      ["Who is the 4th King of Chrysealis and the God of Mysteries and Courage?", "King Klarius Demetrius", "King Miknelah", "King Ziphus", "King Tirath"],
+      ["Why did Jayden choose the surname 'Caelestine'?", "To honor his mother's grace and lineage", "It was James Cameron's true name", "To hide from Mephistopheles", "It means 'Victory of the People'"],
+      ["What state was Jayden in when he forged Michelle's wedding ring?", "His perfected combined state", "His mortal state as the Mystic Kid", "His heavily injured state", "His 0% AD state"],
+      ["Who is the biological brother of Yveldinjar (Mephistopheles)?", "Nichothéos (Nicholas)", "Draco Cameron", "Valthar", "Klarius"],
+      ["What lineage does Queen Aelunira belong to?", "House Caelestine", "House Demetrius", "The House of War", "House Williams"],
+      ["Which Chrysealean King is Nicholas's Great-grandfather?", "King Klarius Demetrius", "King Miknelah", "King Ziphus", "King Tirath"],
+      ["Which King is Nicholas's Grandfather?", "King Tirath Demetrius", "King Kailus", "King Klarius", "Valthar"],
+      ["Which generation of Chrysealean Kings does Kailus Demetrius represent?", "The 6th King", "The 5th King", "The 4th King", "The 7th King"]
     ],
     advanced: [
-      ["Which equation is used for Batch Reactor design?", "Design Equation", "Bernoulli Equation", "Ergun Equation", "Van der Waals"],
-      ["What is the 'No-Slip Condition' in fluid mechanics?", "Velocity at wall is zero", "Pressure at wall is zero", "Flow is frictionless", "Temperature is constant"],
-      ["What does a P&ID stand for?", "Piping and Instrumentation Diagram", "Pressure and Intake Design", "Process and Internal Draft", "Power and Information Data"],
-      ["The 'Arrhenius Equation' calculates the effect of temperature on what?", "Reaction Rate Constant", "Pressure", "Viscosity", "Entropy"],
-      ["In Distillation, what does the 'Reflux Ratio' represent?", "Ratio of returned liquid to product", "Boiling point difference", "Vapor to liquid ratio", "Feed to product ratio"],
-      ["What is the Fugacity coefficient a measure of?", "Departure from ideal gas behavior", "Volatility", "Heat capacity", "Reaction speed"],
-      ["Which law relates the partial pressure of a gas to its mole fraction?", "Raoult's Law", "Henry's Law", "Dalton's Law", "Boyle's Law"]
+      ["Matchup: Nichothéos (0% AD) vs Valthar the Lost Prince?", "Nichothéos wins because his 'Existence' overrides Valthar's 'Technique'", "Valthar wins due to mastering all weapons", "It is a perfect stalemate", "Valthar wins using the Triune Symmetry"],
+      ["What is the mechanical difference between a Reality Breaker and a True God (Rank 14)?", "A True God naturally encompasses all realities, while a Breaker forcibly shatters them", "A Reality Breaker is Rank 15", "True Gods require a Vessel; Breakers do not", "There is no difference"],
+      ["Matchup: The combined armies of Chrysealis vs The Crimson God of War?", "Nichothéos's mere approach dissolves their war, making them functionally useless", "The armies win via attrition", "Kailus uses the Memory Lock to save the army", "The Triune prevents them from fighting"],
+      ["Why can't Mad Gods comprehend the Triune Symmetry?", "Their minds are fractured by chaotic energy, making absolute order lethal to their psyche", "They are blind to Aetherium", "They are trapped in the Aetheridom Expanse", "They refuse to acknowledge Aetherius Dominus"],
+      ["Matchup: Astraea (Current War-God) vs Nichothéos?", "Nichothéos wins overwhelmingly; Astraea is just a manageable replacement for Kailus", "Astraea wins due to having the official title", "Astraea traps him in a Memory Lock", "They refuse to fight due to bloodlines"],
+      ["What is the ultimate purpose of the 'Vessel' in relation to the Triune?", "To ground the infinite power of the Prime Creator into a comprehensible avatar", "To destroy Mad Gods", "To act as a prison for Mephistopheles", "To rewrite the laws of thermodynamics in lower verses"]
+      ["What is the exact ratio of Nicholas's Crimson to Brown hair?", "57:43", "50:50", "60:40", "43:57"],
+      ["Why are Aetherius Dominus's memories sealed within the Nichothéos persona?", "To prevent the Ordverse from collapsing", "To hide from Supremus Daragvener", "As punishment for creating the Vessel", "To learn the ways of mortals"],
+      ["Valthar Demetrius, the 'Lost Prince', was the God of what domain?", "Raw Strength & Weapons", "Mysteries and Courage", "Beauty, Charm, Wealth, and Power", "Creation"],
+      ["What percentage of Aetherius Dominus's true power does Nichothéos utilize?", "0%", "1%", "10%", "100%"],
+      ["How tall is Nicholas Caelestine?", "6'3\"", "6'0\"", "6'5\"", "6'1\""],
+      ["How many Rank 13 Peak powerhouses can a Rank 14 True God overwhelm simultaneously?", "A googolplex", "One billion", "Infinite", "One hundred thousand"],
+      ["What ability/tool does Jayden use to automate the neutralization of lower-ranked threats?", "HIMMAGE", "The Memory Lock", "The Vessel", "Triune Symmetry"],
+      ["At what specific sub-level of Rank 13 (God) does King Kailus Demetrius currently sit?", "Advanced", "Beginner", "Peak", "He is Rank 14"],
+      ["What rank do World Breaker Hulk and the Strongest Wonder Woman occupy?", "Advanced Emperor (Rank 8)", "Peak Saint (Rank 9)", "Beginner King (Rank 7)", "Advanced Knight (Rank 6)"],
+      ["Who is an example of a Rank 11 Primordial entity in the Ordverse?", "The Void / Cthulhu", "Saitama", "The Chrysealean Immortals", "Planetary-tier Lords"],
+      ["What exactly was Mephistopheles attempting to force on Supreme Earth that led to war?", "A 'Fixed Point' of destruction", "A Chrysealean invasion", "The resurrection of Valthar", "The destruction of the Sun"],
+      ["Because of his Administrator Authority, Jayden treats Sages, Saints, and Emperors as what?", "Mere background noise", "Worthy challengers", "Allies in the war", "Unpredictable anomalies"],
+      ["At Rank 2 (Advanced), what is the 'Multiple' for a newly promoted Advanced warrior against Prime Beginners?", "15", "5", "50", "100"],
+      ["Why did Jayden's hair randomize to include brown during his first banishment?", "As a side effect of transitioning to a mortal vessel", "It was a curse from King Kailus", "To hide his identity from Mephistopheles", "It was a sign of his growing RF"],
+      ["What does the 'Multiple' represent in the RF progression system?", "The number of lower sub-level warriors a newly promoted warrior can defeat simultaneously", "The amount of RF gained per battle", "The speed at which a warrior heals", "The number of dimensions a warrior can access"],
+      ["What specific material struck Lake Michigan, contaminating Jayden and granting him his powers?", "Polyvenium", "Aetherium", "Chrysealean steel", "Void essence"],
+      ["What was the secret, tragic history between James Cameron and Michelle's family?", "James was an ex-lover of Michelle's mother", "James accidentally injured Michelle's father", "James stole magic from their bloodline", "James was secretly Michelle's uncle"],
+      ["What triggered Jayden's dismissal from military school between the ages of 9 and 10?", "An uncontrolled power leak during a commander incident", "Fighting with other cadets", "Refusing to follow orders", "Sneaking out to practice swordsmanship"],
+      ["How did Mystic Kid undo the destruction caused by Mephistopheles at the cost of his own life?", "He used a war-spell fueled by his life force", "He reversed time using the Polyvenium", "He transferred his immortality to the Earth", "He absorbed Mephistopheles into his soul"],
+      ["Which items did James give Jayden at age 13 to help him debut as the Mystic Kid?", "A Watch, Cloak, and Weapons", "A Mask, Ring, and Sword", "A Staff, Shield, and Armor", "An Amulet, Boots, and Gauntlets"],
+      ["Where did Jayden travel at age 8 to train in Ninjutsu, subsequently meeting an obsessed Aimi?", "Japan", "South Korea", "China", "Tibet"],
+      ["Who did Evelyn inform about Jayden's recurring death dreams, only to be dismissed?", "Michelle", "James", "Dr. Steve Cameron", "Aimi"],
+      ["What was Jayden's final heroic act for Earth before he succumbed to exhaustion and died?", "He undid the illusion, reversing the destruction of the world", "He transferred his immortality to the planet", "He sealed the portal to Chrysealis", "He erased humanity's memory of the war"],
+      ["What were Jayden's whispered last words before drawing his final breath?", "\"I failed father, I was not strong enough to avenge you completely.\"", "\"Michelle, I will always love you.\"", "\"The Demetrius name dies with me.\"", "\"Earth is safe now.\""],
+      ["What was the power conversion rate when Nichothéos transferred his energy to his Mystic Kid form via his axe?", "One hour of transfer was greater than his original power as Mystic Kid", "It was a 1:1 ratio of power transfer", "He lost 50% of his power in the transfer", "It required 14 days to equal one hour of his true power"],
+      ["Why did Nichothéos realize King Kailus actually wanted him to conquer Earth?", "To forever curb him by turning him into the King's weapon", "To harvest Earth's Polyvenium", "To prepare for a war against the Primordials", "To prove he no longer loved Michelle"],
+      ["What is the exact blood relationship between Astraea and Yveldinjar (Mephistopheles)?", "They are blood sister and brother", "They are cousins", "Astraea is his aunt", "They share no blood relation"],
+      ["When Mephistopheles retreated from the blood sigil, what was his condition?", "He took severe damage and had a bit of his life-force drained", "He was completely uninjured but terrified", "He was trapped in an illusion", "His memories were locked"],
+      ["What ultimatum did King Kailus use to test Nichothéos's loyalty before stripping his titles?", "He ordered him to subdue Earth and bring it under Chrysealean rule", "He ordered him to execute Michelle", "He ordered him to yield 100% of his RF to Yveldinjar", "He ordered him to fight Astraea to the death"],
+      ["How did Nichothéos's solo conquests politically affect the Chrysealean military?", "They made the King's armies and generals functionally useless and redundant", "They inspired the army to train harder", "They caused a civil war among the ranks", "They bankrupted the empire"],
+      ["How do the Rank 3 Authorities view Nichothéos (Jayden)?", "With sheer terror, knowing he simplified the Omniverse into one empire alone", "As a weak, Rank 2 vessel", "As a valuable ally for their own conquests", "As a myth that never truly existed"],
+      ["According to the updated lore entry, what is the primary difference between Valthar and Nichothéos?", "Valthar was the strongest in Chrysealean history, but Nichothéos was the strongest in existence", "Valthar was a God of Death, Nichothéos was a God of War", "Valthar conquered Earth, Nichothéos conquered the Expanse", "Valthar relied on magic, Nichothéos relied on physical strength"],
+      ["What was the method Kailus used to essentially 'lobotomize' Nichothéos during his banishment?", "The randomization and memory lock of the Supreme Universe", "Extracting his Aetherium core", "Binding him with chains holding the weight of Universes", "Forcing him to live as a mortal infant"],
+      ["What does the title 'Crimson God of War' specifically represent from the perspective of the battlefield?", "The unstoppable, rare-blooded force that fights alone", "The official commander of the King's legions", "The absolute end and finality of death", "The merciful protector of the weak"],
+      ["What did Kailus realize would happen if Nichothéos ever turned his 'One-Man Army' focus toward the Throne?", "Nothing, not even the combined six lineages, could stop him", "The Triune Symmetry would intervene to save the King", "Astraea would be able to defeat him", "The Supreme Universe would collapse"],
+      ["In the context of the looming Arc 2 conflict, what does Astraea hold compared to Nicholas?", "The 'Official' authority of the House of Demetrius", "A higher absolute Reality Factor", "The title of God of Death", "Control over the Rank 3 Authorities"],
+      ["Because Michelle's ring acts as a conduit of authority, what specific scaling mechanic can she tap into as a mortal?", "His divine scaling power", "The 14-Rank RF system", "The X+1 limit", "HIMMAGE automation"],
+      ["King Demetrius Zichri is exactly how many generations removed from Nicholas?", "4x Great-grandfather", "3x Great-grandfather", "5x Great-grandfather", "Great-grandfather"],
+      ["Valthar Demetrius is the first son of which Chrysealean King?", "King Tirath Demetrius", "King Klarius", "King Kailus", "King Miknelah"],
+      ["Which King is Nicholas's 3x Great-grandfather?", "King Ziphus Demetrius", "King Miknelah", "King Zichri", "King Klarius"],
+      ["How is Astraea related to Yveldinjar and Nichothéos?", "Step-sister to Nichothéos and blood sister to Yveldinjar", "Blood sister to Nichothéos and step-sister to Yveldinjar", "Cousin to both", "Adopted daughter of Kailus"],
+      ["The wedding ring given to Michelle is described as a literal fragment of what?", "The Absolute", "The Triune Symmetry", "The Void", "Aetherium"],
+      ["What prevents any weapon in Chrysealis from penetrating Michelle's defense?", "The ring's direct link to Jayden's perfected form", "Her status as the Mortal Anchor", "A spell cast by James Cameron", "Her own Reality Factor"],
+      ["Who is the 2x Great-grandfather of Nicholas?", "King Miknelah Demetrius", "King Klarius", "King Ziphus", "King Tirath"],
+      ["What specific status does Michelle hold in the Character Summary Table?", "Mortal Anchor", "The Supreme Queen", "The Ultimate Conduit", "Chrysealean War-God"],
+      ["What trait defines the noble House Caelestine, according to Queen Aelunira's origin?", "High-tier status known for elegance and celestial grace", "The mastery of raw strength and weapons", "Absolute control over Chrysealean magic", "Being the true founders of the Demetrius line"],
+      ["How does the ring differ from a standard magical artifact in the Ordverse?", "It is a conduit of authority forged from his own essence", "It grants the user a Rank 13 status", "It bypasses the Memory Lock", "It neutralizes Polyvenium"],
+      ["Who is known as Kaeltharya by her enemies?", "Kira Athlea Hunter-Cameron", "Claire Emilia Cameron", "Astraea Demetrius", "Aimi"],
+      ["What relation is Kira Athlea to Claire Emilia Cameron?", "Childhood best friend and adopted sister", "Biological sister", "Mother", "Cousin"],
+      ["Why is Michelle considered Jayden's 'primary anchor'?", "Her existence is the main reason he protects Earth", "She holds the Memory Lock", "She is the only one who can defeat him", "She is the reincarnation of a Chrysealean God"]
     ]
   },
   science: {
     foundational: [
+      ["At what temperature does water freeze?", "0°C", "10°C", "32°C", "-10°C"],
+      ["Which planet is closest to the Sun?", "Mercury", "Venus", "Earth", "Mars"],
+      // ... PASTE PREVIOUS 50 FOUNDATIONAL SCIENCE QUESTIONS HERE
       ["At what temperature does water freeze?", "0°C", "10°C", "32°C", "-10°C"],
       ["Which planet is closest to the Sun?", "Mercury", "Venus", "Earth", "Mars"],
       ["What unseen force pulls objects toward the center of the Earth?", "Gravity", "Magnetism", "Friction", "Inertia"],
@@ -103,56 +245,7 @@ const rawQuizData = {
     intermediate: [
       ["What organelle is the 'powerhouse' of the cell?", "Mitochondria", "Nucleus", "Ribosome", "Chloroplast"],
       ["What is the atomic symbol for Gold?", "Au", "Ag", "Gd", "Go"],
-      ["What is the most abundant gas in Earth's atmosphere?", "Nitrogen", "Oxygen", "Carbon Dioxide", "Argon"],
-      ["What is the approximate speed of light in a vacuum?", "3 x 10^8 m/s", "1.5 x 10^8 m/s", "3 x 10^6 m/s", "1 x 10^9 m/s"],
-      ["By what biological process do plants convert light into chemical energy?", "Photosynthesis", "Respiration", "Transpiration", "Digestion"],
-      ["According to Newton's Second Law, Force equals...", "Mass x Acceleration", "Mass / Acceleration", "Mass x Velocity", "Work / Time"],
-      ["What is the pH level of pure water?", "7", "0", "14", "5.5"],
-      ["What is the process of cell division resulting in two identical cells?", "Mitosis", "Meiosis", "Fission", "Budding"],
-      ["In Chemistry, what is Avogadro's number?", "6.022 x 10^23", "3.14 x 10^15", "1.602 x 10^-19", "2.99 x 10^8"],
-      ["What is the standard SI unit of electrical resistance?", "Ohm", "Volt", "Ampere", "Watt"],
-      ["What is the chemical formula for standard table salt?", "NaCl", "NaOH", "HCl", "KCl"],
-      ["What is the formula for calculating Kinetic Energy?", "1/2 mv^2", "mgh", "mc^2", "Fd"],
-      ["Which cell organelle synthesizes proteins?", "Ribosome", "Lysosome", "Golgi Apparatus", "Vacuole"],
-      ["The atomic number of an element is determined by the number of...", "Protons", "Neutrons", "Electrons", "Protons and Neutrons"],
-      ["The Law of Conservation of Energy states energy cannot be...", "Created or destroyed", "Transferred", "Stored", "Measured"],
-      ["An organism's physical appearance is called its...", "Phenotype", "Genotype", "Allele", "Chromosome"],
-      ["What chemical bond shares electron pairs between atoms?", "Covalent bond", "Ionic bond", "Metallic bond", "Hydrogen bond"],
-      ["What is the acceleration due to gravity on Earth?", "9.8 m/s^2", "3.14 m/s^2", "1.6 m/s^2", "15.2 m/s^2"],
-      ["Which blood cells carry oxygen?", "Erythrocytes (Red Blood Cells)", "Leukocytes (White Blood Cells)", "Thrombocytes (Platelets)", "Lymphocytes"],
-      ["Group 18 elements are known as...", "Noble Gases", "Alkali Metals", "Halogens", "Transition Metals"],
-      ["What type of energy is stored in stretched rubber bands?", "Elastic Potential Energy", "Kinetic Energy", "Thermal Energy", "Chemical Energy"],
-      ["What is the main function of white blood cells?", "Fighting infection", "Carrying oxygen", "Clotting blood", "Digesting food"],
-      ["What principle states that buoyant force equals the weight of displaced fluid?", "Archimedes' Principle", "Pascal's Principle", "Bernoulli's Principle", "Boyle's Law"],
-      ["In genetics, what does DNA stand for?", "Deoxyribonucleic Acid", "Diribonucleic Acid", "Deoxyribose Nitrogen Acid", "Dynamic Nucleic Acid"],
-      ["What is a chemical reaction that releases heat called?", "Exothermic", "Endothermic", "Isothermic", "Catalytic"],
-      ["Which subatomic particle has a negative charge?", "Electron", "Proton", "Neutron", "Nucleus"],
-      ["What phase change occurs when a gas turns into a liquid?", "Condensation", "Evaporation", "Sublimation", "Melting"],
-      ["Who is considered the father of modern genetics?", "Gregor Mendel", "Charles Darwin", "Louis Pasteur", "Isaac Newton"],
-      ["What wave property determines the pitch of a sound?", "Frequency", "Amplitude", "Wavelength", "Speed"],
-      ["What is the half-life of a radioactive isotope?", "Time for half of it to decay", "Time for it to fully decay", "Half its physical lifespan", "Time to double in mass"],
-      ["What part of the brain controls balance and coordination?", "Cerebellum", "Cerebrum", "Brainstem", "Hypothalamus"],
-      ["What element has the chemical symbol 'Fe'?", "Iron", "Fluorine", "Francium", "Lead"],
-      ["Which law states volume of a gas is inversely proportional to its pressure?", "Boyle's Law", "Charles's Law", "Avogadro's Law", "Gay-Lussac's Law"],
-      ["What cellular structure contains the genetic material in eukaryotes?", "Nucleus", "Cytoplasm", "Cell Membrane", "Ribosome"],
-      ["What type of lens is thicker in the middle and magnifies objects?", "Convex", "Concave", "Plano", "Cylindrical"],
-      ["In an ecosystem, fungi and bacteria serve as...", "Decomposers", "Producers", "Primary Consumers", "Apex Predators"],
-      ["What type of mixture is visually uniform throughout (like saltwater)?", "Homogeneous", "Heterogeneous", "Suspension", "Colloid"],
-      ["What is the unit of power?", "Watt", "Joule", "Newton", "Ampere"],
-      ["What blood vessel carries oxygenated blood away from the heart?", "Artery", "Vein", "Capillary", "Venule"],
-      ["What is the process traits are passed from parents to offspring?", "Heredity", "Mutation", "Evolution", "Homeostasis"],
-      ["Which group on the periodic table contains highly reactive metals like Sodium?", "Alkali Metals", "Alkaline Earth Metals", "Halogens", "Noble Gases"],
-      ["What phenomenon causes a prism to split white light into colors?", "Dispersion", "Reflection", "Diffraction", "Interference"],
-      ["What is the chemical formula for glucose?", "C6H12O6", "CO2", "H2O", "CH4"],
-      ["What is the primary function of the large intestine?", "Absorbing water", "Absorbing nutrients", "Digesting proteins", "Producing bile"],
-      ["Which law states that action has an equal opposite reaction?", "Newton's Third Law", "Newton's First Law", "Newton's Second Law", "Law of Gravitation"],
-      ["What type of reproduction involves only one parent?", "Asexual", "Sexual", "Meiosis", "Fertilization"],
-      ["What is the name for a substance that speeds up a chemical reaction?", "Catalyst", "Inhibitor", "Reactant", "Product"],
-      ["What scalar quantity is the rate distance covered?", "Speed", "Velocity", "Acceleration", "Displacement"],
-      ["What is the most common isotope of carbon used in radiometric dating?", "Carbon-14", "Carbon-12", "Carbon-13", "Carbon-16"],
-      ["What fluid in the human body is primarily made of water, plasma, and cells?", "Blood", "Lymph", "Saliva", "Bile"]
-    ],
-    advanced: [
+      // ... PASTE PREVIOUS 50 INTERMEDIATE SCIENCE QUESTIONS HERE
       ["The Heisenberg Uncertainty Principle states you cannot know momentum and...", "Position", "Energy", "Spin", "Charge"],
       ["Which enzyme 'unzips' the double helix during DNA replication?", "Helicase", "DNA Polymerase", "Ligase", "Primase"],
       ["Which pure metallic element possesses the highest melting point?", "Tungsten", "Titanium", "Platinum", "Carbon"],
@@ -203,10 +296,67 @@ const rawQuizData = {
       ["What transition metal is at the center of hemoglobin molecule?", "Iron (Fe)", "Magnesium (Mg)", "Copper (Cu)", "Zinc (Zn)"],
       ["Which phenomenon describes light bending around edge of obstacle?", "Diffraction", "Refraction", "Interference", "Polarization"],
       ["What is the limit of strong force's effective range?", "Roughly 1 femtometer", "1 nanometer", "1 millimeter", "Infinite"]
+    ],
+    advanced: [
+      ["The Heisenberg Uncertainty Principle states you cannot know momentum and...", "Position", "Energy", "Spin", "Charge"],
+      ["Which enzyme 'unzips' the double helix during DNA replication?", "Helicase", "DNA Polymerase", "Ligase", "Primase"],
+      // ... PASTE PREVIOUS 50 ADVANCED SCIENCE QUESTIONS HERE
+      ["What organelle is the 'powerhouse' of the cell?", "Mitochondria", "Nucleus", "Ribosome", "Chloroplast"],
+      ["What is the atomic symbol for Gold?", "Au", "Ag", "Gd", "Go"],
+      ["What is the most abundant gas in Earth's atmosphere?", "Nitrogen", "Oxygen", "Carbon Dioxide", "Argon"],
+      ["What is the approximate speed of light in a vacuum?", "3 x 10^8 m/s", "1.5 x 10^8 m/s", "3 x 10^6 m/s", "1 x 10^9 m/s"],
+      ["By what biological process do plants convert light into chemical energy?", "Photosynthesis", "Respiration", "Transpiration", "Digestion"],
+      ["According to Newton's Second Law, Force equals...", "Mass x Acceleration", "Mass / Acceleration", "Mass x Velocity", "Work / Time"],
+      ["What is the pH level of pure water?", "7", "0", "14", "5.5"],
+      ["What is the process of cell division resulting in two identical cells?", "Mitosis", "Meiosis", "Fission", "Budding"],
+      ["In Chemistry, what is Avogadro's number?", "6.022 x 10^23", "3.14 x 10^15", "1.602 x 10^-19", "2.99 x 10^8"],
+      ["What is the standard SI unit of electrical resistance?", "Ohm", "Volt", "Ampere", "Watt"],
+      ["What is the chemical formula for standard table salt?", "NaCl", "NaOH", "HCl", "KCl"],
+      ["What is the formula for calculating Kinetic Energy?", "1/2 mv^2", "mgh", "mc^2", "Fd"],
+      ["Which cell organelle synthesizes proteins?", "Ribosome", "Lysosome", "Golgi Apparatus", "Vacuole"],
+      ["The atomic number of an element is determined by the number of...", "Protons", "Neutrons", "Electrons", "Protons and Neutrons"],
+      ["The Law of Conservation of Energy states energy cannot be...", "Created or destroyed", "Transferred", "Stored", "Measured"],
+      ["An organism's physical appearance is called its...", "Phenotype", "Genotype", "Allele", "Chromosome"],
+      ["What chemical bond shares electron pairs between atoms?", "Covalent bond", "Ionic bond", "Metallic bond", "Hydrogen bond"],
+      ["What is the acceleration due to gravity on Earth?", "9.8 m/s^2", "3.14 m/s^2", "1.6 m/s^2", "15.2 m/s^2"],
+      ["Which blood cells carry oxygen?", "Erythrocytes (Red Blood Cells)", "Leukocytes (White Blood Cells)", "Thrombocytes (Platelets)", "Lymphocytes"],
+      ["Group 18 elements are known as...", "Noble Gases", "Alkali Metals", "Halogens", "Transition Metals"],
+      ["What type of energy is stored in stretched rubber bands?", "Elastic Potential Energy", "Kinetic Energy", "Thermal Energy", "Chemical Energy"],
+      ["What is the main function of white blood cells?", "Fighting infection", "Carrying oxygen", "Clotting blood", "Digesting food"],
+      ["What principle states that buoyant force equals the weight of displaced fluid?", "Archimedes' Principle", "Pascal's Principle", "Bernoulli's Principle", "Boyle's Law"],
+      ["In genetics, what does DNA stand for?", "Deoxyribonucleic Acid", "Diribonucleic Acid", "Deoxyribose Nitrogen Acid", "Dynamic Nucleic Acid"],
+      ["What is a chemical reaction that releases heat called?", "Exothermic", "Endothermic", "Isothermic", "Catalytic"],
+      ["Which subatomic particle has a negative charge?", "Electron", "Proton", "Neutron", "Nucleus"],
+      ["What phase change occurs when a gas turns into a liquid?", "Condensation", "Evaporation", "Sublimation", "Melting"],
+      ["Who is considered the father of modern genetics?", "Gregor Mendel", "Charles Darwin", "Louis Pasteur", "Isaac Newton"],
+      ["What wave property determines the pitch of a sound?", "Frequency", "Amplitude", "Wavelength", "Speed"],
+      ["What is the half-life of a radioactive isotope?", "Time for half of it to decay", "Time for it to fully decay", "Half its physical lifespan", "Time to double in mass"],
+      ["What part of the brain controls balance and coordination?", "Cerebellum", "Cerebrum", "Brainstem", "Hypothalamus"],
+      ["What element has the chemical symbol 'Fe'?", "Iron", "Fluorine", "Francium", "Lead"],
+      ["Which law states volume of a gas is inversely proportional to its pressure?", "Boyle's Law", "Charles's Law", "Avogadro's Law", "Gay-Lussac's Law"],
+      ["What cellular structure contains the genetic material in eukaryotes?", "Nucleus", "Cytoplasm", "Cell Membrane", "Ribosome"],
+      ["What type of lens is thicker in the middle and magnifies objects?", "Convex", "Concave", "Plano", "Cylindrical"],
+      ["In an ecosystem, fungi and bacteria serve as...", "Decomposers", "Producers", "Primary Consumers", "Apex Predators"],
+      ["What type of mixture is visually uniform throughout (like saltwater)?", "Homogeneous", "Heterogeneous", "Suspension", "Colloid"],
+      ["What is the unit of power?", "Watt", "Joule", "Newton", "Ampere"],
+      ["What blood vessel carries oxygenated blood away from the heart?", "Artery", "Vein", "Capillary", "Venule"],
+      ["What is the process traits are passed from parents to offspring?", "Heredity", "Mutation", "Evolution", "Homeostasis"],
+      ["Which group on the periodic table contains highly reactive metals like Sodium?", "Alkali Metals", "Alkaline Earth Metals", "Halogens", "Noble Gases"],
+      ["What phenomenon causes a prism to split white light into colors?", "Dispersion", "Reflection", "Diffraction", "Interference"],
+      ["What is the chemical formula for glucose?", "C6H12O6", "CO2", "H2O", "CH4"],
+      ["What is the primary function of the large intestine?", "Absorbing water", "Absorbing nutrients", "Digesting proteins", "Producing bile"],
+      ["Which law states that action has an equal opposite reaction?", "Newton's Third Law", "Newton's First Law", "Newton's Second Law", "Law of Gravitation"],
+      ["What type of reproduction involves only one parent?", "Asexual", "Sexual", "Meiosis", "Fertilization"],
+      ["What is the name for a substance that speeds up a chemical reaction?", "Catalyst", "Inhibitor", "Reactant", "Product"],
+      ["What scalar quantity is the rate distance covered?", "Speed", "Velocity", "Acceleration", "Displacement"],
+      ["What is the most common isotope of carbon used in radiometric dating?", "Carbon-14", "Carbon-12", "Carbon-13", "Carbon-16"],
+      ["What fluid in the human body is primarily made of water, plasma, and cells?", "Blood", "Lymph", "Saliva", "Bile"]
     ]
   },
   tech: {
     foundational: [
+      ["What does PC stand for?", "Personal Computer", "Private Computer", "Primary Console", "Portable Computer"],
+      // ... PASTE PREVIOUS TECH QUESTIONS HERE
       ["[Tech] What does PC stand for?", "Personal Computer", "Private Computer", "Primary Console", "Portable Computer"],
       ["[Math] What is 8 multiplied by 7?", "56", "54", "64", "42"],
       ["[Tech] What part is considered the 'brain' of the computer?", "CPU", "Hard Drive", "RAM", "Motherboard"],
@@ -252,13 +402,15 @@ const rawQuizData = {
       ["[Tech] What symbol is used in every email address?", "@", "#", "$", "&"],
       ["[Math] What is 100 minus 37?", "63", "53", "73", "67"],
       ["[Tech] What is a password used for?", "Security", "Speed", "Storage", "Sharing"],
-      ["[Math] What is 10 to the power of 3 (10³)?", "1000", "30", "100", "10000"],
+      ["[Math] What shape has 3 equal sides and 3 equal angles?", "Equilateral Triangle", "Isosceles Triangle", "Right Triangle", "Scalene Triangle"],
       ["[Tech] What is an 'app' short for?", "Application", "Apple", "Apparatus", "Appendix"],
       ["[Math] What is half of 50?", "25", "20", "30", "15"],
       ["[Tech] What do you double-click to open a program?", "An icon", "The screen", "The keyboard", "The cable"],
       ["[Math] How many zeros are in one million?", "6", "5", "7", "8"]
     ],
     intermediate: [
+      ["What does HTML stand for?", "HyperText Markup Language", "High Tech", "Home Tool", "Hyperlinks"],
+      // ... PASTE PREVIOUS TECH QUESTIONS HERE
       ["[Tech] What does HTML stand for?", "HyperText Markup Language", "High Tech Modern Language", "Home Tool Markup Language", "Hyperlinks Text Markup Language"],
       ["[Math] What is the derivative of x² with respect to x?", "2x", "x", "x³ / 3", "2"],
       ["[Tech] Which language is primarily used to style web pages?", "CSS", "Python", "JavaScript", "C++"],
@@ -311,6 +463,8 @@ const rawQuizData = {
       ["[Math] What is 2^5 (2 to the power of 5)?", "32", "16", "64", "10"]
     ],
     advanced: [
+      ["What is the worst-case time complexity of Binary Search?", "O(log n)", "O(1)", "O(n)", "O(n log n)"],
+      // ... PASTE PREVIOUS TECH QUESTIONS HERE
       ["[Tech] What is the worst-case time complexity of Binary Search?", "O(log n)", "O(1)", "O(n)", "O(n log n)"],
       ["[Math] In Linear Algebra, Ax = λx represents finding...", "Eigenvalues and Eigenvectors", "Determinant", "Cross Product", "Inverse Matrix"],
       ["[Tech] In CAP Theorem, a distributed system guarantees two out of...", "Consistency, Availability, Partition Tolerance", "Concurrency, Availability, Performance", "Capacity, Atomicity, Persistence", "Computing, Asynchrony, Parallelism"],
@@ -364,511 +518,334 @@ const rawQuizData = {
     ]
   },
   history: {
-    foundational: [
-      ["Who was the first President of the United States?", "George Washington", "Abraham Lincoln", "Thomas Jefferson", "John Adams"],
-      ["Which ancient civilization built the Great Pyramid of Giza?", "Ancient Egyptians", "Ancient Romans", "Ancient Greeks", "Mayans"],
-      ["In what year did Christopher Columbus first reach the Americas?", "1492", "1776", "1607", "1066"],
-      ["Who was the Queen of Ancient Egypt?", "Cleopatra", "Nefertiti", "Hatshepsut", "Boudicca"],
-      ["Which empire was ruled by Julius Caesar?", "The Roman Empire", "The Ottoman Empire", "The British Empire", "The Mongol Empire"],
-      ["What was the name of the ship that brought the Pilgrims to America?", "Mayflower", "Santa Maria", "Nina", "Pinta"],
-      ["Which global conflict ended in 1945?", "World War II", "World War I", "The Cold War", "The Vietnam War"],
-      ["Who wrote the Declaration of Independence?", "Thomas Jefferson", "Benjamin Franklin", "George Washington", "Alexander Hamilton"],
-      ["What wall was torn down in 1989?", "The Berlin Wall", "The Great Wall of China", "Hadrian's Wall", "The Western Wall"],
-      ["Which leader was assassinated on the Ides of March?", "Julius Caesar", "Abraham Lincoln", "Alexander the Great", "Napoleon Bonaparte"],
-      ["What was the primary language of Ancient Romans?", "Latin", "Greek", "Italian", "Aramaic"],
-      ["Who gave the 'I Have a Dream' speech?", "Martin Luther King Jr.", "Malcolm X", "Nelson Mandela", "Frederick Douglass"],
-      ["Which civilization is known for Socrates and Plato?", "Ancient Greece", "Ancient Rome", "Ancient Egypt", "Mesopotamia"],
-      ["What invention revolutionized information in the 1400s?", "The Printing Press", "The Telegraph", "The Compass", "The Steam Engine"],
-      ["Who was the first woman to fly solo across the Atlantic?", "Amelia Earhart", "Bessie Coleman", "Harriet Quimby", "Sally Ride"],
-      ["Which country gave the Statue of Liberty to the US?", "France", "Great Britain", "Spain", "Germany"],
-      ["What was the first English settlement in North America?", "Jamestown", "Roanoke", "Plymouth", "Williamsburg"],
-      ["Who was the founder of modern nursing?", "Florence Nightingale", "Clara Barton", "Mary Seacole", "Dorothea Dix"],
-      ["The Titanic sank in which ocean in 1912?", "Atlantic Ocean", "Pacific Ocean", "Indian Ocean", "Arctic Ocean"],
-      ["Who was the leader of the Soviet Union in WWII?", "Joseph Stalin", "Vladimir Lenin", "Mikhail Gorbachev", "Leon Trotsky"],
-      ["What route was used to trade between China and Europe?", "The Silk Road", "The Spice Route", "The Amber Road", "The Oregon Trail"],
-      ["Who conquered an empire from Greece to India?", "Alexander the Great", "Cyrus the Great", "Leonidas", "Pericles"],
-      ["Which president issued the Emancipation Proclamation?", "Abraham Lincoln", "Ulysses S. Grant", "Andrew Jackson", "Theodore Roosevelt"],
-      ["What French structure was built for the 1889 World Fair?", "The Eiffel Tower", "The Louvre", "The Arc de Triomphe", "Notre-Dame"],
-      ["Who was the founder of the Mongol Empire?", "Genghis Khan", "Kublai Khan", "Attila the Hun", "Sun Tzu"],
-      ["Which period in Europe was a cultural rebirth?", "The Renaissance", "The Dark Ages", "The Enlightenment", "The Industrial Revolution"],
-      ["What ancient wonder was located in Babylon?", "The Hanging Gardens", "The Colosseum", "The Lighthouse of Alexandria", "The Parthenon"],
-      ["In what country did the Industrial Revolution begin?", "Great Britain", "United States", "France", "Germany"],
-      ["Who was the longest-reigning British monarch before Elizabeth II?", "Queen Victoria", "King George III", "King Henry VIII", "Queen Mary"],
-      ["Which explorer first reached India by sea?", "Vasco da Gama", "Ferdinand Magellan", "Marco Polo", "James Cook"]
-    ],
-    intermediate: [
-      ["What document signed in 1215 limited the King's powers?", "Magna Carta", "Bill of Rights", "Constitution", "Treaty of Paris"],
-      ["Which war was between the North and South of the US?", "The American Civil War", "The Revolutionary War", "The War of 1812", "The Spanish-American War"],
-      ["Who was the primary author of the Communist Manifesto?", "Karl Marx", "Vladimir Lenin", "Friedrich Engels", "Joseph Stalin"],
-      ["Which ancient empire was defeated by Hernán Cortés?", "The Aztec Empire", "The Inca Empire", "The Maya Empire", "The Olmec Empire"],
-      ["What was the project to develop the atomic bomb?", "The Manhattan Project", "The Apollo Project", "Project Trinity", "The Overlord Project"],
-      ["Who was the first Emperor of Rome?", "Augustus", "Julius Caesar", "Nero", "Caligula"],
-      ["What battle was the turning point of the US Civil War?", "The Battle of Gettysburg", "The Battle of Antietam", "The Battle of Bull Run", "The Battle of Shiloh"],
-      ["The Cold War was between the US and who?", "The Soviet Union", "China", "Germany", "Japan"],
-      ["What treaty officially ended World War I?", "The Treaty of Versailles", "The Treaty of Paris", "The Treaty of Ghent", "The Treaty of Tordesillas"],
-      ["Who was the French leader in the Reign of Terror?", "Maximilien Robespierre", "Napoleon Bonaparte", "Louis XVI", "Jean-Paul Marat"],
-      ["Which dynasty was the last to rule imperial China?", "Qing Dynasty", "Ming Dynasty", "Tang Dynasty", "Han Dynasty"],
-      ["What disease wiped out 1/3 of Europe in the 14th century?", "The Black Death", "Smallpox", "Cholera", "Typhus"],
-      ["Who crossed the Alps with elephants to attack Rome?", "Hannibal", "Scipio Africanus", "Spartacus", "Attila the Hun"],
-      ["What year did the French Revolution begin?", "1789", "1776", "1812", "1799"],
-      ["Which Native American guide assisted Lewis and Clark?", "Sacagawea", "Pocahontas", "Sitting Bull", "Geronimo"],
-      ["Who led the Indian independence movement?", "Mahatma Gandhi", "Jawaharlal Nehru", "Subhas Chandra Bose", "Bhagat Singh"],
-      ["What event sparked World War I?", "Assassination of Franz Ferdinand", "Invasion of Poland", "Sinking of Lusitania", "Bombing of Pearl Harbor"],
-      ["The code name for the 1944 Allied invasion was...", "Operation Overlord", "Operation Barbarossa", "Operation Market Garden", "Operation Torch"],
-      ["Which war was between Lancaster and York?", "The Wars of the Roses", "The Hundred Years' War", "The English Civil War", "The Thirty Years' War"],
-      ["Who was the British PM for most of WWII?", "Winston Churchill", "Neville Chamberlain", "Clement Attlee", "Anthony Eden"],
-      ["What empire was conquered by Pizarro?", "The Inca Empire", "The Aztec Empire", "The Maya Empire", "The Toltec Empire"],
-      ["Where was Carthage located?", "Tunisia", "Egypt", "Morocco", "Libya"],
-      ["What era modernized Japan in 1868?", "Meiji Restoration", "Edo Period", "Tokugawa Shogunate", "Showa Era"],
-      ["Who was the last Tsar of Russia?", "Nicholas II", "Alexander III", "Peter the Great", "Ivan the Terrible"],
-      ["What was the first artificial satellite?", "Sputnik 1", "Vostok 1", "Explorer 1", "Soyuz 1"],
-      ["Which explorer first circumnavigated the globe?", "Ferdinand Magellan", "Francis Drake", "Christopher Columbus", "Vasco da Gama"],
-      ["What US scandal led to Nixon's resignation?", "Watergate", "Teapot Dome", "Iran-Contra", "Whitewater"],
-      ["Who founded Islam?", "Muhammad", "Abu Bakr", "Ali", "Umar"],
-      ["The 'Trail of Tears' relocated which nation?", "The Cherokee", "The Navajo", "The Apache", "The Sioux"],
-      ["Who invaded England in 1066?", "William the Conqueror", "Charlemagne", "Richard the Lionheart", "Henry V"]
-    ],
-    advanced: [
-      ["Which treaty concluded the 30 Years' War?", "Peace of Westphalia", "Treaty of Utrecht", "Congress of Vienna", "Treaty of Tordesillas"],
-      ["Carthaginian general defeated at Battle of Zama?", "Hannibal Barca", "Hasdrubal", "Hamilcar", "Mago"],
-      ["Faction that became the Communist Party?", "The Bolsheviks", "The Mensheviks", "The SRs", "The Kadets"],
-      ["King who won 'Pyrrhic victories' against Rome?", "Pyrrhus of Epirus", "Antiochus III", "Philip V", "Mithridates VI"],
-      ["Naval battle where Holy League defeated Ottomans?", "Battle of Lepanto", "Battle of Actium", "Battle of Trafalgar", "Battle of Salamis"],
-      ["Cause of Defenestration of Prague?", "Religious conflicts", "Tax dispute", "Assassination", "Border dispute"],
-      ["Byzantine queen influential in Nika riots?", "Empress Theodora", "Empress Irene", "Empress Zoe", "Empress Eudoxia"],
-      ["Social system in France before 1789?", "The Ancien Régime", "The Directory", "The Consulate", "The Bourbon Restoration"],
-      ["Athenian general in Sicilian Expedition?", "Alcibiades", "Pericles", "Nicias", "Demosthenes"],
-      ["Which dynasty was founded by Kublai Khan?", "The Yuan Dynasty", "The Ming Dynasty", "The Song Dynasty", "The Jin Dynasty"],
-      ["City where Popes resided during 'Babylonian Captivity'?", "Avignon", "Paris", "Lyon", "Marseille"],
-      ["Dictator who unified Japan before Tokugawa?", "Toyotomi Hideyoshi", "Oda Nobunaga", "Tokugawa Ieyasu", "Takeda Shingen"],
-      ["Who led the team that found the Rosetta Stone?", "Pierre-François Bouchard", "Jean-François Champollion", "Howard Carter", "Heinrich Schliemann"],
-      ["Purpose of Council of Trent?", "Direct Counter-Reformation", "Excommunicate Luther", "Authorize Crusades", "Translate Bible"],
-      ["Battle that established Octavian's sole rule?", "Battle of Actium", "Battle of Philippi", "Battle of Pharsalus", "Battle of Cannae"],
-      ["Banking family that ruled Florence?", "The Medici family", "The Borgia family", "The Sforza family", "The Habsburg family"],
-      ["Name of 1884 meeting to regulate African colonization?", "The Berlin Conference", "The Congress of Vienna", "The Treaty of Versailles", "The Yalta Conference"],
-      ["First king of unified Italy in 1861?", "Victor Emmanuel II", "Giuseppe Garibaldi", "Camillo Cavour", "Umberto I"],
-      ["Taiping Rebellion leader claimed to be...", "Brother of Jesus", "Reincarnated Buddha", "Ming Emperor", "Dragon King messenger"],
-      ["Emperor who split Rome into the Tetrarchy?", "Diocletian", "Constantine", "Marcus Aurelius", "Trajan"],
-      ["Code name for German invasion of USSR?", "Operation Barbarossa", "Operation Sealion", "Operation Citadel", "Operation Felix"],
-      ["Who wrote 'The Prince'?", "Niccolò Machiavelli", "Thomas Hobbes", "John Locke", "Thomas More"],
-      ["English monarch overthrown in 1688?", "King James II", "King Charles I", "King Charles II", "King Henry VIII"],
-      ["System where peasants were tied to the land?", "Serfdom / Manorialism", "Feudalism", "Vassalage", "Mercantilism"],
-      ["General who defeated Napoleon at Waterloo?", "Duke of Wellington", "Horatio Nelson", "Gebhard von Blücher", "Mikhail Kutuzov"],
-      ["German tactic of rapid concentrated attacks?", "Blitzkrieg", "Schlieffen Plan", "Guerre de Course", "Pincer Movement"],
-      ["Edict that granted rights to Huguenots?", "Edict of Nantes", "Edict of Worms", "Edict of Milan", "Edict of Restitution"],
-      ["First female PM of the UK?", "Margaret Thatcher", "Theresa May", "Indira Gandhi", "Golda Meir"],
-      ["Oldest surviving library city?", "Nineveh", "Babylon", "Ur", "Uruk"],
-      ["Event triggered by defenestration in Prague?", "The Thirty Years' War", "The Hussite Wars", "The Bohemian Revolt", "The Seven Years' War"]
-    ]
+    foundational: [["First US President?", "Washington", "Lincoln", "Jefferson", "Adams"] /* ... PASTE HISTORY HERE */["Who was the first President of the United States?", "George Washington", "Abraham Lincoln", "Thomas Jefferson", "John Adams"],
+  ["Which ancient civilization built the Great Pyramid of Giza?", "Ancient Egyptians", "Ancient Romans", "Ancient Greeks", "Mayans"],
+  ["In what year did Christopher Columbus first reach the Americas?", "1492", "1776", "1607", "1066"],
+  ["Who was the famous Queen of Ancient Egypt who had relationships with Julius Caesar and Mark Antony?", "Cleopatra", "Nefertiti", "Hatshepsut", "Boudicca"],
+  ["Which empire was ruled by Julius Caesar?", "The Roman Empire", "The Ottoman Empire", "The British Empire", "The Mongol Empire"],
+  ["What was the name of the ship that brought the Pilgrims to America in 1620?", "Mayflower", "Santa Maria", "Nina", "Pinta"],
+  ["Which global conflict ended in 1945?", "World War II", "World War I", "The Cold War", "The Vietnam War"],
+  ["Who wrote the Declaration of Independence?", "Thomas Jefferson", "Benjamin Franklin", "George Washington", "Alexander Hamilton"],
+  ["What wall was torn down in 1989, unifying a divided European city?", "The Berlin Wall", "The Great Wall of China", "Hadrian's Wall", "The Western Wall"],
+  ["Which famous leader was assassinated on the Ides of March?", "Julius Caesar", "Abraham Lincoln", "Alexander the Great", "Napoleon Bonaparte"],
+  ["What was the primary language of the Ancient Romans?", "Latin", "Greek", "Italian", "Aramaic"],
+  ["Who was the civil rights leader famous for his 'I Have a Dream' speech?", "Martin Luther King Jr.", "Malcolm X", "Nelson Mandela", "Frederick Douglass"],
+  ["Which ancient civilization is known for its philosophers like Socrates and Plato?", "Ancient Greece", "Ancient Rome", "Ancient Egypt", "Mesopotamia"],
+  ["What invention by Johannes Gutenberg revolutionized the spread of information in the 1400s?", "The Printing Press", "The Telegraph", "The Compass", "The Steam Engine"],
+  ["Who was the first woman to fly solo across the Atlantic Ocean?", "Amelia Earhart", "Bessie Coleman", "Harriet Quimby", "Sally Ride"],
+  ["Which European country gave the Statue of Liberty to the United States?", "France", "Great Britain", "Spain", "Germany"],
+  ["What was the name of the first successful English settlement in North America?", "Jamestown", "Roanoke", "Plymouth", "Williamsburg"],
+  ["Which famous nurse saved lives during the Crimean War and is the founder of modern nursing?", "Florence Nightingale", "Clara Barton", "Mary Seacole", "Dorothea Dix"],
+  ["The Titanic sank in which ocean in 1912?", "Atlantic Ocean", "Pacific Ocean", "Indian Ocean", "Arctic Ocean"],
+  ["Who was the leader of the Soviet Union during World War II?", "Joseph Stalin", "Vladimir Lenin", "Mikhail Gorbachev", "Leon Trotsky"],
+  ["What historic route was used to travel and trade between China and the Mediterranean?", "The Silk Road", "The Spice Route", "The Amber Road", "The Oregon Trail"],
+  ["Which legendary king of Macedon conquered an empire stretching from Greece to northwestern India?", "Alexander the Great", "Cyrus the Great", "Leonidas", "Pericles"],
+  ["Which American president issued the Emancipation Proclamation?", "Abraham Lincoln", "Ulysses S. Grant", "Andrew Jackson", "Theodore Roosevelt"],
+  ["What iconic French structure was built as the entrance to the 1889 World's Fair?", "The Eiffel Tower", "The Louvre", "The Arc de Triomphe", "Notre-Dame"],
+  ["Who was the founder of the Mongol Empire?", "Genghis Khan", "Kublai Khan", "Attila the Hun", "Sun Tzu"],
+  ["Which period in European history is known for its cultural, artistic, and scientific rebirth?", "The Renaissance", "The Dark Ages", "The Enlightenment", "The Industrial Revolution"],
+  ["What ancient wonder was located in the city of Babylon?", "The Hanging Gardens", "The Colosseum", "The Lighthouse of Alexandria", "The Parthenon"],
+  ["In what country did the Industrial Revolution begin?", "Great Britain", "United States", "France", "Germany"],
+  ["Who was the longest-reigning British monarch before Queen Elizabeth II?", "Queen Victoria", "King George III", "King Henry VIII", "Queen Mary"],
+  ["Which famous explorer was the first European to reach India by sea?", "Vasco da Gama", "Ferdinand Magellan", "Marco Polo", "James Cook"]
+                  ],
+    intermediate: [["Document signed in 1215?", "Magna Carta", "Bill of Rights", "Constitution", "Treaty"] /* ... PASTE HISTORY HERE */["What was the name of the document signed by King John of England in 1215 that limited his powers?", "Magna Carta", "The Bill of Rights", "The Declaration of Rights", "The Domesday Book"],
+  ["Which war was fought between the North and South regions of the United States?", "The American Civil War", "The Revolutionary War", "The War of 1812", "The Spanish-American War"],
+  ["Who was the primary author of the Communist Manifesto?", "Karl Marx", "Vladimir Lenin", "Friedrich Engels", "Joseph Stalin"],
+  ["Which ancient empire was defeated by Hernán Cortés?", "The Aztec Empire", "The Inca Empire", "The Maya Empire", "The Olmec Empire"],
+  ["What was the name of the secret project to develop the atomic bomb during WWII?", "The Manhattan Project", "The Apollo Project", "Project Trinity", "The Overlord Project"],
+  ["Who was the first Emperor of Rome?", "Augustus", "Julius Caesar", "Nero", "Caligula"],
+  ["Which battle is widely considered the turning point of the American Civil War?", "The Battle of Gettysburg", "The Battle of Antietam", "The Battle of Bull Run", "The Battle of Shiloh"],
+  ["The Cold War was primarily a geopolitical standoff between the United States and which other nation?", "The Soviet Union", "China", "Germany", "Japan"],
+  ["What famous treaty officially ended World War I?", "The Treaty of Versailles", "The Treaty of Paris", "The Treaty of Ghent", "The Treaty of Tordesillas"],
+  ["Who was the leader of the French Revolution known for his role in the Reign of Terror?", "Maximilien Robespierre", "Napoleon Bonaparte", "Louis XVI", "Jean-Paul Marat"],
+  ["Which dynasty was the last to rule imperial China?", "Qing Dynasty", "Ming Dynasty", "Tang Dynasty", "Han Dynasty"],
+  ["What disease famously wiped out an estimated one-third of Europe's population in the 14th century?", "The Black Death (Bubonic Plague)", "Smallpox", "Cholera", "Typhus"],
+  ["Who famously crossed the Alps with elephants to attack Rome during the Second Punic War?", "Hannibal", "Scipio Africanus", "Spartacus", "Attila the Hun"],
+  ["In what year did the French Revolution begin with the storming of the Bastille?", "1789", "1776", "1812", "1799"],
+  ["Which Native American guide famously assisted the Lewis and Clark expedition?", "Sacagawea", "Pocahontas", "Sitting Bull", "Geronimo"],
+  ["Who was the principal leader of the Indian independence movement against British rule?", "Mahatma Gandhi", "Jawaharlal Nehru", "Subhas Chandra Bose", "Bhagat Singh"],
+  ["What event sparked the beginning of World War I?", "The assassination of Archduke Franz Ferdinand", "The invasion of Poland", "The sinking of the Lusitania", "The bombing of Pearl Harbor"],
+  ["The code name for the Allied invasion of Normandy in 1944 was...", "Operation Overlord", "Operation Barbarossa", "Operation Market Garden", "Operation Torch"],
+  ["Which famous conflict was fought between the houses of Lancaster and York for the English throne?", "The Wars of the Roses", "The Hundred Years' War", "The English Civil War", "The Thirty Years' War"],
+  ["Who was the British Prime Minister for most of World War II?", "Winston Churchill", "Neville Chamberlain", "Clement Attlee", "Anthony Eden"],
+  ["What empire was conquered by Francisco Pizarro?", "The Inca Empire", "The Aztec Empire", "The Maya Empire", "The Toltec Empire"],
+  ["The ancient city of Carthage, a great rival of Rome, was located in what modern-day country?", "Tunisia", "Egypt", "Morocco", "Libya"],
+  ["What Japanese era modernized the country and restored practical imperial rule in 1868?", "The Meiji Restoration", "The Edo Period", "The Tokugawa Shogunate", "The Showa Era"],
+  ["Who was the last Tsar of Russia before the 1917 revolution?", "Nicholas II", "Alexander III", "Peter the Great", "Ivan the Terrible"],
+  ["What was the name of the first artificial Earth satellite, launched by the USSR in 1957?", "Sputnik 1", "Vostok 1", "Explorer 1", "Soyuz 1"],
+  ["Which European explorer is credited with the first circumnavigation of the globe?", "Ferdinand Magellan", "Francis Drake", "Christopher Columbus", "Vasco da Gama"],
+  ["What prominent US political scandal led to the resignation of President Richard Nixon in 1974?", "Watergate", "Teapot Dome", "Iran-Contra", "Whitewater"],
+  ["Who founded the religion of Islam in the 7th century?", "Muhammad", "Abu Bakr", "Ali", "Umar"],
+  ["The 'Trail of Tears' refers to the forced relocation of which Native American nation?", "The Cherokee", "The Navajo", "The Apache", "The Sioux"],
+  ["In 1066, who successfully invaded England and defeated King Harold at the Battle of Hastings?", "William the Conqueror", "Charlemagne", "Richard the Lionheart", "Henry V"]
+                  ],
+    advanced: [["Treaty ending 30 Years' War?", "Peace of Westphalia", "Utrecht", "Vienna", "Tordesillas"] /* ... PASTE HISTORY HERE */["Which treaty concluded the Thirty Years' War in 1648 and established the concept of modern state sovereignty?", "The Peace of Westphalia", "The Treaty of Utrecht", "The Congress of Vienna", "The Treaty of Tordesillas"],
+  ["Who was the famous Carthaginian general defeated at the Battle of Zama in 202 BC?", "Hannibal Barca", "Hasdrubal", "Hamilcar", "Mago"],
+  ["What was the name of the specific faction within the Russian Social Democratic Labour Party that became the Communist Party?", "The Bolsheviks", "The Mensheviks", "The SRs", "The Kadets"],
+  ["Which Hellenistic king fought the Romans and won 'Pyrrhic victories' in Italy?", "Pyrrhus of Epirus", "Antiochus III", "Philip V", "Mithridates VI"],
+  ["In which naval battle did the Holy League definitively defeat the fleet of the Ottoman Empire in 1571?", "The Battle of Lepanto", "The Battle of Actium", "The Battle of Trafalgar", "The Battle of Salamis"],
+  ["What was the primary cause of the Defenestration of Prague in 1618, which sparked the Thirty Years' War?", "Religious conflicts between Protestants and Catholics", "A dispute over taxation", "The assassination of a prince", "A border dispute with Poland"],
+  ["Which Byzantine queen and wife of Justinian I was highly influential and famously refused to flee during the Nika riots?", "Empress Theodora", "Empress Irene", "Empress Zoe", "Empress Eudoxia"],
+  ["What was the name of the political and social system in France before the Revolution of 1789?", "The Ancien Régime", "The Directory", "The Consulate", "The Bourbon Restoration"],
+  ["During the Peloponnesian War, the disastrous Sicilian Expedition was championed by which controversial Athenian general?", "Alcibiades", "Pericles", "Nicias", "Demosthenes"],
+  ["Which Chinese dynasty was founded by Kublai Khan?", "The Yuan Dynasty", "The Ming Dynasty", "The Song Dynasty", "The Jin Dynasty"],
+  ["The 'Babylonian Captivity of the Papacy' refers to the time when the Popes resided in which French city?", "Avignon", "Paris", "Lyon", "Marseille"],
+  ["What Japanese military dictator unified the country, ending the Sengoku period before the Tokugawa shogunate?", "Toyotomi Hideyoshi", "Oda Nobunaga", "Tokugawa Ieyasu", "Takeda Shingen"],
+  ["The famous Rosetta Stone was instrumental in deciphering Egyptian hieroglyphs. Who led the team that found it in 1799?", "Pierre-François Bouchard (under Napoleon)", "Jean-François Champollion", "Howard Carter", "Heinrich Schliemann"],
+  ["What was the main purpose of the Council of Trent (1545–1563)?", "To direct the Catholic Counter-Reformation", "To excommunicate Martin Luther", "To authorize the First Crusade", "To translate the Bible into Latin"],
+  ["Which battle in 31 BC established Octavian as the sole ruler of the Roman world, defeating Antony and Cleopatra?", "The Battle of Actium", "The Battle of Philippi", "The Battle of Pharsalus", "The Battle of Cannae"],
+  ["What was the name of the powerful banking family that effectively ruled Florence during the Renaissance?", "The Medici family", "The Borgia family", "The Sforza family", "The Habsburg family"],
+  ["In 1884-1885, European powers met to regulate colonization and trade in Africa. What was this meeting called?", "The Berlin Conference", "The Congress of Vienna", "The Treaty of Versailles", "The Yalta Conference"],
+  ["Who was the first king of a unified Italy since the 6th century, crowned in 1861?", "Victor Emmanuel II", "Giuseppe Garibaldi", "Camillo Cavour", "Umberto I"],
+  ["The Taiping Rebellion (1850–1864) was a massive civil war in China led by a man claiming to be...", "The younger brother of Jesus Christ", "The reincarnation of Buddha", "The true Ming Emperor", "A messenger from the Dragon King"],
+  ["Which Roman Emperor famously split the empire into the Tetrarchy (rule of four) to manage its vast size?", "Diocletian", "Constantine", "Marcus Aurelius", "Trajan"],
+  ["What was the code name for the German invasion of the Soviet Union during World War II?", "Operation Barbarossa", "Operation Sealion", "Operation Citadel", "Operation Felix"],
+  ["Who wrote 'The Prince', a 16th-century political treatise instructing rulers on how to acquire and maintain power?", "Niccolò Machiavelli", "Thomas Hobbes", "John Locke", "Thomas More"],
+  ["The 'Glorious Revolution' of 1688 in England resulted in the overthrow of which monarch?", "King James II", "King Charles I", "King Charles II", "King Henry VIII"],
+  ["What was the name of the agricultural system in medieval Europe where peasants were tied to the land of a lord?", "Serfdom / Manorialism", "Feudalism", "Vassalage", "Mercantilism"],
+  ["Which general decisively defeated Napoleon at the Battle of Waterloo in 1805?", "Arthur Wellesley, Duke of Wellington", "Horatio Nelson", "Gebhard Leberecht von Blücher", "Mikhail Kutuzov"],
+  ["What was the specific name of the military tactic utilizing rapid, concentrated attacks that Germany used in WWII?", "Blitzkrieg", "Schlieffen Plan", "Guerre de Course", "Pincer Movement"],
+  ["The Edict of Nantes, issued in 1598, granted substantial rights to which religious group in France?", "The Huguenots (Calvinist Protestants)", "The Catholics", "The Jews", "The Eastern Orthodox"],
+  ["Who was the first female Prime Minister of the United Kingdom, often called the 'Iron Lady'?", "Margaret Thatcher", "Theresa May", "Indira Gandhi", "Golda Meir"],
+  ["The ancient library of Ashurbanipal, one of the oldest surviving libraries, was located in what Assyrian city?", "Nineveh", "Babylon", "Ur", "Uruk"],
+  ["Which major historical event was triggered by the defenestration of two imperial governors from a window in Prague in 1618?", "The Thirty Years' War", "The Hussite Wars", "The Bohemian Revolt", "The Seven Years' War"]
+              ]
   },
   funfact: {
-    foundational: [
-      ["Fastest land animal?", "Cheetah", "Lion", "Horse", "Greyhound"],
-      ["How many continents are there?", "7", "5", "6", "8"],
-      ["Largest organ in human body?", "Skin", "Liver", "Brain", "Heart"],
-      ["Which is the 'Red Planet'?", "Mars", "Venus", "Jupiter", "Saturn"],
-      ["What animal is a Komodo dragon?", "Lizard", "Snake", "Crocodile", "Dinosaur"],
-      ["Colors in a rainbow?", "7", "6", "5", "8"],
-      ["Only mammal capable of sustained flight?", "Bat", "Flying squirrel", "Sugar glider", "Lemur"],
-      ["Hardest natural substance?", "Diamond", "Gold", "Iron", "Quartz"],
-      ["Days in a leap year?", "366", "365", "364", "367"],
-      ["United States flag star color?", "White", "Red", "Blue", "Gold"],
-      ["Animal with humps?", "Camel", "Elephant", "Rhino", "Hippopotamus"],
-      ["Chemical symbol for water?", "H2O", "CO2", "O2", "HO"],
-      ["Legs of an octopus?", "8", "6", "10", "12"],
-      ["What do bees make?", "Honey", "Nectar", "Wax", "Pollen"],
-      ["Tallest animal?", "Giraffe", "Elephant", "Ostrich", "Kangaroo"],
-      ["Group of wolves?", "Pack", "Herd", "Flock", "Pride"],
-      ["Largest ocean?", "Pacific", "Atlantic", "Indian", "Arctic"],
-      ["Opposite of nocturnal?", "Diurnal", "Crepuscular", "Matutinal", "Vespertine"],
-      ["Teeth in adult human?", "32", "30", "28", "34"],
-      ["Fruit to keep doctor away?", "Apple", "Banana", "Orange", "Grape"],
-      ["Guacamole main ingredient?", "Avocado", "Tomato", "Onion", "Lime"],
-      ["What do caterpillars turn into?", "Butterflies", "Moths", "Beetles", "Flies"],
-      ["Stop sign shape?", "Octagon", "Hexagon", "Pentagon", "Circle"],
-      ["Primary colors count?", "3", "4", "5", "2"],
-      ["Closest star to Earth?", "The Sun", "Sirius", "Alpha Centauri", "Proxima Centauri"],
-      ["Largest bone in human body?", "Femur", "Humerus", "Tibia", "Fibula"],
-      ["Panda's main food?", "Bamboo", "Eucalyptus", "Fish", "Berries"],
-      ["Freezing point in Fahrenheit?", "32°F", "0°F", "100°F", "212°F"],
-      ["Zeros in a million?", "6", "5", "7", "8"],
-      ["School bus color?", "Yellow", "Orange", "Red", "Green"]
-    ],
-    intermediate: [
-      ["Letter not in any US state name?", "Q", "Z", "X", "J"],
-      ["Animal with fingerprints like humans?", "Koala", "Chimpanzee", "Gorilla", "Orangutan"],
-      ["Rarest human blood type?", "AB-negative", "O-negative", "B-negative", "A-negative"],
-      ["Group of flamingos name?", "Flamboyance", "Flock", "Murder", "Parliament"],
-      ["Fear of spiders?", "Arachnophobia", "Claustrophobia", "Agoraphobia", "Acrophobia"],
-      ["Dot over 'i' or 'j'?", "Tittle", "Speck", "Point", "Jot"],
-      ["Hearts in an octopus?", "3", "2", "4", "1"],
-      ["First toy advertised on US TV?", "Mr. Potato Head", "Barbie", "G.I. Joe", "Slinky"],
-      ["National animal of Scotland?", "Unicorn", "Lion", "Stag", "Dragon"],
-      ["Fruit that floats because of air?", "Apple", "Orange", "Watermelon", "Grape"],
-      ["Planet that rolls on its side?", "Uranus", "Neptune", "Saturn", "Venus"],
-      ["Animal with highest BP?", "Giraffe", "Elephant", "Cheetah", "Blue Whale"],
-      ["Pneumonoultramicroscopicsilicovolcanoconiosis is?", "Lung disease", "Skin condition", "Metal type", "Plant"],
-      ["Fear of long words?", "Hippopotomonstrosesquippedaliophobia", "Verbophobia", "Logophobia", "Lexophobia"],
-      ["Bird with eyes larger than brain?", "Ostrich", "Owl", "Emu", "Penguin"],
-      ["Rarest M&M color?", "Brown", "Red", "Yellow", "Blue"],
-      ["Phenomenon measured by Fujita scale?", "Tornadoes", "Hurricanes", "Earthquakes", "Tsunamis"],
-      ["Shoelace tip name?", "Aglet", "Tip", "Cap", "Lace-lock"],
-      ["Mammal with thickest fur?", "Sea Otter", "Polar Bear", "Arctic Fox", "Chinchilla"],
-      ["Wallpaper cleaner turned toy?", "Play-Doh", "Silly Putty", "Slime", "Magic Eraser"],
-      ["Food that doesn't expire?", "Honey", "Salt", "Sugar", "Rice"],
-      ["Human blinks per minute?", "15-20", "5-10", "25-30", "30-40"],
-      ["Hot water freezes faster effect?", "Mpemba effect", "Doppler effect", "Coriolis effect", "Leidenfrost effect"],
-      ["Group of porcupines name?", "Prickle", "Herd", "Pack", "Spine"],
-      ["Animal with pink milk?", "Hippopotamus", "Yak", "Water Buffalo", "Flamingo"],
-      ["Most common letter in English?", "E", "A", "T", "O"],
-      ["Smell of rain name?", "Petrichor", "Ozone", "Geosmin", "Aerosol"],
-      ["Body part with most active muscles?", "Eyes", "Heart", "Hands", "Tongue"],
-      ["First practical telephone inventor?", "Alexander Graham Bell", "Thomas Edison", "Nikola Tesla", "Guglielmo Marconi"],
-      ["Country with most islands?", "Sweden", "Canada", "Norway", "Indonesia"]
-    ],
-    advanced: [
-      ["Protein that makes fireflies glow?", "Luciferin", "Biolumin", "Phosphorin", "Luminol"],
-      ["The Golden Ratio is roughly?", "1.618", "3.14", "2.71", "1.41"],
-      ["Symbol & name?", "Ampersand", "Octothorpe", "Asterism", "Caret"],
-      ["Second most abundant element in universe?", "Helium", "Neon", "Argon", "Krypton"],
-      ["Tendency to overestimate abilities?", "Dunning-Kruger", "Baader-Meinhof", "Mandela", "Placebo"],
-      ["Scientific name for 'brain freeze'?", "Sphenopalatine ganglioneuralgia", "Cryogenic cephalalgia", "Cerebral hypothermia", "Trigeminal neuralgia"],
-      ["Biologically immortal jellyfish?", "Turritopsis dohrnii", "Chironex fleckeri", "Physalia physalis", "Aurelia aurita"],
-      ["Deepest point in oceans?", "Challenger Deep", "Mariana Trench", "Sirena Deep", "Tonga Trench"],
-      ["Fear of number 13?", "Triskaidekaphobia", "Tetraphobia", "Octophobia", "Hexakosioihexekontahexaphobia"],
-      ["Compound that colors blueberries?", "Anthocyanins", "Carotenoids", "Chlorophyll", "Betalains"],
-      ["Sentence using every letter of alphabet?", "Pangram", "Anagram", "Palindrome", "Tautogram"],
-      ["Paradox: If aliens exist, where are they?", "Fermi Paradox", "Drake Equation", "Olbers Paradox", "Twin Paradox"],
-      ["Microscopic 'water bear' name?", "Tardigrade", "Rotifer", "Nematode", "Copepod"],
-      ["Liquid metal at room temp?", "Mercury", "Gallium", "Bromine", "Francium"],
-      ["Luminous electrical energy in storms?", "Ball lightning", "St Elmo fire", "Sprite lightning", "Auroral sub-storm"],
-      ["Funny bone anatomical term?", "Ulnar nerve", "Humerus", "Radius", "Medial epicondyle"],
-      ["Word that reads same backwards?", "Palindrome", "Anagram", "Ambigram", "Portmanteau"],
-      ["Planet with day longer than year?", "Venus", "Mercury", "Jupiter", "Uranus"],
-      ["Word that imitates sound?", "Onomatopoeia", "Alliteration", "Assonance", "Hyperbole"],
-      ["Black hole light escape boundary?", "Event horizon", "Singularity", "Accretion disk", "Photon sphere"],
-      ["Oldest living tree name?", "Methuselah", "Hyperion", "General Sherman", "Prometheus"],
-      ["Potato browning process?", "Enzymatic browning", "Caramelization", "Fermentation", "Maillard reaction"],
-      ["Words with same root different meanings?", "Cognates", "Synonyms", "Homophones", "Antonyms"],
-      ["Straight lines appear curved illusion?", "Hering illusion", "Müller-Lyer illusion", "Ponzo illusion", "Ebbinghaus illusion"],
-      ["Cell programmed death process?", "Apoptosis", "Necrosis", "Autophagy", "Mitosis"],
-      ["Theoretical sphere of comets?", "Oort Cloud", "Kuiper Belt", "Asteroid Belt", "Scattered Disc"],
-      ["Fear of being without phone?", "Nomophobia", "Technophobia", "Telephonophobia", "Cyberphobia"],
-      ["Crust and mantle boundary?", "Moho", "Gutenberg", "Lehmann", "Conrad"],
-      ["Remember first and last list items effect?", "Serial position", "Recency", "Primacy", "Von Restorff"],
-      ["Dark red liquid non-metallic element?", "Bromine", "Iodine", "Mercury", "Francium"]
-    ]
+    foundational: [["Fastest land animal?", "Cheetah", "Lion", "Horse", "Greyhound"] /* ... PASTE FUNFACT HERE */["What is the fastest land animal in the world?", "Cheetah", "Lion", "Horse", "Greyhound"],
+  ["How many continents are there on Earth?", "7", "5", "6", "8"],
+  ["What is the largest organ of the human body?", "The skin", "The liver", "The brain", "The heart"],
+  ["Which planet in our solar system is known as the 'Red Planet'?", "Mars", "Venus", "Jupiter", "Saturn"],
+  ["What type of animal is a Komodo dragon?", "A lizard", "A snake", "A crocodile", "A dinosaur"],
+  ["How many colors are there in a standard rainbow?", "7", "6", "5", "8"],
+  ["What is the only mammal capable of true sustained flight?", "The bat", "The flying squirrel", "The sugar glider", "The lemur"],
+  ["What is the hardest natural substance on Earth?", "Diamond", "Gold", "Iron", "Quartz"],
+  ["How many days are in a standard leap year?", "366", "365", "364", "367"],
+  ["What color are the stars on the United States flag?", "White", "Red", "Blue", "Gold"],
+  ["What animal is known to have a trunk (or two) to store fat?", "Camel", "Elephant", "Rhino", "Hippopotamus"],
+  ["What is the chemical symbol for water?", "H2O", "CO2", "O2", "HO"],
+  ["How many legs does an octopus have?", "8", "6", "10", "12"],
+  ["What do bees make that humans eat?", "Honey", "Nectar", "Wax", "Pollen"],
+  ["What is the tallest animal in the world?", "Giraffe", "Elephant", "Ostrich", "Kangaroo"],
+  ["What do you call a group of wolves?", "A pack", "A herd", "A flock", "A pride"],
+  ["Which ocean is the largest on Earth?", "Pacific Ocean", "Atlantic Ocean", "Indian Ocean", "Arctic Ocean"],
+  ["What is the opposite of nocturnal?", "Diurnal", "Crepuscular", "Matutinal", "Vespertine"],
+  ["How many teeth does an adult human usually have?", "32", "30", "28", "34"],
+  ["What fruit is known for keeping the doctor away?", "Apple", "Banana", "Orange", "Grape"],
+  ["What is the main ingredient in guacamole?", "Avocado", "Tomato", "Onion", "Lime"],
+  ["What do caterpillars turn into?", "Butterflies", "Moths", "Beetles", "Flies"],
+  ["What shape is a stop sign?", "Octagon", "Hexagon", "Pentagon", "Circle"],
+  ["How many primary colors are there?", "3", "4", "5", "2"],
+  ["What is the closest star to Earth?", "The Sun", "Sirius", "Alpha Centauri", "Proxima Centauri"],
+  ["What is the largest bone in the human body?", "Femur (thigh bone)", "Humerus", "Tibia", "Fibula"],
+  ["What do giant pandas primarily eat?", "Bamboo", "Eucalyptus", "Fish", "Berries"],
+  ["What is the freezing point of water in Fahrenheit?", "32°F", "0°F", "100°F", "212°F"],
+  ["How many zeros are in a million?", "6", "5", "7", "8"],
+  ["What color is a school bus mostly painted?", "Yellow", "Orange", "Red", "Green"]
+                  ],
+    intermediate: [["Hearts in an octopus?", "3", "2", "4", "1"] /* ... PASTE FUNFACT HERE */["What is the only letter that doesn't appear in any US state name?", "Q", "Z", "X", "J"],
+  ["Which animal is known to have fingerprints almost indistinguishable from humans?", "Koala", "Chimpanzee", "Gorilla", "Orangutan"],
+  ["What is the rarest blood type in humans?", "AB-negative", "O-negative", "B-negative", "A-negative"],
+  ["A group of crows is called a pack. What is a group of flamingos called?", "A flamboyance", "A flock", "A murder", "A parliament"],
+  ["What is the fear of spiders called?", "Arachnophobia", "Claustrophobia", "Agoraphobia", "Acrophobia"],
+  ["What is the dot over the lowercase letter 'i' or 'j' called?", "A tittle", "A speck", "A point", "A jot"],
+  ["How many hearts does an octopus have?", "3", "2", "4", "1"],
+  ["What was the first toy to be advertised on national television?", "Mr. Potato Head", "Barbie", "G.I. Joe", "Slinky"],
+  ["What is the national animal of Scotland?", "The Unicorn", "The Lion", "The Stag", "The Dragon"],
+  ["Which fruit floats in water because 25% of its volume is air?", "Apple", "Orange", "Watermelon", "Grape"],
+  ["What is the only planet in our solar system that rolls on its side like a barrel?", "Uranus", "Neptune", "Saturn", "Venus"],
+  ["What animal has the highest blood pressure?", "Giraffe", "Elephant", "Cheetah", "Blue Whale"],
+  ["What is the longest officially recognized word in the English dictionary (referring to a lung disease)?", "Pneumonoultramicroscopicsilicovolcanoconiosis", "Supercalifragilisticexpialidocious", "Pseudopseudohypoparathyroidism", "Floccinaucinihilipilification"],
+  ["What is the name of the fear of long words?", "Hippopotomonstrosesquippedaliophobia", "Verbophobia", "Logophobia", "Lexophobia"],
+  ["Which bird is known to have eyes larger than its brain?", "Ostrich", "Owl", "Emu", "Penguin"],
+  ["What is the rarest M&M color?", "Brown", "Red", "Yellow", "Blue"],
+  ["What natural phenomenon is measured by the Fujita scale?", "Tornadoes", "Hurricanes", "Earthquakes", "Tsunamis"],
+  ["What is the tiny piece of plastic or metal at the end of a shoelace called?", "An aglet", "A tip", "A cap", "A lace-lock"],
+  ["Which mammal has the thickest fur of any animal?", "Sea Otter", "Polar Bear", "Arctic Fox", "Chinchilla"],
+  ["What common household item was originally invented to clean wallpaper?", "Play-Doh", "Silly Putty", "Slime", "Magic Eraser"],
+  ["What is the only food that doesn't expire or go bad?", "Honey", "Salt", "Sugar", "Rice"],
+  ["How many times does the average human blink in a minute?", "15-20", "5-10", "25-30", "30-40"],
+  ["What do you call the phenomenon where hot water freezes faster than cold water?", "The Mpemba effect", "The Doppler effect", "The Coriolis effect", "The Leidenfrost effect"],
+  ["What is the collective noun for a group of porcupines?", "A prickle", "A herd", "A pack", "A spine"],
+  ["Which animal's milk is famously pink?", "Hippopotamus", "Yak", "Water Buffalo", "Flamingo"],
+  ["What is the most commonly used letter in the English alphabet?", "E", "A", "T", "O"],
+  ["What do you call the smell of dust after rain?", "Petrichor", "Ozone", "Geosmin", "Aerosol"],
+  ["What part of the body has the most active muscles?", "The eyes", "The heart", "The hands", "The tongue"],
+  ["Which inventor is credited with creating the first practical telephone?", "Alexander Graham Bell", "Thomas Edison", "Nikola Tesla", "Guglielmo Marconi"],
+  ["What country has the most islands in the world?", "Sweden", "Canada", "Norway", "Indonesia"]
+                  ],
+    advanced: [["Protein in fireflies?", "Luciferin", "Biolumin", "Phosphorin", "Luminol"] /* ... PASTE FUNFACT HERE */["What is the name of the protein that makes fireflies glow?", "Luciferin", "Biolumin", "Phosphorin", "Luminol"],
+  ["What mathematical constant is roughly equal to 1.618 and is known as the 'Golden Ratio'?", "Phi (φ)", "Pi (π)", "Euler's Number (e)", "Tau (τ)"],
+  ["In typography, what is the symbol '&' technically called?", "An ampersand", "An octothorpe", "An asterism", "A caret"],
+  ["Which noble gas is the second most abundant element in the universe, yet relatively rare on Earth?", "Helium", "Neon", "Argon", "Krypton"],
+  ["What is the psychological term for the tendency to overestimate one's own abilities?", "The Dunning-Kruger effect", "The Baader-Meinhof phenomenon", "The Mandela effect", "The placebo effect"],
+  ["What is the scientific name for the 'brain freeze' you get from eating cold food quickly?", "Sphenopalatine ganglioneuralgia", "Cryogenic cephalalgia", "Cerebral hypothermia", "Trigeminal neuralgia"],
+  ["What species of jellyfish is biologically immortal?", "Turritopsis dohrnii", "Chironex fleckeri", "Physalia physalis", "Aurelia aurita"],
+  ["What is the name of the deepest known point in the Earth's oceans?", "The Challenger Deep", "The Mariana Trench", "The Sirena Deep", "The Tonga Trench"],
+  ["What is the official scientific term for the fear of the number 13?", "Triskaidekaphobia", "Tetraphobia", "Octophobia", "Hexakosioihexekontahexaphobia"],
+  ["What chemical compound gives raspberries, blackberries, and blueberries their distinct colors?", "Anthocyanins", "Carotenoids", "Chlorophyll", "Betalains"],
+  ["In linguistics, a sentence that uses every letter of the alphabet is called a...", "Pangram", "Anagram", "Palindrome", "Tautogram"],
+  ["What is the name of the paradox that states if the universe is infinite and old, where are all the aliens?", "The Fermi Paradox", "The Drake Equation", "The Olbers' Paradox", "The Twin Paradox"],
+  ["What is the name of the extremely resilient microscopic animal also known as a 'water bear'?", "Tardigrade", "Rotifer", "Nematode", "Copepod"],
+  ["What is the only metal that is a liquid at standard room temperature and pressure?", "Mercury", "Gallium", "Bromine", "Francium"],
+  ["Which rare meteorological phenomenon involves a ball of luminous electrical energy appearing during a thunderstorm?", "Ball lightning", "St. Elmo's fire", "Sprite lightning", "Auroral sub-storm"],
+  ["What is the anatomical term for the 'funny bone'?", "The ulnar nerve", "The humerus", "The radius", "The medial epicondyle"],
+  ["What linguistic phenomenon involves a word or phrase that reads the same forwards and backwards?", "Palindrome", "Anagram", "Ambigram", "Portmanteau"],
+  ["Which planet's day is longer than its year?", "Venus", "Mercury", "Jupiter", "Uranus"],
+  ["What is the term for a word that is an imitation of the sound it describes (e.g., 'buzz' or 'hiss')?", "Onomatopoeia", "Alliteration", "Assonance", "Hyperbole"],
+  ["In astronomy, what is the boundary around a black hole beyond which no light or other radiation can escape?", "The event horizon", "The singularity", "The accretion disk", "The photon sphere"],
+  ["What is the name of the oldest known living individual tree in the world (a bristlecone pine)?", "Methuselah", "Hyperion", "General Sherman", "Prometheus"],
+  ["What chemical process causes cut apples and potatoes to turn brown when exposed to air?", "Enzymatic browning (oxidation)", "Caramelization", "Fermentation", "Maillard reaction"],
+  ["What is the term for a group of words that share the same root but have different meanings (e.g., 'produce', 'product')?", "Cognates", "Synonyms", "Homophones", "Antonyms"],
+  ["What is the term for the optical illusion that causes straight lines to appear curved or distorted?", "The Hering illusion", "The Müller-Lyer illusion", "The Ponzo illusion", "The Ebbinghaus illusion"],
+  ["Which biological process involves a cell programming its own death?", "Apoptosis", "Necrosis", "Autophagy", "Mitosis"],
+  ["What is the name of the theoretical sphere of comets that surrounds the solar system?", "The Oort Cloud", "The Kuiper Belt", "The Asteroid Belt", "The Scattered Disc"],
+  ["What is the specific phobia of being without a mobile phone or mobile network coverage?", "Nomophobia", "Technophobia", "Telephonophobia", "Cyberphobia"],
+  ["In geology, what is the boundary between the Earth's crust and the mantle called?", "The Mohorovičić discontinuity (Moho)", "The Gutenberg discontinuity", "The Lehmann discontinuity", "The Conrad discontinuity"],
+  ["What is the name of the effect where people tend to remember the first and last items in a list best?", "The serial position effect", "The recency effect", "The primacy effect", "The von Restorff effect"],
+  ["Which element, atomic number 83, is a non-metallic, dark red liquid at room temperature?", "Bromine", "Iodine", "Mercury", "Francium"]
+              ]
   },
   entertainment: {
-    foundational: [
-      ["Mickey Mouse creator?", "Walt Disney", "Mighty Mouse", "Jerry", "Stuart Little"],
-      ["'Man of Steel'?", "Superman", "Batman", "Iron Man", "Spider-Man"],
-      ["Clownfish movie?", "Finding Nemo", "Shark Tale", "Little Mermaid", "Moana"],
-      ["'Queen of Pop'?", "Madonna", "Lady Gaga", "Whitney Houston", "Britney Spears"],
-      ["Darth Vader lightsaber color?", "Red", "Blue", "Green", "Purple"],
-      ["Harry Potter school?", "Hogwarts", "Beauxbatons", "Durmstrang", "Ilvermorny"],
-      ["Jack Sparrow actor?", "Johnny Depp", "Orlando Bloom", "Brad Pitt", "Tom Cruise"],
-      ["Toy Story cowboy?", "Woody", "Buzz Lightyear", "Jessie", "Andy"],
-      ["Glass slipper princess?", "Cinderella", "Snow White", "Ariel", "Belle"],
-      ["Building block surviving game?", "Minecraft", "Roblox", "Fortnite", "Terraria"],
-      ["Queen lead singer?", "Freddie Mercury", "Mick Jagger", "David Bowie", "Elton John"],
-      ["Batman's city?", "Gotham City", "Metropolis", "Star City", "Central City"],
-      ["Highest grossing film as of 2024?", "Avatar", "Avengers Endgame", "Titanic", "Force Awakens"],
-      ["Who wrote Romeo and Juliet?", "William Shakespeare", "Charles Dickens", "Jane Austen", "Mark Twain"],
-      ["Springfield yellow family?", "The Simpsons", "Family Guy", "Bob's Burgers", "Futurama"],
-      ["Lion King villain?", "Scar", "Jafar", "Ursula", "Gaston"],
-      ["Pac-Man color?", "Yellow", "Red", "Blue", "Green"],
-      ["Drummer plays?", "Drums", "Guitar", "Piano", "Bass"],
-      ["Green swamp ogre?", "Shrek", "Donkey", "Lord Farquaad", "Puss in Boots"],
-      ["John Paul George Ringo band?", "The Beatles", "Rolling Stones", "The Who", "The Kinks"],
-      ["MCU Iron Man actor?", "Robert Downey Jr", "Chris Evans", "Chris Hemsworth", "Mark Ruffalo"],
-      ["Game of Thrones continent?", "Westeros", "Middle-earth", "Narnia", "Tamriel"],
-      ["'Shake It Off' singer?", "Taylor Swift", "Katy Perry", "Ariana Grande", "Miley Cyrus"],
-      ["Aladdin lamp source?", "Cave of Wonders", "Agrabah Market", "Sultan Palace", "Magic Carpet"],
-      ["Zelda protagonist?", "Link", "Zelda", "Ganon", "Mario"],
-      ["Theme park dinosaur movie?", "Jurassic Park", "Godzilla", "King Kong", "Land Before Time"],
-      ["Harry Potter author?", "JK Rowling", "Stephen King", "Suzanne Collins", "JR Tolkien"],
-      ["Gramophone award?", "Grammy Award", "Oscar", "Emmy", "Tony"],
-      [" Spielberg 1982 alien?", "ET", "Alf", "Stitch", "Yoda"],
-      ["Avengers publisher?", "Marvel", "DC", "Dark Horse", "Image"]
-    ],
-    intermediate: [
-      ["Inception and Titanic director?", "James Cameron", "Steven Spielberg", "Christopher Nolan", "Quentin Tarantino"],
-      ["American Idol season 1 winner?", "Kelly Clarkson", "Carrie Underwood", "Adam Lambert", "Fantasia Barrino"],
-      ["'Dark Side of the Moon' band?", "Pink Floyd", "Led Zeppelin", "The Who", "Rolling Stones"],
-      ["Neo's wake up pill color?", "Red", "Blue", "Green", "Yellow"],
-      ["Black Panther country?", "Wakanda", "Zamunda", "Genosha", "Latveria"],
-      ["'Here's Johnny!' improviser?", "Jack Nicholson", "Robert De Niro", "Al Pacino", "Marlon Brando"],
-      ["Pulp Fiction director?", "Quentin Tarantino", "Martin Scorsese", "Stanley Kubrick", "David Fincher"],
-      ["First feature length animated movie?", "Snow White", "Pinocchio", "Fantasia", "Bambi"],
-      ["Most Grammys by female artist?", "Beyoncé", "Taylor Swift", "Adele", "Aretha Franklin"],
-      ["Highest selling console?", "PlayStation 2", "Nintendo DS", "Xbox 360", "Nintendo Wii"],
-      ["2008 Joker actor?", "Heath Ledger", "Joaquin Phoenix", "Jared Leto", "Jack Nicholson"],
-      ["Harry Potter prison?", "Azkaban", "Nurmengard", "Gringotts", "Askaban"],
-      ["Star Wars composer?", "John Williams", "Hans Zimmer", "Ennio Morricone", "Alan Silvestri"],
-      ["Longest running US live comedy?", "It's Always Sunny", "The Simpsons", "South Park", "Saturday Night Live"],
-      ["'21' album singer?", "Adele", "Taylor Swift", "Lady Gaga", "Katy Perry"],
-      ["1994 Best Picture starring Tom Hanks?", "Forrest Gump", "Pulp Fiction", "Shawshank Redemption", "Schindler's List"],
-      ["Mufasa voice actor?", "James Earl Jones", "Jeremy Irons", "Matthew Broderick", "Rowan Atkinson"],
-      ["Stranger Things town?", "Hawkins", "Riverdale", "Sunnydale", "Derry"],
-      ["'Stairway to Heaven' band?", "Led Zeppelin", "Pink Floyd", "Eagles", "Doors"],
-      ["Walter White actor?", "Bryan Cranston", "Robert Downey Jr", "Chris Evans", "Mark Ruffalo"],
-      ["'Princess of Pop'?", "Britney Spears", "Christina Aguilera", "Madonna", "Janet Jackson"],
-      ["Captain America shield metal?", "Vibranium", "Adamantium", "Uru", "Nth Metal"],
-      ["Grand Budapest Hotel director?", "Wes Anderson", "Tim Burton", "Guillermo del Toro", "Edgar Wright"],
-      ["Harry Potter broomstick sport?", "Quidditch", "Quadpot", "Gobstones", "Broom-racing"],
-      ["The Matrix Neo actor?", "Keanu Reeves", "Tom Cruise", "Will Smith", "Brad Pitt"],
-      ["Wizarding newspaper name?", "The Daily Prophet", "The Quibbler", "The Daily Bugle", "The Wizarding Times"],
-      ["'1989' album artist?", "Taylor Swift", "Katy Perry", "Ariana Grande", "Miley Cyrus"],
-      ["The Simpsons town?", "Springfield", "Shelbyville", "Quahog", "South Park"],
-      ["'Bohemian Rhapsody' band?", "Queen", "Led Zeppelin", "Rolling Stones", "The Beatles"],
-      ["Wolverine actor?", "Hugh Jackman", "Patrick Stewart", "Ian McKellen", "Ryan Reynolds"]
-    ],
-    advanced: [
-      ["First Best Animated Feature Oscar winner?", "Shrek", "Monsters Inc", "Jimmy Neutron", "Spirited Away"],
-      ["Oscar Emmy Grammy Tony Pulitzer winner?", "Richard Rodgers", "Marvin Hamlisch", "Mel Brooks", "Audrey Hepburn"],
-      ["Tolkien Elven language?", "Sindarin", "Dothraki", "Klingon", "Valyrian"],
-      ["'Rumours' album band?", "Fleetwood Mac", "Pink Floyd", "Eagles", "Led Zeppelin"],
-      ["First movie to gross over $1B?", "Titanic", "Jurassic Park", "Episode I", "Avatar"],
-      ["Most Oscar nominations actor?", "Meryl Streep", "Jack Nicholson", "Katharine Hepburn", "Daniel Day-Lewis"],
-      ["Highest grossing indie film?", "Passion of Christ", "My Big Fat Greek Wedding", "Slumdog Millionaire", "Juno"],
-      ["'Four Seasons' composer?", "Vivaldi", "Mozart", "Beethoven", "Bach"],
-      ["First Mario appearance game?", "Donkey Kong", "Super Mario Bros", "Mario Bros", "Space Invaders"],
-      ["'Frankly my dear I don't give a damn' movie?", "Gone with the Wind", "Casablanca", "Wizard of Oz", "Citizen Kane"],
-      ["TARDIS fuel name?", "Artron Energy", "Dilithium", "Kyber crystals", "Tachyon particles"],
-      ["'Purple Rain' artist?", "Prince", "Michael Jackson", "David Bowie", "James Brown"],
-      ["First feature length computer animated film?", "Toy Story", "A Bug's Life", "Antz", "Shrek"],
-      ["'Reservoir Dogs' director?", "Quentin Tarantino", "Martin Scorsese", "Paul Anderson", "Guy Ritchie"],
-      ["Highest grossing Broadway musical?", "The Lion King", "Wicked", "Phantom of Opera", "Hamilton"],
-      ["Posthumous Oscar winner for 'Network'?", "Peter Finch", "Heath Ledger", "James Dean", "Massimo Troisi"],
-      ["Stephen King fictional town?", "Castle Rock", "Derry", "Jerusalem's Lot", "Haven"],
-      ["'Lemonade' artist?", "Beyoncé", "Adele", "Rihanna", "Lady Gaga"],
-      ["First film to win 'Big Five' Oscars?", "It Happened One Night", "One Flew Over Cuckoo's Nest", "Silence of Lambs", "Gone with the Wind"],
-      ["'Nevermind' band?", "Nirvana", "Pearl Jam", "Soundgarden", "Alice in Chains"],
-      ["Arrakis movie?", "Dune", "Tatooine", "Hoth", "Cybertron"],
-      ["Symmetrical framing director?", "Wes Anderson", "Stanley Kubrick", "Alfred Hitchcock", "Steven Spielberg"],
-      ["First console with built-in HDD?", "Xbox", "PlayStation 2", "GameCube", "Dreamcast"],
-      ["'Here's looking at you kid' movie?", "Casablanca", "Gone with the Wind", "Maltese Falcon", "The Big Sleep"],
-      ["Avatar language name?", "Na'vi", "Klingon", "Dothraki", "Valyrian"],
-      ["'King of Rock and Roll'?", "Elvis Presley", "Chuck Berry", "Little Richard", "Jerry Lee Lewis"],
-      ["First animated film nominated for Best Picture?", "Beauty and the Beast", "The Lion King", "Toy Story", "Up"],
-      ["'Evil Dead' director?", "Sam Raimi", "Quentin Tarantino", "Robert Rodriguez", "Kevin Smith"],
-      ["Highest grossing documentary?", "Fahrenheit 9/11", "March of Penguins", "Super Size Me", "Inconvenient Truth"],
-      ["Hannibal Lecter Oscar winner?", "Anthony Hopkins", "Mads Mikkelsen", "Brian Cox", "Gaspard Ulliel"]
-    ]
-  },
-  lore: {
-    foundational: [
-      ["Who is known as the Prime Creator in the Ordverse?", "Aetherius Dominus", "Supremus Daragvener", "King Kailus", "Valthar Demetrius"],
-      ["What name did the protagonist choose to honor his mother?", "Caelestine", "Demetrius", "Zichri", "Chrysealis"],
-      ["Who is the current King of Chrysealis?", "King Kailus", "King Tirath", "King Miknelah", "King Ziphus"],
-      ["What is the name of the Divine Empire?", "Chrysealis", "The Aetheridom Expanse", "The Supreme Universe", "The House of War"],
-      ["Who was reinstated as the Crown Prince of Chrysealis?", "Yveldinjar (Mephistopheles)", "Valthar", "Nicholas", "Astraea"],
-      ["What system measures power progression in the Ordverse?", "Reality Factor (RF)", "Power Level (PL)", "Divine Energy", "Aura Points"],
-      ["What is the 14th and highest rank?", "True God", "Progenitor", "Primordial", "God"],
-      ["What was Nichothéos's human identity?", "Jayden Cameron", "Nicholas Caelestine", "Yveldinjar", "Valthar Demetrius"],
-      ["Who did Jayden fall in love with on Earth?", "Michelle", "Astraea", "Aelunira", "He never fell in love"],
-      ["Who is the older brother who fell from grace?", "Yveldinjar (Mephistopheles)", "Valthar", "Kailus", "Ziphus"],
-      ["How long did the refinement process in Chrysealis take?", "14 days", "7 days", "30 days", "3 days"],
-      ["How long did it take to end Mephistopheles's threat?", "Under three minutes", "Fourteen days", "One hour", "He couldn't defeat him"],
-      ["What rank corresponds to a 'Saint'?", "Rank 9", "Rank 10", "Rank 7", "Rank 12"],
-      ["What rank corresponds to a 'Sage'?", "Rank 10", "Rank 9", "Rank 11", "Rank 8"],
-      ["What is the lowest rank (Rank 1)?", "Basic", "Novice", "Advanced", "Expert"],
-      ["Who were Jayden's adoptive parents?", "Dr. Steve & Rachel Cameron", "James & Evelyn", "Michael & Aimi", "Draco & Michelle"],
-      ["Jayden's superhero moniker at age 13?", "Mystic Kid", "Ultimate Warrior", "Grand Champion", "Kim Hyuk Jae"],
-      ["Who was Jayden's biological brother on Earth?", "Draco Cameron", "Bradley Draxler", "Michael Larmarck", "Prince Edmundus"],
-      ["What event at age 12 granted Jayden invulnerability?", "A Polyvenium meteorite", "A solar flare", "A magical spell", "A lightning strike"],
-      ["When did Jayden vow revenge?", "Age 17.6", "Age 13", "Age 18", "Age 21"],
-      ["How old was Jayden when he died saving Earth?", "18", "17", "21", "14"],
-      ["Who did Jayden fall in love with at school?", "Michelle", "Aimi", "Evelyn", "Rachel"],
-      ["What bound Jayden during the Mephistopheles battle?", "Divine chains", "A gravity spell", "Polyvenium cuffs", "Chrysealean steel"],
-      ["Whose murder pushed Jayden to rage?", "James Cameron", "Dr. Steve Cameron", "Evelyn Williams", "Rachel Cameron"],
-      ["What activated the forbidden sigil?", "His life-force and his blood", "A Chrysealean incantation", "The power of the Sun", "Aetherium crystals"],
-      ["Mephistopheles's true identity?", "Yveldinjar Demetrius", "Valthar", "King Kailus's brother", "A rogue Primordial"],
-      ["Where did Jayden wake up after dying?", "Chrysealis", "The Aetheridom Expanse", "The Supreme Universe", "The Void"],
-      ["How long for the rematch victory?", "Less than 3 minutes", "Fourteen days", "18 hours", "An entire day"],
-      ["Nichothéos's terrifying moniker?", "Crimson-haired God of Death", "The Lost Prince", "The Ultimate Conduit", "The Mystic Kid"],
-      ["How did Nichothéos conquer defiant realms?", "Single-handedly without an army", "By leading the Vanguard", "Using six lineages", "Through diplomacy"],
-      ["Official reason for banishment?", "He was 'soft'", "Tried to assassinate King", "Lost to a Primordial", "Refused weapons"],
-      ["Visual omen of his arrival?", "Sky turned deep bruised red", "Sun instantly set", "Oceans turned to blood", "Gravity reversed"],
-      ["Official state rank title?", "Crimson God of War", "Chrysealean God of War", "God of Death", "The Lost Prince"],
-      ["What does 'God of Death' represent?", "Finality of his arrival", "Unstoppable armies", "Mastery of dark magic", "Right to throne"],
-      ["Who did Nichothéos train?", "Astraea", "Yveldinjar", "Valthar", "King Kailus"],
-      ["Kailus's true motive for banishment?", "A better, more obedient son", "A dead legend", "A spy", "To protect him"],
-      ["Nicholas's biological daughter?", "Claire Emilia Cameron", "Kira Athlea", "Astraea", "Aelunira"],
-      ["Nicholas's adopted daughter?", "Kira Athlea Hunter-Cameron", "Evelyn Williams", "Michelle", "Aimi"],
-      ["Kira's name to enemies?", "Kaeltharya", "Astraea", "Mephistopheles", "Aelunira"],
-      ["Kailus's relation to Nicholas?", "Father", "Grandfather", "Brother", "Uncle"],
-      ["Queen Aelunira Caelestine relation?", "Nicholas's Mother", "Step-sister", "Michelle's Mother", "Goddess of War"],
-      ["6th King of Chrysealis?", "King Kailus Demetrius", "King Tirath", "King Ziphus", "King Miknelah"],
-      ["Artifact given to Michelle?", "A wedding ring", "Aetherium Crown", "Scepter of Ord", "Polyvenium dagger"],
-      ["Who is Evelyn Williams to Jayden?", "Adopted Daughter", "Sister-in-law", "Mother", "Ex-wife"],
-      ["1st King of Chrysealis?", "King Demetrius Zichri", "King Klarius", "King Kailus", "Valthar"],
-      ["Jayden's primary anchor to humanity?", "Michelle Williams", "Rachel Cameron", "Evelyn Williams", "Aimi"],
-      ["Ultimate progenitor of Nicholas?", "Aetherius Dominus", "Supremus Daragvener", "King Kailus", "Valthar"],
-      ["Jayden's older brother/Crown Prince?", "Yveldinjar (Mephistopheles)", "Draco Cameron", "Valthar", "Klarius"],
-      ["James Cameron relation?", "Earthly Father Figure", "Biological Father", "Uncle", "Older Brother"],
-      ["New War-God after banishment?", "Astraea Demetrius", "Valthar", "Yveldinjar", "Miknelah"]
-    ],
-    intermediate: [
-      ["The Triune Symmetry's third pillar?", "τὸ ἄγνωστον (The Unknown)", "Supremus Daragvener", "The Vessel", "The Ultimate Conduit"],
-      ["God of Chrysealean Magic?", "King Miknelah", "King Klarius", "King Tirath", "King Zichri"],
-      ["Current War-God after Nicholas left?", "Astraea", "Valthar", "Queen Aelunira", "Yveldinjar"],
-      ["Penalty for entering Supreme Universe?", "Total Annihilation", "Memory Wipe", "Banishment", "Loss of Domains"],
-      ["Remnant of first banishment?", "Brown hair", "Trench coat", "Mortal vulnerability", "Lost memories"],
-      ["Three sub-levels within ranks?", "Beginner, Advanced, Peak", "Low, Mid, High", "Initiate, Master, Grandmaster", "Alpha, Beta, Omega"],
-      ["Saitama's peak rank?", "Rank 10 (Sage)", "Rank 9 (Saint)", "Rank 11 (Primordial)", "Rank 8 (Emperor)"],
-      ["CAS Superman rank?", "Peak Sage (Rank 10)", "Peak Saint (Rank 9)", "Advanced Emperor (Rank 8)", "Beginner God (Rank 13)"],
-      ["Transitioning between levels increases what?", "Dimensional Priority", "Physical Mass", "Magical Capacity", "Divine Right"],
-      ["Rank 13 Advanced vs Prime Beginners?", "100,000+", "15", "1,000", "1,000,000"],
-      ["Who holds the Peak level of Rank 13?", "Jayden", "Valthar", "King Kailus", "Astraea"],
-      ["Title stripped and given to Astraea?", "War-God", "Crown Prince", "God of Light", "The Vessel"],
-      ["Kailus's demand for reinstatement?", "Give up humanity", "Conquer Earth", "Kill Mephistopheles", "Marry a Chrysealean"],
-      ["Base Multiple for Rank 1 Advanced?", "5 Prime Beginners", "10 Prime Beginners", "15 Prime Beginners", "2 Prime Beginners"],
-      ["Rank of Chrysealean Immortals?", "Rank 13 (God)", "Rank 12 (Progenitor)", "Rank 11 (Primordial)", "Rank 14 (True God)"],
-      ["Alias for swordsmanship victory?", "Kim Hyuk Jae", "Bradley Draxler", "Prince Edmundus", "Draco"],
-      ["Who became Jayden's confidante at 13.5?", "Aimi", "Evelyn Williams", "Rachel Cameron", "Bradley Draxler"],
-      ["Who ruined Jayden's relationship with Michelle?", "Aimi and Prince Edmundus", "Mephistopheles and Draco", "James and Evelyn", "Bradley and Michael"],
-      ["Moved to Detroit to live with?", "His uncle James", "Dr. Steve Cameron", "Japan master", "Prince Edmundus"],
-      ["13.25 transport title?", "Grand Champion of Supreme Universe", "Ultimate Warrior", "God of War", "Prime Creator"],
-      ["Days of recurring nightmares?", "On his birthdays", "New Year's Eve", "Adoption anniversary", "Meteorite strike day"],
-      ["First friends in Denver?", "Bradley Draxler & Michael Larmarck", "Steve & Draco", "Evelyn & Michelle", "Edmundus & Aimi"],
-      ["How he drew the forbidden sigil?", "Using battle movements over hours", "A cloaking spell", "James drew it", "Telekinesis"],
-      ["How he got the blood needed?", "Intentionally created an opening", "Bit his hand", "Mephistopheles's blood", "Cut himself"],
-      ["Gatekeeper who helped recover powers?", "Sethys", "Astraea", "Miknelah", "Klarius"],
-      ["Why Kailus wanted Yveldinjar back?", "Favorite queen's son", "Royal Seal", "Defeat Jayden", "Memory Lock"],
-      ["How he spent 14 days of 'meditation'?", "Transferring power into his axe", "Praying", "Healing", "Learning Magic"],
-      ["Title given to Astraea?", "Chrysealean War-God", "Crown Prince", "God of Light", "Supreme Protector"],
-      ["Crown Prince after banishment?", "Astraea", "Yveldinjar", "Valthar", "Ziphus"],
-      ["How he dismantled resistance?", "Became X+1", "Drained 50% magic", "Multiplied RF", "Froze time"],
-      ["Political reason for banishment?", "Fear of his power", "Refused Earth conquest", "Hide truth of Yveldinjar", "Resource drought"],
-      ["Jayden's aversion to 'conquering'?", "Rejection of the monster father made", "James's curse", "Meteor side effect", "Fear of mortality"],
-      ["Difference from standard War-Gods?", "His existence dissolved war", "Relied on weapon mastery", "Only fought by day", "Required permission"],
-      ["Choosing 'Nicholas' signified?", "Protecting beings he subjugated", "Tribute to Draco", "Insult to Astraea", "Acceptance of destiny"],
-      ["Trait inherited from Valthar legacy?", "57:43 crimson-brown hair", "Mastery of every weapon", "Time manipulation", "Polyvenium invulnerability"],
-      ["Why Astraea replaced him?", "Control over technique vs existence", "Astraea defeated him", "Astraea higher RF", "He requested it"],
-      ["God of Love and Wisdom?", "King Ziphus Demetrius", "King Klarius", "King Tirath", "King Miknelah"],
-      ["Miknelah Demetrius domain?", "God of Chrysealean Magic", "Mysteries and Courage", "Light and Purity", "Raw Strength"],
-      ["Unique property of Michelle's ring?", "Key to use his divine abilities", "Invisibility", "Chrysealean Magic", "Turns her to True God"],
-      ["5th King domain?", "Beauty Charm Wealth Power", "Magic", "Light", "Raw Strength"],
-      ["Valthar's title before vanishing?", "The Lost Prince", "The 4th King", "The Crown Prince", "The Founder"],
-      ["What does the ring provide for defense?", "Ultimate Defense linked to perfected form", "Complete immortality", "Polyvenium shield", "Triune Symmetry power"],
-      ["4th King domain?", "Mysteries and Courage", "Magic", "Light", "Beauty"],
-      ["Why 'Caelestine'?", "Honor mother's grace", "James's true name", "Hide from Mephistopheles", "Victory of the people"],
-      ["State when forging the ring?", "Perfected combined state", "Mortal state", "Injured state", "0% AD state"],
-      ["Biological brother of Mephistopheles?", "Nichothéos", "Draco Cameron", "Valthar", "Klarius"],
-      ["Aelunira lineage?", "House Caelestine", "House Demetrius", "House War", "House Williams"],
-      ["Nicholas's Great-grandfather?", "King Klarius Demetrius", "King Miknelah", "King Ziphus", "King Tirath"],
-      ["Nicholas's Grandfather?", "King Tirath Demetrius", "King Kailus", "King Klarius", "Valthar"],
-      ["Kailus generation?", "6th King", "5th King", "4th King", "7th King"]
-    ],
-    advanced: [
-      ["Nicholas's Crimson to Brown ratio?", "57:43", "50:50", "60:40", "43:57"],
-      ["Why Aetherius Dominus memories are sealed?", "Prevent Ordverse collapse", "Hide from Daragvener", "Punishment", "To learn mortal ways"],
-      ["Valthar domain?", "Raw Strength & Weapons", "Mysteries and Courage", "Beauty Charm Wealth Power", "Creation"],
-      ["Percentage of true power Nichothéos uses?", "0%", "1%", "10%", "100%"],
-      ["Nicholas height?", "6'3\"", "6'0\"", "6'5\"", "6'1\""],
-      ["Rank 14 vs Rank 13 Peak powerhouses?", "A googolplex", "One billion", "Infinite", "One hundred thousand"],
-      ["Tool for neutralizing lower threats?", "HIMMAGE", "Memory Lock", "The Vessel", "Triune Symmetry"],
-      ["Kailus current Rank 13 level?", "Peak", "Beginner", "Advanced", "He is Rank 14"],
-      ["World Breaker Hulk rank?", "Peak Saint (Rank 9)", "Advanced Emperor (Rank 8)", "Beginner King (Rank 7)", "Advanced Knight (Rank 6)"],
-      ["Example of Rank 11 Primordial?", "The Void / Cthulhu", "Saitama", "Immortals", "Planetary Lords"],
-      ["Mephistopheles's Earth goal?", "A 'Fixed Point' of destruction", "Chrysealean invasion", "Resurrect Valthar", "Destroy Sun"],
-      ["How he treats Sages, Saints, Emperors?", "Background noise", "Worthy challengers", "Allies", "Anomalies"],
-      ["Rank 2 Advanced Multiple?", "15", "5", "50", "100"],
-      ["Why hair randomize to brown?", "Side effect of mortal vessel", "Kailus curse", "Hide from Mephistopheles", "Sign of RF"],
-      ["What does 'Multiple' represent?", "Simultaneous lower level victories", "RF gain", "Healing speed", "Dimensional access"],
-      [" Lake Michigan contamination material?", "Polyvenium", "Aetherium", "Chrysealean steel", "Void essence"],
-      ["James and Michelle's family history?", "James ex-lover of her mother", "James injured her father", "James stole magic", "James was her uncle"],
-      ["Military school dismissal reason?", "Uncontrolled power leak", "Fighting", "Disobedience", "Swordsmanship"],
-      ["How he undid Mephistopheles's destruction?", "War-spell fueled by life force", "Reversed time", "Transferred immortality", "Absorbed him"],
-      ["Items given by James at 13?", "Watch, Cloak, Weapons", "Mask, Ring, Sword", "Staff, Shield, Armor", "Amulet, Boots, Gauntlets"],
-      ["Where he met obsessed Aimi?", "Japan", "South Korea", "China", "Tibet"],
-      ["Who Evelyn informed of his nightmares?", "Dr. Steve Cameron", "James", "Michelle", "Aimi"],
-      ["Final act for Earth before death?", "Undid illusion reversing destruction", "Transferred immortality", "Sealed portal", "Erased memory"],
-      ["Jayden's last words?", "\"Earth is safe now.\"", "\"I failed father...\"", "\"Michelle...\"", "\"The Demetrius name dies...\""],
-      ["Power conversion rate to Mystic Kid?", "14 days to equal one hour true power", "1:1 ratio", "Lost 50%", "One hour > original power"],
-      ["Why Kailus wanted Earth conquered?", "To turn him into a weapon", "Harvest Polyvenium", "War with Primordials", "No longer love Michelle"],
-      ["Astraea and Yveldinjar relation?", "Blood sister and brother", "Cousins", "Aunt", "No relation"],
-      ["Mephistopheles condition after retreat?", "Severe damage/life-force drain", "Uninjured but terrified", "Trapped in illusion", "Memories locked"],
-      ["Kailus's loyalty ultimatum?", "Subdue Earth", "Execute Michelle", "Yield RF", "Fight Astraea"],
-      ["Effect of solo conquests on military?", "Made armies redundant/useless", "Inspired training", "Civil war", "Bankrupted empire"],
-      ["Rank 3 Authorities view of him?", "Simplified the Omniverse into one empire", "Weak vessel", "Valuable ally", "Myth"],
-      ["Difference between Valthar and Nichothéos?", "Nichothéos strongest in existence", "God of Death vs War", "Valthar conquered Earth", "Physical vs Magic"],
-      ["Kailus's 'lobotomizing' method?", "Randomization and memory lock", "Extracting core", "Weight of Universes", "Mortality"],
-      ["'Crimson God of War' representation?", "Rare-blooded force that fights alone", "Commander of legions", "Finality of death", "Protector of weak"],
-      ["Kailus realization of 'One-Man Army'?", "Nothing could stop him", "Triune Symmetry save King", "Astraea defeat him", "Universe collapse"],
-      ["Astraea's hold compared to Nicholas?", "Official authority of House Demetrius", "Higher absolute RF", "Title of God of Death", "Control over Authorities"],
-      ["Michelle's conduit mechanic?", "His divine scaling power", "14-Rank RF system", "X+1 limit", "HIMMAGE automation"],
-      ["Demetrius Zichri relation?", "4x Great-grandfather", "3x Great-grandfather", "5x Great-grandfather", "Great-grandfather"],
-      ["Valthar Demetrius relation?", "First son of Klarius", "Son of Tirath", "Son of Kailus", "Son of Miknelah"],
-      ["Nicholas 3x Great-grandfather?", "King Ziphus Demetrius", "King Miknelah", "King Zichri", "King Klarius"],
-      ["Astraea's relation to both?", "Step-sister to Nicholas, blood sister to Yveldinjar", "Blood sister Nicholas", "Cousin", "Adopted daughter"],
-      ["Michelle's ring is a fragment of?", "The Absolute", "The Triune Symmetry", "The Void", "Aetherium"],
-      ["What prevents penetration of her defense?", "Link to perfected form", "Mortal Anchor status", "James's spell", "Her own RF"],
-      ["Nicholas 2x Great-grandfather?", "King Miknelah Demetrius", "King Klarius", "King Ziphus", "King Tirath"],
-      ["Michelle status in Table?", "Mortal Anchor", "Supreme Queen", "Ultimate Conduit", "War-God"],
-      ["House Caelestine trait?", "Elegance and celestial grace", "Raw strength", "Magic", "Founders of Demetrius"],
-      ["Ring difference from standard artifacts?", "Conduit of authority from his essence", "Rank 13 status", "Bypass Memory Lock", "Neutralize Polyvenium"],
-      ["Who is Kaeltharya?", "Kira Athlea Hunter-Cameron", "Claire Emilia Cameron", "Astraea Demetrius", "Aimi"],
-      ["Kira and Claire relation?", "Childhood best friend and adopted sister", "Biological sister", "Mother", "Cousin"],
-      ["Why Michelle is Jayden's 'primary anchor'?", "Her existence is the reason he protects Earth", "She holds Memory Lock", "She can defeat him", "She is reincarnated God"]
-    ]
+    foundational: [["Mickey Mouse creator?", "Walt Disney", "Jerry", "Stuart Little", "Mighty Mouse"] /* ... PASTE ENTERTAINMENT HERE */["Who is the famous mouse created by Walt Disney?", "Mickey Mouse", "Mighty Mouse", "Jerry", "Stuart Little"],
+  ["Which superhero is known as the 'Man of Steel'?", "Superman", "Batman", "Iron Man", "Spider-Man"],
+  ["What animated movie features a clownfish looking for his son?", "Finding Nemo", "Shark Tale", "The Little Mermaid", "Moana"],
+  ["Which pop singer is known as the 'Queen of Pop' and sang 'Material Girl'?", "Madonna", "Lady Gaga", "Whitney Houston", "Britney Spears"],
+  ["What color is the lightsaber typically wielded by Darth Vader in Star Wars?", "Red", "Blue", "Green", "Purple"],
+  ["What magical school does Harry Potter attend?", "Hogwarts", "Beauxbatons", "Durmstrang", "Ilvermorny"],
+  ["Who plays the character of Jack Sparrow in Pirates of the Caribbean?", "Johnny Depp", "Orlando Bloom", "Brad Pitt", "Tom Cruise"],
+  ["What is the name of the cowboy doll in the movie Toy Story?", "Woody", "Buzz Lightyear", "Jessie", "Andy"],
+  ["Which Disney princess lost her glass slipper at the ball?", "Cinderella", "Snow White", "Ariel", "Belle"],
+  ["What game involves building blocks and surviving monsters at night?", "Minecraft", "Roblox", "Fortnite", "Terraria"],
+  ["Who is the lead singer of the band Queen?", "Freddie Mercury", "Mick Jagger", "David Bowie", "Elton John"],
+  ["What city is Batman sworn to protect?", "Gotham City", "Metropolis", "Star City", "Central City"],
+  ["What is the highest-grossing film of all time (as of 2024)?", "Avatar", "Avengers: Endgame", "Titanic", "Star Wars: The Force Awakens"],
+  ["Who wrote the play 'Romeo and Juliet'?", "William Shakespeare", "Charles Dickens", "Jane Austen", "Mark Twain"],
+  ["What animated TV show features a family with yellow skin living in Springfield?", "The Simpsons", "Family Guy", "Bob's Burgers", "Futurama"],
+  ["Who is the villain in the movie 'The Lion King'?", "Scar", "Jafar", "Ursula", "Gaston"],
+  ["Which video game features a yellow character eating dots and running from ghosts?", "Pac-Man", "Donkey Kong", "Super Mario Bros.", "Sonic the Hedgehog"],
+  ["What instrument does a drummer play?", "Drums", "Guitar", "Piano", "Bass"],
+  ["Who is the green ogre that lives in a swamp and marries Princess Fiona?", "Shrek", "Donkey", "Lord Farquaad", "Puss in Boots"],
+  ["What famous band consisted of John, Paul, George, and Ringo?", "The Beatles", "The Rolling Stones", "The Who", "The Kinks"],
+  ["Which actor played Iron Man in the Marvel Cinematic Universe?", "Robert Downey Jr.", "Chris Evans", "Chris Hemsworth", "Mark Ruffalo"],
+  ["What is the name of the fictional continent where Game of Thrones takes place?", "Westeros", "Middle-earth", "Narnia", "Tamriel"],
+  ["Who sings the hit song 'Shake It Off'?", "Taylor Swift", "Katy Perry", "Ariana Grande", "Miley Cyrus"],
+  ["What magical item does Aladdin find in the Cave of Wonders?", "A magic lamp", "A flying carpet", "A magical sword", "A spellbook"],
+  ["What is the name of the main protagonist in the Legend of Zelda series?", "Link", "Zelda", "Ganon", "Mario"],
+  ["Which movie features dinosaurs being brought back to life in a theme park?", "Jurassic Park", "Godzilla", "King Kong", "The Land Before Time"],
+  ["Who is the author of the Harry Potter book series?", "J.K. Rowling", "Stephen King", "Suzanne Collins", "J.R.R. Tolkien"],
+  ["What famous music award is given a gramophone-shaped trophy?", "The Grammy Award", "The Oscar", "The Emmy Award", "The Tony Award"],
+  ["What is the name of the friendly alien from a 1982 Steven Spielberg movie?", "E.T.", "Alf", "Stitch", "Yoda"],
+  ["Which comic book publisher created the Avengers?", "Marvel Comics", "DC Comics", "Dark Horse Comics", "Image Comics"]
+                  ],
+    intermediate: [["Neo's pill color?", "Red", "Blue", "Green", "Yellow"] /* ... PASTE ENTERTAINMENT HERE */["Which director is known for films like 'Inception', 'Titanic', and 'The Terminator'?", "James Cameron", "Steven Spielberg", "Christopher Nolan", "Quentin Tarantino"],
+  ["Who won the first season of the TV show 'American Idol'?", "Kelly Clarkson", "Carrie Underwood", "Adam Lambert", "Fantasia Barrino"],
+  ["Which classic rock band released the album 'The Dark Side of the Moon'?", "Pink Floyd", "Led Zeppelin", "The Who", "The Rolling Stones"],
+  ["In the Matrix, what color pill does Neo take to wake up from the simulation?", "The Red Pill", "The Blue Pill", "The Green Pill", "The Yellow Pill"],
+  ["What is the name of the fictional African country ruled by Black Panther?", "Wakanda", "Zamunda", "Genosha", "Latveria"],
+  ["Which actor famously improvised the line 'Here's Johnny!' in The Shining?", "Jack Nicholson", "Robert De Niro", "Al Pacino", "Marlon Brando"],
+  ["Who directed the 1994 cult classic movie 'Pulp Fiction'?", "Quentin Tarantino", "Martin Scorsese", "Stanley Kubrick", "David Fincher"],
+  ["What was the first feature-length animated movie ever released?", "Snow White and the Seven Dwarfs", "Pinocchio", "Fantasia", "Bambi"],
+  ["Which artist holds the record for the most Grammy Awards won by a female artist?", "Beyoncé", "Taylor Swift", "Adele", "Aretha Franklin"],
+  ["What is the highest-selling video game console of all time?", "PlayStation 2", "Nintendo DS", "Xbox 360", "Nintendo Wii"],
+  ["Which iconic actor played the character of the Joker in the 2008 film 'The Dark Knight'?", "Heath Ledger", "Joaquin Phoenix", "Jared Leto", "Jack Nicholson"],
+  ["What is the name of the fictional wizarding prison in the Harry Potter series?", "Azkaban", "Nurmengard", "Gringotts", "Askaban"],
+  ["Which famous composer is known for his film scores, including Star Wars, Indiana Jones, and Jurassic Park?", "John Williams", "Hans Zimmer", "Ennio Morricone", "Alan Silvestri"],
+  ["What is the longest-running live-action comedy series in American television history?", "It's Always Sunny in Philadelphia", "The Simpsons", "South Park", "Saturday Night Live"],
+  ["Which female artist released the best-selling album '21'?", "Adele", "Taylor Swift", "Lady Gaga", "Katy Perry"],
+  ["What film won the Academy Award for Best Picture in 1994, starring Tom Hanks?", "Forrest Gump", "Pulp Fiction", "The Shawshank Redemption", "Schindler's List"],
+  ["Which famous actor voiced the character of Mufasa in the 1994 animated film 'The Lion King'?", "James Earl Jones", "Jeremy Irons", "Matthew Broderick", "Rowan Atkinson"],
+  ["What is the name of the fictional town where the show 'Stranger Things' takes place?", "Hawkins", "Riverdale", "Sunnydale", "Derry"],
+  ["Which rock band is famous for their hit song 'Stairway to Heaven'?", "Pink Floyd", "Led Zeppelin", "The Eagles", "The Doors"],
+  ["What actor played the character of Walter White in the Marvel Cinematic Universe?", "Bryan Cranston", "Robert Downey Jr.", "Chris Evans", "Mark Ruffalo"],
+  ["Which famous female artist is known as the 'Princess of Pop'?", "Britney Spears", "Christina Aguilera", "Madonna", "Janet Jackson"],
+  ["What is the name of the fictional metal that Captain America's shield is made of?", "Vibranium", "Adamantium", "Uru", "Nth Metal"],
+  ["Which famous director is known for his distinct visual style in films like 'The Grand Budapest Hotel' and 'Isle of Dogs'?", "Wes Anderson", "Tim Burton", "Guillermo del Toro", "Edgar Wright"],
+  ["What is the name of the fictional wizarding sport played on flying broomsticks in Harry Potter?", "Quidditch", "Quadpot", "Gobstones", "Broom-racing"],
+  ["Which actor played the character of Neo in 'The Matrix'?", "Keanu Reeves", "Tom Cruise", "Will Smith", "Brad Pitt"],
+  ["What is the name of the fictional wizarding newspaper in the Harry Potter series?", "The Daily Prophet", "The Quibbler", "The Daily Bugle", "The Wizarding Times"],
+  ["Which famous female artist released the hit album '1989'?", "Taylor Swift", "Katy Perry", "Ariana Grande", "Miley Cyrus"],
+  ["What is the name of the fictional city where the show 'The Simpsons' takes place?", "Springfield", "Shelbyville", "Quahog", "South Park"],
+  ["Which rock band is famous for their hit song 'Bohemian Rhapsody'?", "Queen", "Led Zeppelin", "The Rolling Stones", "The Beatles"],
+  ["What actor played the character of Wolverine in the X-Men film series?", "Hugh Jackman", "Patrick Stewart", "Ian McKellen", "Ryan Reynolds"]
+                  ],
+    advanced: [["Tolkien Elven language?", "Sindarin", "Dothraki", "Klingon", "Valyrian"] /* ... PASTE ENTERTAINMENT HERE */["Which film won the first-ever Academy Award for Best Animated Feature in 2002?", "Shrek", "Monsters, Inc.", "Jimmy Neutron: Boy Genius", "Spirited Away"],
+  ["Who is the only person to have won an Oscar, an Emmy, a Grammy, a Tony, and a Pulitzer Prize?", "Richard Rodgers", "Marvin Hamlisch", "Mel Brooks", "Audrey Hepburn"],
+  ["What is the name of the fictional language created by J.R.R. Tolkien for the Elves in Lord of the Rings?", "Sindarin", "Dothraki", "Klingon", "Valyrian"],
+  ["Which band released the iconic 1977 album 'Rumours'?", "Fleetwood Mac", "Pink Floyd", "The Eagles", "Led Zeppelin"],
+  ["What was the first movie to gross over $1 billion worldwide?", "Titanic", "Jurassic Park", "Star Wars: Episode I", "Avatar"],
+  ["Which actor holds the record for the most Academy Award nominations?", "Meryl Streep", "Jack Nicholson", "Katharine Hepburn", "Daniel Day-Lewis"],
+  ["What is the name of the highest-grossing independent film of all time?", "The Passion of the Christ", "My Big Fat Greek Wedding", "Slumdog Millionaire", "Juno"],
+  ["Who composed the famous musical piece 'The Four Seasons'?", "Antonio Vivaldi", "Wolfgang Amadeus Mozart", "Ludwig van Beethoven", "Johann Sebastian Bach"],
+  ["What was the first video game to feature the character Mario?", "Donkey Kong", "Super Mario Bros.", "Mario Bros.", "Space Invaders"],
+  ["Which classic movie features the famous quote 'Frankly, my dear, I don't give a damn'?", "Gone with the Wind", "Casablanca", "The Wizard of Oz", "Citizen Kane"],
+  ["What is the name of the fictional substance that powers the TARDIS in Doctor Who?", "Artron Energy", "Dilithium", "Kyber crystals", "Tachyon particles"],
+  ["Which musician was known as the 'High Priest of Pop' and released the album 'Purple Rain'?", "Prince", "Michael Jackson", "David Bowie", "James Brown"],
+  ["What was the first feature-length computer-animated film?", "Toy Story", "A Bug's Life", "Antz", "Shrek"],
+  ["Which famous director made his feature film debut with 'Reservoir Dogs'?", "Quentin Tarantino", "Martin Scorsese", "Paul Thomas Anderson", "Guy Ritchie"],
+  ["What is the name of the highest-grossing Broadway musical of all time?", "The Lion King", "Wicked", "The Phantom of the Opera", "Hamilton"],
+  ["Which actor won a posthumous Academy Award for his role as Peter Finch in 'Network'?", "Peter Finch", "Heath Ledger", "James Dean", "Massimo Troisi"],
+  ["What is the name of the fictional town in Stephen King's novels where many of his stories are set?", "Castle Rock", "Derry", "Jerusalem's Lot", "Haven"],
+  ["Which famous female artist released the critically acclaimed album 'Lemonade'?", "Beyoncé", "Adele", "Rihanna", "Lady Gaga"],
+  ["What was the first film to win all five major Academy Awards (Best Picture, Director, Actor, Actress, Screenplay)?", "It Happened One Night", "One Flew Over the Cuckoo's Nest", "The Silence of the Lambs", "Gone with the Wind"],
+  ["Which rock band released the iconic 1991 album 'Nevermind'?", "Nirvana", "Pearl Jam", "Soundgarden", "Alice in Chains"],
+  ["What is the name of the fictional planet where the movie 'Dune' primarily takes place?", "Arrakis", "Tatooine", "Hoth", "Cybertron"],
+  ["Which famous director is known for his signature use of the 'push-in' shot and symmetrical framing?", "Wes Anderson", "Stanley Kubrick", "Alfred Hitchcock", "Steven Spielberg"],
+  ["What was the first video game console to feature a built-in hard drive?", "Original Xbox", "PlayStation 2", "GameCube", "Sega Dreamcast"],
+  ["Which classic movie features the famous quote 'Here's looking at you, kid'?", "Casablanca", "Gone with the Wind", "The Maltese Falcon", "The Big Sleep"],
+  ["What is the name of the fictional language created for the Na'vi people in the movie 'Avatar'?", "Na'vi", "Klingon", "Dothraki", "Valyrian"],
+  ["Which musician was known as the 'King of Rock and Roll'?", "Elvis Presley", "Chuck Berry", "Little Richard", "Jerry Lee Lewis"],
+  ["What was the first feature-length animated film to be nominated for Best Picture at the Oscars?", "Beauty and the Beast", "The Lion King", "Toy Story", "Up"],
+  ["Which famous director made his feature film debut with 'The Evil Dead'?", "Quentin Tarantino", "Robert Rodriguez", "Kevin Smith", "Richard Linklater"],
+  ["What is the name of the highest-grossing documentary film of all time?", "Fahrenheit 9/11", "March of the Penguins", "Super Size Me", "An Inconvenient Truth"],
+  ["Which actor won an Academy Award for his role as Hannibal Lecter in 'The Silence of the Lambs'?", "Anthony Hopkins", "Mads Mikkelsen", "Brian Cox", "Gaspard Ulliel"]
+              ]
   },
   sports: {
     foundational: [
-      ["Players per team on a football pitch?", "11", "10", "12", "7"],
-      ["Most World Cups won?", "Brazil", "Germany", "Italy", "Argentina"],
-      ["Three goals in one match?", "Hat-trick", "Brace", "Turkey", "Century"],
-      ["Player often called 'CR7'?", "Cristiano Ronaldo", "Lionel Messi", "Neymar", "Ronaldinho"],
-      ["Sport using a shuttlecock?", "Badminton", "Tennis", "Squash", "Table Tennis"],
-      ["Which city hosts the Wimbledon tennis tournament?", "London", "New York", "Paris", "Melbourne"],
-      ["What is the color of the middle ring on the Olympic flag?", "Black", "Red", "Blue", "Green"],
-      ["In basketball, how many points is a free throw worth?", "1", "2", "3", "5"],
-      ["Which country won the 2022 FIFA World Cup?", "Argentina", "France", "Brazil", "Croatia"],
-      ["How many holes are played in a standard round of golf?", "18", "9", "12", "10"]
+      ["Players per team in football?", "11", "10", "12", "7"], 
+      ["World Cup 2022 winner?", "Argentina", "France", "Brazil", "Morocco"],
+      ["What do you call three goals in one game?", "Hat-trick", "Brace", "Turkey", "Century"],
+      ["Which city hosts Wimbledon?", "London", "Paris", "New York", "Melbourne"],
+      ["Points for a free throw in basketball?", "1", "2", "3", "4"]
     ],
     intermediate: [
-      ["2023/24 Premier League winners?", "Manchester City", "Arsenal", "Liverpool", "Chelsea"],
-      ["Most Champions League titles?", "Real Madrid", "AC Milan", "Liverpool", "Bayern Munich"],
-      ["Record for most PL goals in a season (36)?", "Erling Haaland", "Mo Salah", "Alan Shearer", "Luis Suarez"],
-      ["2023 African Footballer of the Year?", "Victor Osimhen", "Victor Boniface", "Ademola Lookman", "Alex Iwobi"],
-      ["Which tennis player has the most Men's Grand Slam titles?", "Novak Djokovic", "Rafael Nadal", "Roger Federer", "Pete Sampras"],
-      ["In American Football, how many points is a touchdown?", "6", "3", "7", "2"],
-      ["Which driver holds the record for most Formula 1 titles?", "Lewis Hamilton / Schumacher", "Sebastian Vettel", "Max Verstappen", "Ayrton Senna"],
-      ["Who is the current manager of the Nigerian Super Eagles?", "Finidi George", "Jose Peseiro", "Gernot Rohr", "Stephen Keshi"]
+      ["Most Ballon d'Or awards?", "Messi", "Ronaldo", "Zidane", "Pele"], 
+      ["Most UCL titles?", "Real Madrid", "AC Milan", "Liverpool", "Bayern"],
+      ["Driver with most F1 titles?", "Hamilton/Schumacher", "Vettel", "Verstappen", "Senna"],
+      ["2023/24 Premier League winner?", "Manchester City", "Arsenal", "Liverpool", "Chelsea"],
+      ["Record for most PL goals in a season (36)?", "Erling Haaland", "Mo Salah", "Alan Shearer", "Luis Suarez"]
     ],
     advanced: [
-      ["First African Ballon d'Or winner?", "George Weah", "Samuel Eto'o", "Didier Drogba", "Jay-Jay Okocha"],
+      ["First African Ballon d'Or?", "George Weah", "Eto'o", "Drogba", "Okocha"],
       ["First FIFA World Cup winner (1930)?", "Uruguay", "Argentina", "Brazil", "France"],
-      ["Premier League all-time top goalscorer?", "Alan Shearer", "Harry Kane", "Wayne Rooney", "Sergio Aguero"],
-      ["Who was the first player to be sold for over £100 million?", "Neymar", "Paul Pogba", "Cristiano Ronaldo", "Gareth Bale"],
-      ["Which country has the most medals in Olympic history?", "USA", "Russia", "China", "Germany"],
-      ["In cricket, what is the term for a batsman being out for zero?", "Duck", "Goose", "Wide", "Dot"]
+      ["Premier League all-time top scorer?", "Alan Shearer", "Harry Kane", "Wayne Rooney", "Sergio Aguero"],
+      ["First player sold for over £100 million?", "Neymar", "Pogba", "Ronaldo", "Bale"],
+      ["Country with the most Olympic medals?", "USA", "Russia", "China", "Germany"]
     ]
   },
   languages: {
     foundational: [
-      ["'Thank you' in French?", "Merci", "Gracias", "Obrigado", "Danke"],
-      ["Most spoken language in Nigeria?", "English", "Yoruba", "Hausa", "Igbo"],
+      ["'Thank you' in French?", "Merci", "Gracias", "Obrigado", "Danke"], 
       ["Official language of Brazil?", "Portuguese", "Spanish", "French", "Italian"],
-      ["How do you say 'Hello' in Spanish?", "Hola", "Bonjour", "Ciao", "Namaste"],
-      ["Which of these is the most spoken language globally?", "English", "Mandarin", "Spanish", "Hindi"],
-      ["What is the official language of Germany?", "German", "Dutch", "Danish", "Swiss"]
+      ["Most spoken language in Nigeria?", "English", "Yoruba", "Hausa", "Igbo"],
+      ["'Hello' in Spanish?", "Hola", "Bonjour", "Ciao", "Namaste"],
+      ["Most spoken language globally?", "English", "Mandarin", "Spanish", "Hindi"]
     ],
     intermediate: [
-      ["'Konnichiwa' meaning?", "Hello", "Goodbye", "Thank you", "I'm sorry"],
+      ["'Konnichiwa' meaning?", "Hello", "Goodbye", "Thank you", "Sorry"], 
       ["English language family?", "Germanic", "Romance", "Slavic", "Semitic"],
-      ["Spanish 'Biblioteca' meaning?", "Library", "Discotheque", "School", "Church"],
-      ["Which language uses the Cyrillic alphabet?", "Russian", "Greek", "Arabic", "Hebrew"],
-      ["What is the official language of Egypt?", "Arabic", "Coptic", "English", "French"]
+      ["Language using Cyrillic alphabet?", "Russian", "Greek", "Arabic", "Hebrew"],
+      ["Official language of Egypt?", "Arabic", "Coptic", "English", "French"],
+      ["'Biblioteca' in Spanish?", "Library", "Discotheque", "School", "Church"]
     ],
     advanced: [
-      ["Word that sounds like what it describes?", "Onomatopoeia", "Hyperbole", "Oxymoron", "Palindrome"],
+      ["UN official languages count?", "6", "5", "4", "7"],
+      ["Word that sounds like noise?", "Onomatopoeia", "Hyperbole", "Oxymoron", "Palindrome"],
       ["Example of a ConLang?", "Esperanto", "Swahili", "Finnish", "Vietnamese"],
-      ["Number of UN official languages?", "6", "5", "4", "7"],
       ["What is a 'portmanteau'?", "A word blending two meanings", "A synonym", "A specific verb tense", "An archaic noun"],
-      ["Which language is the root of the Romance languages?", "Latin", "Greek", "Sanskrit", "Hebrew"]
+      ["Root of the Romance languages?", "Latin", "Greek", "Sanskrit", "Hebrew"]
     ]
   }
 };
@@ -890,7 +867,6 @@ const parseData = (data) => {
 const quizData = parseData(rawQuizData);
 
 const SUBJECTS = [
-  { id: 'futa_eng', title: 'FUTA Engineering', icon: GraduationCap, color: 'text-emerald-400' },
   { id: 'science', title: 'Science', icon: Brain, color: 'text-blue-400' },
   { id: 'tech', title: 'Tech & Math', icon: Cpu, color: 'text-indigo-400' },
   { id: 'history', title: 'History', icon: BookOpen, color: 'text-amber-600' },
@@ -901,6 +877,12 @@ const SUBJECTS = [
   { id: 'lore', title: 'Ordverse Lore', icon: Swords, color: 'text-rose-500' }
 ];
 
+const DIFFICULTIES = [
+  { id: 'foundational', title: 'Foundational', color: 'text-emerald-400', border: 'border-emerald-500/30' },
+  { id: 'intermediate', title: 'Intermediate', color: 'text-blue-400', border: 'border-blue-500/30' },
+  { id: 'advanced', title: 'Advanced', color: 'text-rose-400', border: 'border-rose-500/30' }
+];
+
 const VAULT_CONSTANTS = [
   { name: "Gas Constant (R)", value: "8.314 J/(mol·K)", formula: "PV = nRT" },
   { name: "Gravity (g)", value: "9.81 m/s²", formula: "F = mg" },
@@ -909,7 +891,7 @@ const VAULT_CONSTANTS = [
 ];
 
 export default function App() {
-  const [gameState, setGameState] = useState('subject_select');
+  const [gameState, setGameState] = useState('subject_select'); 
   const [showSettings, setShowSettings] = useState(false);
   const [showVault, setShowVault] = useState(false);
   const [settings, setSettings] = useState({ musicEnabled: true, sfxEnabled: true, hapticsEnabled: true });
@@ -923,6 +905,10 @@ export default function App() {
   const [isTimeAttack, setIsTimeAttack] = useState(false);
   const [isChecking, setIsChecking] = useState(false);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
+  
+  // 🔥 NEW STREAK ENGINE
+  const [streak, setStreak] = useState(0);
+  const [showStreakBonus, setShowStreakBonus] = useState(false);
 
   const bgMusic = useRef(new Audio('/music.mp3'));
   const correctSfx = useRef(new Audio('/correct.mp3'));
@@ -934,7 +920,6 @@ export default function App() {
     if (s1) setStats(JSON.parse(s1));
     if (s2) setSettings(JSON.parse(s2));
     bgMusic.current.loop = true;
-    bgMusic.current.volume = 0.3;
   }, []);
 
   useEffect(() => {
@@ -955,16 +940,26 @@ export default function App() {
     return () => clearInterval(timer);
   }, [gameState, timeLeft, isTimeAttack]);
 
-  const startQuiz = (diffId, timeMode = false) => {
+  const shuffle = (array) => {
+    let shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  const startQuiz = (timeMode) => {
     setIsTimeAttack(timeMode);
     setTimeLeft(60);
-    setSelectedDifficulty(diffId);
-    let qList = quizData[selectedSubject.id][diffId];
+    setStreak(0);
+    setShowStreakBonus(false);
     
-    // FIX: Pull 10 or 20 questions based on mode, but only as many as exist!
-    const limit = Math.min(qList.length, timeMode ? 20 : 10);
-    const randomized = [...qList].sort(() => Math.random() - 0.5).slice(0, limit).map(q => ({
-      ...q, options: [...q.options].sort(() => Math.random() - 0.5)
+    let pool = quizData[selectedSubject.id][selectedDifficulty.id];
+    
+    const limit = timeMode ? 20 : 10;
+    const randomized = shuffle(pool).slice(0, Math.min(pool.length, limit)).map(q => ({
+      ...q, options: shuffle(q.options)
     }));
     
     setQuestions(randomized);
@@ -974,8 +969,8 @@ export default function App() {
   };
 
   const finishQuiz = (finalScore) => {
-    const xpGain = isTimeAttack ? finalScore * 20 : finalScore * 10;
-    const newStats = { totalXp: stats.totalXp + xpGain, completed: stats.completed + 1 };
+    const baseGain = isTimeAttack ? finalScore * 20 : finalScore * 10;
+    const newStats = { totalXp: stats.totalXp + baseGain, completed: stats.completed + 1 };
     setStats(newStats);
     localStorage.setItem('nexus_stats', JSON.stringify(newStats));
     setGameState('results');
@@ -988,9 +983,25 @@ export default function App() {
 
     if (isCorrect) {
       setScore(s => s + 1);
+      
+      // 🔥 Streak Logic
+      const newStreak = streak + 1;
+      setStreak(newStreak);
+      if (newStreak > 0 && newStreak % 5 === 0) {
+         setShowStreakBonus(true);
+         setTimeout(() => setShowStreakBonus(false), 2000);
+         // Bonus XP added immediately
+         setStats(prev => {
+             const updated = { ...prev, totalXp: prev.totalXp + 50 };
+             localStorage.setItem('nexus_stats', JSON.stringify(updated));
+             return updated;
+         });
+      }
+
       if (settings.sfxEnabled) correctSfx.current.play();
       if (settings.hapticsEnabled) await Haptics.notification({ type: NotificationType.Success });
     } else {
+      setStreak(0);
       if (settings.sfxEnabled) wrongSfx.current.play();
       if (settings.hapticsEnabled) await Haptics.impact({ style: ImpactStyle.Heavy });
     }
@@ -1008,8 +1019,15 @@ export default function App() {
     }, isTimeAttack ? 500 : 1200);
   };
 
+  const getRank = (xp) => {
+    if (xp > 15000) return "Omniverse Legend";
+    if (xp > 8000) return "Rank 13 (God)";
+    if (xp > 3000) return "Rank 10 (Sage)";
+    return "Mortal";
+  };
+
   const Modal = ({ title, children, onClose, icon: Icon, iconColor }) => (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/85 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/90 backdrop-blur-md">
       <div className="w-full max-w-sm bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl overflow-y-auto max-h-[85vh]">
         <h2 className="text-2xl font-black mb-6 flex items-center">{Icon && <Icon className={`mr-3 ${iconColor}`} />} {title}</h2>
         {children}
@@ -1020,9 +1038,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-200 p-6 flex flex-col items-center">
+      {/* --- Settings & Vault Modals --- */}
       {showSettings && (
         <Modal title="Settings" onClose={() => setShowSettings(false)} icon={Settings} iconColor="text-blue-400">
-          <div className="space-y-6">
+           <div className="space-y-6">
             {['musicEnabled', 'sfxEnabled', 'hapticsEnabled'].map((key) => (
               <div key={key} className="flex items-center justify-between">
                 <span className="capitalize">{key.replace('Enabled', '')}</span>
@@ -1053,23 +1072,24 @@ export default function App() {
         </Modal>
       )}
 
+      {/* --- Header --- */}
       <div className="w-full max-w-4xl flex justify-between items-center mb-8">
         <div className="flex items-center space-x-2" onClick={() => setGameState('subject_select')}>
           <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-2 rounded-lg"><Brain className="text-white" size={20} /></div>
-          <span className="text-xl font-black italic">NexusQuiz</span>
+          <span className="text-xl font-black italic tracking-tighter">NexusQuiz</span>
         </div>
         <div className="flex space-x-2">
            <button onClick={() => setShowVault(true)} className="p-2 bg-slate-900 rounded-xl border border-slate-800"><Book size={20} className="text-emerald-400"/></button>
-           <button onClick={() => setGameState('leaderboard')} className="p-2 bg-slate-900 rounded-xl border border-slate-800"><BarChart3 size={20} className="text-purple-400"/></button>
            <button onClick={() => setShowSettings(true)} className="p-2 bg-slate-900 rounded-xl border border-slate-800"><Settings size={20}/></button>
         </div>
       </div>
 
+      {/* --- State 1: Subject Select --- */}
       {gameState === 'subject_select' && (
         <div className="w-full max-w-2xl space-y-6">
           <div className="bg-slate-900/50 p-6 rounded-3xl border border-slate-800 flex justify-around">
             <div className="text-center"><p className="text-[10px] text-slate-500 uppercase">Total XP</p><p className="font-bold text-emerald-400">{stats.totalXp}</p></div>
-            <div className="text-center"><p className="text-[10px] text-slate-500 uppercase">Completed</p><p className="font-bold text-blue-400">{stats.completed}</p></div>
+            <div className="text-center"><p className="text-[10px] text-slate-500 uppercase">Rank</p><p className="font-bold text-blue-400">{getRank(stats.totalXp)}</p></div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {SUBJECTS.map(sub => (
@@ -1080,29 +1100,64 @@ export default function App() {
               </button>
             ))}
           </div>
+          <button onClick={() => setGameState('leaderboard')} className="w-full py-5 bg-blue-600/20 text-blue-400 rounded-2xl font-bold flex items-center justify-center border border-blue-500/30">
+            <BarChart3 className="mr-2"/> View Hall of Fame
+          </button>
         </div>
       )}
 
+      {/* --- State 2: Difficulty Select --- */}
       {gameState === 'difficulty_select' && (
+        <div className="w-full max-w-sm space-y-4">
+           <button onClick={() => setGameState('subject_select')} className="text-slate-500 flex items-center mb-4"><ChevronLeft size={16}/> Back</button>
+           <h2 className="text-2xl font-black mb-6 text-center">{selectedSubject.title}</h2>
+           {DIFFICULTIES.map(diff => (
+             <button key={diff.id} onClick={() => {setSelectedDifficulty(diff); setGameState('mode_select')}}
+               className={`w-full p-6 bg-slate-900 border ${diff.border} rounded-2xl flex items-center justify-between`}>
+               <span className={`text-xl font-bold ${diff.color}`}>{diff.title}</span>
+               <ArrowRight size={20} className="text-slate-700" />
+             </button>
+           ))}
+        </div>
+      )}
+
+      {/* --- State 3: Mode Select --- */}
+      {gameState === 'mode_select' && (
         <div className="w-full max-w-sm space-y-4 text-center">
-           <h2 className="text-2xl font-black mb-6 text-blue-400">{selectedSubject.title}</h2>
-           <button onClick={() => startQuiz('foundational', false)} className="w-full p-5 bg-slate-900 border border-slate-800 rounded-2xl font-bold">Standard Mode (10Q)</button>
-           <button onClick={() => startQuiz('foundational', true)} className="w-full p-5 bg-orange-500/10 border border-orange-500/40 text-orange-400 rounded-2xl font-bold flex items-center justify-center">
+           <button onClick={() => setGameState('difficulty_select')} className="text-slate-500 flex items-center mb-4"><ChevronLeft size={16}/> Back</button>
+           <h2 className={`text-2xl font-black ${selectedSubject.color}`}>{selectedSubject.title}</h2>
+           <p className="text-slate-500 mb-8 uppercase text-xs font-bold tracking-widest">{selectedDifficulty.title} Level</p>
+           <button onClick={() => startQuiz(false)} className="w-full p-5 bg-slate-900 border border-slate-800 rounded-2xl font-bold">Standard Mode (10Q)</button>
+           <button onClick={() => startQuiz(true)} className="w-full p-5 bg-orange-500/10 border border-orange-500/40 text-orange-400 rounded-2xl font-bold flex items-center justify-center">
              <Zap size={20} className="mr-2"/> Time Attack (60s)
            </button>
-           <button onClick={() => setGameState('subject_select')} className="w-full py-4 text-slate-600 font-bold">Back to Hub</button>
         </div>
       )}
 
+      {/* --- State 4: Playing --- */}
       {gameState === 'playing' && (
-        <div className="w-full max-w-xl text-center">
+        <div className="w-full max-w-xl relative">
+          
+          {/* 🔥 STREAK POPUP ANIMATION */}
+          {showStreakBonus && (
+             <div className="absolute top-[-40px] left-1/2 transform -translate-x-1/2 text-orange-400 font-black flex items-center bg-orange-500/20 px-4 py-2 rounded-full border border-orange-500/50 animate-bounce">
+               <Flame className="mr-2" size={20}/> +50 XP STREAK!
+             </div>
+          )}
+
           <div className="flex justify-between items-center mb-10">
             <div className="h-2 flex-1 bg-slate-800 rounded-full mr-4 overflow-hidden">
                <div className="h-full bg-blue-500 transition-all duration-300" style={{width: `${(currentIndex/questions.length)*100}%`}} />
             </div>
-            {isTimeAttack && <div className="text-orange-400 font-black flex items-center"><Timer size={18} className="mr-1"/>{timeLeft}s</div>}
+            
+            <div className="flex items-center space-x-4">
+              {streak > 2 && <div className="text-orange-500 font-black flex items-center"><Flame size={16} className="mr-1"/> {streak}</div>}
+              {isTimeAttack && <div className="text-orange-400 font-black flex items-center"><Timer size={18} className="mr-1"/>{timeLeft}s</div>}
+            </div>
           </div>
-          <h2 className="text-2xl font-bold mb-10 leading-snug">{questions[currentIndex]?.text}</h2>
+
+          <h2 className="text-2xl font-bold mb-10 text-center leading-snug">{questions[currentIndex]?.text}</h2>
+          
           <div className="grid gap-3">
             {questions[currentIndex]?.options.map((opt, i) => (
               <button key={i} disabled={isChecking} onClick={() => handleAnswer(i, opt.isCorrect)}
@@ -1114,24 +1169,26 @@ export default function App() {
         </div>
       )}
 
+      {/* --- State 5: Results --- */}
       {gameState === 'results' && (
         <div className="text-center p-10 bg-slate-900 border border-slate-800 rounded-[40px] w-full max-w-sm">
           <Trophy className="mx-auto mb-4 text-amber-400" size={80} />
-          <h2 className="text-3xl font-black mb-2 text-white">Quiz Over!</h2>
-          <p className="text-6xl font-black my-8 text-white">{score}<span className="text-xl text-slate-700">/{questions.length}</span></p>
+          <h2 className="text-3xl font-black mb-2">Quiz Over!</h2>
+          <p className="text-6xl font-black my-8">{score}<span className="text-xl text-slate-700">/{questions.length}</span></p>
           <button onClick={() => setGameState('subject_select')} className="w-full py-5 bg-blue-600 rounded-2xl font-black text-xl shadow-lg">Return to Hub</button>
         </div>
       )}
 
+      {/* --- State 6: Leaderboard --- */}
       {gameState === 'leaderboard' && (
         <div className="w-full max-w-md">
           <h2 className="text-3xl font-black mb-8 flex items-center"><Users className="mr-3 text-purple-400" /> Hall of Fame</h2>
           <div className="space-y-3">
             <div className="p-5 bg-blue-500/10 border border-blue-500/40 rounded-3xl flex justify-between items-center text-left">
-              <div><p className="font-bold">You (Chemical Engineer)</p><p className="text-xs text-blue-400 italic">Level {Math.floor(stats.totalXp/100)}</p></div>
+              <div><p className="font-bold">You</p><p className="text-xs text-blue-400 italic">Level {Math.floor(stats.totalXp/100)}</p></div>
               <p className="text-2xl font-black text-white">{stats.totalXp} XP</p>
             </div>
-            {[{n: "Nichothéos", x: 99999}, {n: "FUTA Dean", x: 25000}, {n: "Akure_Dev", x: 12000}].map((u, i) => (
+            {[{n: "Nichothéos", x: 99999}, {n: "Daragvener", x: 25000}, {n: "Thriller", x: 1200}].map((u, i) => (
               <div key={i} className="p-5 bg-slate-900/50 border border-slate-800 rounded-3xl flex justify-between items-center opacity-60 text-left">
                 <p className="font-bold">{u.n}</p><p className="font-black">{u.x} XP</p>
               </div>
@@ -1143,3 +1200,4 @@ export default function App() {
     </div>
   );
 }
+
