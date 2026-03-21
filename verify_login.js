@@ -3,8 +3,7 @@ const fs = require('fs');
 const content = fs.readFileSync('App.jsx', 'utf8');
 
 const expectedHandlers = [
-    'handleEmailLogin',
-    'handleEmailRegister',
+    'handleEmailAuth',
     'handleGoogleLogin',
     'handleFacebookLogin',
     'handleLogout'
