@@ -1,7 +1,8 @@
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
+import { App as CapacitorApp } from '@capacitor/app';
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Brain, Cpu, Trophy, ArrowRight, RotateCcw, ChevronLeft, Axes, 
+  Brain, Cpu, Trophy, ArrowRight, RotateCcw, ChevronLeft, Axe, 
   Trophy as SportIcon, Languages, Home, Settings, Volume2, VolumeX, 
   Smartphone, BarChart3, Users, Timer, Zap, Book, BookOpen, Lightbulb, Film, Flame, Share2, LogOut, Mail, Lock
 } from 'lucide-react';
@@ -259,7 +260,7 @@ const rawQuizData = {
       ["How does the ring differ from a standard magical artifact in the Ordverse?", "It is a conduit of authority forged from his own essence", "It grants the user a Rank 13 status", "It bypasses the Memory Lock", "It neutralizes Polyvenium"],
       ["Who is known as Kaeltharya by her enemies?", "Kira Athlea Hunter-Cameron", "Claire Emilia Cameron", "Astraea Demetrius", "Aimi"],
       ["What relation is Kira Athlea to Claire Emilia Cameron?", "Childhood best friend and adopted sister", "Biological sister", "Mother", "Cousin"],
-      ["Why is Michelle considered Jayden's 'primary anchor'?", "Her existence is the main reason he protects Earth", "She holds the Memory Lock", "She is the only one who can defeat him", "She is the reincarnation of a Chrysealean God"]
+      ["Why is Michelle considered Jayden's 'primary anchor'?", "Her existence is the main reason he protects Earth", "She holds the Memory Lock", "She is the only one who can defeat him", "She is the reincarnation of a Chrysealean God"],["What is the signature weapon wielded by Nichothéos in the Ordverse?", "The Golden Axe", "The Infinity Blade", "The Crimson Staff", "The Void Spear"],["What is the distinct color of the aura emitted by Nichothéos's Golden Axe?", "Divine Crimson (Red)", "Electric Blue", "Emerald Green", "Void Purple"],["Nichothéos's Golden Axe is primarily known for its ability to cut through:", "Anything and Everything", "Physical armor only", "Magical barriers only", "Space-time and Realities"],["Who is the current bearer of the Golden Axe with the red tint?", "Nichothéos", "Jayden", "The Rank 2 Warrior", "Mephistopheles"],["The red tint on Nichothéos's weapon represents which type of energy?", "Aetherius Essence", "Primordial Divine Energy", "Kinetic Force", "Solar Radiation"],["What material was used to forge the handle of the Golden Axe?", "It's Unknown", "Infinity Steel", "Obsidian", "Mythril"],["Nichothéos used the Golden Axe to end the threat of which antagonist?", "Mephistopheles", "The Shadow King", "The Prime Hunter", "The Void Nomad"],["The weight of the Golden Axe is said to be equivalent to:", "All of Existence", "A mountain", "The weight of ten dying stars", "It has no weight because it is divine"],["Which studio logo features elements inspired by Nichothéos's divine power?", "THE INFINITY STUDIOS™", "Nexus Graphics", "Ord-Gen", "Crimson Arts"]
     ]
   },
   science: {
@@ -426,7 +427,11 @@ const SUBJECTS = [
   { id: 'entertainment', title: 'Entertainment', icon: Film, color: 'text-purple-400' },
   { id: 'sports', title: 'Sports', icon: SportIcon, color: 'text-orange-500' },
   { id: 'languages', title: 'Languages', icon: Languages, color: 'text-pink-400' },
-  { id: 'lore', title: 'Ordverse Lore', icon: Axes, color: 'text-rose-500' }
+  { id: 'lore', title: 'Ordverse', icon: Axe, color: 'text-amber-400', glow: 'drop-shadow-[0_0_10px_rgba(220,38,38,0.8)]' // This gives it the "Golden" base
+  // To add the red tint/glow, add this to your icon className:
+  // "drop-shadow-[0_0_10px_rgba(220,38,38,0.8)]" 
+}
+
 ];
 
 const DIFFICULTIES = [
@@ -612,6 +617,28 @@ export default function App() {
     } else {
       bgMusic.current.pause();
     }
+  }, [settings.musicEnabled, gameState]);
+  
+  useEffect(() => {
+    const setupAppStateListener = async () => {
+      await CapacitorApp.addListener('appStateChange', ({ isActive }) => {
+        if (!isActive) {
+          // Screen turned off or app minimized
+          bgMusic.current.pause();
+        } else {
+          // App opened back up
+          if (settings.musicEnabled && gameState !== 'playing') {
+            bgMusic.current.play().catch(() => {});
+          }
+        }
+      });
+    };
+
+    setupAppStateListener();
+
+    return () => {
+      CapacitorApp.removeAllListeners();
+    };
   }, [settings.musicEnabled, gameState]);
 
   useEffect(() => {
@@ -900,7 +927,7 @@ export default function App() {
               <button key={sub.id} onClick={() => {setSelectedSubject(sub); setGameState('difficulty_select')}}
                 className="p-6 bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-between active:scale-95 transition-all">
                 <div className="flex items-center space-x-4">
-                  <sub.icon size={28} className={sub.color} />
+                  <sub.icon size={28} className={`${sub.color} ${sub.glow || ''}`} />
                   <span className="text-lg font-bold">{sub.title}</span>
                 </div>
                 <ArrowRight className="text-slate-700" size={20} />
