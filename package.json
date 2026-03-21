@@ -6,17 +6,19 @@
     "cap:build": "npx cap sync android"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "lucide-react": "latest",
-    "@capacitor/core": "latest",
+    "@capacitor-firebase/authentication": "^8.1.0",
     "@capacitor/android": "latest",
-    "@capacitor/haptics": "latest"
+    "@capacitor/core": "latest",
+    "@capacitor/haptics": "latest",
+    "firebase": "^12.11.0",
+    "lucide-react": "latest",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@capacitor/assets": "latest",
     "@capacitor/cli": "latest",
-    "vite": "latest",
     "@vitejs/plugin-react": "latest",
-    "@capacitor/assets": "latest"
+    "vite": "latest"
   }
 }
