@@ -1,8 +1,9 @@
+import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Brain, Cpu, Trophy, ArrowRight, RotateCcw, ChevronLeft, Swords, 
   Trophy as SportIcon, Languages, Home, Settings, Volume2, VolumeX, 
-  Smartphone, BarChart3, Users, Timer, Zap, Book, BookOpen, Lightbulb, Film, Flame, Share2
+  Smartphone, BarChart3, Users, Timer, Zap, Book, BookOpen, Lightbulb, Film, Flame, Share2, LogOut, Mail, Lock
 } from 'lucide-react';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 
@@ -428,11 +429,86 @@ const VAULT_CONSTANTS = [
 
 export default function App() {
   // --- 📦 CORE STATES ---
-  const [gameState, setGameState] = useState('subject_select');
+  const [gameState, setGameState] = useState('login');
   const [showSettings, setShowSettings] = useState(false);
   const [showVault, setShowVault] = useState(false);
   const [settings, setSettings] = useState({ musicEnabled: true, sfxEnabled: true, hapticsEnabled: true });
   const [stats, setStats] = useState({ totalXp: 0, completed: 0 });
+
+  // --- 🔐 AUTH STATES ---
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    FirebaseAuthentication.addListener('authStateChange', (result) => {
+      if (result.user) {
+        setGameState('subject_select');
+      } else {
+        setGameState('login');
+      }
+      setIsLoading(false);
+    });
+
+    // Check initial auth state
+    FirebaseAuthentication.getCurrentUser().then((result) => {
+      if (result.user) {
+        setGameState('subject_select');
+      }
+      setIsLoading(false);
+    }).catch(() => {
+      setIsLoading(false);
+    });
+  }, []);
+
+  const handleEmailLogin = async () => {
+    try {
+      setIsLoading(true);
+      await FirebaseAuthentication.signInWithEmailAndPassword({ email, password });
+    } catch (error) {
+      alert(`Login Failed: ${error.message}`);
+      setIsLoading(false);
+    }
+  };
+
+  const handleEmailRegister = async () => {
+    try {
+      setIsLoading(true);
+      await FirebaseAuthentication.createUserWithEmailAndPassword({ email, password });
+    } catch (error) {
+      alert(`Registration Failed: ${error.message}`);
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      setIsLoading(true);
+      await FirebaseAuthentication.signInWithGoogle();
+    } catch (error) {
+      alert(`Google Login Failed: ${error.message}`);
+      setIsLoading(false);
+    }
+  };
+
+  const handleFacebookLogin = async () => {
+    try {
+      setIsLoading(true);
+      await FirebaseAuthentication.signInWithFacebook();
+    } catch (error) {
+      alert(`Facebook Login Failed: ${error.message}`);
+      setIsLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await FirebaseAuthentication.signOut();
+      setGameState('login');
+    } catch (error) {
+      alert(`Logout Failed: ${error.message}`);
+    }
+  };
 
   // --- 🌟 ANIMATION STATES ---
   const [showRankUp, setShowRankUp] = useState(false);
@@ -657,6 +733,19 @@ export default function App() {
                 </button>
               </div>
             ))}
+
+            <div className="pt-6 mt-6 border-t border-slate-800">
+              <button
+                onClick={() => {
+                  setShowSettings(false);
+                  handleLogout();
+                }}
+                className="w-full py-4 bg-rose-500/10 text-rose-500 hover:bg-rose-500/20 rounded-xl font-bold flex items-center justify-center transition-colors border border-rose-500/30"
+              >
+                <LogOut className="mr-2" size={20} />
+                Log Out
+              </button>
+            </div>
           </div>
         </Modal>
       )}
@@ -686,7 +775,88 @@ export default function App() {
         </div>
       </div>
 
-                        {gameState === 'subject_select' && (
+      {gameState === 'login' && (
+        <div className="w-full max-w-sm space-y-4">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-black mb-2">Welcome</h2>
+            <p className="text-slate-500">Log in to sync your progress</p>
+          </div>
+
+          <div className="space-y-4">
+            <div className="relative">
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={20} />
+              <input
+                type="email"
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full bg-slate-900 border border-slate-800 rounded-xl p-4 pl-12 focus:outline-none focus:border-blue-500 transition-colors"
+              />
+            </div>
+            <div className="relative">
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={20} />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full bg-slate-900 border border-slate-800 rounded-xl p-4 pl-12 focus:outline-none focus:border-blue-500 transition-colors"
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mt-2">
+              <button
+                onClick={handleEmailLogin}
+                disabled={isLoading}
+                className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold py-4 rounded-xl transition-colors"
+              >
+                {isLoading ? 'Wait...' : 'Log In'}
+              </button>
+              <button
+                onClick={handleEmailRegister}
+                disabled={isLoading}
+                className="bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-white font-bold py-4 rounded-xl transition-colors"
+              >
+                Register
+              </button>
+            </div>
+          </div>
+
+          <div className="flex items-center my-6 text-slate-500">
+            <div className="flex-1 h-px bg-slate-800"></div>
+            <span className="px-4 text-sm font-bold">OR CONTINUE WITH</span>
+            <div className="flex-1 h-px bg-slate-800"></div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <button
+              onClick={handleGoogleLogin}
+              disabled={isLoading}
+              className="bg-white hover:bg-slate-200 text-slate-900 font-bold py-4 rounded-xl flex items-center justify-center transition-colors disabled:opacity-50"
+            >
+              Google
+            </button>
+            <button
+              onClick={handleFacebookLogin}
+              disabled={isLoading}
+              className="bg-[#1877F2] hover:bg-[#166FE5] text-white font-bold py-4 rounded-xl flex items-center justify-center transition-colors disabled:opacity-50"
+            >
+              Facebook
+            </button>
+          </div>
+
+          <div className="mt-8 text-center">
+            <button
+              onClick={() => setGameState('subject_select')}
+              className="text-slate-500 underline text-sm"
+            >
+              Continue Offline (No Sync)
+            </button>
+          </div>
+        </div>
+      )}
+
+      {gameState === 'subject_select' && (
         <div className="w-full max-w-2xl space-y-6">
           {/* --- 👑 Power Hierarchy Header --- */}
           <div className="bg-slate-900/50 p-6 rounded-3xl border border-slate-800 flex justify-around items-center">
