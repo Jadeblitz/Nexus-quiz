@@ -1,12 +1,11 @@
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Brain, Cpu, Trophy, ArrowRight, RotateCcw, ChevronLeft, Swords, 
+  Brain, Cpu, Trophy, ArrowRight, RotateCcw, ChevronLeft, Axes, 
   Trophy as SportIcon, Languages, Home, Settings, Volume2, VolumeX, 
   Smartphone, BarChart3, Users, Timer, Zap, Book, BookOpen, Lightbulb, Film, Flame, Share2, LogOut, Mail, Lock
 } from 'lucide-react';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
-import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 
@@ -420,14 +419,14 @@ const parseData = (data) => {
 const quizData = parseData(rawQuizData);
 
 const SUBJECTS = [
-  { id: 'science', title: 'Science', icon: Brain, color: 'text-blue-400' },
+  { id: 'science', title: 'Science & Engineering', icon: Brain, color: 'text-blue-400' },
   { id: 'tech', title: 'Tech & Math', icon: Cpu, color: 'text-indigo-400' },
   { id: 'history', title: 'History', icon: BookOpen, color: 'text-amber-600' },
   { id: 'funfact', title: 'Fun Facts', icon: Lightbulb, color: 'text-yellow-400' },
   { id: 'entertainment', title: 'Entertainment', icon: Film, color: 'text-purple-400' },
   { id: 'sports', title: 'Sports', icon: SportIcon, color: 'text-orange-500' },
   { id: 'languages', title: 'Languages', icon: Languages, color: 'text-pink-400' },
-  { id: 'lore', title: 'Ordverse Lore', icon: Swords, color: 'text-rose-500' }
+  { id: 'lore', title: 'Ordverse Lore', icon: Axes, color: 'text-rose-500' }
 ];
 
 const DIFFICULTIES = [
