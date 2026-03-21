@@ -55,8 +55,8 @@ jobs:
             # Step 1: Create the "fake" folder the signing tool is looking for
       - name: Prep Build Tools for Signing
         run: |
-          sudo mkdir -p /usr/local/lib/android/sdk/build-tools/29.0.3
-          sudo ln -s /usr/local/lib/android/sdk/build-tools/34.0.0/zipalign /usr/local/lib/android/sdk/build-tools/29.0.3/zipalign
+          sudo rm -rf /usr/local/lib/android/sdk/build-tools/29.0.3
+          sudo ln -s /usr/local/lib/android/sdk/build-tools/34.0.0 /usr/local/lib/android/sdk/build-tools/29.0.3
 
       # Step 2: The actual signing (back to the original setup)
       - name: Sign APK
