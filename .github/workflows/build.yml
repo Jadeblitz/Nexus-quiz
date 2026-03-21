@@ -52,6 +52,13 @@ jobs:
         working-directory: ./android
         run: ./gradlew assembleRelease
 
+            # Step 1: Create the "fake" folder the signing tool is looking for
+      - name: Prep Build Tools for Signing
+        run: |
+          sudo mkdir -p /usr/local/lib/android/sdk/build-tools/29.0.3
+          sudo ln -s /usr/local/lib/android/sdk/build-tools/34.0.0/zipalign /usr/local/lib/android/sdk/build-tools/29.0.3/zipalign
+
+      # Step 2: The actual signing (back to the original setup)
       - name: Sign APK
         id: sign_app
         uses: r0adkll/sign-android-release@v1
@@ -61,7 +68,6 @@ jobs:
           alias: ${{ secrets.ANDROID_KEY_ALIAS }}
           keyStorePassword: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
-          buildToolsVersion: "34.0.0" # <--- ADD THIS LINE HERE
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
