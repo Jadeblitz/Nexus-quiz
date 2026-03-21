@@ -12,7 +12,20 @@
           "package_name": "com.theinfinitystudios.nexusquiz"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "385373365979-2hupm9ivk8g1aghj0n1dob0q72l3k2il.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theinfinitystudios.nexusquiz",
+            "certificate_hash": "ce6602391b6a2b98a9119586c133c310ce53454b"
+          }
+        },
+        {
+          "client_id": "385373365979-fe5edh8pl9mlebkptphtav4m5j2nt50r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBHK0rh7w2VBrbdZwJTXsg39HJBgbidv1Q"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385373365979-fe5edh8pl9mlebkptphtav4m5j2nt50r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
