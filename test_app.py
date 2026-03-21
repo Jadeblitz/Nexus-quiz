@@ -5,7 +5,7 @@ import subprocess
 import signal
 
 def start_server():
-    server_process = subprocess.Popen(["npm", "run", "dev", "--", "--port", "5173", "--host", "127.0.0.1"])
+    server_process = subprocess.Popen(["npx", "vite", "--port", "5173", "--host", "127.0.0.1"])
     time.sleep(3) # Give it time to start
     return server_process
 
