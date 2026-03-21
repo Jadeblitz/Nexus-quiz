@@ -5,6 +5,22 @@ import {
   Smartphone, BarChart3, Users, Timer, Zap, Book, BookOpen, Lightbulb, Film, Flame, Share2
 } from 'lucide-react';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
+import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
+
+// Initialize Firebase (using dummy config since google-services.json handles native, but web needs this)
+const firebaseConfig = {
+  apiKey: "dummy",
+  authDomain: "dummy.firebaseapp.com",
+  projectId: "dummy",
+  storageBucket: "dummy.appspot.com",
+  messagingSenderId: "dummy",
+  appId: "dummy"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 
 // ==========================================
 // 📚 THE MEGA REPOSITORY (850+ Questions)
@@ -433,6 +449,7 @@ export default function App() {
   const [showVault, setShowVault] = useState(false);
   const [settings, setSettings] = useState({ musicEnabled: true, sfxEnabled: true, hapticsEnabled: true });
   const [stats, setStats] = useState({ totalXp: 0, completed: 0 });
+  const [user, setUser] = useState(null);
 
   // --- 🌟 ANIMATION STATES ---
   const [showRankUp, setShowRankUp] = useState(false);
@@ -441,6 +458,49 @@ export default function App() {
   // --- 🔥 STREAK ENGINE ---
   const [streak, setStreak] = useState(0);
   const [showStreakBonus, setShowStreakBonus] = useState(false);
+
+  // --- 🔐 AUTH ENGINE ---
+  const handleLogin = async (provider) => {
+    try {
+      let result;
+      if (provider === 'google') {
+        result = await FirebaseAuthentication.signInWithGoogle();
+      } else if (provider === 'facebook') {
+        result = await FirebaseAuthentication.signInWithFacebook();
+      } else {
+        alert("Email login not implemented in this demo");
+        return;
+      }
+
+      const userObj = result.user;
+      setUser(userObj);
+      setGameState('subject_select');
+
+      // Save to Firestore
+      const rankData = getRank(stats.totalXp);
+      await setDoc(doc(db, "users", userObj.uid), {
+        uid: userObj.uid,
+        displayName: userObj.displayName || "Unknown Warrior",
+        rank: rankData.level,
+        score: stats.totalXp
+      }, { merge: true });
+
+    } catch (error) {
+      console.error("Login failed:", error);
+      alert("Login failed. Please try again.");
+    }
+  };
+
+  useEffect(() => {
+    FirebaseAuthentication.getCurrentUser().then(result => {
+      if (result.user) {
+        setUser(result.user);
+      } else {
+        setGameState('login');
+      }
+    });
+  }, []);
+
 
   // --- 🕹️ GAMEPLAY STATES ---
   const [selectedSubject, setSelectedSubject] = useState(null);
@@ -636,6 +696,16 @@ export default function App() {
     setStats(newStats);
     localStorage.setItem('nexus_stats', JSON.stringify(newStats));
     
+    // Auto-Sync to Firestore
+    if (user) {
+      const rankData = getRank(newXp);
+      setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        rank: rankData.level,
+        score: newXp
+      }, { merge: true }).catch(err => console.error("Sync failed", err));
+    }
+
     // 4. Move to the results screen
     setGameState('results');
   };
@@ -686,7 +756,32 @@ export default function App() {
         </div>
       </div>
 
-                        {gameState === 'subject_select' && (
+
+      {gameState === 'login' && (
+        <div className="w-full max-w-sm space-y-6 text-center animate-in zoom-in duration-300">
+          <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-4 rounded-3xl inline-block mb-4 shadow-[0_0_30px_rgba(59,130,246,0.5)]">
+            <Brain className="text-white" size={60} />
+          </div>
+          <h1 className="text-4xl font-black italic tracking-tighter mb-2">NexusQuiz</h1>
+          <p className="text-slate-400 mb-8">Prove your knowledge across the Ordverse.</p>
+
+          <div className="space-y-4">
+            <button onClick={() => handleLogin('google')} className="w-full p-4 bg-white text-slate-900 rounded-2xl font-bold flex items-center justify-center hover:bg-gray-100 transition-colors">
+              <img src="https://www.svgrepo.com/show/475656/google-color.svg" className="w-6 h-6 mr-3" alt="Google" />
+              Continue with Google
+            </button>
+            <button onClick={() => handleLogin('facebook')} className="w-full p-4 bg-[#1877F2] text-white rounded-2xl font-bold flex items-center justify-center hover:bg-[#166FE5] transition-colors">
+              <svg className="w-6 h-6 mr-3 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Continue with Facebook
+            </button>
+            <button onClick={() => handleLogin('email')} className="w-full p-4 bg-slate-800 text-white border border-slate-700 rounded-2xl font-bold flex items-center justify-center hover:bg-slate-700 transition-colors">
+              Continue with Email
+            </button>
+          </div>
+        </div>
+      )}
+
+      {gameState === 'subject_select' && (
         <div className="w-full max-w-2xl space-y-6">
           {/* --- 👑 Power Hierarchy Header --- */}
           <div className="bg-slate-900/50 p-6 rounded-3xl border border-slate-800 flex justify-around items-center">
