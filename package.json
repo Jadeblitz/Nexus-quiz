@@ -5,11 +5,11 @@
     "build": "vite build",
     "cap:build": "npx cap sync android"
   },
-    "dependencies": {
+  "dependencies": {
     "@capacitor-firebase/authentication": "^8.1.0",
     "@capacitor/android": "latest",
+    "@capacitor/app": "latest",
     "@capacitor/core": "latest",
-    "@capacitor/app": "latest", 
     "@capacitor/haptics": "latest",
     "firebase": "^12.11.0",
     "lucide-react": "latest",
@@ -20,6 +20,9 @@
     "@capacitor/assets": "latest",
     "@capacitor/cli": "latest",
     "@vitejs/plugin-react": "latest",
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19",
     "vite": "latest"
   }
 }
