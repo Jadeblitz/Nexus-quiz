@@ -394,7 +394,7 @@ const parseData = (data) => {
               });
             }
           } catch (err) {
-            console.log(`Skipped a broken question in ${subject}`);
+            console.error(`Skipped a broken question in ${subject} [${diff}] at index ${idx}:`, err);
           }
         });
       }
