@@ -9,7 +9,7 @@ import {
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
-import { parseData } from './parser.js';
+import { getRank } from './rankEngine';
 
 // Initialize Firebase (using dummy config since google-services.json handles native, but web needs this)
 const firebaseConfig = {
