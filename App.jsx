@@ -656,9 +656,20 @@ export default function App() {
 
     let pool = subjectData[selectedDifficulty.id];
     const limit = timeMode ? 20 : 10;
-    const randomized = shuffle(pool).slice(0, Math.min(pool.length, limit)).map(q => ({
-      ...q, options: shuffle(q.options)
-    }));
+    const actualLimit = Math.min(pool.length, limit);
+
+    const randomized = [];
+    const usedIndices = new Set();
+    while (randomized.length < actualLimit) {
+      const idx = Math.floor(Math.random() * pool.length);
+      if (!usedIndices.has(idx)) {
+        usedIndices.add(idx);
+        randomized.push({
+          ...pool[idx],
+          options: shuffle(pool[idx].options)
+        });
+      }
+    }
     
     setQuestions(randomized);
     setCurrentIndex(0);
