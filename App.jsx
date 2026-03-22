@@ -9,6 +9,7 @@ import {
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { getRank, calculateQuizResults } from './quizLogic';
 
 // Initialize Firebase (using dummy config since google-services.json handles native, but web needs this)
 const firebaseConfig = {
@@ -717,27 +718,6 @@ export default function App() {
     </div>
   );
 
-    // --- 🏆 THE 14 RANK ENGINE ---
-  const getRank = (xp) => {
-    const RANKS = ["Basic", "Advanced Rank", "Elite", "Veteran", "Commander", "Knight", "King", "Emperor", "Saint", "Sage", "Primordial", "Progenitor", "God"];
-    if (xp >= 50000) return { title: "Rank 14", level: "True God", color: "text-amber-400 font-black" };
-    
-    const xpPerSubStep = 1250; 
-    const stepIndex = Math.floor(xp / xpPerSubStep);
-    const rankIndex = Math.floor(stepIndex / 3);
-    const subLevelIndex = stepIndex % 3;
-    const subLevels = ["Beginner", "Advanced", "Peak"];
-    
-    const rankName = RANKS[rankIndex] || "Basic";
-    const subName = subLevels[subLevelIndex] || "Beginner";
-    
-    return {
-      title: `Rank ${rankIndex + 1}`,
-      level: `${rankName} (${subName})`,
-      color: rankIndex >= 10 ? "text-rose-500" : rankIndex >= 8 ? "text-purple-400" : "text-blue-400"
-    };
-  };
-
   // --- 📲 THE SHARE ENGINE ---
   const handleShare = async () => {
     const rankData = getRank(stats.totalXp);
@@ -758,18 +738,10 @@ export default function App() {
 
     // --- 🏁 THE FINISH LINE LOGIC ---
   const finishQuiz = (finalScore) => {
-    // 1. Calculate the XP gain (Time Attack gives double!)
-    const baseGain = isTimeAttack ? finalScore * 20 : finalScore * 10;
-    const oldXp = stats.totalXp;
-    const newXp = oldXp + baseGain;
+    const { newXp, hasRankedUp, newRankData } = calculateQuizResults(finalScore, isTimeAttack, stats.totalXp);
 
-    // 2. Rank Up Check: Did we cross a 1,250 XP milestone?
-    const oldStep = Math.floor(oldXp / 1250);
-    const newStep = Math.floor(newXp / 1250);
-
-    if (newStep > oldStep) {
-      const rankData = getRank(newXp);
-      setNewRankInfo(rankData); // Load the Rank Up screen info
+    if (hasRankedUp) {
+      setNewRankInfo(newRankData); // Load the Rank Up screen info
       setShowRankUp(true);      // Trigger the gold flash animation
       setTimeout(() => setShowRankUp(false), 4000); // Hide after 4 seconds
     }
