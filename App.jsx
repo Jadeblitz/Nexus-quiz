@@ -433,6 +433,9 @@ const VAULT_CONSTANTS = [
   { name: "Faraday (F)", value: "96,485 C/mol", formula: "Q = nF" }
 ];
 
+const NEXUS_STATS_KEY = 'nexus_stats';
+const NEXUS_SETTINGS_KEY = 'nexus_settings';
+
 export default function App() {
   // --- 📦 CORE STATES ---
   const [gameState, setGameState] = useState('login');
@@ -580,14 +583,14 @@ export default function App() {
 
   useEffect(() => {
     try {
-      const s1 = localStorage.getItem('nexus_stats');
-      const s2 = localStorage.getItem('nexus_settings');
+      const s1 = localStorage.getItem(NEXUS_STATS_KEY);
+      const s2 = localStorage.getItem(NEXUS_SETTINGS_KEY);
       if (s1) setStats(JSON.parse(s1));
       if (s2) setSettings(JSON.parse(s2));
     } catch (e) {
       console.log("Corrupted save data detected. Resetting.");
-      localStorage.removeItem('nexus_stats');
-      localStorage.removeItem('nexus_settings');
+      localStorage.removeItem(NEXUS_STATS_KEY);
+      localStorage.removeItem(NEXUS_SETTINGS_KEY);
     }
     bgMusic.current.loop = true;
   }, []);
@@ -681,7 +684,7 @@ export default function App() {
          setTimeout(() => setShowStreakBonus(false), 2000);
          setStats(prev => {
              const updated = { ...prev, totalXp: prev.totalXp + 50 };
-             localStorage.setItem('nexus_stats', JSON.stringify(updated));
+             localStorage.setItem(NEXUS_STATS_KEY, JSON.stringify(updated));
              return updated;
          });
       }
@@ -777,7 +780,7 @@ export default function App() {
     // 3. Save the new progress
     const newStats = { ...stats, totalXp: newXp, completed: stats.completed + 1 };
     setStats(newStats);
-    localStorage.setItem('nexus_stats', JSON.stringify(newStats));
+    localStorage.setItem(NEXUS_STATS_KEY, JSON.stringify(newStats));
     
     // Auto-Sync to Firestore
     if (user) {
@@ -804,7 +807,7 @@ export default function App() {
                 <button onClick={() => {
                   const ns = {...settings, [key]: !settings[key]};
                   setSettings(ns);
-                  localStorage.setItem('nexus_settings', JSON.stringify(ns));
+                  localStorage.setItem(NEXUS_SETTINGS_KEY, JSON.stringify(ns));
                 }} className={`w-12 h-6 rounded-full ${settings[key] ? 'bg-blue-500' : 'bg-slate-700'}`}>
                   <div className={`w-4 h-4 bg-white rounded-full transition-all ${settings[key] ? 'translate-x-7' : 'translate-x-1'}`} />
                 </button>
