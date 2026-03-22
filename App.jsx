@@ -9,7 +9,7 @@ import {
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
-import { getRank, calculateQuizResults } from './quizLogic';
+import { parseData } from './parser.js';
 
 // Initialize Firebase (using dummy config since google-services.json handles native, but web needs this)
 const firebaseConfig = {
@@ -367,10 +367,6 @@ const rawQuizData = {
     ]
   }
 };
-
-// ==========================================
-// 🛡️ TRUE BULLETPROOF PARSING ENGINE
-// ==========================================
 
 const quizData = parseData(rawQuizData);
 
