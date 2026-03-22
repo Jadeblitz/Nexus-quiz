@@ -398,6 +398,8 @@ const VAULT_CONSTANTS = [
   { name: "Faraday (F)", value: "96,485 C/mol", formula: "Q = nF" }
 ];
 
+const XP_PER_RANK_STEP = 1250;
+
 export default function App() {
   // --- 📦 CORE STATES ---
   const [gameState, setGameState] = useState('login');
@@ -545,14 +547,14 @@ export default function App() {
 
   useEffect(() => {
     try {
-      const s1 = localStorage.getItem('nexus_stats');
-      const s2 = localStorage.getItem('nexus_settings');
+      const s1 = localStorage.getItem(NEXUS_STATS_KEY);
+      const s2 = localStorage.getItem(NEXUS_SETTINGS_KEY);
       if (s1) setStats(JSON.parse(s1));
       if (s2) setSettings(JSON.parse(s2));
     } catch (e) {
       console.log("Corrupted save data detected. Resetting.");
-      localStorage.removeItem('nexus_stats');
-      localStorage.removeItem('nexus_settings');
+      localStorage.removeItem(NEXUS_STATS_KEY);
+      localStorage.removeItem(NEXUS_SETTINGS_KEY);
     }
     bgMusic.current.loop = true;
   }, []);
@@ -597,15 +599,6 @@ export default function App() {
     return () => clearInterval(timer);
   }, [gameState, timeLeft, isTimeAttack]);
 
-  const shuffle = (array) => {
-    let shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  };
-
   const startQuiz = (timeMode) => {
     setIsTimeAttack(timeMode);
     setTimeLeft(60);
@@ -621,9 +614,20 @@ export default function App() {
 
     let pool = subjectData[selectedDifficulty.id];
     const limit = timeMode ? 20 : 10;
-    const randomized = shuffle(pool).slice(0, Math.min(pool.length, limit)).map(q => ({
-      ...q, options: shuffle(q.options)
-    }));
+    const actualLimit = Math.min(pool.length, limit);
+
+    const randomized = [];
+    const usedIndices = new Set();
+    while (randomized.length < actualLimit) {
+      const idx = Math.floor(Math.random() * pool.length);
+      if (!usedIndices.has(idx)) {
+        usedIndices.add(idx);
+        randomized.push({
+          ...pool[idx],
+          options: shuffle(pool[idx].options)
+        });
+      }
+    }
     
     setQuestions(randomized);
     setCurrentIndex(0);
@@ -646,7 +650,7 @@ export default function App() {
          setTimeout(() => setShowStreakBonus(false), 2000);
          setStats(prev => {
              const updated = { ...prev, totalXp: prev.totalXp + 50 };
-             localStorage.setItem('nexus_stats', JSON.stringify(updated));
+             localStorage.setItem(NEXUS_STATS_KEY, JSON.stringify(updated));
              return updated;
          });
       }
@@ -682,27 +686,6 @@ export default function App() {
     </div>
   );
 
-    // --- 🏆 THE 14 RANK ENGINE ---
-  const getRank = (xp) => {
-    const RANKS = ["Basic", "Advanced Rank", "Elite", "Veteran", "Commander", "Knight", "King", "Emperor", "Saint", "Sage", "Primordial", "Progenitor", "God"];
-    if (xp >= 50000) return { title: "Rank 14", level: "True God", color: "text-amber-400 font-black" };
-    
-    const xpPerSubStep = 1250; 
-    const stepIndex = Math.floor(xp / xpPerSubStep);
-    const rankIndex = Math.floor(stepIndex / 3);
-    const subLevelIndex = stepIndex % 3;
-    const subLevels = ["Beginner", "Advanced", "Peak"];
-    
-    const rankName = RANKS[rankIndex] || "Basic";
-    const subName = subLevels[subLevelIndex] || "Beginner";
-    
-    return {
-      title: `Rank ${rankIndex + 1}`,
-      level: `${rankName} (${subName})`,
-      color: rankIndex >= 10 ? "text-rose-500" : rankIndex >= 8 ? "text-purple-400" : "text-blue-400"
-    };
-  };
-
   // --- 📲 THE SHARE ENGINE ---
   const handleShare = async () => {
     const rankData = getRank(stats.totalXp);
@@ -723,18 +706,10 @@ export default function App() {
 
     // --- 🏁 THE FINISH LINE LOGIC ---
   const finishQuiz = (finalScore) => {
-    // 1. Calculate the XP gain (Time Attack gives double!)
-    const baseGain = isTimeAttack ? finalScore * 20 : finalScore * 10;
-    const oldXp = stats.totalXp;
-    const newXp = oldXp + baseGain;
+    const { newXp, hasRankedUp, newRankData } = calculateQuizResults(finalScore, isTimeAttack, stats.totalXp);
 
-    // 2. Rank Up Check: Did we cross a 1,250 XP milestone?
-    const oldStep = Math.floor(oldXp / 1250);
-    const newStep = Math.floor(newXp / 1250);
-
-    if (newStep > oldStep) {
-      const rankData = getRank(newXp);
-      setNewRankInfo(rankData); // Load the Rank Up screen info
+    if (hasRankedUp) {
+      setNewRankInfo(newRankData); // Load the Rank Up screen info
       setShowRankUp(true);      // Trigger the gold flash animation
       setTimeout(() => setShowRankUp(false), 4000); // Hide after 4 seconds
     }
@@ -742,7 +717,7 @@ export default function App() {
     // 3. Save the new progress
     const newStats = { ...stats, totalXp: newXp, completed: stats.completed + 1 };
     setStats(newStats);
-    localStorage.setItem('nexus_stats', JSON.stringify(newStats));
+    localStorage.setItem(NEXUS_STATS_KEY, JSON.stringify(newStats));
     
     // Auto-Sync to Firestore
     if (user) {
@@ -769,7 +744,7 @@ export default function App() {
                 <button onClick={() => {
                   const ns = {...settings, [key]: !settings[key]};
                   setSettings(ns);
-                  localStorage.setItem('nexus_settings', JSON.stringify(ns));
+                  localStorage.setItem(NEXUS_SETTINGS_KEY, JSON.stringify(ns));
                 }} className={`w-12 h-6 rounded-full ${settings[key] ? 'bg-blue-500' : 'bg-slate-700'}`}>
                   <div className={`w-4 h-4 bg-white rounded-full transition-all ${settings[key] ? 'translate-x-7' : 'translate-x-1'}`} />
                 </button>
@@ -862,22 +837,24 @@ export default function App() {
         </div>
       )}
 
-      {gameState === 'subject_select' && (
+      {gameState === 'subject_select' && (() => {
+        const rankData = getRank(stats.totalXp);
+        return (
         <div className="w-full max-w-2xl space-y-6">
           {/* --- 👑 Power Hierarchy Header --- */}
           <div className="bg-slate-900/50 p-6 rounded-3xl border border-slate-800 flex justify-around items-center">
             <div className="text-center">
               <p className="text-[10px] text-slate-500 uppercase tracking-widest">Power Level</p>
               {/* ✅ Fixed: Backticks + Closing > */}
-              <p className={`font-black text-lg ${getRank(stats.totalXp).color}`}>
-                {getRank(stats.totalXp).title}
+              <p className={`font-black text-lg ${rankData.color}`}>
+                {rankData.title}
               </p>
             </div>
             <div className="h-8 w-px bg-slate-800"></div>
             <div className="text-center">
               <p className="text-[10px] text-slate-500 uppercase tracking-widest">Status</p>
               <p className="font-bold text-white">
-                {getRank(stats.totalXp).level}
+                {rankData.level}
               </p>
             </div>
             <div className="h-8 w-px bg-slate-800"></div>
@@ -905,7 +882,8 @@ export default function App() {
             <BarChart3 className="mr-2" size={20}/> View Hall of Fame
           </button>
         </div>
-      )}
+        );
+      })()}
 
       {gameState === 'difficulty_select' && (
         <div className="w-full max-w-sm space-y-4">
