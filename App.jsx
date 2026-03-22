@@ -897,22 +897,24 @@ export default function App() {
         </div>
       )}
 
-      {gameState === 'subject_select' && (
+      {gameState === 'subject_select' && (() => {
+        const rankData = getRank(stats.totalXp);
+        return (
         <div className="w-full max-w-2xl space-y-6">
           {/* --- 👑 Power Hierarchy Header --- */}
           <div className="bg-slate-900/50 p-6 rounded-3xl border border-slate-800 flex justify-around items-center">
             <div className="text-center">
               <p className="text-[10px] text-slate-500 uppercase tracking-widest">Power Level</p>
               {/* ✅ Fixed: Backticks + Closing > */}
-              <p className={`font-black text-lg ${getRank(stats.totalXp).color}`}>
-                {getRank(stats.totalXp).title}
+              <p className={`font-black text-lg ${rankData.color}`}>
+                {rankData.title}
               </p>
             </div>
             <div className="h-8 w-px bg-slate-800"></div>
             <div className="text-center">
               <p className="text-[10px] text-slate-500 uppercase tracking-widest">Status</p>
               <p className="font-bold text-white">
-                {getRank(stats.totalXp).level}
+                {rankData.level}
               </p>
             </div>
             <div className="h-8 w-px bg-slate-800"></div>
@@ -940,7 +942,8 @@ export default function App() {
             <BarChart3 className="mr-2" size={20}/> View Hall of Fame
           </button>
         </div>
-      )}
+        );
+      })()}
 
       {gameState === 'difficulty_select' && (
         <div className="w-full max-w-sm space-y-4">
