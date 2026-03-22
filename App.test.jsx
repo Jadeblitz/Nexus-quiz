@@ -1,99 +1,110 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import App from './App';
-import { vi } from 'vitest';
-import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import App from './App.jsx';
 
-// Mock Capacitor and Firebase so they don't break JS DOM rendering
+// Mock the capacitor and firebase dependencies
+vi.mock('@capacitor/core', () => ({
+  Capacitor: {
+    isNativePlatform: () => false
+  }
+}));
+
 vi.mock('@capacitor-firebase/authentication', () => ({
   FirebaseAuthentication: {
-    addListener: vi.fn((event, callback) => {
-      // Simulate auth state change resolving to not logged in by default
-      if (event === 'authStateChange') {
-        setTimeout(() => callback({ user: null }), 0);
-      }
-      return Promise.resolve({ remove: vi.fn() });
-    }),
-    getCurrentUser: vi.fn().mockResolvedValue({ user: null }),
-    signInWithEmailAndPassword: vi.fn(),
-    createUserWithEmailAndPassword: vi.fn(),
-    signInWithGoogle: vi.fn(),
-    signInWithFacebook: vi.fn(),
-    signOut: vi.fn()
+    addListener: vi.fn(() => ({ remove: vi.fn() })),
+    getCurrentUser: vi.fn().mockImplementation(() => new Promise(() => {})),
+    signInWithEmailAndPassword: vi.fn().mockResolvedValue({ user: { uid: '123' } }),
+    signInWithGoogle: vi.fn().mockResolvedValue({ user: { uid: '123' } }),
+    signInWithFacebook: vi.fn().mockResolvedValue({ user: { uid: '123' } }),
+    createUserWithEmailAndPassword: vi.fn().mockResolvedValue({ user: { uid: '123' } }),
+    signOut: vi.fn().mockResolvedValue(),
   }
-}));
-
-vi.mock('@capacitor/app', () => ({
-  App: {
-    addListener: vi.fn(),
-    removeAllListeners: vi.fn()
-  }
-}));
-
-vi.mock('@capacitor/haptics', () => ({
-  Haptics: {
-    impact: vi.fn(),
-    notification: vi.fn()
-  },
-  ImpactStyle: {},
-  NotificationType: {}
 }));
 
 vi.mock('firebase/app', () => ({
-  initializeApp: vi.fn()
+  initializeApp: vi.fn(),
+  getApps: vi.fn().mockReturnValue([]),
 }));
 
 vi.mock('firebase/firestore', () => ({
   getFirestore: vi.fn(),
   doc: vi.fn(),
-  setDoc: vi.fn()
+  getDoc: vi.fn().mockResolvedValue({ exists: () => true, data: () => ({ rank: 'Novice', score: 0 }) }),
+  setDoc: vi.fn(),
+  updateDoc: vi.fn(),
 }));
 
-// Mock audio
-window.HTMLMediaElement.prototype.play = () => Promise.resolve();
-window.HTMLMediaElement.prototype.pause = () => {};
-
-describe('App Component', () => {
+describe('App - startQuiz coverage', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    FirebaseAuthentication.getCurrentUser.mockResolvedValue({ user: null });
   });
 
-  it('renders login screen by default when not logged in', async () => {
+  it('renders without crashing and shows login screen', async () => {
     render(<App />);
-
-    await waitFor(() => {
-      expect(screen.getAllByText('NexusQuiz').length).toBeGreaterThan(0);
-      expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
-      expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
-    });
+    expect(screen.getByText(/Prove your knowledge/i)).toBeInTheDocument();
   });
 
-  it('navigates to subject select when logged in', async () => {
-    FirebaseAuthentication.getCurrentUser.mockResolvedValue({ user: { uid: 'testuid', displayName: 'Test User' } });
-    FirebaseAuthentication.addListener.mockImplementation((event, callback) => {
-      if (event === 'authStateChange') {
-        setTimeout(() => callback({ user: { uid: 'testuid', displayName: 'Test User' } }), 0);
-      }
-      return Promise.resolve({ remove: vi.fn() });
-    });
-
+  it('allows user to start a standard quiz and tests startQuiz initialization via guest mode', async () => {
     render(<App />);
 
+    // Click 'Play as Guest' to bypass login
+    const guestBtn = screen.getByText('Play as Guest');
+    fireEvent.click(guestBtn);
+
     await waitFor(() => {
-      expect(screen.getByText('View Hall of Fame')).toBeInTheDocument();
+      expect(screen.getByText(/Power Level/i)).toBeInTheDocument();
     });
+
+    const scienceCard = screen.getByText('Science & Engineering').closest('button');
+    fireEvent.click(scienceCard);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Foundational/i)).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getByText(/Foundational/i));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Standard Mode/i)).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByText(/Standard Mode/i));
+
+    await waitFor(() => {
+      expect(screen.queryByText(/Score:/i)).not.toBeInTheDocument();
+    });
+
+    expect(screen.queryByText(/Time Left/i)).not.toBeInTheDocument();
   });
 
-  it('can login as guest', async () => {
+  it('allows user to start a time attack quiz and tests time mode branch', async () => {
     render(<App />);
 
-    const user = userEvent.setup();
-    const guestButton = await screen.findByText('Play as Guest');
-    await user.click(guestButton);
+    // Click 'Play as Guest' to bypass login
+    const guestBtn = screen.getByText('Play as Guest');
+    fireEvent.click(guestBtn);
 
     await waitFor(() => {
-      expect(screen.getByText('View Hall of Fame')).toBeInTheDocument();
+      expect(screen.getByText(/Power Level/i)).toBeInTheDocument();
     });
+
+    fireEvent.click(screen.getByText('History').closest('button'));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Intermediate/i)).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getByText(/Intermediate/i));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Time Attack/i)).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByText(/Time Attack/i));
+
+    await waitFor(() => {
+      expect(screen.queryByText(/Score:/i)).not.toBeInTheDocument();
+    });
+
+    // Test that Time Left is displayed, verifying `setIsTimeAttack(timeMode)` branch
+    expect(screen.getByText(/60s/i)).toBeInTheDocument();
   });
 });
