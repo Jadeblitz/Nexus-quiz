@@ -9,7 +9,7 @@ import {
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
-import { parseData } from './utils.js';
+import { shuffle } from './shuffle';
 
 // Initialize Firebase (using dummy config since google-services.json handles native, but web needs this)
 const firebaseConfig = {
@@ -602,17 +602,6 @@ export default function App() {
     }
     return () => clearInterval(timer);
   }, [gameState, timeLeft, isTimeAttack]);
-
-  const shuffle = (array) => {
-    let shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const randomValues = new Uint32Array(1);
-      window.crypto.getRandomValues(randomValues);
-      const j = Math.floor((randomValues[0] / 0x100000000) * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  };
 
   const startQuiz = (timeMode) => {
     setIsTimeAttack(timeMode);
