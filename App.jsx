@@ -433,6 +433,8 @@ const VAULT_CONSTANTS = [
   { name: "Faraday (F)", value: "96,485 C/mol", formula: "Q = nF" }
 ];
 
+const XP_PER_RANK_STEP = 1250;
+
 export default function App() {
   // --- 📦 CORE STATES ---
   const [gameState, setGameState] = useState('login');
@@ -722,8 +724,7 @@ export default function App() {
     const RANKS = ["Basic", "Advanced Rank", "Elite", "Veteran", "Commander", "Knight", "King", "Emperor", "Saint", "Sage", "Primordial", "Progenitor", "God"];
     if (xp >= 50000) return { title: "Rank 14", level: "True God", color: "text-amber-400 font-black" };
     
-    const xpPerSubStep = 1250; 
-    const stepIndex = Math.floor(xp / xpPerSubStep);
+    const stepIndex = Math.floor(xp / XP_PER_RANK_STEP);
     const rankIndex = Math.floor(stepIndex / 3);
     const subLevelIndex = stepIndex % 3;
     const subLevels = ["Beginner", "Advanced", "Peak"];
@@ -764,8 +765,8 @@ export default function App() {
     const newXp = oldXp + baseGain;
 
     // 2. Rank Up Check: Did we cross a 1,250 XP milestone?
-    const oldStep = Math.floor(oldXp / 1250);
-    const newStep = Math.floor(newXp / 1250);
+    const oldStep = Math.floor(oldXp / XP_PER_RANK_STEP);
+    const newStep = Math.floor(newXp / XP_PER_RANK_STEP);
 
     if (newStep > oldStep) {
       const rankData = getRank(newXp);
