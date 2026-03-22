@@ -371,38 +371,6 @@ const rawQuizData = {
 // ==========================================
 // 🛡️ TRUE BULLETPROOF PARSING ENGINE
 // ==========================================
-const parseData = (data) => {
-  const parsed = {};
-  for (const subject in data) {
-    parsed[subject] = {};
-    for (const diff in data[subject]) {
-      parsed[subject][diff] = []; // Always create the category to prevent crashes
-      
-      if (Array.isArray(data[subject][diff])) {
-        data[subject][diff].forEach((q, idx) => {
-          try {
-            // Only load the question if it actually has text inside it
-            if (q && Array.isArray(q) && q.length > 1) {
-              parsed[subject][diff].push({
-                id: `${subject}_${diff}_${idx}`, 
-                text: q[0] || "Question text missing",
-                options: [
-                  {text: q[1] || "A", isCorrect: true}, 
-                  {text: q[2] || "B", isCorrect: false}, 
-                  {text: q[3] || "C", isCorrect: false}, 
-                  {text: q[4] || "D", isCorrect: false}
-                ]
-              });
-            }
-          } catch (err) {
-            console.log(`Skipped a broken question in ${subject}`);
-          }
-        });
-      }
-    }
-  }
-  return parsed;
-};
 
 const quizData = parseData(rawQuizData);
 
@@ -433,6 +401,8 @@ const VAULT_CONSTANTS = [
   { name: "Water Density (ρ)", value: "1000 kg/m³", formula: "at 4°C" },
   { name: "Faraday (F)", value: "96,485 C/mol", formula: "Q = nF" }
 ];
+
+const XP_PER_RANK_STEP = 1250;
 
 export default function App() {
   // --- 📦 CORE STATES ---
@@ -581,14 +551,14 @@ export default function App() {
 
   useEffect(() => {
     try {
-      const s1 = localStorage.getItem('nexus_stats');
-      const s2 = localStorage.getItem('nexus_settings');
+      const s1 = localStorage.getItem(NEXUS_STATS_KEY);
+      const s2 = localStorage.getItem(NEXUS_SETTINGS_KEY);
       if (s1) setStats(JSON.parse(s1));
       if (s2) setSettings(JSON.parse(s2));
     } catch (e) {
       console.log("Corrupted save data detected. Resetting.");
-      localStorage.removeItem('nexus_stats');
-      localStorage.removeItem('nexus_settings');
+      localStorage.removeItem(NEXUS_STATS_KEY);
+      localStorage.removeItem(NEXUS_SETTINGS_KEY);
     }
     bgMusic.current.loop = true;
   }, []);
@@ -648,9 +618,20 @@ export default function App() {
 
     let pool = subjectData[selectedDifficulty.id];
     const limit = timeMode ? 20 : 10;
-    const randomized = shuffle(pool).slice(0, Math.min(pool.length, limit)).map(q => ({
-      ...q, options: shuffle(q.options)
-    }));
+    const actualLimit = Math.min(pool.length, limit);
+
+    const randomized = [];
+    const usedIndices = new Set();
+    while (randomized.length < actualLimit) {
+      const idx = Math.floor(Math.random() * pool.length);
+      if (!usedIndices.has(idx)) {
+        usedIndices.add(idx);
+        randomized.push({
+          ...pool[idx],
+          options: shuffle(pool[idx].options)
+        });
+      }
+    }
     
     setQuestions(randomized);
     setCurrentIndex(0);
@@ -673,7 +654,7 @@ export default function App() {
          setTimeout(() => setShowStreakBonus(false), 2000);
          setStats(prev => {
              const updated = { ...prev, totalXp: prev.totalXp + 50 };
-             localStorage.setItem('nexus_stats', JSON.stringify(updated));
+             localStorage.setItem(NEXUS_STATS_KEY, JSON.stringify(updated));
              return updated;
          });
       }
@@ -714,8 +695,7 @@ export default function App() {
     const RANKS = ["Basic", "Advanced Rank", "Elite", "Veteran", "Commander", "Knight", "King", "Emperor", "Saint", "Sage", "Primordial", "Progenitor", "God"];
     if (xp >= 50000) return { title: "Rank 14", level: "True God", color: "text-amber-400 font-black" };
     
-    const xpPerSubStep = 1250; 
-    const stepIndex = Math.floor(xp / xpPerSubStep);
+    const stepIndex = Math.floor(xp / XP_PER_RANK_STEP);
     const rankIndex = Math.floor(stepIndex / 3);
     const subLevelIndex = stepIndex % 3;
     const subLevels = ["Beginner", "Advanced", "Peak"];
@@ -756,8 +736,8 @@ export default function App() {
     const newXp = oldXp + baseGain;
 
     // 2. Rank Up Check: Did we cross a 1,250 XP milestone?
-    const oldStep = Math.floor(oldXp / 1250);
-    const newStep = Math.floor(newXp / 1250);
+    const oldStep = Math.floor(oldXp / XP_PER_RANK_STEP);
+    const newStep = Math.floor(newXp / XP_PER_RANK_STEP);
 
     if (newStep > oldStep) {
       const rankData = getRank(newXp);
@@ -769,7 +749,7 @@ export default function App() {
     // 3. Save the new progress
     const newStats = { ...stats, totalXp: newXp, completed: stats.completed + 1 };
     setStats(newStats);
-    localStorage.setItem('nexus_stats', JSON.stringify(newStats));
+    localStorage.setItem(NEXUS_STATS_KEY, JSON.stringify(newStats));
     
     // Auto-Sync to Firestore
     if (user) {
@@ -796,7 +776,7 @@ export default function App() {
                 <button onClick={() => {
                   const ns = {...settings, [key]: !settings[key]};
                   setSettings(ns);
-                  localStorage.setItem('nexus_settings', JSON.stringify(ns));
+                  localStorage.setItem(NEXUS_SETTINGS_KEY, JSON.stringify(ns));
                 }} className={`w-12 h-6 rounded-full ${settings[key] ? 'bg-blue-500' : 'bg-slate-700'}`}>
                   <div className={`w-4 h-4 bg-white rounded-full transition-all ${settings[key] ? 'translate-x-7' : 'translate-x-1'}`} />
                 </button>
@@ -889,22 +869,24 @@ export default function App() {
         </div>
       )}
 
-      {gameState === 'subject_select' && (
+      {gameState === 'subject_select' && (() => {
+        const rankData = getRank(stats.totalXp);
+        return (
         <div className="w-full max-w-2xl space-y-6">
           {/* --- 👑 Power Hierarchy Header --- */}
           <div className="bg-slate-900/50 p-6 rounded-3xl border border-slate-800 flex justify-around items-center">
             <div className="text-center">
               <p className="text-[10px] text-slate-500 uppercase tracking-widest">Power Level</p>
               {/* ✅ Fixed: Backticks + Closing > */}
-              <p className={`font-black text-lg ${getRank(stats.totalXp).color}`}>
-                {getRank(stats.totalXp).title}
+              <p className={`font-black text-lg ${rankData.color}`}>
+                {rankData.title}
               </p>
             </div>
             <div className="h-8 w-px bg-slate-800"></div>
             <div className="text-center">
               <p className="text-[10px] text-slate-500 uppercase tracking-widest">Status</p>
               <p className="font-bold text-white">
-                {getRank(stats.totalXp).level}
+                {rankData.level}
               </p>
             </div>
             <div className="h-8 w-px bg-slate-800"></div>
@@ -932,7 +914,8 @@ export default function App() {
             <BarChart3 className="mr-2" size={20}/> View Hall of Fame
           </button>
         </div>
-      )}
+        );
+      })()}
 
       {gameState === 'difficulty_select' && (
         <div className="w-full max-w-sm space-y-4">
