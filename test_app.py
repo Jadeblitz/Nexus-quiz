@@ -21,8 +21,8 @@ def verify_feature():
         try:
             page.goto("http://127.0.0.1:5173")
             time.sleep(2)
-            page.wait_for_selector("text=Welcome")
-            page.wait_for_selector("text=Log in to sync your progress")
+            page.wait_for_selector("text=NexusQuiz")
+            page.wait_for_selector("text=Prove your knowledge across the Ordverse.")
 
             # Type something
             page.fill("input[type='email']", "test@test.com")
@@ -30,7 +30,7 @@ def verify_feature():
             time.sleep(1)
 
             # Click the buttons to ensure they're interactive (will show "Failed" due to no real firebase setup, but that's fine, we want to see the UI)
-            page.click("button:has-text('Log In')")
+            page.click("button:has-text('Login')")
             time.sleep(1)
 
             # Ensure social buttons exist

@@ -3,7 +3,8 @@
   "version": "2.0.0",
   "scripts": {
     "build": "vite build",
-    "cap:build": "npx cap sync android"
+    "cap:build": "npx cap sync android",
+    "test": "vitest run"
   },
   "dependencies": {
     "@capacitor-firebase/authentication": "^8.1.0",
