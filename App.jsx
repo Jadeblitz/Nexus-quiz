@@ -2,32 +2,74 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Brain, Book, Settings, LogOut, Zap } from 'lucide-react';
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { App as CapacitorApp } from '@capacitor/app';
+import React, { useState, useEffect, useRef } from 'react';
+import HubMenu from './src/components/HubMenu';
+import { DifficultySelect, ModeSelect, QuizPlayer, ResultScreen } from './src/components/QuizEngine';
+import Leaderboard from './src/components/Leaderboard';
+import LoginScreen from './src/components/LoginScreen';
+import { 
+  Brain, Cpu, Trophy, ArrowRight, RotateCcw, ChevronLeft, Axe, 
+  Trophy as SportIcon, Languages, Home, Settings, Volume2, VolumeX, 
+  Smartphone, BarChart3, Users, Timer, Zap, Book, BookOpen, Lightbulb, Film, Flame, Share2, LogOut, Mail, Lock
+} from 'lucide-react';
+import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 
-import { GameProvider, useGame } from './src/context/GameContext.jsx';
-import LoginScreen from './src/components/LoginScreen.jsx';
-import HubMenu from './src/components/HubMenu.jsx';
-import QuizEngine from './src/components/QuizEngine.jsx';
+// Initialize Firebase (using dummy config since google-services.json handles native, but web needs this)
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-const Modal = ({ title, children, onClose, icon: Icon, iconColor }) => (
-  <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/90 backdrop-blur-md">
-    <div className="w-full max-w-sm bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl overflow-y-auto max-h-[85vh]">
-      <h2 className="text-2xl font-black mb-6 flex items-center">{Icon && <Icon className={`mr-3 ${iconColor}`} />} {title}</h2>
-      {children}
-      <button onClick={onClose} className="w-full mt-8 py-4 bg-slate-800 rounded-xl font-bold">Close</button>
-    </div>
-  </div>
-);
 
-function AppContent() {
-  const {
-    user, setUser,
-    stats, setStats,
-    gameState, setGameState,
-    isLoading, setIsLoading,
-    settings, setSettings,
-    showRankUp, newRankInfo,
-    VAULT_CONSTANTS
-  } = useGame();
+// ==========================================
+// 📚 THE MEGA REPOSITORY (850+ Questions)
+// ==========================================
+import { rawQuizData } from './data/quizData.jsx';
+import { parseData } from './utils.js';
+import { getRank } from './quizLogic.js';
+import { shuffle } from './shuffle.js';
+
+const quizData = parseData(rawQuizData);
+
+const SUBJECTS = [
+  { id: 'science', title: 'Science & Tech', icon: Brain, color: 'text-blue-400' },
+  { id: 'tech', title: 'Engineering & Math', icon: Cpu, color: 'text-indigo-400' },
+  { id: 'history', title: 'History', icon: BookOpen, color: 'text-amber-600' },
+  { id: 'funfact', title: 'Fun Facts', icon: Lightbulb, color: 'text-yellow-400' },
+  { id: 'entertainment', title: 'Entertainment', icon: Film, color: 'text-purple-400' },
+  { id: 'sports', title: 'Sports', icon: SportIcon, color: 'text-orange-500' },
+  { id: 'languages', title: 'Languages', icon: Languages, color: 'text-pink-400' },
+  { id: 'lore', title: 'Ordverse', icon: Axe, color: 'text-amber-400', glow: 'drop-shadow-[0_0_10px_rgba(220,38,38,0.8)]' // This gives it the "Golden" base
+  // To add the red tint/glow, add this to your icon className:
+  // "drop-shadow-[0_0_10px_rgba(220,38,38,0.8)]" 
+}
+
+];
+
+const DIFFICULTIES = [
+  { id: 'foundational', title: 'Foundational', color: 'text-emerald-400', border: 'border-emerald-500/30' },
+  { id: 'intermediate', title: 'Intermediate', color: 'text-blue-400', border: 'border-blue-500/30' },
+  { id: 'advanced', title: 'Advanced', color: 'text-rose-400', border: 'border-rose-500/30' }
+];
+
+const VAULT_CONSTANTS = [
+  { name: "Gas Constant (R)", value: "8.314 J/(mol·K)", formula: "PV = nRT" },
+  { name: "Gravity (g)", value: "9.81 m/s²", formula: "F = mg" },
+  { name: "Water Density (ρ)", value: "1000 kg/m³", formula: "at 4°C" },
+  { name: "Faraday (F)", value: "96,485 C/mol", formula: "Q = nF" }
+];
+
+const XP_PER_RANK_STEP = 1250;
+const NEXUS_STATS_KEY = 'nexus_stats';
+const NEXUS_SETTINGS_KEY = 'nexus_settings';
 
   const [showSettings, setShowSettings] = useState(false);
   const [showVault, setShowVault] = useState(false);
