@@ -52,6 +52,7 @@ function AppContent() {
       console.log("Corrupted save data detected. Resetting.");
       localStorage.removeItem(NEXUS_STATS_KEY);
       localStorage.removeItem(NEXUS_SETTINGS_KEY);
+      console.error("Error loading saved data", e);
     }
   }, []);
 
