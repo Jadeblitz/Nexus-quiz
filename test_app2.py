@@ -1,6 +1,17 @@
 from playwright.sync_api import sync_playwright
 import time
 import os
+import subprocess
+import signal
+
+def start_server():
+    server_process = subprocess.Popen(["npx", "vite", "--port", "5173", "--host", "127.0.0.1"])
+    time.sleep(3) # Give it time to start
+    return server_process
+
+def stop_server(process):
+    if process:
+        os.kill(process.pid, signal.SIGTERM)
 
 def verify_feature():
     with sync_playwright() as p:
@@ -27,16 +38,21 @@ def verify_feature():
             time.sleep(1)
 
             # Ensure social buttons exist
-            page.wait_for_selector("button:has-text('Google')")
-            page.wait_for_selector("button:has-text('Facebook')")
+            page.wait_for_selector("button:has-text('Continue with Google')")
+            page.wait_for_selector("button:has-text('Continue with Facebook')")
 
             # Take screenshot
             os.makedirs("/home/jules/verification", exist_ok=True)
             page.screenshot(path="/home/jules/verification/verification.png")
+            print("test_app2.py completed.")
 
         finally:
             context.close()
             browser.close()
 
 if __name__ == "__main__":
-    verify_feature()
+    server = start_server()
+    try:
+        verify_feature()
+    finally:
+        stop_server(server)

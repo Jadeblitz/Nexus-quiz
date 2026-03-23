@@ -34,8 +34,8 @@ def verify_feature():
             time.sleep(1)
 
             # Ensure social buttons exist
-            page.wait_for_selector("button:has-text('Google')")
-            page.wait_for_selector("button:has-text('Facebook')")
+            page.wait_for_selector("button:has-text('Continue with Google')")
+            page.wait_for_selector("button:has-text('Continue with Facebook')")
 
             # Dismiss alert if any
             page.on("dialog", lambda dialog: dialog.accept())
@@ -43,6 +43,7 @@ def verify_feature():
             # Take screenshot
             os.makedirs("/home/jules/verification", exist_ok=True)
             page.screenshot(path="/home/jules/verification/verification.png")
+            print("test_app.py completed.")
 
         finally:
             context.close()

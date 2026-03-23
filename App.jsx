@@ -41,8 +41,8 @@ function AppContent() {
 
   useEffect(() => {
     try {
-      const s1 = localStorage.getItem('nexus_stats');
-      const s2 = localStorage.getItem('nexus_settings');
+      const s1 = localStorage.getItem(NEXUS_STATS_KEY);
+      const s2 = localStorage.getItem(NEXUS_SETTINGS_KEY);
       if (s1) setStats(JSON.parse(s1));
       if (s2) setSettings(JSON.parse(s2));
     } catch (e) { console.error("Error loading saved data", e); }
@@ -138,7 +138,7 @@ function AppContent() {
                 <button onClick={() => {
                   const ns = {...settings, [key]: !settings[key]};
                   setSettings(ns);
-                  localStorage.setItem('nexus_settings', JSON.stringify(ns));
+                  localStorage.setItem(NEXUS_SETTINGS_KEY, JSON.stringify(ns));
                 }} className={`w-12 h-6 rounded-full ${settings[key] ? 'bg-blue-500' : 'bg-slate-700'}`}>
                   <div className={`w-4 h-4 bg-white rounded-full transition-all ${settings[key] ? 'translate-x-7' : 'translate-x-1'}`} />
                 </button>
