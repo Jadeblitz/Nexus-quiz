@@ -21,11 +21,8 @@ def verify_feature():
         try:
             page.goto("http://127.0.0.1:5173")
             time.sleep(2)
-            page.wait_for_selector("text=NexusQuiz", timeout=10000)
-
-            # The page has been updated. "text=Welcome" might not exist.
-            # Looking at App.jsx, the login screen has "NexusQuiz" and "Prove your knowledge across the Ordverse."
-            page.wait_for_selector("text=Prove your knowledge across the Ordverse.", timeout=10000)
+            page.wait_for_selector("text=NexusQuiz")
+            page.wait_for_selector("text=Prove your knowledge across the Ordverse.")
 
             # Type something
             page.fill("input[type='email']", "test@test.com")

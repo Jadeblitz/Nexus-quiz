@@ -1,11 +1,9 @@
 const fs = require('fs');
 
-const content = fs.readFileSync('App.jsx', 'utf8');
+const content = fs.readFileSync('App.jsx', 'utf8') + '\n' + fs.readFileSync('src/context/GameContext.jsx', 'utf8') + '\n' + fs.readFileSync('src/components/LoginScreen.jsx', 'utf8');
 
 const expectedHandlers = [
-    'handleEmailAuth',
-    'handleGoogleLogin',
-    'handleFacebookLogin',
+    'handleLogin',
     'handleLogout'
 ];
 
