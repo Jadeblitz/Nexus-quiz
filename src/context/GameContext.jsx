@@ -3,26 +3,9 @@ import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
-import { Brain, Cpu, BookOpen, Lightbulb, Film, Trophy as SportIcon, Languages, Axe } from 'lucide-react';
+import { quizData, VAULT_CONSTANTS, SUBJECTS, DIFFICULTIES } from '../data/quizData';
 
-export const SUBJECTS = [
-  { id: 'science', title: 'Science & Engineering', icon: Brain, color: 'text-blue-400' },
-  { id: 'tech', title: 'Tech & Math', icon: Cpu, color: 'text-indigo-400' },
-  { id: 'history', title: 'History', icon: BookOpen, color: 'text-amber-600' },
-  { id: 'funfact', title: 'Fun Facts', icon: Lightbulb, color: 'text-yellow-400' },
-  { id: 'entertainment', title: 'Entertainment', icon: Film, color: 'text-purple-400' },
-  { id: 'sports', title: 'Sports', icon: SportIcon, color: 'text-orange-500' },
-  { id: 'languages', title: 'Languages', icon: Languages, color: 'text-pink-400' },
-  { id: 'lore', title: 'Ordverse', icon: Axe, color: 'text-amber-400', glow: 'drop-shadow-[0_0_10px_rgba(220,38,38,0.8)]' }
-];
-
-export const DIFFICULTIES = [
-  { id: 'foundational', title: 'Foundational', color: 'text-emerald-400', border: 'border-emerald-500/30' },
-  { id: 'intermediate', title: 'Intermediate', color: 'text-blue-400', border: 'border-blue-500/30' },
-  { id: 'advanced', title: 'Advanced', color: 'text-rose-400', border: 'border-rose-500/30' }
-];
-
-import { quizData, VAULT_CONSTANTS } from '../data/quizData';
+export { SUBJECTS, DIFFICULTIES };
 
 export const getRank = (xp) => {
   const RANKS = ["Basic", "Advanced Rank", "Elite", "Veteran", "Commander", "Knight", "King", "Emperor", "Saint", "Sage", "Primordial", "Progenitor", "God"];
