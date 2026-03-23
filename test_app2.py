@@ -25,6 +25,9 @@ def verify_feature():
             # Dismiss alert if any
             page.on("dialog", lambda dialog: dialog.accept())
 
+            # page.wait_for_selector("text=NexusQuiz", timeout=10000)
+            # page.wait_for_selector("text=Prove your knowledge across the Ordverse.", timeout=10000)
+
             # Type something
             page.fill("input[type='email']", "test@test.com")
             page.fill("input[type='password']", "password")
