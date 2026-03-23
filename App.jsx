@@ -31,12 +31,15 @@ const db = getFirestore(app);
 // 📚 THE MEGA REPOSITORY (850+ Questions)
 // ==========================================
 import { rawQuizData } from './data/quizData.jsx';
+import { parseData } from './utils.js';
+import { getRank } from './quizLogic.js';
+import { shuffle } from './shuffle.js';
 
 const quizData = parseData(rawQuizData);
 
 const SUBJECTS = [
-  { id: 'science', title: 'Science & Engineering', icon: Brain, color: 'text-blue-400' },
-  { id: 'tech', title: 'Tech & Math', icon: Cpu, color: 'text-indigo-400' },
+  { id: 'science', title: 'Science & Tech', icon: Brain, color: 'text-blue-400' },
+  { id: 'tech', title: 'Engineering & Math', icon: Cpu, color: 'text-indigo-400' },
   { id: 'history', title: 'History', icon: BookOpen, color: 'text-amber-600' },
   { id: 'funfact', title: 'Fun Facts', icon: Lightbulb, color: 'text-yellow-400' },
   { id: 'entertainment', title: 'Entertainment', icon: Film, color: 'text-purple-400' },
@@ -63,6 +66,8 @@ const VAULT_CONSTANTS = [
 ];
 
 const XP_PER_RANK_STEP = 1250;
+const NEXUS_STATS_KEY = 'nexus_stats';
+const NEXUS_SETTINGS_KEY = 'nexus_settings';
 
 export default function App() {
   // --- 📦 CORE STATES ---
