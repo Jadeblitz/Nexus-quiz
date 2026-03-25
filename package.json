@@ -3,10 +3,9 @@
   "version": "2.0.0",
   "type": "module",
   "scripts": {
-    "test": "node --test parser.test.mjs",
+    "test": "vitest run",
     "build": "vite build",
-    "cap:build": "npx cap sync android",
-    "test": "vitest run"
+    "cap:build": "npx cap sync android"
   },
   "dependencies": {
     "@capacitor-firebase/authentication": "^8.1.0",
@@ -15,7 +14,7 @@
     "@capacitor/core": "latest",
     "@capacitor/haptics": "latest",
     "firebase": "^12.11.0",
-    "lucide-react": "latest",
+    "lucide-react": "^1.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
