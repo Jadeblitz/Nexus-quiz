@@ -3,7 +3,7 @@ import { ArrowRight, BarChart3, ChevronLeft, Zap, Brain, Cpu, BookOpen, Lightbul
 import { useGame, getRank, SUBJECTS, DIFFICULTIES } from '../context/GameContext.jsx';
 
 export default function HubMenu() {
-  const { stats, gameState, setGameState, selectedSubject, setSelectedSubject, selectedDifficulty, setSelectedDifficulty, startQuiz } = useGame();
+  const { user, stats, gameState, setGameState, selectedSubject, setSelectedSubject, selectedDifficulty, setSelectedDifficulty, startQuiz } = useGame();
 
   return (
     <>
@@ -12,15 +12,15 @@ export default function HubMenu() {
           <div className="bg-slate-900/50 p-6 rounded-3xl border border-slate-800 flex justify-around items-center">
             <div className="text-center">
               <p className="text-[10px] text-slate-500 uppercase tracking-widest">Power Level</p>
-              <p className={`font-black text-lg ${getRank(stats.totalXp).color}`}>
-                {getRank(stats.totalXp).title}
+              <p className={`font-black text-lg ${getRank(stats.totalXp, user?.uid).color}`}>
+                {getRank(stats.totalXp, user?.uid).title}
               </p>
             </div>
             <div className="h-8 w-px bg-slate-800"></div>
             <div className="text-center">
               <p className="text-[10px] text-slate-500 uppercase tracking-widest">Status</p>
               <p className="font-bold text-white">
-                {getRank(stats.totalXp).level}
+                {getRank(stats.totalXp, user?.uid).level}
               </p>
             </div>
             <div className="h-8 w-px bg-slate-800"></div>

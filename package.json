@@ -3,10 +3,9 @@
   "version": "2.0.0",
   "type": "module",
   "scripts": {
-    "test": "node --test parser.test.mjs",
+    "test": "vitest run",
     "build": "vite build",
-    "cap:build": "npx cap sync android",
-    "test": "vitest run"
+    "cap:build": "npx cap sync android"
   },
   "dependencies": {
     "@capacitor-firebase/authentication": "^8.1.0",
@@ -24,12 +23,12 @@
     "@capacitor/cli": "latest",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
-    "@vitejs/plugin-react": "latest",
+    "@vitejs/plugin-react": "^6.0.1",
     "autoprefixer": "^10.4.27",
     "jsdom": "^29.0.1",
     "postcss": "^8.5.8",
     "tailwindcss": "^3.4.19",
-    "vite": "latest",
+    "vite": "^8.0.2",
     "vitest": "^4.1.0"
   }
 }
