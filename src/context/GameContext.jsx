@@ -7,14 +7,23 @@ import { quizData, VAULT_CONSTANTS, SUBJECTS, DIFFICULTIES } from '../data/quizD
 
 export { SUBJECTS, DIFFICULTIES };
 
-export const getRank = (xp) => {
-  const RANKS = ["Basic", "Advanced Rank", "Elite", "Veteran", "Commander", "Knight", "King", "Emperor", "Saint", "Sage", "Primordial", "Progenitor", "God"];
-  if (xp >= 50000) return { title: "Rank 14", level: "True God", color: "text-amber-400 font-black" };
+export const getRank = (xp, uid) => {
+  const RANKS = ["Basic", "Novice", "Adept", "Elite", "Veteran", "Commander", "Knight", "King", "Emperor", "Saint", "Sage", "Primordial", "God"];
+
+  if (xp >= 13 * 3 * 1250) {
+      // True God is reserved
+      if (uid === 'nichotheos_uid') {
+          return { title: "Rank 14", level: "True God", color: "text-amber-400 font-black" };
+      }
+      // Non-admins cap at Rank 13 Peak (God)
+      return { title: "Rank 13", level: "God (Peak)", color: "text-rose-500" };
+  }
 
   const xpPerSubStep = 1250;
-  const stepIndex = Math.floor(xp / xpPerSubStep);
-  const rankIndex = Math.floor(stepIndex / 3);
-  const subLevelIndex = stepIndex % 3;
+  const stepIndex = Math.floor((xp < 0 ? 0 : xp) / xpPerSubStep);
+  // Cap rank at 13 (index 12)
+  const rankIndex = Math.min(Math.floor(stepIndex / 3), 12);
+  const subLevelIndex = Math.min(stepIndex % 3, 2);
   const subLevels = ["Beginner", "Advanced", "Peak"];
 
   const rankName = RANKS[rankIndex] || "Basic";
@@ -23,15 +32,16 @@ export const getRank = (xp) => {
   return {
     title: `Rank ${rankIndex + 1}`,
     level: `${rankName} (${subName})`,
-    color: rankIndex >= 10 ? "text-rose-500" : rankIndex >= 8 ? "text-purple-400" : "text-blue-400"
+    color: rankIndex >= 11 ? "text-rose-500" : rankIndex >= 8 ? "text-purple-400" : "text-blue-400"
   };
 };
+
 
 export const GameContext = createContext();
 
 export const GameProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [stats, setStats] = useState({ totalXp: 0, completed: 0 });
+  const [stats, setStats] = useState({ totalXp: 0, completed: 0, passes: {} });
   const [gameState, setGameState] = useState('login');
   const [isLoading, setIsLoading] = useState(true);
   const [selectedSubject, setSelectedSubject] = useState(null);
@@ -46,6 +56,8 @@ export const GameProvider = ({ children }) => {
   const [streak, setStreak] = useState(0);
   const [showStreakBonus, setShowStreakBonus] = useState(false);
   const [score, setScore] = useState(0);
+  const [sessionXp, setSessionXp] = useState(0);
+  const [lastPassesNeeded, setLastPassesNeeded] = useState(0);
 
   const [showRankUp, setShowRankUp] = useState(false);
   const [newRankInfo, setNewRankInfo] = useState({});
@@ -69,7 +81,7 @@ export const GameProvider = ({ children }) => {
         const userDocSnap = await getDoc(userDocRef);
         if (userDocSnap.exists()) {
           const data = userDocSnap.data();
-          setStats({ totalXp: data.score || 0, completed: data.completed || 0 });
+          setStats({ totalXp: data.score || 0, completed: data.completed || 0, passes: data.passes || {} });
         } else {
           await setDoc(userDocRef, {
             uid: userObj.uid,
@@ -77,14 +89,15 @@ export const GameProvider = ({ children }) => {
             rank: "Basic (Beginner)",
             score: 0,
             powerLevel: 1,
-            completed: 0
+            completed: 0,
+            passes: {}
           });
-          setStats({ totalXp: 0, completed: 0 });
+          setStats({ totalXp: 0, completed: 0, passes: {} });
         }
       } catch (err) {
         console.error("Firebase persistence failed, falling back to Guest state:", err);
         // Fallback to Guest state
-        setStats({ totalXp: 0, completed: 0 });
+        setStats({ totalXp: 0, completed: 0, passes: {} });
       }
     };
 
@@ -128,7 +141,7 @@ export const GameProvider = ({ children }) => {
     if (gameState === 'playing' && isTimeAttack && timeLeft > 0) {
       timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
     } else if (timeLeft === 0 && gameState === 'playing') {
-      finishQuiz(score);
+      finishQuiz(score, sessionXp);
     }
     return () => clearInterval(timer);
   }, [gameState, timeLeft, isTimeAttack]);
@@ -164,6 +177,7 @@ export const GameProvider = ({ children }) => {
     setQuestions(randomized);
     setCurrentIndex(0);
     setScore(0);
+    setSessionXp(0);
     setGameState('playing');
   };
 
@@ -172,28 +186,51 @@ export const GameProvider = ({ children }) => {
     setSelectedAnswerIndex(index);
     setIsChecking(true);
 
-    if (isCorrect) {
-      setScore(s => s + 1);
+    let baseGain = 10;
+    if (selectedDifficulty?.id === 'intermediate') {
+       if (selectedSubject?.id === 'lore') baseGain = 30;
+       else if (selectedSubject?.id === 'tech') baseGain = 20;
+       else baseGain = 15;
+    } else if (selectedDifficulty?.id === 'advanced') {
+       if (selectedSubject?.id === 'lore') baseGain = 50;
+       else if (selectedSubject?.id === 'tech') baseGain = 30;
+       else baseGain = 20;
+    }
 
-      const newStreak = streak + 1;
-      setStreak(newStreak);
-      if (newStreak > 0 && newStreak % 5 === 0) {
+    let xpEarnedThisQuestion = 0;
+    let newScore = score;
+    let currentStreak = streak;
+
+    if (isCorrect) {
+      newScore += 1;
+      setScore(newScore);
+
+      xpEarnedThisQuestion = baseGain;
+      currentStreak += 1;
+      setStreak(currentStreak);
+
+      if (currentStreak > 0 && currentStreak % 5 === 0) {
          setShowStreakBonus(true);
          setTimeout(() => setShowStreakBonus(false), 2000);
-         setStats(prev => {
-             const updated = { ...prev, totalXp: prev.totalXp + 50 };
-             localStorage.setItem('nexus_stats', JSON.stringify(updated));
-             return updated;
-         });
+         xpEarnedThisQuestion += baseGain * 2; // Proportionate bonus
       }
 
       if (settings.sfxEnabled && correctSfx.current) correctSfx.current.play().catch(()=>{});
       if (settings.hapticsEnabled) await Haptics.notification({ type: NotificationType.Success }).catch(()=>{});
     } else {
+      currentStreak = 0;
       setStreak(0);
+
+      if (selectedDifficulty?.id === 'advanced') {
+         xpEarnedThisQuestion = -Math.floor(baseGain / 2);
+      }
+
       if (settings.sfxEnabled && wrongSfx.current) wrongSfx.current.play().catch(()=>{});
       if (settings.hapticsEnabled) await Haptics.impact({ style: ImpactStyle.Heavy }).catch(()=>{});
     }
+
+    const updatedSessionXp = sessionXp + xpEarnedThisQuestion;
+    setSessionXp(updatedSessionXp);
 
     setTimeout(() => {
       if (currentIndex < questions.length - 1) {
@@ -201,56 +238,79 @@ export const GameProvider = ({ children }) => {
         setSelectedAnswerIndex(null);
         setIsChecking(false);
       } else {
-        finishQuiz(score + (isCorrect ? 1 : 0));
+        finishQuiz(newScore, updatedSessionXp);
         setIsChecking(false);
         setSelectedAnswerIndex(null);
       }
     }, isTimeAttack ? 500 : 1200);
   };
 
-  const saveProgress = async (newXp, newCompleted) => {
+  const saveProgress = async (newXp, newCompleted, newPasses) => {
     if (!user) return;
     try {
-      const rankData = getRank(newXp);
+      const rankData = getRank(newXp, user?.uid);
       const powerLevel = Math.floor(newXp / 100);
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         rank: rankData.level,
         score: newXp,
         powerLevel: powerLevel,
-        completed: newCompleted
+        completed: newCompleted,
+        passes: newPasses
       }, { merge: true });
     } catch (err) {
       console.error("Sync failed", err);
     }
   };
 
-  const finishQuiz = (finalScore) => {
-    const baseGain = isTimeAttack ? finalScore * 20 : finalScore * 10;
+  const finishQuiz = (finalScore, finalSessionXp) => {
+    let finalXpGain = isTimeAttack ? finalSessionXp * 2 : finalSessionXp;
+
     const oldXp = stats.totalXp;
-    const newXp = oldXp + baseGain;
+    let newXp = oldXp + finalXpGain;
+    if (newXp < 0) newXp = 0;
 
     const oldStep = Math.floor(oldXp / 1250);
     const newStep = Math.floor(newXp / 1250);
 
     if (newStep > oldStep) {
-      const rankData = getRank(newXp);
+      const rankData = getRank(newXp, user?.uid);
       setNewRankInfo(rankData);
       setShowRankUp(true);
       setTimeout(() => setShowRankUp(false), 4000);
     }
 
-    const newStats = { ...stats, totalXp: newXp, completed: stats.completed + 1 };
+    const passThreshold = isTimeAttack ? 14 : 7;
+    const isPass = finalScore >= passThreshold;
+    const passKey = `${selectedSubject?.id}_${selectedDifficulty?.id}`;
+    const newPasses = { ...(stats.passes || {}) };
+
+    let passesNeededMsg = 0;
+    if (isPass) {
+      newPasses[passKey] = (newPasses[passKey] || 0) + 1;
+    }
+
+    if (selectedDifficulty?.id === 'foundational') {
+       const hasPasses = newPasses[passKey] || 0;
+       passesNeededMsg = Math.max(0, 5 - hasPasses);
+    } else if (selectedDifficulty?.id === 'intermediate') {
+       const hasPasses = newPasses[passKey] || 0;
+       passesNeededMsg = Math.max(0, 5 - hasPasses);
+    }
+    setLastPassesNeeded(passesNeededMsg);
+
+    const newStats = { ...stats, totalXp: newXp, completed: stats.completed + 1, passes: newPasses };
     setStats(newStats);
     localStorage.setItem('nexus_stats', JSON.stringify(newStats));
 
-    saveProgress(newXp, newStats.completed);
+    saveProgress(newXp, newStats.completed, newPasses);
 
+    setSessionXp(finalXpGain);
     setGameState('results');
   };
 
   const handleShareWrapper = async () => {
-    const rankData = getRank(stats.totalXp);
+    const rankData = getRank(stats.totalXp, user?.uid);
     const { handleShare } = await import('../utils/shareUtils.js');
     await handleShare(rankData, streak, stats.totalXp);
   };
@@ -272,6 +332,8 @@ export const GameProvider = ({ children }) => {
       streak, setStreak,
       showStreakBonus, setShowStreakBonus,
       score, setScore,
+      sessionXp, setSessionXp,
+      lastPassesNeeded, setLastPassesNeeded,
       settings, setSettings,
       showRankUp, setShowRankUp,
       newRankInfo, setNewRankInfo,

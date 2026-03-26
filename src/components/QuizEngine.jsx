@@ -4,10 +4,11 @@ import { useGame, getRank } from '../context/GameContext.jsx';
 
 export default function QuizEngine() {
   const {
-    stats, gameState, setGameState,
+    user, stats, gameState, setGameState,
     isTimeAttack, timeLeft,
     streak, showStreakBonus,
-    score, questions, currentIndex, isChecking, selectedAnswerIndex, handleAnswer, handleShareWrapper
+    score, questions, currentIndex, isChecking, selectedAnswerIndex, handleAnswer, handleShareWrapper,
+    sessionXp, lastPassesNeeded, selectedSubject
   } = useGame();
 
   return (
@@ -44,11 +45,41 @@ export default function QuizEngine() {
         </div>
       )}
 
-      {gameState === 'results' && (
+      {gameState === 'results' && (function() {
+        const passThreshold = isTimeAttack ? 14 : 7;
+        const totalQ = questions.length;
+        const percentage = (score / totalQ) * 100;
+
+        let gradeText = "Failed";
+        let gradeColor = "text-rose-500";
+        if (percentage >= 70) {
+           gradeText = "Pass";
+           gradeColor = "text-emerald-400";
+        } else if (percentage >= 50) {
+           gradeText = "Average";
+           gradeColor = "text-yellow-400";
+        } else if (percentage >= 30) {
+           gradeText = "Fair";
+           gradeColor = "text-orange-400";
+        }
+
+        let xpColor = sessionXp >= 0 ? "text-emerald-400" : "text-rose-500";
+        if (selectedSubject?.id === 'lore') {
+           xpColor = sessionXp >= 0 ? "text-[#FBBF24]" : "text-[#6A0DAD]";
+        }
+
+        return (
         <div className="text-center p-10 bg-slate-900 border border-slate-800 rounded-[40px] w-full max-w-sm animate-in zoom-in duration-300 shadow-2xl">
           <Trophy className="mx-auto mb-4 text-amber-400" size={80} />
           <h2 className="text-3xl font-black mb-2 text-white">Quiz Over!</h2>
-          <p className="text-6xl font-black my-8 text-white">{score}<span className="text-xl text-slate-700">/{questions.length}</span></p>
+          <p className="text-6xl font-black mt-4 mb-2 text-white">{score}<span className="text-xl text-slate-700">/{totalQ}</span></p>
+
+          <div className="mb-6 space-y-1">
+             <p className={`text-3xl font-black uppercase tracking-widest ${gradeColor}`}>{gradeText}</p>
+             <p className={`text-2xl font-bold ${xpColor}`}>{sessionXp > 0 ? '+' : ''}{sessionXp} XP</p>
+             {lastPassesNeeded > 0 && percentage >= 70 && <p className="text-sm font-bold text-blue-400 mt-2">Need {lastPassesNeeded} more Pass(es) to unlock next difficulty!</p>}
+             {lastPassesNeeded === 0 && percentage >= 70 && <p className="text-sm font-bold text-emerald-400 mt-2">Difficulty Mastered!</p>}
+          </div>
 
           <div className="space-y-3">
             <button onClick={handleShareWrapper} className="w-full py-4 bg-emerald-600 rounded-2xl font-black text-lg flex items-center justify-center shadow-lg">
@@ -59,14 +90,15 @@ export default function QuizEngine() {
             </button>
           </div>
         </div>
-      )}
+        );
+      })()}
 
       {gameState === 'leaderboard' && (
         <div className="w-full max-w-md">
           <h2 className="text-3xl font-black mb-8 flex items-center"><Users className="mr-3 text-purple-400" /> Hall of Fame</h2>
           <div className="space-y-3">
             <div className="p-5 bg-blue-500/10 border border-blue-500/40 rounded-3xl flex justify-between items-center text-left">
-              <div><p className="font-bold">You</p><p className="text-xs text-blue-400 italic">Level {Math.floor(stats.totalXp/100)}</p></div>
+              <div><p className="font-bold">{user?.displayName || "Unknown Warrior"}</p><p className="text-xs text-blue-400 italic">Level {Math.floor(stats.totalXp/100)}</p></div>
               <p className="text-2xl font-black text-white">{stats.totalXp} XP</p>
             </div>
             {[{n: "Nichothéos", x: 99999}, {n: "Daragvener", x: 25000}, {n: "Thril_ler", x: 12000}].map((u, i) => (
