@@ -1487,7 +1487,7 @@ export const rawQuizData = {
         "THE INFINITY STUDIOS™",
         "Nexus Graphics",
         "Ord-Gen",
-        "Crimson Arts"
+        "Crimson Archives" 
       ]
     ]
   },
