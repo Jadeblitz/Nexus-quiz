@@ -1,5 +1,5 @@
 import React from 'react';
-import { Brain, Mail, Lock } from 'lucide-react';
+import { Brain } from 'lucide-react';
 
 export default function LoginScreen({ email, setEmail, password, setPassword, isRegistering, setIsRegistering, handleLogin, setGameState }) {
   return (
