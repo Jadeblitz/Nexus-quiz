@@ -1,138 +1,243 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import React, { useEffect } from 'react';
 import { render, screen, act } from '@testing-library/react';
-import React, { useContext } from 'react';
-import { GameProvider, GameContext } from './GameContext';
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { GameProvider, useGame } from './GameContext';
+import { Haptics, NotificationType, ImpactStyle } from '@capacitor/haptics';
 
-// Mock Capacitor plugins
-vi.mock('@capacitor-firebase/authentication', () => {
-  let authCallback = null;
-  return {
-    FirebaseAuthentication: {
-      addListener: vi.fn((event, callback) => {
-        if (event === 'authStateChange') authCallback = callback;
-        return { remove: vi.fn() };
-      }),
-      getCurrentUser: vi.fn(() => Promise.resolve({ user: { uid: 'test-uid', displayName: 'Test User' } })),
-      __triggerAuthChange: (user) => {
-        if (authCallback) authCallback({ user });
-      }
-    }
-  };
-});
-
-vi.mock('@capacitor/haptics', () => ({
-  Haptics: {
-    notification: vi.fn(),
-    impact: vi.fn(),
-  },
-  ImpactStyle: { Heavy: 'HEAVY' },
-  NotificationType: { Success: 'SUCCESS' },
+// Mocks
+vi.mock('firebase/firestore', () => ({
+  doc: vi.fn(),
+  setDoc: vi.fn(),
+  getDoc: vi.fn()
 }));
 
-// Mock Firebase config
 vi.mock('../config/firebase', () => ({
   db: {}
 }));
 
-// Mock Firebase Firestore methods
-const getDocMock = vi.fn();
-const setDocMock = vi.fn();
-const docMock = vi.fn();
-
-vi.mock('firebase/firestore', () => ({
-  getDoc: (...args) => getDocMock(...args),
-  setDoc: (...args) => setDocMock(...args),
-  doc: (...args) => docMock(...args),
+vi.mock('@capacitor-firebase/authentication', () => ({
+  FirebaseAuthentication: {
+    addListener: vi.fn(),
+    getCurrentUser: vi.fn().mockResolvedValue({ user: null })
+  }
 }));
 
-// Test component to read context state
-const TestComponent = () => {
-  const { stats, gameState, isLoading } = useContext(GameContext);
+vi.mock('@capacitor/haptics', () => ({
+  Haptics: {
+    notification: vi.fn().mockResolvedValue(),
+    impact: vi.fn().mockResolvedValue()
+  },
+  ImpactStyle: { Heavy: 'HEAVY' },
+  NotificationType: { Success: 'SUCCESS' }
+}));
+
+// Mock Audio
+class MockAudio {
+  constructor() {}
+  play() {
+    return Promise.resolve();
+  }
+  pause() {}
+}
+global.Audio = MockAudio;
+
+const TestComponent = ({ testAction }) => {
+  const game = useGame();
+
+  useEffect(() => {
+    if (testAction) {
+      testAction(game);
+    }
+  }, [testAction, game]);
+
   return (
     <div>
-      <div data-testid="is-loading">{isLoading.toString()}</div>
-      <div data-testid="game-state">{gameState}</div>
-      <div data-testid="total-xp">{stats.totalXp}</div>
-      <div data-testid="completed">{stats.completed}</div>
-      <div data-testid="passes">{JSON.stringify(stats.passes)}</div>
+      <div data-testid="score">{game.score}</div>
+      <div data-testid="streak">{game.streak}</div>
+      <div data-testid="sessionXp">{game.sessionXp}</div>
+      <div data-testid="isChecking">{String(game.isChecking)}</div>
+      <div data-testid="selectedAnswerIndex">{game.selectedAnswerIndex}</div>
+      <div data-testid="currentIndex">{game.currentIndex}</div>
+      <div data-testid="showStreakBonus">{String(game.showStreakBonus)}</div>
+      <button data-testid="btn-correct" onClick={() => game.handleAnswer(1, true)}>Answer Correct</button>
+      <button data-testid="btn-incorrect" onClick={() => game.handleAnswer(2, false)}>Answer Incorrect</button>
     </div>
   );
 };
-
-describe('GameContext - Firebase Persistence Fallback', () => {
+describe('GameContext - handleAnswer', () => {
   beforeEach(() => {
+    vi.useFakeTimers();
     vi.clearAllMocks();
   });
 
-  it('should fallback to Guest state when Firebase persistence fails on getDoc', async () => {
-    // Make getDoc throw an error to simulate Firebase persistence failure
-    const errorMsg = 'Firebase error on getDoc';
-    getDocMock.mockRejectedValueOnce(new Error(errorMsg));
-    docMock.mockReturnValue('mocked-doc-ref');
-
-    // Spy on console.error
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    await act(async () => {
-      render(
-        <GameProvider>
-          <TestComponent />
-        </GameProvider>
-      );
-    });
-
-    // We wait for the promise rejection and state updates to settle
-    // The context should transition out of loading state
-    expect(screen.getByTestId('is-loading').textContent).toBe('false');
-
-    // The stats should be set to the fallback guest state ({ totalXp: 0, completed: 0, passes: {} })
-    expect(screen.getByTestId('total-xp').textContent).toBe('0');
-    expect(screen.getByTestId('completed').textContent).toBe('0');
-    expect(screen.getByTestId('passes').textContent).toBe('{}');
-
-    // Check that console.error was called with our simulated error
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
-      "Firebase persistence failed, falling back to Guest state:",
-      expect.any(Error)
-    );
-
-    consoleErrorSpy.mockRestore();
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
-  it('should fallback to Guest state when Firebase persistence fails on setDoc', async () => {
-    // Make getDoc return non-existent document
-    getDocMock.mockResolvedValueOnce({ exists: () => false });
-    // Make setDoc throw an error
-    const errorMsg = 'Firebase error on setDoc';
-    setDocMock.mockRejectedValueOnce(new Error(errorMsg));
-    docMock.mockReturnValue('mocked-doc-ref');
+  it('handles a correct answer correctly', async () => {
+    const action = (game) => {
+      if (game.score === 0 && !game.isChecking && game.sessionXp === 0 && game.questions.length === 0) {
+        act(() => {
+            game.setSelectedSubject({ id: 'lore' });
+            game.setSelectedDifficulty({ id: 'intermediate' });
+            game.setQuestions([{}, {}]);
+            game.setCurrentIndex(0);
+            game.setScore(0);
+            game.setSessionXp(0);
+            game.setStreak(0);
+            game.setSettings({ sfxEnabled: true, hapticsEnabled: true });
+        });
+      }
+    };
 
-    // Spy on console.error
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-
-    await act(async () => {
-      render(
-        <GameProvider>
-          <TestComponent />
-        </GameProvider>
-      );
-    });
-
-    // We wait for the promise rejection and state updates to settle
-    // The context should transition out of loading state
-    expect(screen.getByTestId('is-loading').textContent).toBe('false');
-
-    // The stats should be set to the fallback guest state ({ totalXp: 0, completed: 0, passes: {} })
-    expect(screen.getByTestId('total-xp').textContent).toBe('0');
-    expect(screen.getByTestId('completed').textContent).toBe('0');
-    expect(screen.getByTestId('passes').textContent).toBe('{}');
-
-    // Check that console.error was called with our simulated error
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
-      "Firebase persistence failed, falling back to Guest state:",
-      expect.any(Error)
+    render(
+      <GameProvider>
+        <TestComponent testAction={action} />
+      </GameProvider>
     );
 
-    consoleErrorSpy.mockRestore();
+    await act(async () => {
+      screen.getByTestId('btn-correct').click();
+    });
+
+    expect(screen.getByTestId('score').textContent).toBe('1');
+    expect(screen.getByTestId('streak').textContent).toBe('1');
+    expect(screen.getByTestId('sessionXp').textContent).toBe('30');
+    expect(screen.getByTestId('isChecking').textContent).toBe('true');
+    expect(screen.getByTestId('selectedAnswerIndex').textContent).toBe('1');
+    expect(Haptics.notification).toHaveBeenCalledWith({ type: NotificationType.Success });
+
+    await act(async () => {
+      vi.advanceTimersByTime(1200);
+    });
+
+    expect(screen.getByTestId('isChecking').textContent).toBe('false');
+    expect(screen.getByTestId('currentIndex').textContent).toBe('1');
+    expect(screen.getByTestId('selectedAnswerIndex').textContent).toBe('');
+  });
+
+  it('handles an incorrect answer correctly', async () => {
+    const action = (game) => {
+      if (game.score === 0 && !game.isChecking && game.sessionXp === 0 && game.questions.length === 0) {
+        act(() => {
+            game.setSelectedSubject({ id: 'tech' });
+            game.setSelectedDifficulty({ id: 'advanced' });
+            game.setQuestions([{}, {}]);
+            game.setCurrentIndex(0);
+            game.setScore(5);
+            game.setSessionXp(100);
+            game.setStreak(3);
+            game.setSettings({ sfxEnabled: true, hapticsEnabled: true });
+        });
+      }
+    };
+
+    render(
+      <GameProvider>
+        <TestComponent testAction={action} />
+      </GameProvider>
+    );
+
+    await act(async () => {
+      vi.advanceTimersByTime(1);
+    });
+
+    await act(async () => {
+      screen.getByTestId('btn-incorrect').click();
+    });
+
+    expect(screen.getByTestId('score').textContent).toBe('5');
+    expect(screen.getByTestId('streak').textContent).toBe('0');
+    expect(screen.getByTestId('sessionXp').textContent).toBe('85');
+
+    expect(screen.getByTestId('isChecking').textContent).toBe('true');
+    expect(screen.getByTestId('selectedAnswerIndex').textContent).toBe('2');
+    expect(Haptics.impact).toHaveBeenCalledWith({ style: ImpactStyle.Heavy });
+
+    await act(async () => {
+      vi.advanceTimersByTime(1200);
+    });
+
+    expect(screen.getByTestId('isChecking').textContent).toBe('false');
+    expect(screen.getByTestId('currentIndex').textContent).toBe('1');
+    expect(screen.getByTestId('selectedAnswerIndex').textContent).toBe('');
+  });
+
+  it('handles streak bonuses correctly', async () => {
+    const action = (game) => {
+      if (game.score === 0 && !game.isChecking && game.sessionXp === 0 && game.questions.length === 0) {
+        act(() => {
+            game.setSelectedSubject({ id: 'science' });
+            game.setSelectedDifficulty({ id: 'foundational' });
+            game.setQuestions([{}, {}]);
+            game.setCurrentIndex(0);
+            game.setScore(4);
+            game.setSessionXp(40);
+            game.setStreak(4);
+            game.setSettings({ sfxEnabled: true, hapticsEnabled: true });
+        });
+      }
+    };
+
+    render(
+      <GameProvider>
+        <TestComponent testAction={action} />
+      </GameProvider>
+    );
+
+    await act(async () => {
+      vi.advanceTimersByTime(1);
+    });
+
+    await act(async () => {
+      screen.getByTestId('btn-correct').click();
+    });
+
+    expect(screen.getByTestId('score').textContent).toBe('5');
+    expect(screen.getByTestId('streak').textContent).toBe('5');
+    expect(screen.getByTestId('sessionXp').textContent).toBe('70');
+    expect(screen.getByTestId('showStreakBonus').textContent).toBe('true');
+
+    await act(async () => {
+      vi.advanceTimersByTime(2000);
+    });
+    expect(screen.getByTestId('showStreakBonus').textContent).toBe('false');
+  });
+
+  it('finishes quiz when on last question', async () => {
+    const action = (game) => {
+      if (game.score === 0 && !game.isChecking && game.questions.length === 0) {
+        act(() => {
+            game.setSelectedSubject({ id: 'science' });
+            game.setSelectedDifficulty({ id: 'foundational' });
+            game.setQuestions([{}]);
+            game.setCurrentIndex(0);
+            game.setScore(0);
+            game.setSessionXp(0);
+            game.setStreak(0);
+        });
+      }
+    };
+
+    render(
+      <GameProvider>
+        <TestComponent testAction={action} />
+      </GameProvider>
+    );
+
+    await act(async () => {
+      vi.advanceTimersByTime(1);
+    });
+
+    await act(async () => {
+      screen.getByTestId('btn-correct').click();
+    });
+
+    await act(async () => {
+      vi.advanceTimersByTime(1200);
+    });
+
+    expect(screen.getByTestId('isChecking').textContent).toBe('false');
+    expect(screen.getByTestId('selectedAnswerIndex').textContent).toBe('');
   });
 });
