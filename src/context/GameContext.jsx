@@ -105,16 +105,19 @@ export const GameProvider = ({ children }) => {
       }
     };
 
-    FirebaseAuthentication.addListener('authStateChange', (result) => {
-      if (result.user) {
-        setUser(result.user);
-        handleUserPersistence(result.user).then(() => {
-          setGameState('subject_select');
-          setIsLoading(false);
-        }).catch(() => {
+    const resolveAuth = (authUser) => {
+      setUser(authUser);
+      handleUserPersistence(authUser)
+        .catch((err) => console.error("Persistence error:", err))
+        .finally(() => {
           setGameState('subject_select');
           setIsLoading(false);
         });
+    };
+
+    FirebaseAuthentication.addListener('authStateChange', (result) => {
+      if (result.user) {
+        resolveAuth(result.user);
       } else {
         setUser(null);
         setGameState('login');
@@ -124,14 +127,7 @@ export const GameProvider = ({ children }) => {
 
     FirebaseAuthentication.getCurrentUser().then((result) => {
       if (result.user) {
-        setUser(result.user);
-        handleUserPersistence(result.user).then(() => {
-          setGameState('subject_select');
-          setIsLoading(false);
-        }).catch(() => {
-          setGameState('subject_select');
-          setIsLoading(false);
-        });
+        resolveAuth(result.user);
       } else {
         setIsLoading(false);
       }
@@ -174,7 +170,13 @@ export const GameProvider = ({ children }) => {
 
     let pool = subjectData[selectedDifficulty.id];
     const limit = timeMode ? 20 : 10;
-    const randomized = shuffle(pool).slice(0, Math.min(pool.length, limit)).map(q => ({
+    const actualLimit = Math.min(pool.length, limit);
+    const poolCopy = [...pool];
+    for (let i = 0; i < actualLimit; i++) {
+      const j = i + Math.floor(Math.random() * (poolCopy.length - i));
+      [poolCopy[i], poolCopy[j]] = [poolCopy[j], poolCopy[i]];
+    }
+    const randomized = poolCopy.slice(0, actualLimit).map(q => ({
       ...q, options: shuffle(q.options)
     }));
 

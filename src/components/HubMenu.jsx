@@ -5,6 +5,8 @@ import { useGame, getRank, SUBJECTS, DIFFICULTIES } from '../context/GameContext
 export default function HubMenu() {
   const { user, isAdmin, stats, gameState, setGameState, selectedSubject, setSelectedSubject, selectedDifficulty, setSelectedDifficulty, startQuiz } = useGame();
 
+  const rankInfo = getRank(stats.totalXp, user?.uid);
+
   return (
     <>
       {gameState === 'subject_select' && (
