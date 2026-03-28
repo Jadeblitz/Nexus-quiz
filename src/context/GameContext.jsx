@@ -170,7 +170,13 @@ export const GameProvider = ({ children }) => {
 
     let pool = subjectData[selectedDifficulty.id];
     const limit = timeMode ? 20 : 10;
-    const randomized = shuffle(pool).slice(0, Math.min(pool.length, limit)).map(q => ({
+    const actualLimit = Math.min(pool.length, limit);
+    const poolCopy = [...pool];
+    for (let i = 0; i < actualLimit; i++) {
+      const j = i + Math.floor(Math.random() * (poolCopy.length - i));
+      [poolCopy[i], poolCopy[j]] = [poolCopy[j], poolCopy[i]];
+    }
+    const randomized = poolCopy.slice(0, actualLimit).map(q => ({
       ...q, options: shuffle(q.options)
     }));
 
