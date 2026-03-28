@@ -7,12 +7,12 @@ import { quizData, VAULT_CONSTANTS, SUBJECTS, DIFFICULTIES } from '../data/quizD
 
 export { SUBJECTS, DIFFICULTIES };
 
-export const getRank = (xp, uid) => {
+export const getRank = (xp, isAdmin) => {
   const RANKS = ["Basic", "Novice", "Adept", "Elite", "Veteran", "Commander", "Knight", "King", "Emperor", "Saint", "Sage", "Primordial", "God"];
 
   if (xp >= 13 * 3 * 1250) {
       // True God is reserved
-      if (uid === 'nichotheos_uid') {
+      if (isAdmin) {
           return { title: "Rank 14", level: "True God", color: "text-amber-400 font-black" };
       }
       // Non-admins cap at Rank 13 Peak (God)
@@ -41,6 +41,7 @@ export const GameContext = createContext();
 
 export const GameProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [stats, setStats] = useState({ totalXp: 0, completed: 0, passes: {} });
   const [gameState, setGameState] = useState('login');
   const [isLoading, setIsLoading] = useState(true);
@@ -81,8 +82,10 @@ export const GameProvider = ({ children }) => {
         const userDocSnap = await getDoc(userDocRef);
         if (userDocSnap.exists()) {
           const data = userDocSnap.data();
+          setIsAdmin(data.isAdmin === true);
           setStats({ totalXp: data.score || 0, completed: data.completed || 0, passes: data.passes || {} });
         } else {
+          setIsAdmin(false);
           await setDoc(userDocRef, {
             uid: userObj.uid,
             displayName: userObj.displayName || "Unknown Warrior",
@@ -97,6 +100,7 @@ export const GameProvider = ({ children }) => {
       } catch (err) {
         console.error("Firebase persistence failed, falling back to Guest state:", err);
         // Fallback to Guest state
+        setIsAdmin(false);
         setStats({ totalXp: 0, completed: 0, passes: {} });
       }
     };
@@ -248,7 +252,7 @@ export const GameProvider = ({ children }) => {
   const saveProgress = async (newXp, newCompleted, newPasses) => {
     if (!user) return;
     try {
-      const rankData = getRank(newXp, user?.uid);
+      const rankData = getRank(newXp, isAdmin);
       const powerLevel = Math.floor(newXp / 100);
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
@@ -274,7 +278,7 @@ export const GameProvider = ({ children }) => {
     const newStep = Math.floor(newXp / 1250);
 
     if (newStep > oldStep) {
-      const rankData = getRank(newXp, user?.uid);
+      const rankData = getRank(newXp, isAdmin);
       setNewRankInfo(rankData);
       setShowRankUp(true);
       setTimeout(() => setShowRankUp(false), 4000);
@@ -310,14 +314,14 @@ export const GameProvider = ({ children }) => {
   };
 
   const handleShareWrapper = async () => {
-    const rankData = getRank(stats.totalXp, user?.uid);
+    const rankData = getRank(stats.totalXp, isAdmin);
     const { handleShare } = await import('../utils/shareUtils.js');
     await handleShare(rankData, streak, stats.totalXp);
   };
 
   return (
     <GameContext.Provider value={{
-      user, setUser,
+      user, setUser, isAdmin, setIsAdmin,
       stats, setStats,
       gameState, setGameState, isLoading, setIsLoading,
       isLoading, setIsLoading,
