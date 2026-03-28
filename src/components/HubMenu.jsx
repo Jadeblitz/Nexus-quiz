@@ -3,7 +3,7 @@ import { ArrowRight, BarChart3, ChevronLeft, Zap, Brain, Cpu, BookOpen, Lightbul
 import { useGame, getRank, SUBJECTS, DIFFICULTIES } from '../context/GameContext.jsx';
 
 export default function HubMenu() {
-  const { user, stats, gameState, setGameState, selectedSubject, setSelectedSubject, selectedDifficulty, setSelectedDifficulty, startQuiz } = useGame();
+  const { user, isAdmin, stats, gameState, setGameState, selectedSubject, setSelectedSubject, selectedDifficulty, setSelectedDifficulty, startQuiz } = useGame();
 
   const rankInfo = getRank(stats.totalXp, user?.uid);
 
@@ -14,15 +14,15 @@ export default function HubMenu() {
           <div className="bg-slate-900/50 p-6 rounded-3xl border border-slate-800 flex justify-around items-center">
             <div className="text-center">
               <p className="text-[10px] text-slate-500 uppercase tracking-widest">Power Level</p>
-              <p className={`font-black text-lg ${rankInfo.color}`}>
-                {rankInfo.title}
+              <p className={`font-black text-lg ${getRank(stats.totalXp, isAdmin).color}`}>
+                {getRank(stats.totalXp, isAdmin).title}
               </p>
             </div>
             <div className="h-8 w-px bg-slate-800"></div>
             <div className="text-center">
               <p className="text-[10px] text-slate-500 uppercase tracking-widest">Status</p>
               <p className="font-bold text-white">
-                {rankInfo.level}
+                {getRank(stats.totalXp, isAdmin).level}
               </p>
             </div>
             <div className="h-8 w-px bg-slate-800"></div>

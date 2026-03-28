@@ -1,9 +1,9 @@
-export const getRank = (xp, uid) => {
+export const getRank = (xp, isAdmin) => {
   const RANKS = ["Basic", "Novice", "Adept", "Elite", "Veteran", "Commander", "Knight", "King", "Emperor", "Saint", "Sage", "Primordial", "God"];
 
   if (xp >= 13 * 3 * 1250) {
       // True God is reserved
-      if (uid === 'nichotheos_uid') {
+      if (isAdmin) {
           return { title: "Rank 14", level: "True God", color: "text-amber-400 font-black" };
       }
       // Non-admins cap at Rank 13 Peak (God)
