@@ -27,22 +27,6 @@ export const getRank = (xp, uid) => {
   };
 };
 
-  const xpPerSubStep = 1250;
-  const stepIndex = Math.floor(xp / xpPerSubStep);
-  const rankIndex = Math.floor(stepIndex / 3);
-  const subLevelIndex = stepIndex % 3;
-  const subLevels = ["Beginner", "Advanced", "Peak"];
-
-  const rankName = RANKS[rankIndex] || "Basic";
-  const subName = subLevels[subLevelIndex] || "Beginner";
-
-  return {
-    title: `Rank ${rankIndex + 1}`,
-    level: `${rankName} (${subName})`,
-    color: rankIndex >= 10 ? "text-rose-500" : rankIndex >= 8 ? "text-purple-400" : "text-blue-400"
-  };
-};
-
 export const calculateQuizResults = (finalScore, isTimeAttack, oldXp) => {
   // 1. Calculate the XP gain (Time Attack gives double!)
   const baseGain = isTimeAttack ? finalScore * 20 : finalScore * 10;
