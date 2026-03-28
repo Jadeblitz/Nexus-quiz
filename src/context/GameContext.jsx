@@ -7,12 +7,12 @@ import { quizData, VAULT_CONSTANTS, SUBJECTS, DIFFICULTIES } from '../data/quizD
 
 export { SUBJECTS, DIFFICULTIES };
 
-export const getRank = (xp, uid) => {
+export const getRank = (xp, isAdmin = false) => {
   const RANKS = ["Basic", "Novice", "Adept", "Elite", "Veteran", "Commander", "Knight", "King", "Emperor", "Saint", "Sage", "Primordial", "God"];
 
   if (xp >= 13 * 3 * 1250) {
       // True God is reserved
-      if (uid === 'nichotheos_uid') {
+      if (isAdmin) {
           return { title: "Rank 14", level: "True God", color: "text-amber-400 font-black" };
       }
       // Non-admins cap at Rank 13 Peak (God)
@@ -81,6 +81,7 @@ export const GameProvider = ({ children }) => {
         const userDocSnap = await getDoc(userDocRef);
         if (userDocSnap.exists()) {
           const data = userDocSnap.data();
+          userObj.isAdmin = data.isAdmin === true || data.role === 'admin';
           setStats({ totalXp: data.score || 0, completed: data.completed || 0, passes: data.passes || {} });
         } else {
           await setDoc(userDocRef, {
@@ -248,7 +249,7 @@ export const GameProvider = ({ children }) => {
   const saveProgress = async (newXp, newCompleted, newPasses) => {
     if (!user) return;
     try {
-      const rankData = getRank(newXp, user?.uid);
+      const rankData = getRank(newXp, user?.isAdmin);
       const powerLevel = Math.floor(newXp / 100);
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
@@ -274,7 +275,7 @@ export const GameProvider = ({ children }) => {
     const newStep = Math.floor(newXp / 1250);
 
     if (newStep > oldStep) {
-      const rankData = getRank(newXp, user?.uid);
+      const rankData = getRank(newXp, user?.isAdmin);
       setNewRankInfo(rankData);
       setShowRankUp(true);
       setTimeout(() => setShowRankUp(false), 4000);
@@ -310,7 +311,7 @@ export const GameProvider = ({ children }) => {
   };
 
   const handleShareWrapper = async () => {
-    const rankData = getRank(stats.totalXp, user?.uid);
+    const rankData = getRank(stats.totalXp, user?.isAdmin);
     const { handleShare } = await import('../utils/shareUtils.js');
     await handleShare(rankData, streak, stats.totalXp);
   };

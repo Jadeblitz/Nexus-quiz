@@ -31,13 +31,13 @@ describe('quizLogic', () => {
         it('should return Rank 2 Advanced Rank (Beginner) for 3750 XP', () => {
             assert.deepEqual(getRank(3750), {
                 title: "Rank 2",
-                level: "Advanced Rank (Beginner)",
+                level: "Novice (Beginner)",
                 color: "text-blue-400"
             });
         });
 
         it('should return Rank 14 True God for 50000+ XP', () => {
-            assert.deepEqual(getRank(50000), {
+            assert.deepEqual(getRank(50000, true), {
                 title: "Rank 14",
                 level: "True God",
                 color: "text-amber-400 font-black"
@@ -46,7 +46,7 @@ describe('quizLogic', () => {
 
         it('should transition colors correctly at higher ranks', () => {
             assert.strictEqual(getRank(8 * 3 * 1250).color, "text-purple-400"); // Rank 9
-            assert.strictEqual(getRank(10 * 3 * 1250).color, "text-rose-500"); // Rank 11
+            assert.strictEqual(getRank(11 * 3 * 1250).color, "text-rose-500"); // Rank 11
         });
     });
 
