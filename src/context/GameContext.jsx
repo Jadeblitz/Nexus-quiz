@@ -101,16 +101,19 @@ export const GameProvider = ({ children }) => {
       }
     };
 
-    FirebaseAuthentication.addListener('authStateChange', (result) => {
-      if (result.user) {
-        setUser(result.user);
-        handleUserPersistence(result.user).then(() => {
-          setGameState('subject_select');
-          setIsLoading(false);
-        }).catch(() => {
+    const resolveAuth = (authUser) => {
+      setUser(authUser);
+      handleUserPersistence(authUser)
+        .catch((err) => console.error("Persistence error:", err))
+        .finally(() => {
           setGameState('subject_select');
           setIsLoading(false);
         });
+    };
+
+    FirebaseAuthentication.addListener('authStateChange', (result) => {
+      if (result.user) {
+        resolveAuth(result.user);
       } else {
         setUser(null);
         setGameState('login');
@@ -120,14 +123,7 @@ export const GameProvider = ({ children }) => {
 
     FirebaseAuthentication.getCurrentUser().then((result) => {
       if (result.user) {
-        setUser(result.user);
-        handleUserPersistence(result.user).then(() => {
-          setGameState('subject_select');
-          setIsLoading(false);
-        }).catch(() => {
-          setGameState('subject_select');
-          setIsLoading(false);
-        });
+        resolveAuth(result.user);
       } else {
         setIsLoading(false);
       }
