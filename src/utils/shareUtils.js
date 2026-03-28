@@ -6,7 +6,7 @@ export const handleShare = async (rankData, streak, totalXp) => {
     try {
       await navigator.share({ title: 'NexusQuiz Achievement', text: shareText });
     } catch (err) {
-      console.log("Cancelled");
+      // Ignore share cancellation
     }
   } else {
     await navigator.clipboard.writeText(shareText);
