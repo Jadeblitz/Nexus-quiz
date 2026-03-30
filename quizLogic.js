@@ -1,4 +1,4 @@
-export const getRank = (xp, isAdmin) => {
+export const getRank = (xp, isAdmin = false) => {
   const RANKS = ["Basic", "Novice", "Adept", "Elite", "Veteran", "Commander", "Knight", "King", "Emperor", "Saint", "Sage", "Primordial", "God"];
 
   if (xp >= 13 * 3 * 1250) {
@@ -26,6 +26,7 @@ export const getRank = (xp, isAdmin) => {
     color: rankIndex >= 11 ? "text-rose-500" : rankIndex >= 8 ? "text-purple-400" : "text-blue-400"
   };
 };
+
 
 export const calculateQuizResults = (finalScore, isTimeAttack, oldXp) => {
   // 1. Calculate the XP gain (Time Attack gives double!)

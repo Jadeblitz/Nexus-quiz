@@ -1,11 +1,11 @@
 import React from 'react';
-import { ArrowRight, BarChart3, ChevronLeft, Zap, Brain, Cpu, BookOpen, Lightbulb, Film, Trophy as SportIcon, Languages, Axe } from 'lucide-react';
+import { ArrowRight, BarChart3, ChevronLeft, Zap, Brain, Cpu, BookOpen, Lightbulb, Film, Trophy as SportIcon, Languages, Axe, Lock } from 'lucide-react';
 import { useGame, getRank, SUBJECTS, DIFFICULTIES } from '../context/GameContext.jsx';
 
 export default function HubMenu() {
   const { user, isAdmin, stats, gameState, setGameState, selectedSubject, setSelectedSubject, selectedDifficulty, setSelectedDifficulty, startQuiz } = useGame();
 
-  const rankInfo = getRank(stats.totalXp, user?.uid);
+  const rankInfo = getRank(stats.totalXp, isAdmin);
 
   return (
     <>
@@ -58,13 +58,23 @@ export default function HubMenu() {
         <div className="w-full max-w-sm space-y-4">
            <button onClick={() => setGameState('subject_select')} className="text-slate-500 flex items-center mb-4"><ChevronLeft size={16}/> Back</button>
            <h2 className="text-2xl font-black mb-6 text-center">{selectedSubject?.title}</h2>
-           {DIFFICULTIES.map(diff => (
-             <button key={diff.id} onClick={() => {setSelectedDifficulty(diff); setGameState('mode_select')}}
-               className={`w-full p-6 bg-slate-900 border ${diff.border} rounded-2xl flex items-center justify-between`}>
-               <span className={`text-xl font-bold ${diff.color}`}>{diff.title}</span>
-               <ArrowRight size={20} className="text-slate-700" />
-             </button>
-           ))}
+           {DIFFICULTIES.map(diff => {
+             const passesCount = stats.passes?.[`${selectedSubject?.id}_${diff.id}`] || 0;
+             const prevDiffId = diff.id === 'intermediate' ? 'foundational' : (diff.id === 'advanced' ? 'intermediate' : null);
+             const isLocked = prevDiffId && (stats.passes?.[`${selectedSubject?.id}_${prevDiffId}`] || 0) < 5;
+             return (
+               <button key={diff.id} onClick={() => {setSelectedDifficulty(diff); setGameState('mode_select')}} disabled={isLocked}
+                 className={`w-full p-6 bg-slate-900 border ${diff.border} rounded-2xl flex items-center justify-between ${isLocked ? 'opacity-50 cursor-not-allowed grayscale' : ''}`}>
+                 <div className="flex flex-col text-left">
+                   <span className={`text-xl font-bold ${diff.color}`}>{diff.title}</span>
+                   {!isLocked && diff.id !== 'advanced' && (
+                     <span className="text-xs text-slate-500 mt-1">Passes: {passesCount} / 5</span>
+                   )}
+                 </div>
+                 {isLocked ? <Lock size={20} className="text-slate-600" /> : <ArrowRight size={20} className="text-slate-700" />}
+               </button>
+             );
+           })}
         </div>
       )}
 
