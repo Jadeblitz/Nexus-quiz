@@ -1,11 +1,11 @@
 import React from 'react';
-import { ArrowRight, BarChart3, ChevronLeft, Zap, Brain, Cpu, BookOpen, Lightbulb, Film, Trophy as SportIcon, Languages, Axe } from 'lucide-react';
+import { ArrowRight, BarChart3, ChevronLeft, Zap, Brain, Cpu, BookOpen, Lightbulb, Film, Trophy as SportIcon, Languages, Axe, Lock } from 'lucide-react';
 import { useGame, getRank, SUBJECTS, DIFFICULTIES } from '../context/GameContext.jsx';
 
 export default function HubMenu() {
   const { user, isAdmin, stats, gameState, setGameState, selectedSubject, setSelectedSubject, selectedDifficulty, setSelectedDifficulty, startQuiz } = useGame();
 
-  const rankInfo = getRank(stats.totalXp, user?.uid);
+  const rankInfo = getRank(stats.totalXp, isAdmin);
 
   return (
     <>

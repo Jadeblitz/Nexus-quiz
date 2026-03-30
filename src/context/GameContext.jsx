@@ -7,7 +7,7 @@ import { quizData, VAULT_CONSTANTS, SUBJECTS, DIFFICULTIES } from '../data/quizD
 
 export { SUBJECTS, DIFFICULTIES };
 
-export const getRank = (xp, isAdmin) => {
+export const getRank = (xp, isAdmin = false) => {
   const RANKS = ["Basic", "Novice", "Adept", "Elite", "Veteran", "Commander", "Knight", "King", "Emperor", "Saint", "Sage", "Primordial", "God"];
 
   if (xp >= 13 * 3 * 1250) {
@@ -85,7 +85,7 @@ export const GameProvider = ({ children }) => {
         const userDocSnap = await getDoc(userDocRef);
         if (userDocSnap.exists()) {
           const data = userDocSnap.data();
-          setIsAdmin(data.isAdmin === true);
+          setIsAdmin(data.isAdmin === true || data.role === 'admin');
           setStats({ totalXp: data.score || 0, completed: data.completed || 0, passes: data.passes || {} });
         } else {
           setIsAdmin(false);
@@ -334,11 +334,11 @@ export const GameProvider = ({ children }) => {
       setLastPassesNeeded(0);
     }
 
-    const newStats = { ...stats, totalXp: newXp, completed: stats.completed + 1, passes: newPasses };
+    const newStats = { ...stats, completed: stats.completed + 1, passes: newPasses };
     setStats(newStats);
     localStorage.setItem('nexus_stats', JSON.stringify(newStats));
 
-    saveProgress(newXp, newStats.completed, newPasses);
+    saveProgress(finalTotalXp, newStats.completed, newPasses);
 
     setSessionXp(finalXpGain);
     setGameState('results');
