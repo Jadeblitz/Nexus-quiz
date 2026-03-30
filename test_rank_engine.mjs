@@ -34,13 +34,13 @@ assert.strictEqual(rank.level, 'Primordial (Beginner)');
 assert.strictEqual(rank.color, 'text-rose-500');
 
 // True God for admin uid
-rank = getRank(48750, 'nichotheos_uid');
+rank = getRank(48750, true);
 assert.strictEqual(rank.title, 'Rank 14');
 assert.strictEqual(rank.level, 'True God');
 assert.strictEqual(rank.color, 'text-amber-400 font-black');
 
 // Non-admin cap
-rank = getRank(48750, 'some_other_uid');
+rank = getRank(48750, false);
 assert.strictEqual(rank.title, 'Rank 13');
 assert.strictEqual(rank.level, 'God (Peak)');
 assert.strictEqual(rank.color, 'text-rose-500');

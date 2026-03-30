@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flame, Timer, Trophy, Share2, Users } from 'lucide-react';
-import { useGame, getRank } from '../context/GameContext.jsx';
+import { useGame } from '../context/GameContext.jsx';
 
 export default function QuizEngine() {
   const {
