@@ -7,7 +7,7 @@ import { quizData, VAULT_CONSTANTS, SUBJECTS, DIFFICULTIES } from '../data/quizD
 
 export { SUBJECTS, DIFFICULTIES };
 
-export const getRank = (xp, isAdmin) => {
+export const getRank = (xp, isAdmin = false) => {
   const RANKS = ["Basic", "Novice", "Adept", "Elite", "Veteran", "Commander", "Knight", "King", "Emperor", "Saint", "Sage", "Primordial", "God"];
 
   if (xp >= 13 * 3 * 1250) {
@@ -82,7 +82,7 @@ export const GameProvider = ({ children }) => {
         const userDocSnap = await getDoc(userDocRef);
         if (userDocSnap.exists()) {
           const data = userDocSnap.data();
-          setIsAdmin(data.isAdmin === true);
+          setIsAdmin(data.isAdmin === true || data.role === 'admin');
           setStats({ totalXp: data.score || 0, completed: data.completed || 0, passes: data.passes || {} });
         } else {
           setIsAdmin(false);
@@ -238,6 +238,20 @@ export const GameProvider = ({ children }) => {
     const updatedSessionXp = sessionXp + xpEarnedThisQuestion;
     setSessionXp(updatedSessionXp);
 
+    // Real-time Total XP Update
+    const newTotalXp = Math.max(0, stats.totalXp + (isTimeAttack ? xpEarnedThisQuestion * 2 : xpEarnedThisQuestion));
+    const oldStep = Math.floor(stats.totalXp / 1250);
+    const newStep = Math.floor(newTotalXp / 1250);
+
+    if (newStep > oldStep) {
+      const rankData = getRank(newTotalXp, isAdmin);
+      setNewRankInfo(rankData);
+      setShowRankUp(true);
+      setTimeout(() => setShowRankUp(false), 4000);
+    }
+
+    setStats(prev => ({ ...prev, totalXp: newTotalXp }));
+
     setTimeout(() => {
       if (currentIndex < questions.length - 1) {
         setCurrentIndex(c => c + 1);
@@ -272,19 +286,8 @@ export const GameProvider = ({ children }) => {
   const finishQuiz = (finalScore, finalSessionXp) => {
     let finalXpGain = isTimeAttack ? finalSessionXp * 2 : finalSessionXp;
 
-    const oldXp = stats.totalXp;
-    let newXp = oldXp + finalXpGain;
-    if (newXp < 0) newXp = 0;
-
-    const oldStep = Math.floor(oldXp / 1250);
-    const newStep = Math.floor(newXp / 1250);
-
-    if (newStep > oldStep) {
-      const rankData = getRank(newXp, isAdmin);
-      setNewRankInfo(rankData);
-      setShowRankUp(true);
-      setTimeout(() => setShowRankUp(false), 4000);
-    }
+    // totalXp is already updated real-time, just sync it
+    const finalTotalXp = stats.totalXp;
 
     const passThreshold = isTimeAttack ? 14 : 7;
     const isPass = finalScore >= passThreshold;
@@ -305,11 +308,11 @@ export const GameProvider = ({ children }) => {
     }
     setLastPassesNeeded(passesNeededMsg);
 
-    const newStats = { ...stats, totalXp: newXp, completed: stats.completed + 1, passes: newPasses };
+    const newStats = { ...stats, completed: stats.completed + 1, passes: newPasses };
     setStats(newStats);
     localStorage.setItem('nexus_stats', JSON.stringify(newStats));
 
-    saveProgress(newXp, newStats.completed, newPasses);
+    saveProgress(finalTotalXp, newStats.completed, newPasses);
 
     setSessionXp(finalXpGain);
     setGameState('results');
