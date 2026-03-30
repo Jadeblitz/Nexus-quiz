@@ -4332,553 +4332,553 @@ export const rawQuizData = {
         "A fraction"
       ],
       [
-        "What is 9 * 6? [Var mwlyh]",
+        "What is 9 * 6?",
         "54",
         "55",
         "53",
         "56"
       ],
       [
-        "What is 9 * 19? [Var wo9k9]",
+        "What is 9 * 19?",
         "171",
         "172",
         "170",
         "173"
       ],
       [
-        "What is 8 * 5? [Var m7133]",
+        "What is 8 * 5?",
         "40",
         "41",
         "39",
         "42"
       ],
       [
-        "What is 3 * 14? [Var 4gew6]",
+        "What is 3 * 14?",
         "42",
         "43",
         "41",
         "44"
       ],
       [
-        "What is 8 * 16? [Var a6dij]",
+        "What is 8 * 16?",
         "128",
         "129",
         "127",
         "130"
       ],
       [
-        "What is 8 * 4? [Var 2unlb]",
+        "What is 8 * 4?",
         "32",
         "33",
         "31",
         "34"
       ],
       [
-        "What is 10 * 14? [Var mm6mm]",
+        "What is 10 * 14?",
         "140",
         "141",
         "139",
         "142"
       ],
       [
-        "What is 18 * 16? [Var 1i51z]",
+        "What is 18 * 16?",
         "288",
         "289",
         "287",
         "290"
       ],
       [
-        "What is 1 * 12? [Var 0l8nc]",
+        "What is 1 * 12?",
         "12",
         "13",
         "11",
         "14"
       ],
       [
-        "What is 14 * 3? [Var e14dc]",
+        "What is 14 * 3?",
         "42",
         "43",
         "41",
         "44"
       ],
       [
-        "What is 8 * 9? [Var rftp3]",
+        "What is 8 * 9?",
         "72",
         "73",
         "71",
         "74"
       ],
       [
-        "What is 18 * 12? [Var xnoa2]",
+        "What is 18 * 12?",
         "216",
         "217",
         "215",
         "218"
       ],
       [
-        "What is 0 * 18? [Var 0t9sr]",
+        "What is 0 * 18?",
         "0",
         "1",
         "-1",
         "2"
       ],
       [
-        "What is 15 * 6? [Var kww15]",
+        "What is 15 * 6?",
         "90",
         "91",
         "89",
         "92"
       ],
       [
-        "What is 6 * 5? [Var phs69]",
+        "What is 6 * 5?",
         "30",
         "31",
         "29",
         "32"
       ],
       [
-        "What is 14 * 13? [Var lury5]",
+        "What is 14 * 13?",
         "182",
         "183",
         "181",
         "184"
       ],
       [
-        "What is 1 * 16? [Var 8ss38]",
+        "What is 1 * 16?",
         "16",
         "17",
         "15",
         "18"
       ],
       [
-        "What is 15 * 4? [Var a6w9u]",
+        "What is 15 * 4?",
         "60",
         "61",
         "59",
         "62"
       ],
       [
-        "What is 12 * 1? [Var 9003a]",
+        "What is 12 * 1?",
         "12",
         "13",
         "11",
         "14"
       ],
       [
-        "What is 13 * 4? [Var grkzv]",
+        "What is 13 * 4?",
         "52",
         "53",
         "51",
         "54"
       ],
       [
-        "What is 5 * 14? [Var h417k]",
+        "What is 5 * 14?",
         "70",
         "71",
         "69",
         "72"
       ],
       [
-        "What is 0 * 6? [Var ge75y]",
+        "What is 0 * 6?",
         "0",
         "1",
         "-1",
         "2"
       ],
       [
-        "What is 3 * 7? [Var bvzxn]",
+        "What is 3 * 7?",
         "21",
         "22",
         "20",
         "23"
       ],
       [
-        "What is 2 * 6? [Var 6h8ut]",
+        "What is 2 * 6?",
         "12",
         "13",
         "11",
         "14"
       ],
       [
-        "What is 4 * 10? [Var hn788]",
+        "What is 4 * 10?",
         "40",
         "41",
         "39",
         "42"
       ],
       [
-        "What is 8 * 18? [Var xoay5]",
+        "What is 8 * 18?",
         "144",
         "145",
         "143",
         "146"
       ],
       [
-        "What is 17 * 14? [Var 27sj3]",
+        "What is 17 * 14?",
         "238",
         "239",
         "237",
         "240"
       ],
       [
-        "What is 15 * 13? [Var 4rs6y]",
+        "What is 15 * 13?",
         "195",
         "196",
         "194",
         "197"
       ],
       [
-        "What is 11 * 1? [Var 7ijml]",
+        "What is 11 * 1?",
         "11",
         "12",
         "10",
         "13"
       ],
       [
-        "What is 14 * 17? [Var qj9aa]",
+        "What is 14 * 17?",
         "238",
         "239",
         "237",
         "240"
       ],
       [
-        "What is 5 * 18? [Var ripg1]",
+        "What is 5 * 18?",
         "90",
         "91",
         "89",
         "92"
       ],
       [
-        "What is 14 * 10? [Var xskwn]",
+        "What is 14 * 10?",
         "140",
         "141",
         "139",
         "142"
       ],
       [
-        "What is 18 * 16? [Var l4l83]",
+        "What is 18 * 16?",
         "288",
         "289",
         "287",
         "290"
       ],
       [
-        "What is 3 * 5? [Var zjrsl]",
+        "What is 3 * 5?",
         "15",
         "16",
         "14",
         "17"
       ],
       [
-        "What is 10 * 5? [Var 9jer2]",
+        "What is 10 * 5?",
         "50",
         "51",
         "49",
         "52"
       ],
       [
-        "What is 9 * 19? [Var js9pc]",
+        "What is 9 * 19?",
         "171",
         "172",
         "170",
         "173"
       ],
       [
-        "What is 6 * 0? [Var xhl1k]",
+        "What is 6 * 0?",
         "0",
         "1",
         "-1",
         "2"
       ],
       [
-        "What is 8 * 11? [Var s0u59]",
+        "What is 8 * 11?",
         "88",
         "89",
         "87",
         "90"
       ],
       [
-        "What is 7 * 16? [Var pexwu]",
+        "What is 7 * 16?",
         "112",
         "113",
         "111",
         "114"
       ],
       [
-        "What is 9 * 0? [Var enj2g]",
+        "What is 9 * 0?",
         "0",
         "1",
         "-1",
         "2"
       ],
       [
-        "What is 17 * 9? [Var 7fg7u]",
+        "What is 17 * 9?",
         "153",
         "154",
         "152",
         "155"
       ],
       [
-        "What is 3 * 4? [Var jcp2a]",
+        "What is 3 * 4?",
         "12",
         "13",
         "11",
         "14"
       ],
       [
-        "What is 3 * 11? [Var duepp]",
+        "What is 3 * 11?",
         "33",
         "34",
         "32",
         "35"
       ],
       [
-        "What is 15 * 15? [Var refzo]",
+        "What is 15 * 15?",
         "225",
         "226",
         "224",
         "227"
       ],
       [
-        "What is 5 * 1? [Var 8mh0p]",
+        "What is 5 * 1?",
         "5",
         "6",
         "4",
         "7"
       ],
       [
-        "What is 4 * 17? [Var cdmho]",
+        "What is 4 * 17?",
         "68",
         "69",
         "67",
         "70"
       ],
       [
-        "What is 10 * 2? [Var f73ko]",
+        "What is 10 * 2?",
         "20",
         "21",
         "19",
         "22"
       ],
       [
-        "What is 12 * 7? [Var xc7s0]",
+        "What is 12 * 7?",
         "84",
         "85",
         "83",
         "86"
       ],
       [
-        "What is 2 * 14? [Var z0kxi]",
+        "What is 2 * 14?",
         "28",
         "29",
         "27",
         "30"
       ],
       [
-        "What is 7 * 7? [Var 9rbj6]",
+        "What is 7 * 7?",
         "49",
         "50",
         "48",
         "51"
       ],
       [
-        "What is 6 * 5? [Var 76pye]",
+        "What is 6 * 5?",
         "30",
         "31",
         "29",
         "32"
       ],
       [
-        "What is 14 * 6? [Var xued6]",
+        "What is 14 * 6?",
         "84",
         "85",
         "83",
         "86"
       ],
       [
-        "What is 17 * 6? [Var rg8b7]",
+        "What is 17 * 6?",
         "102",
         "103",
         "101",
         "104"
       ],
       [
-        "What is 16 * 3? [Var cuc2j]",
+        "What is 16 * 3?",
         "48",
         "49",
         "47",
         "50"
       ],
       [
-        "What is 8 * 14? [Var gudv3]",
+        "What is 8 * 14?",
         "112",
         "113",
         "111",
         "114"
       ],
       [
-        "What is 6 * 3? [Var 8u86t]",
+        "What is 6 * 3?",
         "18",
         "19",
         "17",
         "20"
       ],
       [
-        "What is 15 * 8? [Var kei7o]",
+        "What is 15 * 8?",
         "120",
         "121",
         "119",
         "122"
       ],
       [
-        "What is 16 * 13? [Var pg8nn]",
+        "What is 16 * 13?",
         "208",
         "209",
         "207",
         "210"
       ],
       [
-        "What is 2 * 18? [Var k1pyn]",
+        "What is 2 * 18?",
         "36",
         "37",
         "35",
         "38"
       ],
       [
-        "What is 12 * 1? [Var z4f2h]",
+        "What is 12 * 1?",
         "12",
         "13",
         "11",
         "14"
       ],
       [
-        "What is 4 * 15? [Var 7cwdd]",
+        "What is 4 * 15?",
         "60",
         "61",
         "59",
         "62"
       ],
       [
-        "What is 6 * 11? [Var 0fmse]",
+        "What is 6 * 11?",
         "66",
         "67",
         "65",
         "68"
       ],
       [
-        "What is 5 * 8? [Var 6j0fc]",
+        "What is 5 * 8?",
         "40",
         "41",
         "39",
         "42"
       ],
       [
-        "What is 6 * 8? [Var 7i9xo]",
+        "What is 6 * 8?",
         "48",
         "49",
         "47",
         "50"
       ],
       [
-        "What is 19 * 7? [Var m6q2r]",
+        "What is 19 * 7?",
         "133",
         "134",
         "132",
         "135"
       ],
       [
-        "What is 10 * 3? [Var nj4iv]",
+        "What is 10 * 3?",
         "30",
         "31",
         "29",
         "32"
       ],
       [
-        "What is 16 * 10? [Var pxv3u]",
+        "What is 16 * 10?",
         "160",
         "161",
         "159",
         "162"
       ],
       [
-        "What is 11 * 15? [Var tajfr]",
+        "What is 11 * 15?",
         "165",
         "166",
         "164",
         "167"
       ],
       [
-        "What is 10 * 7? [Var h1b30]",
+        "What is 10 * 7?",
         "70",
         "71",
         "69",
         "72"
       ],
       [
-        "What is 12 * 13? [Var rcrel]",
+        "What is 12 * 13?",
         "156",
         "157",
         "155",
         "158"
       ],
       [
-        "What is 1 * 12? [Var e3rle]",
+        "What is 1 * 12?",
         "12",
         "13",
         "11",
         "14"
       ],
       [
-        "What is 5 * 8? [Var m4aba]",
+        "What is 5 * 8?",
         "40",
         "41",
         "39",
         "42"
       ],
       [
-        "What is 10 * 9? [Var wk8bw]",
+        "What is 10 * 9?",
         "90",
         "91",
         "89",
         "92"
       ],
       [
-        "What is 2 * 19? [Var nn3b4]",
+        "What is 2 * 19?",
         "38",
         "39",
         "37",
         "40"
       ],
       [
-        "What is 0 * 10? [Var bfg8z]",
+        "What is 0 * 10?",
         "0",
         "1",
         "-1",
         "2"
       ],
       [
-        "What is 16 * 15? [Var hzett]",
+        "What is 16 * 15?",
         "240",
         "241",
         "239",
         "242"
       ],
       [
-        "What is 14 * 14? [Var xs0wh]",
+        "What is 14 * 14?",
         "196",
         "197",
         "195",
         "198"
       ],
       [
-        "What is 5 * 5? [Var b7eaw]",
+        "What is 5 * 5?",
         "25",
         "26",
         "24",
         "27"
       ],
       [
-        "What is 11 * 4? [Var 0d1t7]",
+        "What is 11 * 4?",
         "44",
         "45",
         "43",
@@ -5342,245 +5342,245 @@ export const rawQuizData = {
         "Columns"
       ],
       [
-        "What is 4 * 4 + 3? [Var 1aspa]",
+        "What is 4 * 4 + 3?",
         "19",
         "20",
         "18",
         "21"
       ],
       [
-        "What is 1 * 5 + 6? [Var lcuvc]",
+        "What is 1 * 5 + 6?",
         "11",
         "12",
         "10",
         "13"
       ],
       [
-        "What is 8 * 5 + 9? [Var ix7vs]",
+        "What is 8 * 5 + 9?",
         "49",
         "50",
         "48",
         "51"
       ],
       [
-        "What is 5 * 10 + 6? [Var r7ym6]",
+        "What is 5 * 10 + 6?",
         "56",
         "57",
         "55",
         "58"
       ],
       [
-        "What is 3 * 1 + 7? [Var 3dccp]",
+        "What is 3 * 1 + 7?",
         "10",
         "11",
         "9",
         "12"
       ],
       [
-        "What is 6 * 8 + 5? [Var dvvi1]",
+        "What is 6 * 8 + 5?",
         "53",
         "54",
         "52",
         "55"
       ],
       [
-        "What is 4 * 1 + 5? [Var 69ibh]",
+        "What is 4 * 1 + 5?",
         "9",
         "10",
         "8",
         "11"
       ],
       [
-        "What is 9 * 3 + 9? [Var 128ht]",
+        "What is 9 * 3 + 9?",
         "36",
         "37",
         "35",
         "38"
       ],
       [
-        "What is 6 * 4 + 10? [Var i7loi]",
+        "What is 6 * 4 + 10?",
         "34",
         "35",
         "33",
         "36"
       ],
       [
-        "What is 1 * 10 + 10? [Var ycxb8]",
+        "What is 1 * 10 + 10?",
         "20",
         "21",
         "19",
         "22"
       ],
       [
-        "What is 7 * 6 + 10? [Var 1r1om]",
+        "What is 7 * 6 + 10?",
         "52",
         "53",
         "51",
         "54"
       ],
       [
-        "What is 5 * 8 + 7? [Var sorny]",
+        "What is 5 * 8 + 7?",
         "47",
         "48",
         "46",
         "49"
       ],
       [
-        "What is 2 * 4 + 10? [Var rqqye]",
+        "What is 2 * 4 + 10?",
         "18",
         "19",
         "17",
         "20"
       ],
       [
-        "What is 8 * 1 + 10? [Var okuf2]",
+        "What is 8 * 1 + 10?",
         "18",
         "19",
         "17",
         "20"
       ],
       [
-        "What is 6 * 6 + 7? [Var xsnks]",
+        "What is 6 * 6 + 7?",
         "43",
         "44",
         "42",
         "45"
       ],
       [
-        "What is 5 * 8 + 9? [Var 6fkl6]",
+        "What is 5 * 8 + 9?",
         "49",
         "50",
         "48",
         "51"
       ],
       [
-        "What is 5 * 2 + 9? [Var pw9km]",
+        "What is 5 * 2 + 9?",
         "19",
         "20",
         "18",
         "21"
       ],
       [
-        "What is 8 * 7 + 6? [Var 64102]",
+        "What is 8 * 7 + 6?",
         "62",
         "63",
         "61",
         "64"
       ],
       [
-        "What is 7 * 8 + 5? [Var drvmy]",
+        "What is 7 * 8 + 5?",
         "61",
         "62",
         "60",
         "63"
       ],
       [
-        "What is 2 * 5 + 7? [Var ktsu2]",
+        "What is 2 * 5 + 7?",
         "17",
         "18",
         "16",
         "19"
       ],
       [
-        "What is 8 * 6 + 2? [Var w1ne6]",
+        "What is 8 * 6 + 2?",
         "50",
         "51",
         "49",
         "52"
       ],
       [
-        "What is 2 * 1 + 7? [Var 1lyqu]",
+        "What is 2 * 1 + 7?",
         "9",
         "10",
         "8",
         "11"
       ],
       [
-        "What is 9 * 2 + 1? [Var xdxan]",
+        "What is 9 * 2 + 1?",
         "19",
         "20",
         "18",
         "21"
       ],
       [
-        "What is 5 * 3 + 3? [Var plpc8]",
+        "What is 5 * 3 + 3?",
         "18",
         "19",
         "17",
         "20"
       ],
       [
-        "What is 2 * 8 + 5? [Var u2y9z]",
+        "What is 2 * 8 + 5?",
         "21",
         "22",
         "20",
         "23"
       ],
       [
-        "What is 10 * 6 + 3? [Var hcati]",
+        "What is 10 * 6 + 3?",
         "63",
         "64",
         "62",
         "65"
       ],
       [
-        "What is 7 * 5 + 8? [Var c88sa]",
+        "What is 7 * 5 + 8?",
         "43",
         "44",
         "42",
         "45"
       ],
       [
-        "What is 4 * 2 + 5? [Var nc9lf]",
+        "What is 4 * 2 + 5?",
         "13",
         "14",
         "12",
         "15"
       ],
       [
-        "What is 2 * 4 + 8? [Var 8vsat]",
+        "What is 2 * 4 + 8?",
         "16",
         "17",
         "15",
         "18"
       ],
       [
-        "What is 7 * 8 + 2? [Var ymxvs]",
+        "What is 7 * 8 + 2?",
         "58",
         "59",
         "57",
         "60"
       ],
       [
-        "What is 2 * 10 + 6? [Var cwtov]",
+        "What is 2 * 10 + 6?",
         "26",
         "27",
         "25",
         "28"
       ],
       [
-        "What is 4 * 1 + 5? [Var to6hj]",
+        "What is 4 * 1 + 5?",
         "9",
         "10",
         "8",
         "11"
       ],
       [
-        "What is 1 * 4 + 7? [Var vy0p8]",
+        "What is 1 * 4 + 7?",
         "11",
         "12",
         "10",
         "13"
       ],
       [
-        "What is 3 * 3 + 5? [Var 0pqgv]",
+        "What is 3 * 3 + 5?",
         "14",
         "15",
         "13",
         "16"
       ],
       [
-        "What is 6 * 4 + 3? [Var jplus]",
+        "What is 6 * 4 + 3?",
         "27",
         "28",
         "26",
@@ -6363,350 +6363,350 @@ export const rawQuizData = {
         "Henry V"
       ],
       [
-        "In what year did this event occur: WWI began? [Var 1c8na]",
+        "In what year did this event occur: WWI began?",
         "1914",
         "1915",
         "1904",
         "1924"
       ],
       [
-        "In what year did this event occur: WWII began? [Var rc5b2]",
+        "In what year did this event occur: WWII began?",
         "1939",
         "1940",
         "1929",
         "1949"
       ],
       [
-        "In what year did this event occur: WWII began? [Var lnuik]",
+        "In what year did this event occur: WWII began?",
         "1939",
         "1940",
         "1929",
         "1949"
       ],
       [
-        "In what year did this event occur: Columbus sailed the ocean blue? [Var tooh6]",
+        "In what year did this event occur: Columbus sailed the ocean blue?",
         "1492",
         "1493",
         "1482",
         "1502"
       ],
       [
-        "In what year did this event occur: WWI began? [Var 5p8bw]",
+        "In what year did this event occur: WWI began?",
         "1914",
         "1915",
         "1904",
         "1924"
       ],
       [
-        "In what year did this event occur: US Declaration of Independence? [Var h9qtp]",
+        "In what year did this event occur: US Declaration of Independence?",
         "1776",
         "1777",
         "1766",
         "1786"
       ],
       [
-        "In what year did this event occur: 9/11 attacks? [Var 7vncj]",
+        "In what year did this event occur: 9/11 attacks?",
         "2001",
         "2002",
         "1991",
         "2011"
       ],
       [
-        "In what year did this event occur: COVID-19 pandemic? [Var sp7ya]",
+        "In what year did this event occur: COVID-19 pandemic?",
         "2020",
         "2021",
         "2010",
         "2030"
       ],
       [
-        "In what year did this event occur: Moon Landing? [Var ih629]",
+        "In what year did this event occur: Moon Landing?",
         "1969",
         "1970",
         "1959",
         "1979"
       ],
       [
-        "In what year did this event occur: WWII began? [Var ftfr2]",
+        "In what year did this event occur: WWII began?",
         "1939",
         "1940",
         "1929",
         "1949"
       ],
       [
-        "In what year did this event occur: Battle of Hastings? [Var t2g88]",
+        "In what year did this event occur: Battle of Hastings?",
         "1066",
         "1067",
         "1056",
         "1076"
       ],
       [
-        "In what year did this event occur: Battle of Hastings? [Var lw3xo]",
+        "In what year did this event occur: Battle of Hastings?",
         "1066",
         "1067",
         "1056",
         "1076"
       ],
       [
-        "In what year did this event occur: WWI began? [Var cju3k]",
+        "In what year did this event occur: WWI began?",
         "1914",
         "1915",
         "1904",
         "1924"
       ],
       [
-        "In what year did this event occur: Columbus sailed the ocean blue? [Var 7d7oy]",
+        "In what year did this event occur: Columbus sailed the ocean blue?",
         "1492",
         "1493",
         "1482",
         "1502"
       ],
       [
-        "In what year did this event occur: Moon Landing? [Var ceqtm]",
+        "In what year did this event occur: Moon Landing?",
         "1969",
         "1970",
         "1959",
         "1979"
       ],
       [
-        "In what year did this event occur: WWI began? [Var ndppv]",
+        "In what year did this event occur: WWI began?",
         "1914",
         "1915",
         "1904",
         "1924"
       ],
       [
-        "In what year did this event occur: COVID-19 pandemic? [Var w6oht]",
+        "In what year did this event occur: COVID-19 pandemic?",
         "2020",
         "2021",
         "2010",
         "2030"
       ],
       [
-        "In what year did this event occur: US Declaration of Independence? [Var ogibq]",
+        "In what year did this event occur: US Declaration of Independence?",
         "1776",
         "1777",
         "1766",
         "1786"
       ],
       [
-        "In what year did this event occur: COVID-19 pandemic? [Var 5ywnf]",
+        "In what year did this event occur: COVID-19 pandemic?",
         "2020",
         "2021",
         "2010",
         "2030"
       ],
       [
-        "In what year did this event occur: WWII began? [Var 4nr43]",
+        "In what year did this event occur: WWII began?",
         "1939",
         "1940",
         "1929",
         "1949"
       ],
       [
-        "In what year did this event occur: Battle of Hastings? [Var 5umdx]",
+        "In what year did this event occur: Battle of Hastings?",
         "1066",
         "1067",
         "1056",
         "1076"
       ],
       [
-        "In what year did this event occur: US Declaration of Independence? [Var bnw6f]",
+        "In what year did this event occur: US Declaration of Independence?",
         "1776",
         "1777",
         "1766",
         "1786"
       ],
       [
-        "In what year did this event occur: WWI began? [Var z25g3]",
+        "In what year did this event occur: WWI began?",
         "1914",
         "1915",
         "1904",
         "1924"
       ],
       [
-        "In what year did this event occur: WWII began? [Var bys3u]",
+        "In what year did this event occur: WWII began?",
         "1939",
         "1940",
         "1929",
         "1949"
       ],
       [
-        "In what year did this event occur: Moon Landing? [Var 0uyru]",
+        "In what year did this event occur: Moon Landing?",
         "1969",
         "1970",
         "1959",
         "1979"
       ],
       [
-        "In what year did this event occur: WWII ended? [Var 2t0z6]",
+        "In what year did this event occur: WWII ended?",
         "1945",
         "1946",
         "1935",
         "1955"
       ],
       [
-        "In what year did this event occur: Moon Landing? [Var k8o7x]",
+        "In what year did this event occur: Moon Landing?",
         "1969",
         "1970",
         "1959",
         "1979"
       ],
       [
-        "In what year did this event occur: Moon Landing? [Var jtt04]",
+        "In what year did this event occur: Moon Landing?",
         "1969",
         "1970",
         "1959",
         "1979"
       ],
       [
-        "In what year did this event occur: WWI began? [Var fllj8]",
+        "In what year did this event occur: WWI began?",
         "1914",
         "1915",
         "1904",
         "1924"
       ],
       [
-        "In what year did this event occur: 9/11 attacks? [Var f8p27]",
+        "In what year did this event occur: 9/11 attacks?",
         "2001",
         "2002",
         "1991",
         "2011"
       ],
       [
-        "In what year did this event occur: WWII began? [Var pbfym]",
+        "In what year did this event occur: WWII began?",
         "1939",
         "1940",
         "1929",
         "1949"
       ],
       [
-        "In what year did this event occur: WWII began? [Var tqk1x]",
+        "In what year did this event occur: WWII began?",
         "1939",
         "1940",
         "1929",
         "1949"
       ],
       [
-        "In what year did this event occur: WWI began? [Var bx0du]",
+        "In what year did this event occur: WWI began?",
         "1914",
         "1915",
         "1904",
         "1924"
       ],
       [
-        "In what year did this event occur: US Declaration of Independence? [Var vmrtw]",
+        "In what year did this event occur: US Declaration of Independence?",
         "1776",
         "1777",
         "1766",
         "1786"
       ],
       [
-        "In what year did this event occur: WWII began? [Var qeeb2]",
+        "In what year did this event occur: WWII began?",
         "1939",
         "1940",
         "1929",
         "1949"
       ],
       [
-        "In what year did this event occur: 9/11 attacks? [Var yh0mk]",
+        "In what year did this event occur: 9/11 attacks?",
         "2001",
         "2002",
         "1991",
         "2011"
       ],
       [
-        "In what year did this event occur: WWII began? [Var 7m4y9]",
+        "In what year did this event occur: WWII began?",
         "1939",
         "1940",
         "1929",
         "1949"
       ],
       [
-        "In what year did this event occur: Battle of Hastings? [Var hp8w3]",
+        "In what year did this event occur: Battle of Hastings?",
         "1066",
         "1067",
         "1056",
         "1076"
       ],
       [
-        "In what year did this event occur: WWI began? [Var 04rle]",
+        "In what year did this event occur: WWI began?",
         "1914",
         "1915",
         "1904",
         "1924"
       ],
       [
-        "In what year did this event occur: Moon Landing? [Var 0nkve]",
+        "In what year did this event occur: Moon Landing?",
         "1969",
         "1970",
         "1959",
         "1979"
       ],
       [
-        "In what year did this event occur: COVID-19 pandemic? [Var f5qs1]",
+        "In what year did this event occur: COVID-19 pandemic?",
         "2020",
         "2021",
         "2010",
         "2030"
       ],
       [
-        "In what year did this event occur: US Declaration of Independence? [Var txcdw]",
+        "In what year did this event occur: US Declaration of Independence?",
         "1776",
         "1777",
         "1766",
         "1786"
       ],
       [
-        "In what year did this event occur: COVID-19 pandemic? [Var qpehf]",
+        "In what year did this event occur: COVID-19 pandemic?",
         "2020",
         "2021",
         "2010",
         "2030"
       ],
       [
-        "In what year did this event occur: 9/11 attacks? [Var uckis]",
+        "In what year did this event occur: 9/11 attacks?",
         "2001",
         "2002",
         "1991",
         "2011"
       ],
       [
-        "In what year did this event occur: Columbus sailed the ocean blue? [Var vvy5t]",
+        "In what year did this event occur: Columbus sailed the ocean blue?",
         "1492",
         "1493",
         "1482",
         "1502"
       ],
       [
-        "In what year did this event occur: Columbus sailed the ocean blue? [Var g3msz]",
+        "In what year did this event occur: Columbus sailed the ocean blue?",
         "1492",
         "1493",
         "1482",
         "1502"
       ],
       [
-        "In what year did this event occur: Moon Landing? [Var 01sxf]",
+        "In what year did this event occur: Moon Landing?",
         "1969",
         "1970",
         "1959",
         "1979"
       ],
       [
-        "In what year did this event occur: US Declaration of Independence? [Var r8dqm]",
+        "In what year did this event occur: US Declaration of Independence?",
         "1776",
         "1777",
         "1766",
         "1786"
       ],
       [
-        "In what year did this event occur: Columbus sailed the ocean blue? [Var p7nkf]",
+        "In what year did this event occur: Columbus sailed the ocean blue?",
         "1492",
         "1493",
         "1482",
         "1502"
       ],
       [
-        "In what year did this event occur: Fall of Berlin Wall? [Var vxza9]",
+        "In what year did this event occur: Fall of Berlin Wall?",
         "1989",
         "1990",
         "1979",
@@ -8689,280 +8689,280 @@ export const rawQuizData = {
         "Ryan Reynolds"
       ],
       [
-        "Which of these is a character/actor associated with Forrest Gump? [Var 6ozw2]",
+        "Which of these is a character/actor associated with Forrest Gump?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Godfather? [Var 9lya1]",
+        "Which of these is a character/actor associated with The Godfather?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Interstellar? [Var dihld]",
+        "Which of these is a character/actor associated with Interstellar?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Interstellar? [Var ch3px]",
+        "Which of these is a character/actor associated with Interstellar?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Inception? [Var om1vv]",
+        "Which of these is a character/actor associated with Inception?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Titanic? [Var 15dne]",
+        "Which of these is a character/actor associated with Titanic?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Lord of the Rings? [Var n8og2]",
+        "Which of these is a character/actor associated with The Lord of the Rings?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Godfather? [Var ch89o]",
+        "Which of these is a character/actor associated with The Godfather?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Dark Knight? [Var 8296n]",
+        "Which of these is a character/actor associated with The Dark Knight?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Inception? [Var 2ommc]",
+        "Which of these is a character/actor associated with Inception?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Matrix? [Var dtuej]",
+        "Which of these is a character/actor associated with The Matrix?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Dark Knight? [Var t95pn]",
+        "Which of these is a character/actor associated with The Dark Knight?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Dark Knight? [Var osx3z]",
+        "Which of these is a character/actor associated with The Dark Knight?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Titanic? [Var gp39d]",
+        "Which of these is a character/actor associated with Titanic?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Dark Knight? [Var wwdsn]",
+        "Which of these is a character/actor associated with The Dark Knight?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Dark Knight? [Var meh51]",
+        "Which of these is a character/actor associated with The Dark Knight?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Pulp Fiction? [Var d3x7i]",
+        "Which of these is a character/actor associated with Pulp Fiction?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Forrest Gump? [Var no3ns]",
+        "Which of these is a character/actor associated with Forrest Gump?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Lord of the Rings? [Var jldvg]",
+        "Which of these is a character/actor associated with The Lord of the Rings?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Forrest Gump? [Var a1f9z]",
+        "Which of these is a character/actor associated with Forrest Gump?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Godfather? [Var 6upaq]",
+        "Which of these is a character/actor associated with The Godfather?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Lord of the Rings? [Var c7m7p]",
+        "Which of these is a character/actor associated with The Lord of the Rings?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Matrix? [Var cjajp]",
+        "Which of these is a character/actor associated with The Matrix?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Godfather? [Var 9bhsj]",
+        "Which of these is a character/actor associated with The Godfather?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Titanic? [Var d7cj1]",
+        "Which of these is a character/actor associated with Titanic?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Pulp Fiction? [Var u556t]",
+        "Which of these is a character/actor associated with Pulp Fiction?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Titanic? [Var ts6du]",
+        "Which of these is a character/actor associated with Titanic?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Pulp Fiction? [Var kdnt6]",
+        "Which of these is a character/actor associated with Pulp Fiction?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Avatar? [Var xblxy]",
+        "Which of these is a character/actor associated with Avatar?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Dark Knight? [Var tzrtv]",
+        "Which of these is a character/actor associated with The Dark Knight?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Dark Knight? [Var 08mnn]",
+        "Which of these is a character/actor associated with The Dark Knight?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Avatar? [Var 6qouk]",
+        "Which of these is a character/actor associated with Avatar?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Avatar? [Var nc9og]",
+        "Which of these is a character/actor associated with Avatar?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Dark Knight? [Var 7v75l]",
+        "Which of these is a character/actor associated with The Dark Knight?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Lord of the Rings? [Var 1ax55]",
+        "Which of these is a character/actor associated with The Lord of the Rings?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Godfather? [Var m5p2o]",
+        "Which of these is a character/actor associated with The Godfather?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Godfather? [Var 5h764]",
+        "Which of these is a character/actor associated with The Godfather?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Dark Knight? [Var 5663u]",
+        "Which of these is a character/actor associated with The Dark Knight?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Forrest Gump? [Var y7f7f]",
+        "Which of these is a character/actor associated with Forrest Gump?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Avatar? [Var 49lu3]",
+        "Which of these is a character/actor associated with Avatar?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
@@ -9181,280 +9181,280 @@ export const rawQuizData = {
         "Gaspard Ulliel"
       ],
       [
-        "Which of these is a character/actor associated with The Matrix? [Var wavid]",
+        "Which of these is a character/actor associated with The Matrix?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Godfather? [Var aad62]",
+        "Which of these is a character/actor associated with The Godfather?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Matrix? [Var fk0ym]",
+        "Which of these is a character/actor associated with The Matrix?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Dark Knight? [Var ofnk9]",
+        "Which of these is a character/actor associated with The Dark Knight?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Avatar? [Var jfhsp]",
+        "Which of these is a character/actor associated with Avatar?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Matrix? [Var tfapt]",
+        "Which of these is a character/actor associated with The Matrix?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Matrix? [Var ppvz2]",
+        "Which of these is a character/actor associated with The Matrix?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Matrix? [Var pv1ms]",
+        "Which of these is a character/actor associated with The Matrix?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Forrest Gump? [Var w3bf9]",
+        "Which of these is a character/actor associated with Forrest Gump?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Titanic? [Var l76du]",
+        "Which of these is a character/actor associated with Titanic?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Avatar? [Var 4cxbj]",
+        "Which of these is a character/actor associated with Avatar?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Matrix? [Var pzqd6]",
+        "Which of these is a character/actor associated with The Matrix?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Pulp Fiction? [Var hrzgk]",
+        "Which of these is a character/actor associated with Pulp Fiction?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Lord of the Rings? [Var oneks]",
+        "Which of these is a character/actor associated with The Lord of the Rings?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Inception? [Var jfq4n]",
+        "Which of these is a character/actor associated with Inception?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Godfather? [Var badpf]",
+        "Which of these is a character/actor associated with The Godfather?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Pulp Fiction? [Var f3pw3]",
+        "Which of these is a character/actor associated with Pulp Fiction?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Titanic? [Var q8az9]",
+        "Which of these is a character/actor associated with Titanic?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Pulp Fiction? [Var ixm6n]",
+        "Which of these is a character/actor associated with Pulp Fiction?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Matrix? [Var qma7c]",
+        "Which of these is a character/actor associated with The Matrix?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Forrest Gump? [Var v9jny]",
+        "Which of these is a character/actor associated with Forrest Gump?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Avatar? [Var 80xt3]",
+        "Which of these is a character/actor associated with Avatar?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Pulp Fiction? [Var 7cqeo]",
+        "Which of these is a character/actor associated with Pulp Fiction?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Lord of the Rings? [Var 2wqro]",
+        "Which of these is a character/actor associated with The Lord of the Rings?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Inception? [Var 714gb]",
+        "Which of these is a character/actor associated with Inception?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Matrix? [Var jhi7w]",
+        "Which of these is a character/actor associated with The Matrix?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Titanic? [Var p3zm1]",
+        "Which of these is a character/actor associated with Titanic?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Matrix? [Var k7d2t]",
+        "Which of these is a character/actor associated with The Matrix?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Interstellar? [Var mmnih]",
+        "Which of these is a character/actor associated with Interstellar?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Pulp Fiction? [Var nja60]",
+        "Which of these is a character/actor associated with Pulp Fiction?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Matrix? [Var 4q4mt]",
+        "Which of these is a character/actor associated with The Matrix?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Dark Knight? [Var zbi6g]",
+        "Which of these is a character/actor associated with The Dark Knight?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Dark Knight? [Var lzvcw]",
+        "Which of these is a character/actor associated with The Dark Knight?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Avatar? [Var h1hb3]",
+        "Which of these is a character/actor associated with Avatar?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Matrix? [Var t65d5]",
+        "Which of these is a character/actor associated with The Matrix?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Avatar? [Var 3xaz5]",
+        "Which of these is a character/actor associated with Avatar?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Interstellar? [Var ry53u]",
+        "Which of these is a character/actor associated with Interstellar?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Dark Knight? [Var r25dn]",
+        "Which of these is a character/actor associated with The Dark Knight?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with Avatar? [Var dvgm0]",
+        "Which of these is a character/actor associated with Avatar?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
         "Support Actor 3"
       ],
       [
-        "Which of these is a character/actor associated with The Matrix? [Var x5dnx]",
+        "Which of these is a character/actor associated with The Matrix?",
         "Lead Actor",
         "Support Actor 1",
         "Support Actor 2",
@@ -9591,368 +9591,368 @@ export const rawQuizData = {
         "Mikel Obi"
       ],
       [
-        "How many players are typically on the field/court for one team in Swimming? [Var 9orut]",
-        "1",
-        "8",
-        "4",
-        "1"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Golf? [Var f0nym]",
-        "5",
-        "7",
-        "4",
-        "7"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Tennis? [Var u1yh9]",
+        "How many players are typically on the field/court for one team in Tennis?",
         "6",
         "9",
         "3",
         "5"
       ],
       [
-        "How many players are typically on the field/court for one team in Tennis? [Var hx0dp]",
+        "How many players are typically on the field/court for one team in Tennis?",
         "11",
         "9",
         "1",
         "3"
       ],
       [
-        "How many players are typically on the field/court for one team in Boxing? [Var 0k82h]",
+        "How many players are typically on the field/court for one team in Boxing?",
         "9",
         "1",
         "4",
         "11"
       ],
       [
-        "How many players are typically on the field/court for one team in Swimming? [Var euc02]",
+        "How many players are typically on the field/court for one team in Swimming?",
         "7",
         "10",
         "5",
         "1"
       ],
       [
-        "How many players are typically on the field/court for one team in Cricket? [Var afmct]",
+        "How many players are typically on the field/court for one team in Cricket?",
         "10",
         "3",
         "7",
         "1"
       ],
       [
-        "How many players are typically on the field/court for one team in Cricket? [Var zkfxf]",
+        "How many players are typically on the field/court for one team in Cricket?",
         "6",
         "1",
         "11",
         "9"
       ],
       [
-        "How many players are typically on the field/court for one team in Athletics? [Var 1j9rz]",
-        "9",
-        "1",
-        "2",
-        "9"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Rugby? [Var 5n8e7]",
+        "How many players are typically on the field/court for one team in Rugby?",
         "6",
         "7",
         "4",
         "9"
       ],
       [
-        "How many players are typically on the field/court for one team in Boxing? [Var dk2lu]",
-        "1",
-        "3",
-        "1",
-        "4"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Cricket? [Var rmtzo]",
+        "How many players are typically on the field/court for one team in Cricket?",
         "8",
         "3",
         "10",
         "7"
       ],
       [
-        "How many players are typically on the field/court for one team in Swimming? [Var cr2jj]",
+        "How many players are typically on the field/court for one team in Swimming?",
         "2",
         "8",
         "11",
         "3"
       ],
       [
-        "How many players are typically on the field/court for one team in Basketball? [Var sp8sj]",
+        "How many players are typically on the field/court for one team in Basketball?",
         "2",
         "4",
         "11",
         "3"
       ],
       [
-        "How many players are typically on the field/court for one team in Golf? [Var wa2c2]",
+        "How many players are typically on the field/court for one team in Golf?",
         "8",
         "2",
         "10",
         "4"
       ],
       [
-        "How many players are typically on the field/court for one team in Basketball? [Var x5vmc]",
+        "How many players are typically on the field/court for one team in Basketball?",
         "3",
         "6",
         "9",
         "2"
       ],
       [
-        "How many players are typically on the field/court for one team in Boxing? [Var gnd8r]",
+        "How many players are typically on the field/court for one team in Boxing?",
         "6",
         "9",
         "10",
         "11"
       ],
       [
-        "How many players are typically on the field/court for one team in Rugby? [Var n2is7]",
-        "1",
-        "1",
-        "6",
-        "9"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Tennis? [Var nk1ug]",
+        "How many players are typically on the field/court for one team in Tennis?",
         "10",
         "5",
         "9",
         "4"
       ],
       [
-        "How many players are typically on the field/court for one team in Swimming? [Var mvpsy]",
+        "How many players are typically on the field/court for one team in Swimming?",
         "3",
         "10",
         "8",
         "6"
       ],
       [
-        "How many players are typically on the field/court for one team in Basketball? [Var 07fqi]",
+        "How many players are typically on the field/court for one team in Basketball?",
         "1",
         "6",
         "9",
         "10"
       ],
       [
-        "How many players are typically on the field/court for one team in Athletics? [Var djsdo]",
+        "How many players are typically on the field/court for one team in Athletics?",
         "1",
         "2",
         "8",
         "7"
       ],
       [
-        "How many players are typically on the field/court for one team in Baseball? [Var 79ap2]",
-        "2",
-        "4",
-        "4",
-        "10"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Rugby? [Var crsaa]",
-        "9",
-        "4",
-        "5",
-        "9"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Cricket? [Var bld7f]",
-        "11",
-        "11",
-        "6",
-        "10"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Rugby? [Var rk3x2]",
+        "How many players are typically on the field/court for one team in Rugby?",
         "5",
         "10",
         "7",
         "1"
       ],
       [
-        "How many players are typically on the field/court for one team in Tennis? [Var ucree]",
+        "How many players are typically on the field/court for one team in Tennis?",
         "10",
         "6",
         "7",
         "8"
       ],
       [
-        "How many players are typically on the field/court for one team in Baseball? [Var c9tj6]",
-        "4",
-        "9",
-        "10",
-        "4"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Athletics? [Var 421fj]",
-        "4",
-        "3",
-        "3",
-        "5"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Basketball? [Var dxgjy]",
+        "How many players are typically on the field/court for one team in Basketball?",
         "11",
         "10",
         "7",
         "2"
       ],
       [
-        "How many players are typically on the field/court for one team in Football? [Var 1pf0r]",
+        "How many players are typically on the field/court for one team in Football?",
         "4",
         "1",
         "7",
         "5"
       ],
       [
-        "How many players are typically on the field/court for one team in Basketball? [Var itgix]",
+        "How many players are typically on the field/court for one team in Basketball?",
         "2",
         "11",
         "7",
         "4"
       ],
       [
-        "How many players are typically on the field/court for one team in Swimming? [Var lngmg]",
+        "How many players are typically on the field/court for one team in Swimming?",
         "2",
         "4",
         "5",
         "7"
       ],
       [
-        "How many players are typically on the field/court for one team in Baseball? [Var ns681]",
+        "How many players are typically on the field/court for one team in Baseball?",
         "8",
         "5",
         "4",
         "2"
       ],
       [
-        "How many players are typically on the field/court for one team in Boxing? [Var vtbjh]",
+        "How many players are typically on the field/court for one team in Boxing?",
         "8",
         "5",
         "4",
         "1"
       ],
       [
-        "How many players are typically on the field/court for one team in Golf? [Var udwib]",
-        "10",
-        "10",
-        "5",
-        "2"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Cricket? [Var 4ac7l]",
-        "9",
-        "4",
-        "4",
-        "8"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Athletics? [Var zn19b]",
+        "How many players are typically on the field/court for one team in Athletics?",
         "3",
         "9",
         "11",
         "4"
       ],
       [
-        "How many players are typically on the field/court for one team in Baseball? [Var gg6as]",
-        "9",
-        "5",
-        "9",
-        "4"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Football? [Var sjrga]",
-        "1",
-        "1",
-        "3",
-        "1"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Swimming? [Var jns7m]",
-        "6",
-        "3",
-        "10",
-        "6"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Athletics? [Var cgjk8]",
+        "How many players are typically on the field/court for one team in Athletics?",
         "7",
         "5",
         "8",
         "1"
       ],
       [
-        "How many players are typically on the field/court for one team in Athletics? [Var dezr9]",
-        "9",
-        "4",
-        "1",
-        "1"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Boxing? [Var jxked]",
-        "3",
-        "6",
-        "3",
-        "9"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Rugby? [Var p9nnf]",
+        "How many players are typically on the field/court for one team in Rugby?",
         "9",
         "1",
         "5",
         "2"
       ],
       [
-        "How many players are typically on the field/court for one team in Boxing? [Var fxvpj]",
-        "4",
-        "7",
-        "11",
-        "11"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Baseball? [Var 73jw0]",
+        "How many players are typically on the field/court for one team in Baseball?",
         "7",
         "2",
         "3",
         "4"
       ],
       [
-        "How many players are typically on the field/court for one team in Athletics? [Var 6bppj]",
-        "9",
-        "7",
-        "3",
-        "3"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Golf? [Var 422e9]",
+        "How many players are typically on the field/court for one team in Golf?",
         "4",
         "5",
         "10",
         "1"
       ],
       [
-        "How many players are typically on the field/court for one team in Boxing? [Var 56ry7]",
-        "8",
-        "7",
-        "7",
-        "5"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Football? [Var isz75]",
+        "How many players are typically on the field/court for one team in Football?",
         "8",
         "11",
         "5",
         "10"
       ],
       [
-        "How many players are typically on the field/court for one team in Football? [Var g72nn]",
-        "10",
-        "9",
-        "5",
-        "10"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ]
     ],
     "intermediate": [
@@ -10405,46 +10405,46 @@ export const rawQuizData = {
         "David Beckham"
       ],
       [
-        "How many players are typically on the field/court for one team in Basketball? [Var ogl2k]",
-        "3",
-        "2",
-        "3",
-        "7"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Baseball? [Var qi8eh]",
+        "How many players are typically on the field/court for one team in Baseball?",
         "1",
         "11",
         "2",
         "10"
       ],
       [
-        "How many players are typically on the field/court for one team in Baseball? [Var d4lj9]",
-        "10",
-        "10",
-        "10",
-        "8"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Boxing? [Var t6du1]",
-        "11",
-        "8",
-        "4",
-        "11"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Baseball? [Var 60uiy]",
+        "How many players are typically on the field/court for one team in Baseball?",
         "8",
         "5",
         "3",
         "9"
       ],
       [
-        "How many players are typically on the field/court for one team in Athletics? [Var oq6ir]",
-        "6",
-        "6",
-        "5",
-        "1"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ]
     ],
     "advanced": [
@@ -10568,371 +10568,371 @@ export const rawQuizData = {
         "Gerd Müller"
       ],
       [
-        "How many players are typically on the field/court for one team in Basketball? [Var n0zsf]",
-        "4",
-        "9",
-        "1",
-        "9"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Boxing? [Var yg5f3]",
+        "How many players are typically on the field/court for one team in Boxing?",
         "1",
         "2",
         "7",
         "9"
       ],
       [
-        "How many players are typically on the field/court for one team in Tennis? [Var w0d6r]",
-        "3",
-        "5",
-        "3",
-        "4"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Tennis? [Var trrwp]",
+        "How many players are typically on the field/court for one team in Tennis?",
         "1",
         "10",
         "5",
         "11"
       ],
       [
-        "How many players are typically on the field/court for one team in Rugby? [Var 9ay7p]",
-        "10",
-        "9",
-        "7",
-        "7"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Swimming? [Var zer47]",
+        "How many players are typically on the field/court for one team in Swimming?",
         "11",
         "7",
         "8",
         "2"
       ],
       [
-        "How many players are typically on the field/court for one team in Tennis? [Var 0r2v4]",
-        "1",
-        "1",
-        "6",
-        "3"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Cricket? [Var 1z8ir]",
+        "How many players are typically on the field/court for one team in Cricket?",
         "10",
         "2",
         "6",
         "8"
       ],
       [
-        "How many players are typically on the field/court for one team in Cricket? [Var 9cwzj]",
-        "2",
-        "1",
-        "2",
-        "2"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Cricket? [Var dr4jp]",
+        "How many players are typically on the field/court for one team in Cricket?",
         "7",
         "11",
         "6",
         "9"
       ],
       [
-        "How many players are typically on the field/court for one team in Athletics? [Var v09bj]",
-        "6",
-        "9",
-        "3",
-        "9"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Tennis? [Var 5a6of]",
-        "10",
-        "4",
-        "9",
-        "9"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Swimming? [Var 5k5hy]",
+        "How many players are typically on the field/court for one team in Swimming?",
         "5",
         "9",
         "10",
         "1"
       ],
       [
-        "How many players are typically on the field/court for one team in Football? [Var ap12t]",
+        "How many players are typically on the field/court for one team in Football?",
         "11",
         "1",
         "3",
         "5"
       ],
       [
-        "How many players are typically on the field/court for one team in Football? [Var x7eng]",
-        "10",
-        "5",
-        "10",
-        "4"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Rugby? [Var t7p33]",
-        "3",
-        "7",
-        "2",
-        "2"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Baseball? [Var c0zhv]",
-        "1",
-        "1",
-        "2",
-        "7"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Rugby? [Var 8skim]",
+        "How many players are typically on the field/court for one team in Rugby?",
         "10",
         "9",
         "3",
         "5"
       ],
       [
-        "How many players are typically on the field/court for one team in Basketball? [Var fa66a]",
+        "How many players are typically on the field/court for one team in Basketball?",
         "6",
         "3",
         "8",
         "9"
       ],
       [
-        "How many players are typically on the field/court for one team in Football? [Var b6ig3]",
+        "How many players are typically on the field/court for one team in Football?",
         "6",
         "4",
         "3",
         "7"
       ],
       [
-        "How many players are typically on the field/court for one team in Rugby? [Var 0vu05]",
+        "How many players are typically on the field/court for one team in Rugby?",
         "8",
         "11",
         "5",
         "4"
       ],
       [
-        "How many players are typically on the field/court for one team in Cricket? [Var 8ei06]",
-        "8",
-        "2",
-        "6",
-        "8"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Rugby? [Var ejqd4]",
+        "How many players are typically on the field/court for one team in Rugby?",
         "1",
         "5",
         "11",
         "6"
       ],
       [
-        "How many players are typically on the field/court for one team in Swimming? [Var 4sxha]",
+        "How many players are typically on the field/court for one team in Swimming?",
         "9",
         "5",
         "1",
         "7"
       ],
       [
-        "How many players are typically on the field/court for one team in Rugby? [Var hmd5c]",
-        "4",
-        "5",
-        "11",
-        "11"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Basketball? [Var 4tkrz]",
+        "How many players are typically on the field/court for one team in Basketball?",
         "10",
         "2",
         "6",
         "1"
       ],
       [
-        "How many players are typically on the field/court for one team in Golf? [Var fcwf9]",
-        "8",
-        "9",
-        "5",
-        "5"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Boxing? [Var ucgsu]",
-        "5",
-        "6",
-        "9",
-        "9"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Baseball? [Var eyg2m]",
-        "9",
-        "10",
-        "5",
-        "10"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Boxing? [Var kp16n]",
+        "How many players are typically on the field/court for one team in Boxing?",
         "9",
         "6",
         "11",
         "5"
       ],
       [
-        "How many players are typically on the field/court for one team in Basketball? [Var 1ae5t]",
-        "9",
-        "2",
-        "3",
-        "9"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Boxing? [Var hf6jj]",
+        "How many players are typically on the field/court for one team in Boxing?",
         "3",
         "6",
         "9",
         "4"
       ],
       [
-        "How many players are typically on the field/court for one team in Tennis? [Var ud6hp]",
+        "How many players are typically on the field/court for one team in Tennis?",
         "7",
         "3",
         "2",
         "8"
       ],
       [
-        "How many players are typically on the field/court for one team in Tennis? [Var v2d0y]",
-        "2",
-        "3",
-        "2",
-        "10"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Basketball? [Var rpkcv]",
+        "How many players are typically on the field/court for one team in Basketball?",
         "7",
         "6",
         "4",
         "2"
       ],
       [
-        "How many players are typically on the field/court for one team in Athletics? [Var vxb5q]",
-        "6",
-        "9",
-        "8",
-        "6"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Swimming? [Var ugy0w]",
-        "4",
-        "5",
-        "11",
-        "4"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Golf? [Var jtrfe]",
+        "How many players are typically on the field/court for one team in Golf?",
         "3",
         "9",
         "2",
         "11"
       ],
       [
-        "How many players are typically on the field/court for one team in Boxing? [Var bnj7b]",
+        "How many players are typically on the field/court for one team in Boxing?",
         "5",
         "9",
         "1",
         "2"
       ],
       [
-        "How many players are typically on the field/court for one team in Baseball? [Var b14rv]",
+        "How many players are typically on the field/court for one team in Baseball?",
         "11",
         "1",
         "8",
         "3"
       ],
       [
-        "How many players are typically on the field/court for one team in Basketball? [Var 5tx7a]",
-        "3",
-        "8",
-        "4",
-        "3"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Football? [Var 1ye90]",
+        "How many players are typically on the field/court for one team in Football?",
         "8",
         "1",
         "5",
         "10"
       ],
       [
-        "How many players are typically on the field/court for one team in Basketball? [Var wp28y]",
+        "How many players are typically on the field/court for one team in Basketball?",
         "8",
         "4",
         "7",
         "6"
       ],
       [
-        "How many players are typically on the field/court for one team in Athletics? [Var be46f]",
+        "How many players are typically on the field/court for one team in Athletics?",
         "8",
         "2",
         "5",
         "11"
       ],
       [
-        "How many players are typically on the field/court for one team in Swimming? [Var tbkh0]",
-        "5",
-        "10",
-        "3",
-        "10"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Football? [Var gbq29]",
-        "9",
-        "6",
-        "9",
-        "2"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Rugby? [Var 9e8mr]",
+        "How many players are typically on the field/court for one team in Rugby?",
         "8",
         "5",
         "2",
         "7"
       ],
       [
-        "How many players are typically on the field/court for one team in Swimming? [Var 5nhwh]",
-        "6",
-        "4",
-        "8",
-        "8"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Football? [Var 5mx8e]",
+        "How many players are typically on the field/court for one team in Football?",
         "3",
         "11",
         "6",
         "8"
       ],
       [
-        "How many players are typically on the field/court for one team in Baseball? [Var mn2sy]",
-        "11",
-        "3",
-        "7",
-        "7"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Athletics? [Var zw9tx]",
+        "How many players are typically on the field/court for one team in Athletics?",
         "2",
         "11",
         "9",
         "10"
       ],
       [
-        "How many players are typically on the field/court for one team in Baseball? [Var 5kqr0]",
-        "3",
-        "6",
-        "9",
-        "3"
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
       ],
       [
-        "How many players are typically on the field/court for one team in Tennis? [Var t066r]",
+        "How many players are typically on the field/court for one team in Tennis?",
         "10",
         "7",
         "11",
@@ -10985,448 +10985,448 @@ export const rawQuizData = {
         "Swiss"
       ],
       [
-        "How do you say 'Hello' in Chinese? [Var rhahr]",
+        "How do you say 'Hello' in Chinese?",
         "Ni hao",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Chinese? [Var lm53o]",
+        "How do you say 'Hello' in Chinese?",
         "Ni hao",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Dutch? [Var izw4e]",
+        "How do you say 'Hello' in Dutch?",
         "Hallo",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Romanian? [Var tq8v7]",
+        "How do you say 'Hello' in Romanian?",
         "Buna",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Romanian? [Var 032lx]",
+        "How do you say 'Hello' in Romanian?",
         "Buna",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Polish? [Var swwhq]",
+        "How do you say 'Hello' in Polish?",
         "Czesc",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Swahili? [Var ls3mi]",
+        "How do you say 'Hello' in Swahili?",
         "Jambo",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Arabic? [Var wnn0v]",
+        "How do you say 'Hello' in Arabic?",
         "Marhaba",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Spanish? [Var sm37j]",
+        "How do you say 'Hello' in Spanish?",
         "Hola",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Polish? [Var z4936]",
+        "How do you say 'Hello' in Polish?",
         "Czesc",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Polish? [Var 4bqto]",
+        "How do you say 'Hello' in Polish?",
         "Czesc",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Chinese? [Var wrpdq]",
+        "How do you say 'Hello' in Chinese?",
         "Ni hao",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Japanese? [Var bbmyn]",
+        "How do you say 'Hello' in Japanese?",
         "Konnichiwa",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in French? [Var kpaxl]",
+        "How do you say 'Hello' in French?",
         "Bonjour",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Chinese? [Var 98jr0]",
+        "How do you say 'Hello' in Chinese?",
         "Ni hao",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Korean? [Var 6eqiw]",
+        "How do you say 'Hello' in Korean?",
         "Annyeonghaseyo",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in French? [Var xf76i]",
+        "How do you say 'Hello' in French?",
         "Bonjour",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Swahili? [Var edtkb]",
+        "How do you say 'Hello' in Swahili?",
         "Jambo",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Italian? [Var zv61h]",
+        "How do you say 'Hello' in Italian?",
         "Ciao",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Chinese? [Var xhkj2]",
+        "How do you say 'Hello' in Chinese?",
         "Ni hao",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Chinese? [Var e4oqj]",
+        "How do you say 'Hello' in Chinese?",
         "Ni hao",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Dutch? [Var tv6it]",
+        "How do you say 'Hello' in Dutch?",
         "Hallo",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Turkish? [Var igbo7]",
+        "How do you say 'Hello' in Turkish?",
         "Merhaba",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in French? [Var yejc3]",
+        "How do you say 'Hello' in French?",
         "Bonjour",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Russian? [Var j2llg]",
+        "How do you say 'Hello' in Russian?",
         "Privet",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Swedish? [Var uwvwn]",
+        "How do you say 'Hello' in Swedish?",
         "Hejsan",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Czech? [Var f4ofm]",
+        "How do you say 'Hello' in Czech?",
         "Ahoj",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in French? [Var s3ieh]",
+        "How do you say 'Hello' in French?",
         "Bonjour",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Polish? [Var qbzzv]",
+        "How do you say 'Hello' in Polish?",
         "Czesc",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Korean? [Var o41kq]",
+        "How do you say 'Hello' in Korean?",
         "Annyeonghaseyo",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Dutch? [Var otiie]",
+        "How do you say 'Hello' in Dutch?",
         "Hallo",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Swedish? [Var bemcn]",
+        "How do you say 'Hello' in Swedish?",
         "Hejsan",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Russian? [Var gl4ui]",
+        "How do you say 'Hello' in Russian?",
         "Privet",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Vietnamese? [Var cicjl]",
+        "How do you say 'Hello' in Vietnamese?",
         "Xin chao",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Russian? [Var pdvqz]",
+        "How do you say 'Hello' in Russian?",
         "Privet",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Hindi? [Var i0f2a]",
+        "How do you say 'Hello' in Hindi?",
         "Namaste",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Italian? [Var 5umdz]",
+        "How do you say 'Hello' in Italian?",
         "Ciao",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in French? [Var kmia3]",
+        "How do you say 'Hello' in French?",
         "Bonjour",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in French? [Var hzpze]",
+        "How do you say 'Hello' in French?",
         "Bonjour",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Romanian? [Var owmf2]",
+        "How do you say 'Hello' in Romanian?",
         "Buna",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Korean? [Var razza]",
+        "How do you say 'Hello' in Korean?",
         "Annyeonghaseyo",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Dutch? [Var fg9xc]",
+        "How do you say 'Hello' in Dutch?",
         "Hallo",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Czech? [Var wdoq7]",
+        "How do you say 'Hello' in Czech?",
         "Ahoj",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Portuguese? [Var e1k04]",
+        "How do you say 'Hello' in Portuguese?",
         "Olá",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Hindi? [Var 3m3tc]",
+        "How do you say 'Hello' in Hindi?",
         "Namaste",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Korean? [Var w119b]",
+        "How do you say 'Hello' in Korean?",
         "Annyeonghaseyo",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Turkish? [Var dlklu]",
+        "How do you say 'Hello' in Turkish?",
         "Merhaba",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Swahili? [Var lseqa]",
+        "How do you say 'Hello' in Swahili?",
         "Jambo",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Italian? [Var 043hq]",
+        "How do you say 'Hello' in Italian?",
         "Ciao",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Portuguese? [Var gcchg]",
+        "How do you say 'Hello' in Portuguese?",
         "Olá",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in French? [Var cokjf]",
+        "How do you say 'Hello' in French?",
         "Bonjour",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Hindi? [Var 1uv8p]",
+        "How do you say 'Hello' in Hindi?",
         "Namaste",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Swahili? [Var d1sf2]",
+        "How do you say 'Hello' in Swahili?",
         "Jambo",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Greek? [Var 2beb8]",
+        "How do you say 'Hello' in Greek?",
         "Yassou",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Swedish? [Var dyh7m]",
+        "How do you say 'Hello' in Swedish?",
         "Hejsan",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Swahili? [Var q47e6]",
+        "How do you say 'Hello' in Swahili?",
         "Jambo",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Japanese? [Var 17yxu]",
+        "How do you say 'Hello' in Japanese?",
         "Konnichiwa",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Romanian? [Var 3p8fj]",
+        "How do you say 'Hello' in Romanian?",
         "Buna",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Swedish? [Var gsyce]",
+        "How do you say 'Hello' in Swedish?",
         "Hejsan",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Polish? [Var oa4ej]",
+        "How do you say 'Hello' in Polish?",
         "Czesc",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Greek? [Var atnce]",
+        "How do you say 'Hello' in Greek?",
         "Yassou",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Portuguese? [Var lat9u]",
+        "How do you say 'Hello' in Portuguese?",
         "Olá",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Greek? [Var mebh6]",
+        "How do you say 'Hello' in Greek?",
         "Yassou",
         "Goodbye",
         "Thank you",
         "Please"
       ],
       [
-        "How do you say 'Hello' in Turkish? [Var wq57h]",
+        "How do you say 'Hello' in Turkish?",
         "Merhaba",
         "Goodbye",
         "Thank you",
@@ -11470,455 +11470,455 @@ export const rawQuizData = {
         "Church"
       ],
       [
-        "Translate 'Welcome' to Vietnamese [Var h760p]",
+        "Translate 'Welcome' to Vietnamese",
         "Welcome in Vietnamese",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Korean [Var 6r7zr]",
+        "Translate 'Welcome' to Korean",
         "Welcome in Korean",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Arabic [Var uwape]",
+        "Translate 'Welcome' to Arabic",
         "Welcome in Arabic",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Polish [Var zujn4]",
+        "Translate 'Welcome' to Polish",
         "Welcome in Polish",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Korean [Var lh93a]",
+        "Translate 'Welcome' to Korean",
         "Welcome in Korean",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Greek [Var 898wc]",
+        "Translate 'Welcome' to Greek",
         "Welcome in Greek",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Chinese [Var lkdd8]",
+        "Translate 'Welcome' to Chinese",
         "Welcome in Chinese",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Portuguese [Var bcv18]",
+        "Translate 'Welcome' to Portuguese",
         "Welcome in Portuguese",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Japanese [Var 8j6f8]",
+        "Translate 'Welcome' to Japanese",
         "Welcome in Japanese",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Romanian [Var dggd9]",
+        "Translate 'Welcome' to Romanian",
         "Welcome in Romanian",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Polish [Var e9f0g]",
+        "Translate 'Welcome' to Polish",
         "Welcome in Polish",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Hindi [Var l8u2h]",
+        "Translate 'Welcome' to Hindi",
         "Welcome in Hindi",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Japanese [Var 9sise]",
+        "Translate 'Welcome' to Japanese",
         "Welcome in Japanese",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to German [Var 9t1s3]",
+        "Translate 'Welcome' to German",
         "Welcome in German",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Swedish [Var 79ojn]",
+        "Translate 'Welcome' to Swedish",
         "Welcome in Swedish",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Greek [Var 7x1fe]",
+        "Translate 'Welcome' to Greek",
         "Welcome in Greek",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Portuguese [Var ieyts]",
+        "Translate 'Welcome' to Portuguese",
         "Welcome in Portuguese",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Japanese [Var llae1]",
+        "Translate 'Welcome' to Japanese",
         "Welcome in Japanese",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Swedish [Var 2e8zy]",
+        "Translate 'Welcome' to Swedish",
         "Welcome in Swedish",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Arabic [Var gzik2]",
+        "Translate 'Welcome' to Arabic",
         "Welcome in Arabic",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Russian [Var 7pg3y]",
+        "Translate 'Welcome' to Russian",
         "Welcome in Russian",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Czech [Var v53dc]",
+        "Translate 'Welcome' to Czech",
         "Welcome in Czech",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Russian [Var 4r5j4]",
+        "Translate 'Welcome' to Russian",
         "Welcome in Russian",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to French [Var rv7et]",
+        "Translate 'Welcome' to French",
         "Welcome in French",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Vietnamese [Var 0hcfm]",
+        "Translate 'Welcome' to Vietnamese",
         "Welcome in Vietnamese",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Greek [Var w34jh]",
+        "Translate 'Welcome' to Greek",
         "Welcome in Greek",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Korean [Var loqtg]",
+        "Translate 'Welcome' to Korean",
         "Welcome in Korean",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Turkish [Var s1nzn]",
+        "Translate 'Welcome' to Turkish",
         "Welcome in Turkish",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Italian [Var 0miyb]",
+        "Translate 'Welcome' to Italian",
         "Welcome in Italian",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Turkish [Var cc1j8]",
+        "Translate 'Welcome' to Turkish",
         "Welcome in Turkish",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Dutch [Var dzus7]",
+        "Translate 'Welcome' to Dutch",
         "Welcome in Dutch",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Polish [Var oa1r8]",
+        "Translate 'Welcome' to Polish",
         "Welcome in Polish",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Vietnamese [Var rp57p]",
+        "Translate 'Welcome' to Vietnamese",
         "Welcome in Vietnamese",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Vietnamese [Var 2nyz6]",
+        "Translate 'Welcome' to Vietnamese",
         "Welcome in Vietnamese",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Arabic [Var abatz]",
+        "Translate 'Welcome' to Arabic",
         "Welcome in Arabic",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Czech [Var 0kmr3]",
+        "Translate 'Welcome' to Czech",
         "Welcome in Czech",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to French [Var u2uaz]",
+        "Translate 'Welcome' to French",
         "Welcome in French",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Swahili [Var imtqc]",
+        "Translate 'Welcome' to Swahili",
         "Welcome in Swahili",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Portuguese [Var uif69]",
+        "Translate 'Welcome' to Portuguese",
         "Welcome in Portuguese",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to German [Var lq5rl]",
+        "Translate 'Welcome' to German",
         "Welcome in German",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Korean [Var 8qqp8]",
+        "Translate 'Welcome' to Korean",
         "Welcome in Korean",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to French [Var vgtau]",
+        "Translate 'Welcome' to French",
         "Welcome in French",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Russian [Var 42nz3]",
+        "Translate 'Welcome' to Russian",
         "Welcome in Russian",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to French [Var ef0jy]",
+        "Translate 'Welcome' to French",
         "Welcome in French",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Swedish [Var sot4l]",
+        "Translate 'Welcome' to Swedish",
         "Welcome in Swedish",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Swahili [Var nj2oz]",
+        "Translate 'Welcome' to Swahili",
         "Welcome in Swahili",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Portuguese [Var xajw8]",
+        "Translate 'Welcome' to Portuguese",
         "Welcome in Portuguese",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Swahili [Var pr1yg]",
+        "Translate 'Welcome' to Swahili",
         "Welcome in Swahili",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Portuguese [Var vtn0a]",
+        "Translate 'Welcome' to Portuguese",
         "Welcome in Portuguese",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Dutch [Var kar8x]",
+        "Translate 'Welcome' to Dutch",
         "Welcome in Dutch",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Portuguese [Var l4l17]",
+        "Translate 'Welcome' to Portuguese",
         "Welcome in Portuguese",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Korean [Var fpn7x]",
+        "Translate 'Welcome' to Korean",
         "Welcome in Korean",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Russian [Var e8wbd]",
+        "Translate 'Welcome' to Russian",
         "Welcome in Russian",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Czech [Var mnwd9]",
+        "Translate 'Welcome' to Czech",
         "Welcome in Czech",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Swahili [Var 5pwbz]",
+        "Translate 'Welcome' to Swahili",
         "Welcome in Swahili",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Hindi [Var dc7xx]",
+        "Translate 'Welcome' to Hindi",
         "Welcome in Hindi",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Spanish [Var ikmmx]",
+        "Translate 'Welcome' to Spanish",
         "Welcome in Spanish",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Arabic [Var gc9ut]",
+        "Translate 'Welcome' to Arabic",
         "Welcome in Arabic",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Russian [Var c1pa1]",
+        "Translate 'Welcome' to Russian",
         "Welcome in Russian",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Italian [Var e75ul]",
+        "Translate 'Welcome' to Italian",
         "Welcome in Italian",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Korean [Var wv550]",
+        "Translate 'Welcome' to Korean",
         "Welcome in Korean",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Japanese [Var vjnpv]",
+        "Translate 'Welcome' to Japanese",
         "Welcome in Japanese",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Romanian [Var rk446]",
+        "Translate 'Welcome' to Romanian",
         "Welcome in Romanian",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Czech [Var 3278b]",
+        "Translate 'Welcome' to Czech",
         "Welcome in Czech",
         "Hello",
         "Goodbye",
         "Yes"
       ],
       [
-        "Translate 'Welcome' to Spanish [Var xmw1d]",
+        "Translate 'Welcome' to Spanish",
         "Welcome in Spanish",
         "Hello",
         "Goodbye",
@@ -11962,455 +11962,455 @@ export const rawQuizData = {
         "Hebrew"
       ],
       [
-        "What language family does Arabic belong to? [Var rd0qw]",
+        "What language family does Arabic belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Spanish belong to? [Var aswpl]",
+        "What language family does Spanish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Spanish belong to? [Var 33992]",
+        "What language family does Spanish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Romanian belong to? [Var urjts]",
+        "What language family does Romanian belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Korean belong to? [Var 2r0tw]",
+        "What language family does Korean belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Spanish belong to? [Var eyk7x]",
+        "What language family does Spanish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Greek belong to? [Var r60ov]",
+        "What language family does Greek belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Chinese belong to? [Var hb4ut]",
+        "What language family does Chinese belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Dutch belong to? [Var kj2ze]",
+        "What language family does Dutch belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Swedish belong to? [Var n2vqw]",
+        "What language family does Swedish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Vietnamese belong to? [Var tutq9]",
+        "What language family does Vietnamese belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Swedish belong to? [Var pyhdo]",
+        "What language family does Swedish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Greek belong to? [Var m783e]",
+        "What language family does Greek belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Swedish belong to? [Var u1pco]",
+        "What language family does Swedish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Japanese belong to? [Var 6fpq8]",
+        "What language family does Japanese belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Portuguese belong to? [Var waxsh]",
+        "What language family does Portuguese belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Romanian belong to? [Var 64xze]",
+        "What language family does Romanian belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Hindi belong to? [Var ru3ga]",
+        "What language family does Hindi belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Romanian belong to? [Var d6ggm]",
+        "What language family does Romanian belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Greek belong to? [Var y58ja]",
+        "What language family does Greek belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Turkish belong to? [Var u39bc]",
+        "What language family does Turkish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Italian belong to? [Var 4t529]",
+        "What language family does Italian belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does French belong to? [Var r1wac]",
+        "What language family does French belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Swahili belong to? [Var mzn15]",
+        "What language family does Swahili belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Polish belong to? [Var 6sf25]",
+        "What language family does Polish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Swedish belong to? [Var iv1n9]",
+        "What language family does Swedish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does French belong to? [Var pnqrw]",
+        "What language family does French belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Polish belong to? [Var 0mh5y]",
+        "What language family does Polish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Swedish belong to? [Var cpnu3]",
+        "What language family does Swedish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Swedish belong to? [Var v8h1q]",
+        "What language family does Swedish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Russian belong to? [Var 6wfz3]",
+        "What language family does Russian belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Chinese belong to? [Var qbouu]",
+        "What language family does Chinese belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Swedish belong to? [Var t0dgp]",
+        "What language family does Swedish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Dutch belong to? [Var c1sj4]",
+        "What language family does Dutch belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Japanese belong to? [Var 52ub3]",
+        "What language family does Japanese belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Romanian belong to? [Var h9w5r]",
+        "What language family does Romanian belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does German belong to? [Var oxwiv]",
+        "What language family does German belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does French belong to? [Var 293av]",
+        "What language family does French belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Polish belong to? [Var bkgin]",
+        "What language family does Polish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Polish belong to? [Var nqagd]",
+        "What language family does Polish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Russian belong to? [Var ks3yf]",
+        "What language family does Russian belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Russian belong to? [Var nnd7k]",
+        "What language family does Russian belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Czech belong to? [Var 7p006]",
+        "What language family does Czech belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Dutch belong to? [Var cw4de]",
+        "What language family does Dutch belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Swedish belong to? [Var vttsd]",
+        "What language family does Swedish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Greek belong to? [Var v4j13]",
+        "What language family does Greek belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Portuguese belong to? [Var dxwhq]",
+        "What language family does Portuguese belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Romanian belong to? [Var zzxve]",
+        "What language family does Romanian belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Russian belong to? [Var 29fdy]",
+        "What language family does Russian belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does French belong to? [Var 9el9s]",
+        "What language family does French belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Polish belong to? [Var b2pcr]",
+        "What language family does Polish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Vietnamese belong to? [Var fjor7]",
+        "What language family does Vietnamese belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Vietnamese belong to? [Var nq4oz]",
+        "What language family does Vietnamese belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Korean belong to? [Var pfa2z]",
+        "What language family does Korean belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Arabic belong to? [Var vhdsp]",
+        "What language family does Arabic belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Portuguese belong to? [Var sklb5]",
+        "What language family does Portuguese belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Greek belong to? [Var 4671k]",
+        "What language family does Greek belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Chinese belong to? [Var mmabg]",
+        "What language family does Chinese belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Spanish belong to? [Var bksrm]",
+        "What language family does Spanish belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Arabic belong to? [Var czip9]",
+        "What language family does Arabic belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Hindi belong to? [Var iqnu8]",
+        "What language family does Hindi belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does German belong to? [Var nl4kf]",
+        "What language family does German belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Portuguese belong to? [Var nvo08]",
+        "What language family does Portuguese belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Arabic belong to? [Var 7n1ee]",
+        "What language family does Arabic belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",
         "Wrong Family 3"
       ],
       [
-        "What language family does Dutch belong to? [Var pm9nj]",
+        "What language family does Dutch belong to?",
         "Correct Family",
         "Wrong Family 1",
         "Wrong Family 2",

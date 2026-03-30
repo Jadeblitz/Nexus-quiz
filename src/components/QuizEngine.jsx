@@ -8,7 +8,7 @@ export default function QuizEngine() {
     isTimeAttack, timeLeft,
     streak, showStreakBonus,
     score, questions, currentIndex, isChecking, selectedAnswerIndex, handleAnswer, handleShareWrapper,
-    sessionXp, recentXpChange, showXpChange, lastPassesNeeded, selectedSubject
+    sessionXp, recentXpChange, showXpChange, lastPassesNeeded, selectedSubject, selectedDifficulty
   } = useGame();
 
   const [floatXp, setFloatXp] = React.useState(null);
@@ -28,10 +28,10 @@ export default function QuizEngine() {
     let xpChange = 0;
     if (isCorrect) {
        xpChange = isTimeAttack ? baseGain * 2 : baseGain;
-       setFloatXp({ val: `+${xpChange} XP`, color: 'text-emerald-400' });
+       setFloatXp({ val: `+${xpChange} XP`, color: selectedSubject?.id === 'lore' ? 'text-[#FBBF24]' : 'text-emerald-400' });
     } else if (selectedDifficulty?.id === 'advanced') {
        xpChange = -Math.floor(baseGain / 2);
-       setFloatXp({ val: `${xpChange} XP`, color: 'text-rose-500' });
+       setFloatXp({ val: `${xpChange} XP`, color: selectedSubject?.id === 'lore' ? 'text-[#6A0DAD]' : 'text-rose-500' });
     }
 
     if (xpChange !== 0 || isCorrect) {
@@ -78,7 +78,7 @@ export default function QuizEngine() {
 
           <h2 className="text-2xl font-bold mb-10 text-center leading-snug">{questions[currentIndex]?.text}</h2>
 
-          <div className="grid gap-3">
+          <div className="grid gap-3 relative z-20">
             {questions[currentIndex]?.options.map((opt, i) => (
               <button key={i} disabled={isChecking} onClick={() => localHandleAnswer(i, opt.isCorrect)}
                 className={`p-5 rounded-2xl border text-left transition-all font-medium ${isChecking ? (opt.isCorrect ? 'bg-emerald-500/20 border-emerald-500' : i === selectedAnswerIndex ? 'bg-rose-500/20 border-rose-500' : 'opacity-20') : 'bg-slate-900 border-slate-800'}`}>
