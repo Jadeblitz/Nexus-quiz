@@ -59,19 +59,45 @@ export default function HubMenu() {
            <button onClick={() => setGameState('subject_select')} className="text-slate-500 flex items-center mb-4"><ChevronLeft size={16}/> Back</button>
            <h2 className="text-2xl font-black mb-6 text-center">{selectedSubject?.title}</h2>
            {DIFFICULTIES.map(diff => {
-             const passesCount = stats.passes?.[`${selectedSubject?.id}_${diff.id}`] || 0;
-             const prevDiffId = diff.id === 'intermediate' ? 'foundational' : (diff.id === 'advanced' ? 'intermediate' : null);
-             const isLocked = prevDiffId && (stats.passes?.[`${selectedSubject?.id}_${prevDiffId}`] || 0) < 5;
+             let disabled = false;
+             let passesNeeded = 0;
+             const subjPasses = stats.passes?.[selectedSubject?.id] || {};
+
+             if (diff.id === 'intermediate') {
+                const foundPasses = subjPasses['foundational'] || 0;
+                if (foundPasses < 5) {
+                   disabled = true;
+                   passesNeeded = 5 - foundPasses;
+                }
+             } else if (diff.id === 'advanced') {
+                const interPasses = subjPasses['intermediate'] || 0;
+                if (interPasses < 5) {
+                   disabled = true;
+                   passesNeeded = 5 - interPasses;
+                }
+             }
+
              return (
-               <button key={diff.id} onClick={() => {setSelectedDifficulty(diff); setGameState('mode_select')}} disabled={isLocked}
-                 className={`w-full p-6 bg-slate-900 border ${diff.border} rounded-2xl flex items-center justify-between ${isLocked ? 'opacity-50 cursor-not-allowed grayscale' : ''}`}>
-                 <div className="flex flex-col text-left">
+               <button
+                 key={diff.id}
+                 onClick={() => {
+                   if (!disabled) {
+                     setSelectedDifficulty(diff);
+                     setGameState('mode_select');
+                   }
+                 }}
+                 disabled={disabled}
+                 className={`w-full p-6 bg-slate-900 border ${diff.border} rounded-2xl flex items-center justify-between transition-all ${disabled ? 'opacity-50 cursor-not-allowed grayscale' : 'active:scale-95'}`}
+               >
+                 <div className="flex flex-col items-start">
                    <span className={`text-xl font-bold ${diff.color}`}>{diff.title}</span>
-                   {!isLocked && diff.id !== 'advanced' && (
-                     <span className="text-xs text-slate-500 mt-1">Passes: {passesCount} / 5</span>
+                   {disabled && (
+                     <span className="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">
+                       {passesNeeded} Passes Needed
+                     </span>
                    )}
                  </div>
-                 {isLocked ? <Lock size={20} className="text-slate-600" /> : <ArrowRight size={20} className="text-slate-700" />}
+                 {!disabled && <ArrowRight size={20} className="text-slate-700" />}
                </button>
              );
            })}

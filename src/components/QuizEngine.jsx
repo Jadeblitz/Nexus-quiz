@@ -8,7 +8,7 @@ export default function QuizEngine() {
     isTimeAttack, timeLeft,
     streak, showStreakBonus,
     score, questions, currentIndex, isChecking, selectedAnswerIndex, handleAnswer, handleShareWrapper,
-    sessionXp, lastPassesNeeded, selectedSubject, selectedDifficulty
+    sessionXp, recentXpChange, showXpChange, lastPassesNeeded, selectedSubject
   } = useGame();
 
   const [floatXp, setFloatXp] = React.useState(null);
@@ -52,6 +52,16 @@ export default function QuizEngine() {
           {floatXp && (
              <div className={`absolute top-[-40px] right-0 ${floatXp.color} font-black text-xl animate-out fade-out slide-out-to-top-4 duration-1000 z-10`}>
                {floatXp.val}
+             </div>
+          )}
+
+          {showXpChange && (
+             <div key={currentIndex} className={`absolute top-[-20px] right-0 font-black text-xl animate-in fade-in slide-in-from-bottom-2 duration-300 z-10 ${
+                recentXpChange >= 0
+                  ? (selectedSubject?.id === 'lore' ? 'text-[#FBBF24]' : 'text-emerald-400')
+                  : (selectedSubject?.id === 'lore' ? 'text-[#6A0DAD]' : 'text-rose-500')
+             }`}>
+               {recentXpChange >= 0 ? '+' : ''}{recentXpChange} XP
              </div>
           )}
 
