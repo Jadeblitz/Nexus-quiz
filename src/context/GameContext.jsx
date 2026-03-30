@@ -60,6 +60,9 @@ export const GameProvider = ({ children }) => {
   const [sessionXp, setSessionXp] = useState(0);
   const [lastPassesNeeded, setLastPassesNeeded] = useState(0);
 
+  const [recentXpChange, setRecentXpChange] = useState(0);
+  const [showXpChange, setShowXpChange] = useState(false);
+
   const [showRankUp, setShowRankUp] = useState(false);
   const [newRankInfo, setNewRankInfo] = useState({});
 
@@ -184,7 +187,16 @@ export const GameProvider = ({ children }) => {
     setCurrentIndex(0);
     setScore(0);
     setSessionXp(0);
+    setShowXpChange(false);
     setGameState('playing');
+  };
+
+  const updateLocalXP = (xpChange) => {
+    setStats(prevStats => {
+      let newXp = prevStats.totalXp + xpChange;
+      if (newXp < 0) newXp = 0;
+      return { ...prevStats, totalXp: newXp };
+    });
   };
 
   const handleAnswer = async (index, isCorrect) => {
@@ -238,7 +250,13 @@ export const GameProvider = ({ children }) => {
     const updatedSessionXp = sessionXp + xpEarnedThisQuestion;
     setSessionXp(updatedSessionXp);
 
+    updateLocalXP(xpEarnedThisQuestion);
+
+    setRecentXpChange(xpEarnedThisQuestion);
+    setShowXpChange(true);
+
     setTimeout(() => {
+      setShowXpChange(false);
       if (currentIndex < questions.length - 1) {
         setCurrentIndex(c => c + 1);
         setSelectedAnswerIndex(null);
@@ -272,7 +290,11 @@ export const GameProvider = ({ children }) => {
   const finishQuiz = (finalScore, finalSessionXp) => {
     let finalXpGain = isTimeAttack ? finalSessionXp * 2 : finalSessionXp;
 
-    const oldXp = stats.totalXp;
+    // Because updateLocalXP added sessionXp iteratively to totalXp during gameplay,
+    // totalXp is currently (oldTotalXp + finalSessionXp).
+    // We want the final totalXp to be (oldTotalXp + finalXpGain).
+    // So we subtract finalSessionXp from stats.totalXp, then add finalXpGain.
+    const oldXp = stats.totalXp - finalSessionXp;
     let newXp = oldXp + finalXpGain;
     if (newXp < 0) newXp = 0;
 
@@ -288,22 +310,29 @@ export const GameProvider = ({ children }) => {
 
     const passThreshold = isTimeAttack ? 14 : 7;
     const isPass = finalScore >= passThreshold;
-    const passKey = `${selectedSubject?.id}_${selectedDifficulty?.id}`;
-    const newPasses = { ...(stats.passes || {}) };
 
-    let passesNeededMsg = 0;
-    if (isPass) {
-      newPasses[passKey] = (newPasses[passKey] || 0) + 1;
-    }
+    const newPasses = JSON.parse(JSON.stringify(stats.passes || {}));
+    const subId = selectedSubject?.id;
+    const diffId = selectedDifficulty?.id;
 
-    if (selectedDifficulty?.id === 'foundational') {
-       const hasPasses = newPasses[passKey] || 0;
-       passesNeededMsg = Math.max(0, 5 - hasPasses);
-    } else if (selectedDifficulty?.id === 'intermediate') {
-       const hasPasses = newPasses[passKey] || 0;
-       passesNeededMsg = Math.max(0, 5 - hasPasses);
+    if (subId) {
+      if (!newPasses[subId]) {
+        newPasses[subId] = {};
+      }
+
+      let passesNeededMsg = 0;
+      if (isPass) {
+        newPasses[subId][diffId] = (newPasses[subId][diffId] || 0) + 1;
+      }
+
+      if (diffId === 'foundational' || diffId === 'intermediate') {
+         const hasPasses = newPasses[subId][diffId] || 0;
+         passesNeededMsg = Math.max(0, 5 - hasPasses);
+      }
+      setLastPassesNeeded(passesNeededMsg);
+    } else {
+      setLastPassesNeeded(0);
     }
-    setLastPassesNeeded(passesNeededMsg);
 
     const newStats = { ...stats, totalXp: newXp, completed: stats.completed + 1, passes: newPasses };
     setStats(newStats);
@@ -339,6 +368,8 @@ export const GameProvider = ({ children }) => {
       showStreakBonus, setShowStreakBonus,
       score, setScore,
       sessionXp, setSessionXp,
+      recentXpChange, setRecentXpChange,
+      showXpChange, setShowXpChange,
       lastPassesNeeded, setLastPassesNeeded,
       settings, setSettings,
       showRankUp, setShowRankUp,

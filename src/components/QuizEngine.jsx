@@ -8,7 +8,7 @@ export default function QuizEngine() {
     isTimeAttack, timeLeft,
     streak, showStreakBonus,
     score, questions, currentIndex, isChecking, selectedAnswerIndex, handleAnswer, handleShareWrapper,
-    sessionXp, lastPassesNeeded, selectedSubject
+    sessionXp, recentXpChange, showXpChange, lastPassesNeeded, selectedSubject
   } = useGame();
 
   return (
@@ -16,8 +16,18 @@ export default function QuizEngine() {
       {gameState === 'playing' && (
         <div className="w-full max-w-xl relative">
           {showStreakBonus && (
-             <div className="absolute top-[-40px] left-1/2 transform -translate-x-1/2 text-orange-400 font-black flex items-center bg-orange-500/20 px-4 py-2 rounded-full border border-orange-500/50 animate-bounce">
+             <div className="absolute top-[-40px] left-1/2 transform -translate-x-1/2 text-orange-400 font-black flex items-center bg-orange-500/20 px-4 py-2 rounded-full border border-orange-500/50 animate-bounce z-10">
                <Flame className="mr-2" size={20}/> +50 XP STREAK!
+             </div>
+          )}
+
+          {showXpChange && (
+             <div key={currentIndex} className={`absolute top-[-20px] right-0 font-black text-xl animate-in fade-in slide-in-from-bottom-2 duration-300 z-10 ${
+                recentXpChange >= 0
+                  ? (selectedSubject?.id === 'lore' ? 'text-[#FBBF24]' : 'text-emerald-400')
+                  : (selectedSubject?.id === 'lore' ? 'text-[#6A0DAD]' : 'text-rose-500')
+             }`}>
+               {recentXpChange >= 0 ? '+' : ''}{recentXpChange} XP
              </div>
           )}
 
