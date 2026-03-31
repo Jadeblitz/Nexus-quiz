@@ -1487,7 +1487,7 @@ export const rawQuizData = {
         "THE INFINITY STUDIOS™",
         "Nexus Graphics",
         "Ord-Gen",
-        "Crimson Archives" 
+        "Crimson Archives"
       ]
     ]
   },
@@ -4181,6 +4181,34 @@ export const rawQuizData = {
         "Hexagon",
         "Heptagon",
         "Octagon"
+      ],
+      [
+        "In the Ideal Gas Law equation, PV = nRT, what does the variable 'n' represent?",
+        "Number of Moles",
+        "Newton",
+        "Normal Pressure",
+        "Net Heat"
+      ],
+      [
+        "Which branch of engineering deals with the design and construction of bridges and dams?",
+        "Civil",
+        "Mechanical",
+        "Structural",
+        "Mechatronics"
+      ],
+      [
+        "Which scale is used by Mining Engineers to measure the scratch resistance of minerals?",
+        "Mohs",
+        "Richter",
+        "Kelvin",
+        "Pascal"
+      ],
+      [
+        "What is the SI unit of Force?",
+        "Newton",
+        "Joule",
+        "Watt",
+        "Pascal"
       ]
     ],
     "intermediate": [
@@ -4883,6 +4911,27 @@ export const rawQuizData = {
         "45",
         "43",
         "46"
+      ],
+      [
+        "Which dimensionless number predicts the transition from laminar to turbulent flow?",
+        "Reynolds",
+        "Nusselt",
+        "Prandtl",
+        "Froude"
+      ],
+      [
+        "In Software Engineering, what is the \"Big O\" time complexity of Binary Search on a sorted array?",
+        "O(\\log n)",
+        "O(n)",
+        "O(n^2)",
+        "O(1)"
+      ],
+      [
+        "What is the term for the ratio of stress to strain in the elastic region of a material?",
+        "Young's Modulus",
+        "Poisson's Ratio",
+        "Yield Point",
+        "Ductility"
       ]
     ],
     "advanced": [
@@ -5585,6 +5634,27 @@ export const rawQuizData = {
         "28",
         "26",
         "29"
+      ],
+      [
+        "In Chemical Engineering, what is an \"Isothermal\" process?",
+        "Constant temperature",
+        "No heat transfer",
+        "Constant pressure",
+        "Constant volume"
+      ],
+      [
+        "In Process Economics, what is the \"Payback Period\"?",
+        "Time to recover initial cost",
+        "Total interest paid",
+        "Annual profit margin",
+        "Tax duration"
+      ],
+      [
+        "Which electrical component is designed to store energy in a magnetic field?",
+        "Inductor",
+        "Capacitor",
+        "Resistor",
+        "Diode"
       ]
     ]
   },
@@ -10232,9 +10302,8 @@ export const rawQuizData = {
       [
         "How many players are typically on the field/court for one team in Baseball?",
         "1",
-        "11",
         "2",
-        "10"
+        "6"
       ],
       [
         "How many players are typically on the field/court for one team in Baseball?",

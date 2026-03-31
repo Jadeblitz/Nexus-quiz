@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Brain, Book, Settings, LogOut, Zap } from 'lucide-react';
+import { Brain, Book, Settings, LogOut, Zap, Cloud, Loader2 } from 'lucide-react';
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { App as CapacitorApp } from '@capacitor/app';
 
-import { GameProvider, useGame } from './src/context/GameContext.jsx';
+import { GameProvider, useGame, getRank } from './src/context/GameContext.jsx';
 import LoginScreen from './src/components/LoginScreen.jsx';
 import HubMenu from './src/components/HubMenu.jsx';
 import QuizEngine from './src/components/QuizEngine.jsx';
@@ -26,11 +26,15 @@ function AppContent() {
     isLoading, setIsLoading,
     settings, setSettings,
     showRankUp, newRankInfo,
+    manualSyncToCloud,
     VAULT_CONSTANTS
   } = useGame();
 
   const [showSettings, setShowSettings] = useState(false);
   const [showVault, setShowVault] = useState(false);
+
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncMessage, setSyncMessage] = useState('');
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,17 +45,19 @@ function AppContent() {
   if (bgMusic.current) bgMusic.current.loop = true;
 
   const NEXUS_STATS_KEY = 'nexus_stats';
+  const GUEST_STATS_KEY = 'guest_nexus_stats';
   const NEXUS_SETTINGS_KEY = 'nexus_settings';
 
   useEffect(() => {
     try {
-      const s1 = localStorage.getItem(NEXUS_STATS_KEY);
+      const s1 = localStorage.getItem(NEXUS_STATS_KEY) || localStorage.getItem(GUEST_STATS_KEY);
       const s2 = localStorage.getItem(NEXUS_SETTINGS_KEY);
       if (s1) setStats(JSON.parse(s1));
       if (s2) setSettings(JSON.parse(s2));
     } catch (e) {
       console.log("Corrupted save data detected. Resetting.");
       localStorage.removeItem(NEXUS_STATS_KEY);
+      localStorage.removeItem(GUEST_STATS_KEY);
       localStorage.removeItem(NEXUS_SETTINGS_KEY);
       console.error("Error loading saved data", e);
     }
@@ -118,6 +124,9 @@ function AppContent() {
   const handleLogout = async () => {
     try {
       await FirebaseAuthentication.signOut();
+      setStats({ totalXp: 0, completed: 0, passes: {} });
+      localStorage.removeItem(NEXUS_STATS_KEY);
+      localStorage.removeItem(GUEST_STATS_KEY);
       setUser(null);
       setGameState('login');
     } catch (error) {
@@ -161,6 +170,37 @@ function AppContent() {
             ))}
 
             <div className="pt-6 mt-6 border-t border-slate-800">
+              <button
+                onClick={async () => {
+                  setIsSyncing(true);
+                  setSyncMessage('');
+                  const success = await manualSyncToCloud();
+                  if (success) {
+                    const rankData = getRank(stats.totalXp, user?.isAdmin);
+                    setSyncMessage(`Sync Successful. Your Rank ${rankData.level} status is now secure.`);
+                  } else {
+                    setSyncMessage('Local progress is not newer than cloud, or sync failed.');
+                  }
+                  setIsSyncing(false);
+                  setTimeout(() => setSyncMessage(''), 4000);
+                }}
+                disabled={!user || isSyncing}
+                title={!user ? "Login required to sync to cloud." : ""}
+                className={`w-full py-4 mb-4 rounded-xl font-bold flex items-center justify-center transition-colors border ${
+                  !user
+                    ? 'bg-slate-800/50 text-slate-500 border-slate-700 cursor-not-allowed'
+                    : 'bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 border-blue-500/30'
+                }`}
+              >
+                {isSyncing ? <Loader2 className="mr-2 animate-spin" size={20} /> : <Cloud className="mr-2" size={20} />}
+                {isSyncing ? 'Syncing...' : 'Sync Progress to Cloud'}
+              </button>
+              {syncMessage && (
+                <p className={`text-sm text-center mb-4 ${syncMessage.includes('Successful') ? 'text-emerald-400' : 'text-rose-400'}`}>
+                  {syncMessage}
+                </p>
+              )}
+
               <button
                 onClick={() => {
                   setShowSettings(false);
