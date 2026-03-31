@@ -35,6 +35,7 @@ function AppContent() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRegistering, setIsRegistering] = useState(false);
+  const [loginError, setLoginError] = useState('');
 
   const bgMusic = useRef(typeof Audio !== "undefined" ? new Audio('/music.mp3') : null);
   if (bgMusic.current) bgMusic.current.loop = true;
@@ -85,6 +86,7 @@ function AppContent() {
   }, []);
 
   const handleLogin = async (provider) => {
+    setLoginError('');
     try {
       let result;
       if (provider === 'google') {
@@ -103,7 +105,15 @@ function AppContent() {
 
     } catch (error) {
       console.error("Login failed:", error);
-      alert("Login failed. Please try again.");
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
+        setLoginError("Email not registered. Please sign up first.");
+      } else if (error.code === 'auth/wrong-password') {
+        setLoginError("Incorrect password. Please try again.");
+      } else if (error.code === 'auth/invalid-email') {
+        setLoginError("Please enter a valid email address.");
+      } else {
+        setLoginError("Login failed. Please check your connection and try again.");
+      }
       setIsLoading(false);
     }
   };
@@ -193,6 +203,7 @@ function AppContent() {
           setIsRegistering={setIsRegistering}
           handleLogin={handleLogin}
           setGameState={setGameState}
+          loginError={loginError}
         />
       )}
 
