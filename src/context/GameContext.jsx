@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
@@ -57,6 +57,10 @@ export const GameProvider = ({ children }) => {
   const [streak, setStreak] = useState(0);
   const [showStreakBonus, setShowStreakBonus] = useState(false);
   const [score, setScore] = useState(0);
+
+  // System Maintenance
+  const [maintenanceMode, setMaintenanceMode] = useState(false);
+  const [maintenanceMessage, setMaintenanceMessage] = useState("");
   const [sessionXp, setSessionXp] = useState(0);
   const [lastPassesNeeded, setLastPassesNeeded] = useState(0);
 
@@ -137,6 +141,32 @@ export const GameProvider = ({ children }) => {
     }).catch(() => {
       setIsLoading(false);
     });
+
+    // Setup Maintenance Mode Listener
+    const unsubMaintenance = onSnapshot(doc(db, "system", "appConfig"), (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setMaintenanceMode(data.maintenanceMode === true);
+        setMaintenanceMessage(data.maintenanceMessage || "The Ordverse is currently undergoing a reality reset. Please check back later.");
+      } else {
+        setMaintenanceMode(false);
+        setMaintenanceMessage("");
+      }
+    }, (error) => {
+      console.error("Failed to listen for maintenance mode:", error);
+    });
+
+    if (import.meta.env.MODE === 'test') {
+      window._triggerMaintenanceMode = (mode, msg) => {
+         setMaintenanceMode(mode);
+         setMaintenanceMessage(msg);
+      };
+      window._triggerAdminMode = (mode) => {
+         setIsAdmin(mode);
+      };
+    }
+
+    return () => unsubMaintenance();
   }, []);
 
   useEffect(() => {
@@ -338,7 +368,7 @@ export const GameProvider = ({ children }) => {
     setStats(newStats);
     localStorage.setItem('nexus_stats', JSON.stringify(newStats));
 
-    saveProgress(finalTotalXp, newStats.completed, newPasses);
+    saveProgress(newXp, newStats.completed, newPasses);
 
     setSessionXp(finalXpGain);
     setGameState('results');
@@ -374,7 +404,8 @@ export const GameProvider = ({ children }) => {
       settings, setSettings,
       showRankUp, setShowRankUp,
       newRankInfo, setNewRankInfo,
-      startQuiz, handleAnswer, finishQuiz, handleShareWrapper, VAULT_CONSTANTS
+      startQuiz, handleAnswer, finishQuiz, handleShareWrapper, VAULT_CONSTANTS,
+      maintenanceMode, maintenanceMessage
     }}>
       {children}
     </GameContext.Provider>
