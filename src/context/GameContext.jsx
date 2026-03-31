@@ -320,6 +320,39 @@ export const GameProvider = ({ children }) => {
     }
   };
 
+  const manualSyncToCloud = async () => {
+    if (!user) return false;
+    try {
+      const userDocRef = doc(db, "users", user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+      const cloudData = userDocSnap.exists() ? userDocSnap.data() : null;
+      const cloudScore = cloudData?.score || 0;
+
+      if (stats.totalXp > cloudScore) {
+        const proceed = window.confirm("This will update your cloud profile with your current device progress. Proceed?");
+        if (!proceed) return false;
+
+        const rankData = getRank(stats.totalXp, user?.isAdmin);
+        const powerLevel = Math.floor(stats.totalXp / 100);
+        await setDoc(userDocRef, {
+          uid: user.uid,
+          rank: rankData.level,
+          score: stats.totalXp,
+          powerLevel: powerLevel,
+          completed: stats.completed,
+          passes: stats.passes,
+          lastSynced: new Date().toISOString()
+        }, { merge: true });
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      console.error("Manual sync failed", err);
+      return false;
+    }
+  };
+
   const finishQuiz = (finalScore, finalSessionXp) => {
     let finalXpGain = isTimeAttack ? finalSessionXp * 2 : finalSessionXp;
 
@@ -410,7 +443,7 @@ export const GameProvider = ({ children }) => {
       settings, setSettings,
       showRankUp, setShowRankUp,
       newRankInfo, setNewRankInfo,
-      startQuiz, handleAnswer, finishQuiz, handleShareWrapper, VAULT_CONSTANTS
+      startQuiz, handleAnswer, finishQuiz, handleShareWrapper, manualSyncToCloud, VAULT_CONSTANTS
     }}>
       {children}
     </GameContext.Provider>

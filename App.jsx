@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Brain, Book, Settings, LogOut, Zap } from 'lucide-react';
+import { Brain, Book, Settings, LogOut, Zap, Cloud, Loader2 } from 'lucide-react';
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { App as CapacitorApp } from '@capacitor/app';
 
-import { GameProvider, useGame } from './src/context/GameContext.jsx';
+import { GameProvider, useGame, getRank } from './src/context/GameContext.jsx';
 import LoginScreen from './src/components/LoginScreen.jsx';
 import HubMenu from './src/components/HubMenu.jsx';
 import QuizEngine from './src/components/QuizEngine.jsx';
@@ -26,11 +26,15 @@ function AppContent() {
     isLoading, setIsLoading,
     settings, setSettings,
     showRankUp, newRankInfo,
+    manualSyncToCloud,
     VAULT_CONSTANTS
   } = useGame();
 
   const [showSettings, setShowSettings] = useState(false);
   const [showVault, setShowVault] = useState(false);
+
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncMessage, setSyncMessage] = useState('');
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -159,6 +163,37 @@ function AppContent() {
             ))}
 
             <div className="pt-6 mt-6 border-t border-slate-800">
+              <button
+                onClick={async () => {
+                  setIsSyncing(true);
+                  setSyncMessage('');
+                  const success = await manualSyncToCloud();
+                  if (success) {
+                    const rankData = getRank(stats.totalXp, user?.isAdmin);
+                    setSyncMessage(`Sync Successful. Your Rank ${rankData.level} status is now secure.`);
+                  } else {
+                    setSyncMessage('Local progress is not newer than cloud, or sync failed.');
+                  }
+                  setIsSyncing(false);
+                  setTimeout(() => setSyncMessage(''), 4000);
+                }}
+                disabled={!user || isSyncing}
+                title={!user ? "Login required to sync to cloud." : ""}
+                className={`w-full py-4 mb-4 rounded-xl font-bold flex items-center justify-center transition-colors border ${
+                  !user
+                    ? 'bg-slate-800/50 text-slate-500 border-slate-700 cursor-not-allowed'
+                    : 'bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 border-blue-500/30'
+                }`}
+              >
+                {isSyncing ? <Loader2 className="mr-2 animate-spin" size={20} /> : <Cloud className="mr-2" size={20} />}
+                {isSyncing ? 'Syncing...' : 'Sync Progress to Cloud'}
+              </button>
+              {syncMessage && (
+                <p className={`text-sm text-center mb-4 ${syncMessage.includes('Successful') ? 'text-emerald-400' : 'text-rose-400'}`}>
+                  {syncMessage}
+                </p>
+              )}
+
               <button
                 onClick={() => {
                   setShowSettings(false);
