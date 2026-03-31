@@ -9661,46 +9661,193 @@ export const rawQuizData = {
         "Mikel Obi"
       ],
       [
-        "How many players are on the court for one team in a standard NBA game?",
-        "5",
-        "4",
+        "A standard football match is 90 minutes long",
+        "True",
+        "False",
+        "Partially True",
+        "Depends on the referee"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Tennis?",
         "6",
+        "9",
+        "3",
+        "5"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Tennis?",
+        "11",
+        "9",
+        "1",
+        "3"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Boxing?",
+        "9",
+        "1",
+        "4",
+        "11"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Swimming?",
+        "7",
+        "10",
+        "5",
+        "1"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Cricket?",
+        "10",
+        "3",
+        "7",
+        "1"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Cricket?",
+        "6",
+        "1",
+        "11",
+        "9"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Rugby?",
+        "6",
+        "7",
+        "4",
+        "9"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Cricket?",
+        "8",
+        "3",
+        "10",
         "7"
       ],
       [
-        "In Association Football, what is the maximum number of minutes in one half of standard regulation time?",
-        "45",
-        "30",
-        "60",
-        "90"
+        "How many players are typically on the field/court for one team in Swimming?",
+        "2",
+        "8",
+        "11",
+        "3"
       ],
       [
-        "Which player holds the record for the most goals scored in a single calendar year (91 goals in 2012)?",
-        "Lionel Messi",
-        "Cristiano Ronaldo",
-        "Pelé",
-        "Gerd Müller"
+        "How many players are typically on the field/court for one team in Basketball?",
+        "5",
+        "11",
+        "7",
+        "2"
       ],
       [
-        "In Tennis, what is the score called when both players have won three points each in a game?",
-        "Deuce",
-        "Love-All",
-        "Set-Point",
-        "Break"
+        "How many players are typically on the field/court for one team in Golf?",
+        "8",
+        "2",
+        "10",
+        "4"
       ],
       [
-        "Which country has won the most FIFA World Cup titles in history?",
-        "Brazil",
-        "Germany",
-        "Italy",
-        "Argentina"
+        "How many players are typically on the field/court for one team in Boxing?",
+        "6",
+        "9",
+        "10",
+        "11"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Tennis?",
+        "10",
+        "5",
+        "9",
+        "4"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Swimming?",
+        "3",
+        "10",
+        "8",
+        "6"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Athletics?",
+        "1",
+        "2",
+        "8",
+        "7"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Rugby?",
+        "5",
+        "10",
+        "7",
+        "1"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Tennis?",
+        "10",
+        "6",
+        "7",
+        "8"
       ],
       [
         "How many players are typically on the field/court for one team in Football?",
         "11",
         "10",
-        "12",
+        "7",
+        "5"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Swimming?",
+        "2",
+        "4",
+        "5",
         "7"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Baseball?",
+        "8",
+        "5",
+        "4",
+        "2"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Boxing?",
+        "8",
+        "5",
+        "4",
+        "1"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Athletics?",
+        "3",
+        "9",
+        "11",
+        "4"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Athletics?",
+        "7",
+        "5",
+        "8",
+        "1"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Rugby?",
+        "9",
+        "1",
+        "5",
+        "2"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Baseball?",
+        "7",
+        "2",
+        "3",
+        "4"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Golf?",
+        "4",
+        "5",
+        "10",
+        "1"
       ]
     ],
     "intermediate": [
@@ -10153,39 +10300,17 @@ export const rawQuizData = {
         "David Beckham"
       ],
       [
-        "Which F1 flag indicates that a driver must return to the pits immediately due to a disqualification?",
-        "Black",
-        "Yellow",
-        "Blue",
-        "Green"
-      ],
-      [
-        "In Fantasy Premier League (FPL), how many points is a \"Clean Sheet\" worth for a Defender?",
-        "4",
+        "How many players are typically on the field/court for one team in Baseball?",
         "1",
         "2",
         "6"
       ],
       [
-        "What is the total distance of a standard Olympic Marathon?",
-        "42.195km",
-        "21.1km",
-        "50km",
-        "100km"
-      ],
-      [
-        "In Basketball, a \"Technical Foul\" results in how many free throws for the opposing team?",
-        "1",
-        "2",
-        "3",
-        "0"
-      ],
-      [
-        "How many substitutions are currently allowed in a standard Premier League match (as of 2024)?",
+        "How many players are typically on the field/court for one team in Baseball?",
+        "8",
         "5",
         "3",
-        "4",
-        "7"
+        "9"
       ]
     ],
     "advanced": [
@@ -10307,6 +10432,146 @@ export const rawQuizData = {
         "Cristiano Ronaldo",
         "Pele",
         "Gerd Müller"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Boxing?",
+        "1",
+        "2",
+        "7",
+        "9"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Tennis?",
+        "1",
+        "10",
+        "5",
+        "11"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Swimming?",
+        "11",
+        "7",
+        "8",
+        "2"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Cricket?",
+        "10",
+        "2",
+        "6",
+        "8"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Cricket?",
+        "7",
+        "11",
+        "6",
+        "9"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Swimming?",
+        "5",
+        "9",
+        "10",
+        "1"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Rugby?",
+        "10",
+        "9",
+        "3",
+        "5"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Rugby?",
+        "8",
+        "11",
+        "5",
+        "4"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Rugby?",
+        "1",
+        "5",
+        "11",
+        "6"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Swimming?",
+        "9",
+        "5",
+        "1",
+        "7"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Boxing?",
+        "9",
+        "6",
+        "11",
+        "5"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Boxing?",
+        "3",
+        "6",
+        "9",
+        "4"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Tennis?",
+        "7",
+        "3",
+        "2",
+        "8"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Golf?",
+        "3",
+        "9",
+        "2",
+        "11"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Boxing?",
+        "5",
+        "9",
+        "1",
+        "2"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Baseball?",
+        "11",
+        "1",
+        "8",
+        "3"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Athletics?",
+        "8",
+        "2",
+        "5",
+        "11"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Rugby?",
+        "8",
+        "5",
+        "2",
+        "7"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Athletics?",
+        "2",
+        "11",
+        "9",
+        "10"
+      ],
+      [
+        "How many players are typically on the field/court for one team in Tennis?",
+        "10",
+        "7",
+        "11",
+        "4"
       ]
     ]
   },

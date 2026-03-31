@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
@@ -48,6 +48,7 @@ export const GameProvider = ({ children }) => {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
 
+  const activePools = useRef({});
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isChecking, setIsChecking] = useState(false);
@@ -57,6 +58,10 @@ export const GameProvider = ({ children }) => {
   const [streak, setStreak] = useState(0);
   const [showStreakBonus, setShowStreakBonus] = useState(false);
   const [score, setScore] = useState(0);
+
+  // System Maintenance
+  const [maintenanceMode, setMaintenanceMode] = useState(false);
+  const [maintenanceMessage, setMaintenanceMessage] = useState("");
   const [sessionXp, setSessionXp] = useState(0);
   const [lastPassesNeeded, setLastPassesNeeded] = useState(0);
 
@@ -171,6 +176,32 @@ export const GameProvider = ({ children }) => {
       setIsLoading(false);
       isInitialLoad.current = false;
     });
+
+    // Setup Maintenance Mode Listener
+    const unsubMaintenance = onSnapshot(doc(db, "system", "appConfig"), (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setMaintenanceMode(data.maintenanceMode === true);
+        setMaintenanceMessage(data.maintenanceMessage || "The Ordverse is currently undergoing a reality reset. Please check back later.");
+      } else {
+        setMaintenanceMode(false);
+        setMaintenanceMessage("");
+      }
+    }, (error) => {
+      console.error("Failed to listen for maintenance mode:", error);
+    });
+
+    if (import.meta.env.MODE === 'test') {
+      window._triggerMaintenanceMode = (mode, msg) => {
+         setMaintenanceMode(mode);
+         setMaintenanceMessage(msg);
+      };
+      window._triggerAdminMode = (mode) => {
+         setIsAdmin(mode);
+      };
+    }
+
+    return () => unsubMaintenance();
   }, []);
 
   useEffect(() => {
@@ -192,55 +223,44 @@ export const GameProvider = ({ children }) => {
     return shuffled;
   };
 
-  const startQuiz = (timeMode) => {
+      const startQuiz = (timeMode) => {
     setIsTimeAttack(timeMode);
     setTimeLeft(60);
     setStreak(0);
     setShowStreakBonus(false);
 
-    const subjectData = quizData[selectedSubject?.id];
-    if (!subjectData || !subjectData[selectedDifficulty?.id] || subjectData[selectedDifficulty?.id].length === 0) {
+    const subId = selectedSubject?.id;
+    const diffId = selectedDifficulty?.id;
+    const poolKey = `${subId}_${diffId}`;
+
+    const subjectData = quizData[subId];
+    if (!subjectData || !subjectData[diffId] || subjectData[diffId].length === 0) {
        alert("No questions available for this level yet!");
        setGameState('subject_select');
        return;
     }
 
-    let pool = subjectData[selectedDifficulty.id];
-    const poolKey = `${selectedSubject.id}_${selectedDifficulty.id}`;
-    let currentSeen = seenQuestions[poolKey] || new Set();
-
-    // Reset seen questions if we exhausted the pool
-    if (currentSeen.size >= pool.length) {
-      currentSeen = new Set();
+    // Initialize or reset active pool if it's empty
+    if (!activePools.current[poolKey] || activePools.current[poolKey].length === 0) {
+       activePools.current[poolKey] = [...subjectData[diffId]];
     }
 
-    // Filter out already seen questions
-    let availablePool = pool.filter(q => !currentSeen.has(q.id));
+    let pool = activePools.current[poolKey];
+
+    // Shuffle the pool
+    const shuffledPool = shuffle([...pool]);
+
     const limit = timeMode ? 20 : 10;
+    const actualLimit = Math.min(shuffledPool.length, limit);
 
-    // If there aren't enough available questions, clear the seen set and use the full pool again
-    if (availablePool.length < limit && pool.length >= limit) {
-       currentSeen = new Set();
-       availablePool = [...pool];
-    }
+    // Select questions
+    const selectedQuestions = shuffledPool.slice(0, actualLimit);
 
-    const actualLimit = Math.min(availablePool.length, limit);
-    const poolCopy = [...availablePool];
-    for (let i = 0; i < actualLimit; i++) {
-      const j = i + Math.floor(Math.random() * (poolCopy.length - i));
-      [poolCopy[i], poolCopy[j]] = [poolCopy[j], poolCopy[i]];
-    }
+    // Remove selected questions from the active pool
+    activePools.current[poolKey] = shuffledPool.slice(actualLimit);
 
-    const randomized = poolCopy.slice(0, actualLimit).map(q => {
-      currentSeen.add(q.id); // Add to seen right away for this session
-      return {
-        ...q, options: shuffle(q.options)
-      };
-    });
-
-    setSeenQuestions(prev => ({
-      ...prev,
-      [poolKey]: currentSeen
+    const randomized = selectedQuestions.map(q => ({
+      ...q, options: shuffle(q.options)
     }));
 
     setQuestions(randomized);
@@ -466,7 +486,8 @@ export const GameProvider = ({ children }) => {
       settings, setSettings,
       showRankUp, setShowRankUp,
       newRankInfo, setNewRankInfo,
-      startQuiz, handleAnswer, finishQuiz, handleShareWrapper, manualSyncToCloud, VAULT_CONSTANTS
+      startQuiz, handleAnswer, finishQuiz, handleShareWrapper, VAULT_CONSTANTS,
+      maintenanceMode, maintenanceMessage
     }}>
       {children}
     </GameContext.Provider>
