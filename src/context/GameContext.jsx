@@ -48,6 +48,7 @@ export const GameProvider = ({ children }) => {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
 
+  const activePools = useRef({});
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isChecking, setIsChecking] = useState(false);
@@ -158,28 +159,43 @@ export const GameProvider = ({ children }) => {
     return shuffled;
   };
 
-  const startQuiz = (timeMode) => {
+      const startQuiz = (timeMode) => {
     setIsTimeAttack(timeMode);
     setTimeLeft(60);
     setStreak(0);
     setShowStreakBonus(false);
 
-    const subjectData = quizData[selectedSubject?.id];
-    if (!subjectData || !subjectData[selectedDifficulty?.id] || subjectData[selectedDifficulty?.id].length === 0) {
+    const subId = selectedSubject?.id;
+    const diffId = selectedDifficulty?.id;
+    const poolKey = `${subId}_${diffId}`;
+
+    const subjectData = quizData[subId];
+    if (!subjectData || !subjectData[diffId] || subjectData[diffId].length === 0) {
        alert("No questions available for this level yet!");
        setGameState('subject_select');
        return;
     }
 
-    let pool = subjectData[selectedDifficulty.id];
-    const limit = timeMode ? 20 : 10;
-    const actualLimit = Math.min(pool.length, limit);
-    const poolCopy = [...pool];
-    for (let i = 0; i < actualLimit; i++) {
-      const j = i + Math.floor(Math.random() * (poolCopy.length - i));
-      [poolCopy[i], poolCopy[j]] = [poolCopy[j], poolCopy[i]];
+    // Initialize or reset active pool if it's empty
+    if (!activePools.current[poolKey] || activePools.current[poolKey].length === 0) {
+       activePools.current[poolKey] = [...subjectData[diffId]];
     }
-    const randomized = poolCopy.slice(0, actualLimit).map(q => ({
+
+    let pool = activePools.current[poolKey];
+
+    // Shuffle the pool
+    const shuffledPool = shuffle([...pool]);
+
+    const limit = timeMode ? 20 : 10;
+    const actualLimit = Math.min(shuffledPool.length, limit);
+
+    // Select questions
+    const selectedQuestions = shuffledPool.slice(0, actualLimit);
+
+    // Remove selected questions from the active pool
+    activePools.current[poolKey] = shuffledPool.slice(actualLimit);
+
+    const randomized = selectedQuestions.map(q => ({
       ...q, options: shuffle(q.options)
     }));
 
@@ -338,7 +354,7 @@ export const GameProvider = ({ children }) => {
     setStats(newStats);
     localStorage.setItem('nexus_stats', JSON.stringify(newStats));
 
-    saveProgress(finalTotalXp, newStats.completed, newPasses);
+    saveProgress(newXp, newStats.completed, newPasses);
 
     setSessionXp(finalXpGain);
     setGameState('results');
