@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flame, Timer, Trophy, Share2, Users } from 'lucide-react';
-import { useGame, getRank } from '../context/GameContext.jsx';
+import { useGame } from '../context/GameContext.jsx';
 
 export default function QuizEngine() {
   const {
@@ -8,16 +8,60 @@ export default function QuizEngine() {
     isTimeAttack, timeLeft,
     streak, showStreakBonus,
     score, questions, currentIndex, isChecking, selectedAnswerIndex, handleAnswer, handleShareWrapper,
-    sessionXp, lastPassesNeeded, selectedSubject
+    sessionXp, recentXpChange, showXpChange, lastPassesNeeded, selectedSubject, selectedDifficulty
   } = useGame();
+
+  const [floatXp, setFloatXp] = React.useState(null);
+
+  const localHandleAnswer = (i, isCorrect) => {
+    let baseGain = 10;
+    if (selectedDifficulty?.id === 'intermediate') {
+       if (selectedSubject?.id === 'lore') baseGain = 30;
+       else if (selectedSubject?.id === 'tech') baseGain = 20;
+       else baseGain = 15;
+    } else if (selectedDifficulty?.id === 'advanced') {
+       if (selectedSubject?.id === 'lore') baseGain = 50;
+       else if (selectedSubject?.id === 'tech') baseGain = 30;
+       else baseGain = 20;
+    }
+
+    let xpChange = 0;
+    if (isCorrect) {
+       xpChange = isTimeAttack ? baseGain * 2 : baseGain;
+       setFloatXp({ val: `+${xpChange} XP`, color: selectedSubject?.id === 'lore' ? 'text-[#FBBF24]' : 'text-emerald-400' });
+    } else if (selectedDifficulty?.id === 'advanced') {
+       xpChange = -Math.floor(baseGain / 2);
+       setFloatXp({ val: `${xpChange} XP`, color: selectedSubject?.id === 'lore' ? 'text-[#6A0DAD]' : 'text-rose-500' });
+    }
+
+    if (xpChange !== 0 || isCorrect) {
+      setTimeout(() => setFloatXp(null), 1000);
+    }
+    handleAnswer(i, isCorrect);
+  };
 
   return (
     <>
       {gameState === 'playing' && (
         <div className="w-full max-w-xl relative">
           {showStreakBonus && (
-             <div className="absolute top-[-40px] left-1/2 transform -translate-x-1/2 text-orange-400 font-black flex items-center bg-orange-500/20 px-4 py-2 rounded-full border border-orange-500/50 animate-bounce">
+             <div className="absolute top-[-40px] left-1/2 transform -translate-x-1/2 text-orange-400 font-black flex items-center bg-orange-500/20 px-4 py-2 rounded-full border border-orange-500/50 animate-bounce z-10">
                <Flame className="mr-2" size={20}/> +50 XP STREAK!
+             </div>
+          )}
+          {floatXp && (
+             <div className={`absolute top-[-40px] right-0 ${floatXp.color} font-black text-xl animate-out fade-out slide-out-to-top-4 duration-1000 z-10`}>
+               {floatXp.val}
+             </div>
+          )}
+
+          {showXpChange && (
+             <div key={currentIndex} className={`absolute top-[-20px] right-0 font-black text-xl animate-in fade-in slide-in-from-bottom-2 duration-300 z-10 ${
+                recentXpChange >= 0
+                  ? (selectedSubject?.id === 'lore' ? 'text-[#FBBF24]' : 'text-emerald-400')
+                  : (selectedSubject?.id === 'lore' ? 'text-[#6A0DAD]' : 'text-rose-500')
+             }`}>
+               {recentXpChange >= 0 ? '+' : ''}{recentXpChange} XP
              </div>
           )}
 
@@ -34,9 +78,9 @@ export default function QuizEngine() {
 
           <h2 className="text-2xl font-bold mb-10 text-center leading-snug">{questions[currentIndex]?.text}</h2>
 
-          <div className="grid gap-3">
+          <div className="grid gap-3 relative z-20">
             {questions[currentIndex]?.options.map((opt, i) => (
-              <button key={i} disabled={isChecking} onClick={() => handleAnswer(i, opt.isCorrect)}
+              <button key={i} disabled={isChecking} onClick={() => localHandleAnswer(i, opt.isCorrect)}
                 className={`p-5 rounded-2xl border text-left transition-all font-medium ${isChecking ? (opt.isCorrect ? 'bg-emerald-500/20 border-emerald-500' : i === selectedAnswerIndex ? 'bg-rose-500/20 border-rose-500' : 'opacity-20') : 'bg-slate-900 border-slate-800'}`}>
                 {opt.text}
               </button>

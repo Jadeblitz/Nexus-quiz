@@ -1,6 +1,8 @@
 import React from 'react';
 import { Users } from 'lucide-react';
 
+const LEADERBOARD_DATA = [{n: "Nichothéos", x: 99999}, {n: "Daragvener", x: 25000}, {n: "Thril_ler", x: 12000}];
+
 export default function Leaderboard({ props }) {
   const { setGameState, stats } = props;
   return (
@@ -11,7 +13,7 @@ export default function Leaderboard({ props }) {
           <div><p className="font-bold">You</p><p className="text-xs text-blue-400 italic">Level {Math.floor(stats.totalXp/100)}</p></div>
           <p className="text-2xl font-black text-white">{stats.totalXp} XP</p>
         </div>
-        {[{n: "Nichothéos", x: 99999}, {n: "Daragvener", x: 25000}, {n: "Thril_ler", x: 12000}].map((u, i) => (
+        {LEADERBOARD_DATA.map((u, i) => (
           <div key={i} className="p-5 bg-slate-900/50 border border-slate-800 rounded-3xl flex justify-between items-center opacity-60 text-left">
             <p className="font-bold">{u.n}</p><p className="font-black">{u.x} XP</p>
           </div>

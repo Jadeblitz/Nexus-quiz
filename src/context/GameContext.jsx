@@ -41,6 +41,7 @@ export const GameContext = createContext();
 
 export const GameProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [stats, setStats] = useState({ totalXp: 0, completed: 0, passes: {} });
   const [gameState, setGameState] = useState('login');
   const [isLoading, setIsLoading] = useState(true);
@@ -58,6 +59,9 @@ export const GameProvider = ({ children }) => {
   const [score, setScore] = useState(0);
   const [sessionXp, setSessionXp] = useState(0);
   const [lastPassesNeeded, setLastPassesNeeded] = useState(0);
+
+  const [recentXpChange, setRecentXpChange] = useState(0);
+  const [showXpChange, setShowXpChange] = useState(false);
 
   const [showRankUp, setShowRankUp] = useState(false);
   const [newRankInfo, setNewRankInfo] = useState({});
@@ -84,6 +88,7 @@ export const GameProvider = ({ children }) => {
           userObj.isAdmin = data.isAdmin === true || data.role === 'admin';
           setStats({ totalXp: data.score || 0, completed: data.completed || 0, passes: data.passes || {} });
         } else {
+          setIsAdmin(false);
           await setDoc(userDocRef, {
             uid: userObj.uid,
             displayName: userObj.displayName || "Unknown Warrior",
@@ -98,20 +103,24 @@ export const GameProvider = ({ children }) => {
       } catch (err) {
         console.error("Firebase persistence failed, falling back to Guest state:", err);
         // Fallback to Guest state
+        setIsAdmin(false);
         setStats({ totalXp: 0, completed: 0, passes: {} });
       }
     };
 
-    FirebaseAuthentication.addListener('authStateChange', (result) => {
-      if (result.user) {
-        setUser(result.user);
-        handleUserPersistence(result.user).then(() => {
-          setGameState('subject_select');
-          setIsLoading(false);
-        }).catch(() => {
+    const resolveAuth = (authUser) => {
+      setUser(authUser);
+      handleUserPersistence(authUser)
+        .catch((err) => console.error("Persistence error:", err))
+        .finally(() => {
           setGameState('subject_select');
           setIsLoading(false);
         });
+    };
+
+    FirebaseAuthentication.addListener('authStateChange', (result) => {
+      if (result.user) {
+        resolveAuth(result.user);
       } else {
         setUser(null);
         setGameState('login');
@@ -121,14 +130,7 @@ export const GameProvider = ({ children }) => {
 
     FirebaseAuthentication.getCurrentUser().then((result) => {
       if (result.user) {
-        setUser(result.user);
-        handleUserPersistence(result.user).then(() => {
-          setGameState('subject_select');
-          setIsLoading(false);
-        }).catch(() => {
-          setGameState('subject_select');
-          setIsLoading(false);
-        });
+        resolveAuth(result.user);
       } else {
         setIsLoading(false);
       }
@@ -171,7 +173,13 @@ export const GameProvider = ({ children }) => {
 
     let pool = subjectData[selectedDifficulty.id];
     const limit = timeMode ? 20 : 10;
-    const randomized = shuffle(pool).slice(0, Math.min(pool.length, limit)).map(q => ({
+    const actualLimit = Math.min(pool.length, limit);
+    const poolCopy = [...pool];
+    for (let i = 0; i < actualLimit; i++) {
+      const j = i + Math.floor(Math.random() * (poolCopy.length - i));
+      [poolCopy[i], poolCopy[j]] = [poolCopy[j], poolCopy[i]];
+    }
+    const randomized = poolCopy.slice(0, actualLimit).map(q => ({
       ...q, options: shuffle(q.options)
     }));
 
@@ -179,7 +187,16 @@ export const GameProvider = ({ children }) => {
     setCurrentIndex(0);
     setScore(0);
     setSessionXp(0);
+    setShowXpChange(false);
     setGameState('playing');
+  };
+
+  const updateLocalXP = (xpChange) => {
+    setStats(prevStats => {
+      let newXp = prevStats.totalXp + xpChange;
+      if (newXp < 0) newXp = 0;
+      return { ...prevStats, totalXp: newXp };
+    });
   };
 
   const handleAnswer = async (index, isCorrect) => {
@@ -233,7 +250,13 @@ export const GameProvider = ({ children }) => {
     const updatedSessionXp = sessionXp + xpEarnedThisQuestion;
     setSessionXp(updatedSessionXp);
 
+    updateLocalXP(xpEarnedThisQuestion);
+
+    setRecentXpChange(xpEarnedThisQuestion);
+    setShowXpChange(true);
+
     setTimeout(() => {
+      setShowXpChange(false);
       if (currentIndex < questions.length - 1) {
         setCurrentIndex(c => c + 1);
         setSelectedAnswerIndex(null);
@@ -267,7 +290,11 @@ export const GameProvider = ({ children }) => {
   const finishQuiz = (finalScore, finalSessionXp) => {
     let finalXpGain = isTimeAttack ? finalSessionXp * 2 : finalSessionXp;
 
-    const oldXp = stats.totalXp;
+    // Because updateLocalXP added sessionXp iteratively to totalXp during gameplay,
+    // totalXp is currently (oldTotalXp + finalSessionXp).
+    // We want the final totalXp to be (oldTotalXp + finalXpGain).
+    // So we subtract finalSessionXp from stats.totalXp, then add finalXpGain.
+    const oldXp = stats.totalXp - finalSessionXp;
     let newXp = oldXp + finalXpGain;
     if (newXp < 0) newXp = 0;
 
@@ -283,28 +310,35 @@ export const GameProvider = ({ children }) => {
 
     const passThreshold = isTimeAttack ? 14 : 7;
     const isPass = finalScore >= passThreshold;
-    const passKey = `${selectedSubject?.id}_${selectedDifficulty?.id}`;
-    const newPasses = { ...(stats.passes || {}) };
 
-    let passesNeededMsg = 0;
-    if (isPass) {
-      newPasses[passKey] = (newPasses[passKey] || 0) + 1;
+    const newPasses = JSON.parse(JSON.stringify(stats.passes || {}));
+    const subId = selectedSubject?.id;
+    const diffId = selectedDifficulty?.id;
+
+    if (subId) {
+      if (!newPasses[subId]) {
+        newPasses[subId] = {};
+      }
+
+      let passesNeededMsg = 0;
+      if (isPass) {
+        newPasses[subId][diffId] = (newPasses[subId][diffId] || 0) + 1;
+      }
+
+      if (diffId === 'foundational' || diffId === 'intermediate') {
+         const hasPasses = newPasses[subId][diffId] || 0;
+         passesNeededMsg = Math.max(0, 5 - hasPasses);
+      }
+      setLastPassesNeeded(passesNeededMsg);
+    } else {
+      setLastPassesNeeded(0);
     }
 
-    if (selectedDifficulty?.id === 'foundational') {
-       const hasPasses = newPasses[passKey] || 0;
-       passesNeededMsg = Math.max(0, 5 - hasPasses);
-    } else if (selectedDifficulty?.id === 'intermediate') {
-       const hasPasses = newPasses[passKey] || 0;
-       passesNeededMsg = Math.max(0, 5 - hasPasses);
-    }
-    setLastPassesNeeded(passesNeededMsg);
-
-    const newStats = { ...stats, totalXp: newXp, completed: stats.completed + 1, passes: newPasses };
+    const newStats = { ...stats, completed: stats.completed + 1, passes: newPasses };
     setStats(newStats);
     localStorage.setItem('nexus_stats', JSON.stringify(newStats));
 
-    saveProgress(newXp, newStats.completed, newPasses);
+    saveProgress(finalTotalXp, newStats.completed, newPasses);
 
     setSessionXp(finalXpGain);
     setGameState('results');
@@ -318,7 +352,7 @@ export const GameProvider = ({ children }) => {
 
   return (
     <GameContext.Provider value={{
-      user, setUser,
+      user, setUser, isAdmin, setIsAdmin,
       stats, setStats,
       gameState, setGameState, isLoading, setIsLoading,
       isLoading, setIsLoading,
@@ -334,6 +368,8 @@ export const GameProvider = ({ children }) => {
       showStreakBonus, setShowStreakBonus,
       score, setScore,
       sessionXp, setSessionXp,
+      recentXpChange, setRecentXpChange,
+      showXpChange, setShowXpChange,
       lastPassesNeeded, setLastPassesNeeded,
       settings, setSettings,
       showRankUp, setShowRankUp,

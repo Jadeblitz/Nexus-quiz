@@ -1,9 +1,11 @@
 import React from 'react';
-import { ArrowRight, BarChart3, ChevronLeft, Zap, Brain, Cpu, BookOpen, Lightbulb, Film, Trophy as SportIcon, Languages, Axe } from 'lucide-react';
+import { ArrowRight, BarChart3, ChevronLeft, Zap, Brain, Cpu, BookOpen, Lightbulb, Film, Trophy as SportIcon, Languages, Axe, Lock } from 'lucide-react';
 import { useGame, getRank, SUBJECTS, DIFFICULTIES } from '../context/GameContext.jsx';
 
 export default function HubMenu() {
-  const { user, stats, gameState, setGameState, selectedSubject, setSelectedSubject, selectedDifficulty, setSelectedDifficulty, startQuiz } = useGame();
+  const { user, isAdmin, stats, gameState, setGameState, selectedSubject, setSelectedSubject, selectedDifficulty, setSelectedDifficulty, startQuiz } = useGame();
+
+  const rankInfo = getRank(stats.totalXp, isAdmin);
 
   return (
     <>
@@ -56,13 +58,49 @@ export default function HubMenu() {
         <div className="w-full max-w-sm space-y-4">
            <button onClick={() => setGameState('subject_select')} className="text-slate-500 flex items-center mb-4"><ChevronLeft size={16}/> Back</button>
            <h2 className="text-2xl font-black mb-6 text-center">{selectedSubject?.title}</h2>
-           {DIFFICULTIES.map(diff => (
-             <button key={diff.id} onClick={() => {setSelectedDifficulty(diff); setGameState('mode_select')}}
-               className={`w-full p-6 bg-slate-900 border ${diff.border} rounded-2xl flex items-center justify-between`}>
-               <span className={`text-xl font-bold ${diff.color}`}>{diff.title}</span>
-               <ArrowRight size={20} className="text-slate-700" />
-             </button>
-           ))}
+           {DIFFICULTIES.map(diff => {
+             let disabled = false;
+             let passesNeeded = 0;
+             const subjPasses = stats.passes?.[selectedSubject?.id] || {};
+
+             if (diff.id === 'intermediate') {
+                const foundPasses = subjPasses['foundational'] || 0;
+                if (foundPasses < 5) {
+                   disabled = true;
+                   passesNeeded = 5 - foundPasses;
+                }
+             } else if (diff.id === 'advanced') {
+                const interPasses = subjPasses['intermediate'] || 0;
+                if (interPasses < 5) {
+                   disabled = true;
+                   passesNeeded = 5 - interPasses;
+                }
+             }
+
+             return (
+               <button
+                 key={diff.id}
+                 onClick={() => {
+                   if (!disabled) {
+                     setSelectedDifficulty(diff);
+                     setGameState('mode_select');
+                   }
+                 }}
+                 disabled={disabled}
+                 className={`w-full p-6 bg-slate-900 border ${diff.border} rounded-2xl flex items-center justify-between transition-all ${disabled ? 'opacity-50 cursor-not-allowed grayscale' : 'active:scale-95'}`}
+               >
+                 <div className="flex flex-col items-start">
+                   <span className={`text-xl font-bold ${diff.color}`}>{diff.title}</span>
+                   {disabled && (
+                     <span className="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">
+                       {passesNeeded} Passes Needed
+                     </span>
+                   )}
+                 </div>
+                 {!disabled && <ArrowRight size={20} className="text-slate-700" />}
+               </button>
+             );
+           })}
         </div>
       )}
 

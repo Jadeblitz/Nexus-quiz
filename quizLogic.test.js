@@ -1,4 +1,4 @@
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import assert from 'node:assert';
 import { getRank, calculateQuizResults } from './quizLogic.js';
 
@@ -41,6 +41,14 @@ describe('quizLogic', () => {
                 title: "Rank 14",
                 level: "True God",
                 color: "text-amber-400 font-black"
+            });
+        });
+
+        it('should return Rank 13 God (Peak) for 50000+ XP for non-admin', () => {
+            assert.deepEqual(getRank(50000, false), {
+                title: "Rank 13",
+                level: "God (Peak)",
+                color: "text-rose-500"
             });
         });
 
