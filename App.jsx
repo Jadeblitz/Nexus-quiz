@@ -40,17 +40,19 @@ function AppContent() {
   if (bgMusic.current) bgMusic.current.loop = true;
 
   const NEXUS_STATS_KEY = 'nexus_stats';
+  const GUEST_STATS_KEY = 'guest_nexus_stats';
   const NEXUS_SETTINGS_KEY = 'nexus_settings';
 
   useEffect(() => {
     try {
-      const s1 = localStorage.getItem(NEXUS_STATS_KEY);
+      const s1 = localStorage.getItem(NEXUS_STATS_KEY) || localStorage.getItem(GUEST_STATS_KEY);
       const s2 = localStorage.getItem(NEXUS_SETTINGS_KEY);
       if (s1) setStats(JSON.parse(s1));
       if (s2) setSettings(JSON.parse(s2));
     } catch (e) {
       console.log("Corrupted save data detected. Resetting.");
       localStorage.removeItem(NEXUS_STATS_KEY);
+      localStorage.removeItem(GUEST_STATS_KEY);
       localStorage.removeItem(NEXUS_SETTINGS_KEY);
       console.error("Error loading saved data", e);
     }
@@ -111,6 +113,9 @@ function AppContent() {
   const handleLogout = async () => {
     try {
       await FirebaseAuthentication.signOut();
+      setStats({ totalXp: 0, completed: 0, passes: {} });
+      localStorage.removeItem(NEXUS_STATS_KEY);
+      localStorage.removeItem(GUEST_STATS_KEY);
       setUser(null);
       setGameState('login');
     } catch (error) {
