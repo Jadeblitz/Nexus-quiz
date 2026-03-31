@@ -85,7 +85,7 @@ export const GameProvider = ({ children }) => {
         const userDocSnap = await getDoc(userDocRef);
         if (userDocSnap.exists()) {
           const data = userDocSnap.data();
-          setIsAdmin(data.isAdmin === true || data.role === 'admin');
+          userObj.isAdmin = data.isAdmin === true || data.role === 'admin';
           setStats({ totalXp: data.score || 0, completed: data.completed || 0, passes: data.passes || {} });
         } else {
           setIsAdmin(false);
@@ -272,7 +272,7 @@ export const GameProvider = ({ children }) => {
   const saveProgress = async (newXp, newCompleted, newPasses) => {
     if (!user) return;
     try {
-      const rankData = getRank(newXp, isAdmin);
+      const rankData = getRank(newXp, user?.isAdmin);
       const powerLevel = Math.floor(newXp / 100);
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
@@ -302,7 +302,7 @@ export const GameProvider = ({ children }) => {
     const newStep = Math.floor(newXp / 1250);
 
     if (newStep > oldStep) {
-      const rankData = getRank(newXp, isAdmin);
+      const rankData = getRank(newXp, user?.isAdmin);
       setNewRankInfo(rankData);
       setShowRankUp(true);
       setTimeout(() => setShowRankUp(false), 4000);
@@ -345,7 +345,7 @@ export const GameProvider = ({ children }) => {
   };
 
   const handleShareWrapper = async () => {
-    const rankData = getRank(stats.totalXp, isAdmin);
+    const rankData = getRank(stats.totalXp, user?.isAdmin);
     const { handleShare } = await import('../utils/shareUtils.js');
     await handleShare(rankData, streak, stats.totalXp);
   };

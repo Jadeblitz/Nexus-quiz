@@ -36,7 +36,7 @@ describe('quizLogic', () => {
             });
         });
 
-        it('should return Rank 14 True God for 50000+ XP for admin', () => {
+        it('should return Rank 14 True God for 50000+ XP', () => {
             assert.deepEqual(getRank(50000, true), {
                 title: "Rank 14",
                 level: "True God",
@@ -54,7 +54,7 @@ describe('quizLogic', () => {
 
         it('should transition colors correctly at higher ranks', () => {
             assert.strictEqual(getRank(8 * 3 * 1250).color, "text-purple-400"); // Rank 9
-            assert.strictEqual(getRank(11 * 3 * 1250).color, "text-rose-500"); // Rank 12
+            assert.strictEqual(getRank(11 * 3 * 1250).color, "text-rose-500"); // Rank 11
         });
     });
 
