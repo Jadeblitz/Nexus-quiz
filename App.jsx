@@ -18,16 +18,25 @@ const Modal = ({ title, children, onClose, icon: Icon, iconColor }) => (
   </div>
 );
 
+const MaintenanceScreen = ({ message }) => (
+  <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-white p-6">
+    <Brain className="text-blue-500 mb-6" size={80} />
+    <h1 className="text-3xl font-black mb-4 text-center">System Maintenance</h1>
+    <p className="text-slate-400 text-center max-w-md">{message}</p>
+  </div>
+);
+
 function AppContent() {
   const {
     user, setUser,
+    isAdmin,
     stats, setStats,
     gameState, setGameState,
     isLoading, setIsLoading,
     settings, setSettings,
     showRankUp, newRankInfo,
-    manualSyncToCloud,
-    VAULT_CONSTANTS
+    VAULT_CONSTANTS,
+    maintenanceMode, maintenanceMessage
   } = useGame();
 
   const [showSettings, setShowSettings] = useState(false);
@@ -136,6 +145,10 @@ function AppContent() {
 
   if (isLoading) {
     return <div className="min-h-screen bg-slate-950 flex items-center justify-center text-white"><Brain className="animate-pulse text-blue-500" size={60} /></div>;
+  }
+
+  if (maintenanceMode && !isAdmin) {
+    return <MaintenanceScreen message={maintenanceMessage} />;
   }
 
   return (

@@ -41,6 +41,7 @@ vi.mock('firebase/firestore', () => ({
   getFirestore: vi.fn(),
   doc: vi.fn(),
   setDoc: vi.fn(),
+  onSnapshot: vi.fn(() => vi.fn()) // returns unsubscribe function
 }));
 
 // Mock HTMLAudioElement
