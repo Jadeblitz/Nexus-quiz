@@ -1,7 +1,7 @@
 import React from 'react';
 import { Brain } from 'lucide-react';
 
-export default function LoginScreen({ email, setEmail, password, setPassword, isRegistering, setIsRegistering, handleLogin, setGameState, authError }) {
+export default function LoginScreen({ email, setEmail, password, setPassword, isRegistering, setIsRegistering, handleLogin, setGameState, authError, setAuthError }) {
   return (
     <div className="w-full max-w-sm space-y-6 text-center animate-in zoom-in duration-300">
       <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-4 rounded-3xl inline-block mb-4 shadow-[0_0_30px_rgba(59,130,246,0.5)]">
