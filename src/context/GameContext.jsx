@@ -65,6 +65,7 @@ export const GameProvider = ({ children }) => {
 
   const [showRankUp, setShowRankUp] = useState(false);
   const [newRankInfo, setNewRankInfo] = useState({});
+  const [seenQuestions, setSeenQuestions] = useState({});
 
   // Settings
   const [settings, setSettings] = useState({
@@ -205,15 +206,41 @@ export const GameProvider = ({ children }) => {
     }
 
     let pool = subjectData[selectedDifficulty.id];
+    const poolKey = `${selectedSubject.id}_${selectedDifficulty.id}`;
+    let currentSeen = seenQuestions[poolKey] || new Set();
+
+    // Reset seen questions if we exhausted the pool
+    if (currentSeen.size >= pool.length) {
+      currentSeen = new Set();
+    }
+
+    // Filter out already seen questions
+    let availablePool = pool.filter(q => !currentSeen.has(q.id));
     const limit = timeMode ? 20 : 10;
-    const actualLimit = Math.min(pool.length, limit);
-    const poolCopy = [...pool];
+
+    // If there aren't enough available questions, clear the seen set and use the full pool again
+    if (availablePool.length < limit && pool.length >= limit) {
+       currentSeen = new Set();
+       availablePool = [...pool];
+    }
+
+    const actualLimit = Math.min(availablePool.length, limit);
+    const poolCopy = [...availablePool];
     for (let i = 0; i < actualLimit; i++) {
       const j = i + Math.floor(Math.random() * (poolCopy.length - i));
       [poolCopy[i], poolCopy[j]] = [poolCopy[j], poolCopy[i]];
     }
-    const randomized = poolCopy.slice(0, actualLimit).map(q => ({
-      ...q, options: shuffle(q.options)
+
+    const randomized = poolCopy.slice(0, actualLimit).map(q => {
+      currentSeen.add(q.id); // Add to seen right away for this session
+      return {
+        ...q, options: shuffle(q.options)
+      };
+    });
+
+    setSeenQuestions(prev => ({
+      ...prev,
+      [poolKey]: currentSeen
     }));
 
     setQuestions(randomized);
@@ -403,11 +430,7 @@ export const GameProvider = ({ children }) => {
     const newStats = { ...stats, completed: stats.completed + 1, passes: newPasses };
     setStats(newStats);
 
-    const storageKey = user ? 'nexus_stats' : 'guest_nexus_stats';
-    localStorage.setItem(storageKey, JSON.stringify(newStats));
-
-    const finalTotalXp = newXp;
-    saveProgress(finalTotalXp, newStats.completed, newPasses);
+    saveProgress(newXp, newStats.completed, newPasses);
 
     setSessionXp(finalXpGain);
     setGameState('results');
