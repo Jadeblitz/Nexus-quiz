@@ -77,6 +77,7 @@ export const GameProvider = ({ children }) => {
   const correctSfx = useRef(typeof Audio !== "undefined" ? new Audio('/correct.mp3') : null);
   const wrongSfx = useRef(typeof Audio !== "undefined" ? new Audio('/wrong.mp3') : null);
 
+  const isInitialLoad = useRef(true);
 
   useEffect(() => {
     const handleUserPersistence = async (userObj) => {
@@ -87,7 +88,36 @@ export const GameProvider = ({ children }) => {
         if (userDocSnap.exists()) {
           const data = userDocSnap.data();
           userObj.isAdmin = data.isAdmin === true || data.role === 'admin';
-          setStats({ totalXp: data.score || 0, completed: data.completed || 0, passes: data.passes || {} });
+
+          let mergedStats = { totalXp: data.score || 0, completed: data.completed || 0, passes: data.passes || {} };
+
+          const guestDataStr = localStorage.getItem('guest_nexus_stats');
+          const guestData = guestDataStr ? JSON.parse(guestDataStr) : null;
+
+          if (guestData) {
+            if (guestData.totalXp > (data.score || 0)) {
+              if (window.confirm("We found unsaved progress. Would you like to sync it to this account?")) {
+                mergedStats = {
+                  totalXp: guestData.totalXp,
+                  completed: guestData.completed || 0,
+                  passes: guestData.passes || {}
+                };
+                // Fire and forget save to ensure the newly merged stats are persisted to the cloud
+                const rankData = getRank(mergedStats.totalXp, userObj.isAdmin);
+                setDoc(userDocRef, {
+                  score: mergedStats.totalXp,
+                  powerLevel: Math.floor(mergedStats.totalXp / 100),
+                  completed: mergedStats.completed,
+                  passes: mergedStats.passes,
+                  rank: rankData.level
+                }, { merge: true }).catch(err => console.error("Merge sync failed", err));
+              }
+            }
+            // Unconditionally clear guest storage after an active login so it never shadows the user's cache
+            localStorage.removeItem('guest_nexus_stats');
+          }
+
+          setStats(mergedStats);
         } else {
           setIsAdmin(false);
           await setDoc(userDocRef, {
@@ -116,6 +146,7 @@ export const GameProvider = ({ children }) => {
         .finally(() => {
           setGameState('subject_select');
           setIsLoading(false);
+          isInitialLoad.current = false;
         });
     };
 
@@ -134,9 +165,11 @@ export const GameProvider = ({ children }) => {
         resolveAuth(result.user);
       } else {
         setIsLoading(false);
+        isInitialLoad.current = false;
       }
     }).catch(() => {
       setIsLoading(false);
+      isInitialLoad.current = false;
     });
   }, []);
 
@@ -314,6 +347,39 @@ export const GameProvider = ({ children }) => {
     }
   };
 
+  const manualSyncToCloud = async () => {
+    if (!user) return false;
+    try {
+      const userDocRef = doc(db, "users", user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+      const cloudData = userDocSnap.exists() ? userDocSnap.data() : null;
+      const cloudScore = cloudData?.score || 0;
+
+      if (stats.totalXp > cloudScore) {
+        const proceed = window.confirm("This will update your cloud profile with your current device progress. Proceed?");
+        if (!proceed) return false;
+
+        const rankData = getRank(stats.totalXp, user?.isAdmin);
+        const powerLevel = Math.floor(stats.totalXp / 100);
+        await setDoc(userDocRef, {
+          uid: user.uid,
+          rank: rankData.level,
+          score: stats.totalXp,
+          powerLevel: powerLevel,
+          completed: stats.completed,
+          passes: stats.passes,
+          lastSynced: new Date().toISOString()
+        }, { merge: true });
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      console.error("Manual sync failed", err);
+      return false;
+    }
+  };
+
   const finishQuiz = (finalScore, finalSessionXp) => {
     let finalXpGain = isTimeAttack ? finalSessionXp * 2 : finalSessionXp;
 
@@ -363,7 +429,6 @@ export const GameProvider = ({ children }) => {
 
     const newStats = { ...stats, completed: stats.completed + 1, passes: newPasses };
     setStats(newStats);
-    localStorage.setItem('nexus_stats', JSON.stringify(newStats));
 
     saveProgress(newXp, newStats.completed, newPasses);
 
@@ -401,7 +466,7 @@ export const GameProvider = ({ children }) => {
       settings, setSettings,
       showRankUp, setShowRankUp,
       newRankInfo, setNewRankInfo,
-      startQuiz, handleAnswer, finishQuiz, handleShareWrapper, VAULT_CONSTANTS
+      startQuiz, handleAnswer, finishQuiz, handleShareWrapper, manualSyncToCloud, VAULT_CONSTANTS
     }}>
       {children}
     </GameContext.Provider>
