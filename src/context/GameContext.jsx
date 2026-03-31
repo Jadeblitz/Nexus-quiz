@@ -48,6 +48,7 @@ export const GameProvider = ({ children }) => {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
 
+  const activePools = useRef({});
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isChecking, setIsChecking] = useState(false);
@@ -69,6 +70,7 @@ export const GameProvider = ({ children }) => {
 
   const [showRankUp, setShowRankUp] = useState(false);
   const [newRankInfo, setNewRankInfo] = useState({});
+  const [seenQuestions, setSeenQuestions] = useState({});
 
   // Settings
   const [settings, setSettings] = useState({
@@ -80,6 +82,7 @@ export const GameProvider = ({ children }) => {
   const correctSfx = useRef(typeof Audio !== "undefined" ? new Audio('/correct.mp3') : null);
   const wrongSfx = useRef(typeof Audio !== "undefined" ? new Audio('/wrong.mp3') : null);
 
+  const isInitialLoad = useRef(true);
 
   useEffect(() => {
     const handleUserPersistence = async (userObj) => {
@@ -90,7 +93,36 @@ export const GameProvider = ({ children }) => {
         if (userDocSnap.exists()) {
           const data = userDocSnap.data();
           userObj.isAdmin = data.isAdmin === true || data.role === 'admin';
-          setStats({ totalXp: data.score || 0, completed: data.completed || 0, passes: data.passes || {} });
+
+          let mergedStats = { totalXp: data.score || 0, completed: data.completed || 0, passes: data.passes || {} };
+
+          const guestDataStr = localStorage.getItem('guest_nexus_stats');
+          const guestData = guestDataStr ? JSON.parse(guestDataStr) : null;
+
+          if (guestData) {
+            if (guestData.totalXp > (data.score || 0)) {
+              if (window.confirm("We found unsaved progress. Would you like to sync it to this account?")) {
+                mergedStats = {
+                  totalXp: guestData.totalXp,
+                  completed: guestData.completed || 0,
+                  passes: guestData.passes || {}
+                };
+                // Fire and forget save to ensure the newly merged stats are persisted to the cloud
+                const rankData = getRank(mergedStats.totalXp, userObj.isAdmin);
+                setDoc(userDocRef, {
+                  score: mergedStats.totalXp,
+                  powerLevel: Math.floor(mergedStats.totalXp / 100),
+                  completed: mergedStats.completed,
+                  passes: mergedStats.passes,
+                  rank: rankData.level
+                }, { merge: true }).catch(err => console.error("Merge sync failed", err));
+              }
+            }
+            // Unconditionally clear guest storage after an active login so it never shadows the user's cache
+            localStorage.removeItem('guest_nexus_stats');
+          }
+
+          setStats(mergedStats);
         } else {
           setIsAdmin(false);
           await setDoc(userDocRef, {
@@ -119,6 +151,7 @@ export const GameProvider = ({ children }) => {
         .finally(() => {
           setGameState('subject_select');
           setIsLoading(false);
+          isInitialLoad.current = false;
         });
     };
 
@@ -137,9 +170,11 @@ export const GameProvider = ({ children }) => {
         resolveAuth(result.user);
       } else {
         setIsLoading(false);
+        isInitialLoad.current = false;
       }
     }).catch(() => {
       setIsLoading(false);
+      isInitialLoad.current = false;
     });
 
     // Setup Maintenance Mode Listener
@@ -188,28 +223,43 @@ export const GameProvider = ({ children }) => {
     return shuffled;
   };
 
-  const startQuiz = (timeMode) => {
+      const startQuiz = (timeMode) => {
     setIsTimeAttack(timeMode);
     setTimeLeft(60);
     setStreak(0);
     setShowStreakBonus(false);
 
-    const subjectData = quizData[selectedSubject?.id];
-    if (!subjectData || !subjectData[selectedDifficulty?.id] || subjectData[selectedDifficulty?.id].length === 0) {
+    const subId = selectedSubject?.id;
+    const diffId = selectedDifficulty?.id;
+    const poolKey = `${subId}_${diffId}`;
+
+    const subjectData = quizData[subId];
+    if (!subjectData || !subjectData[diffId] || subjectData[diffId].length === 0) {
        alert("No questions available for this level yet!");
        setGameState('subject_select');
        return;
     }
 
-    let pool = subjectData[selectedDifficulty.id];
-    const limit = timeMode ? 20 : 10;
-    const actualLimit = Math.min(pool.length, limit);
-    const poolCopy = [...pool];
-    for (let i = 0; i < actualLimit; i++) {
-      const j = i + Math.floor(Math.random() * (poolCopy.length - i));
-      [poolCopy[i], poolCopy[j]] = [poolCopy[j], poolCopy[i]];
+    // Initialize or reset active pool if it's empty
+    if (!activePools.current[poolKey] || activePools.current[poolKey].length === 0) {
+       activePools.current[poolKey] = [...subjectData[diffId]];
     }
-    const randomized = poolCopy.slice(0, actualLimit).map(q => ({
+
+    let pool = activePools.current[poolKey];
+
+    // Shuffle the pool
+    const shuffledPool = shuffle([...pool]);
+
+    const limit = timeMode ? 20 : 10;
+    const actualLimit = Math.min(shuffledPool.length, limit);
+
+    // Select questions
+    const selectedQuestions = shuffledPool.slice(0, actualLimit);
+
+    // Remove selected questions from the active pool
+    activePools.current[poolKey] = shuffledPool.slice(actualLimit);
+
+    const randomized = selectedQuestions.map(q => ({
       ...q, options: shuffle(q.options)
     }));
 
@@ -317,6 +367,39 @@ export const GameProvider = ({ children }) => {
     }
   };
 
+  const manualSyncToCloud = async () => {
+    if (!user) return false;
+    try {
+      const userDocRef = doc(db, "users", user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+      const cloudData = userDocSnap.exists() ? userDocSnap.data() : null;
+      const cloudScore = cloudData?.score || 0;
+
+      if (stats.totalXp > cloudScore) {
+        const proceed = window.confirm("This will update your cloud profile with your current device progress. Proceed?");
+        if (!proceed) return false;
+
+        const rankData = getRank(stats.totalXp, user?.isAdmin);
+        const powerLevel = Math.floor(stats.totalXp / 100);
+        await setDoc(userDocRef, {
+          uid: user.uid,
+          rank: rankData.level,
+          score: stats.totalXp,
+          powerLevel: powerLevel,
+          completed: stats.completed,
+          passes: stats.passes,
+          lastSynced: new Date().toISOString()
+        }, { merge: true });
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      console.error("Manual sync failed", err);
+      return false;
+    }
+  };
+
   const finishQuiz = (finalScore, finalSessionXp) => {
     let finalXpGain = isTimeAttack ? finalSessionXp * 2 : finalSessionXp;
 
@@ -366,7 +449,6 @@ export const GameProvider = ({ children }) => {
 
     const newStats = { ...stats, completed: stats.completed + 1, passes: newPasses };
     setStats(newStats);
-    localStorage.setItem('nexus_stats', JSON.stringify(newStats));
 
     saveProgress(newXp, newStats.completed, newPasses);
 
