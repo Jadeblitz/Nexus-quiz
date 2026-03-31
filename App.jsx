@@ -39,6 +39,7 @@ function AppContent() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRegistering, setIsRegistering] = useState(false);
+  const [authError, setAuthError] = useState('');
 
   const bgMusic = useRef(typeof Audio !== "undefined" ? new Audio('/music.mp3') : null);
   if (bgMusic.current) bgMusic.current.loop = true;
@@ -92,6 +93,7 @@ function AppContent() {
 
   const handleLogin = async (provider) => {
     try {
+      setAuthError('');
       let result;
       if (provider === 'google') {
         result = await FirebaseAuthentication.signInWithGoogle();
@@ -109,7 +111,19 @@ function AppContent() {
 
     } catch (error) {
       console.error("Login failed:", error);
-      alert("Login failed. Please try again.");
+
+      let errorMessage = "Login failed. Please try again.";
+      if (error.code === 'auth/user-not-found') {
+        errorMessage = "Email not registered. Please sign up first.";
+      } else if (error.code === 'auth/wrong-password') {
+        errorMessage = "Incorrect password. Please try again.";
+      } else if (error.code === 'auth/invalid-credential') {
+        errorMessage = "Invalid credentials. Please check your email and password.";
+      } else if (error.code === 'auth/invalid-email') {
+        errorMessage = "Invalid email format.";
+      }
+
+      setAuthError(errorMessage);
       setIsLoading(false);
     }
   };
@@ -233,6 +247,7 @@ function AppContent() {
           setIsRegistering={setIsRegistering}
           handleLogin={handleLogin}
           setGameState={setGameState}
+          authError={authError}
         />
       )}
 
