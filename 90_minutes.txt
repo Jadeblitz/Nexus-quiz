@@ -1,0 +1,695 @@
+9584-        "5"
+9585-      ],
+9586-      [
+9587-        "Who is the most capped Super Eagles player?",
+9588-        "Ahmed Musa",
+9589-        "Vincent Enyeama",
+9590-        "Joseph Yobo",
+9591-        "Mikel Obi"
+9592-      ],
+9593-      [
+9594:        "A standard football match is 90 minutes long",
+9595-        "True",
+9596-        "False",
+9597-        "Partially True",
+9598-        "Depends on the referee"
+9599-      ],
+9600-      [
+9601:        "A standard football match is 90 minutes long",
+9602-        "True",
+9603-        "False",
+9604-        "Partially True",
+9605-        "Depends on the referee"
+9606-      ],
+9607-      [
+9608-        "How many players are typically on the field/court for one team in Tennis?",
+9609-        "6",
+9610-        "9",
+9611-        "3",
+--
+9640-        "1"
+9641-      ],
+9642-      [
+9643-        "How many players are typically on the field/court for one team in Cricket?",
+9644-        "6",
+9645-        "1",
+9646-        "11",
+9647-        "9"
+9648-      ],
+9649-      [
+9650:        "A standard football match is 90 minutes long",
+9651-        "True",
+9652-        "False",
+9653-        "Partially True",
+9654-        "Depends on the referee"
+9655-      ],
+9656-      [
+9657-        "How many players are typically on the field/court for one team in Rugby?",
+9658-        "6",
+9659-        "7",
+9660-        "4",
+9661-        "9"
+9662-      ],
+9663-      [
+9664:        "A standard football match is 90 minutes long",
+9665-        "True",
+9666-        "False",
+9667-        "Partially True",
+9668-        "Depends on the referee"
+9669-      ],
+9670-      [
+9671-        "How many players are typically on the field/court for one team in Cricket?",
+9672-        "8",
+9673-        "3",
+9674-        "10",
+--
+9703-        "2"
+9704-      ],
+9705-      [
+9706-        "How many players are typically on the field/court for one team in Boxing?",
+9707-        "6",
+9708-        "9",
+9709-        "10",
+9710-        "11"
+9711-      ],
+9712-      [
+9713:        "A standard football match is 90 minutes long",
+9714-        "True",
+9715-        "False",
+9716-        "Partially True",
+9717-        "Depends on the referee"
+9718-      ],
+9719-      [
+9720-        "How many players are typically on the field/court for one team in Tennis?",
+9721-        "10",
+9722-        "5",
+9723-        "9",
+--
+9738-        "10"
+9739-      ],
+9740-      [
+9741-        "How many players are typically on the field/court for one team in Athletics?",
+9742-        "1",
+9743-        "2",
+9744-        "8",
+9745-        "7"
+9746-      ],
+9747-      [
+9748:        "A standard football match is 90 minutes long",
+9749-        "True",
+9750-        "False",
+9751-        "Partially True",
+9752-        "Depends on the referee"
+9753-      ],
+9754-      [
+9755:        "A standard football match is 90 minutes long",
+9756-        "True",
+9757-        "False",
+9758-        "Partially True",
+9759-        "Depends on the referee"
+9760-      ],
+9761-      [
+9762:        "A standard football match is 90 minutes long",
+9763-        "True",
+9764-        "False",
+9765-        "Partially True",
+9766-        "Depends on the referee"
+9767-      ],
+9768-      [
+9769-        "How many players are typically on the field/court for one team in Rugby?",
+9770-        "5",
+9771-        "10",
+9772-        "7",
+9773-        "1"
+9774-      ],
+9775-      [
+9776-        "How many players are typically on the field/court for one team in Tennis?",
+9777-        "10",
+9778-        "6",
+9779-        "7",
+9780-        "8"
+9781-      ],
+9782-      [
+9783:        "A standard football match is 90 minutes long",
+9784-        "True",
+9785-        "False",
+9786-        "Partially True",
+9787-        "Depends on the referee"
+9788-      ],
+9789-      [
+9790:        "A standard football match is 90 minutes long",
+9791-        "True",
+9792-        "False",
+9793-        "Partially True",
+9794-        "Depends on the referee"
+9795-      ],
+9796-      [
+9797-        "How many players are typically on the field/court for one team in Basketball?",
+9798-        "11",
+9799-        "10",
+9800-        "7",
+--
+9829-        "2"
+9830-      ],
+9831-      [
+9832-        "How many players are typically on the field/court for one team in Boxing?",
+9833-        "8",
+9834-        "5",
+9835-        "4",
+9836-        "1"
+9837-      ],
+9838-      [
+9839:        "A standard football match is 90 minutes long",
+9840-        "True",
+9841-        "False",
+9842-        "Partially True",
+9843-        "Depends on the referee"
+9844-      ],
+9845-      [
+9846:        "A standard football match is 90 minutes long",
+9847-        "True",
+9848-        "False",
+9849-        "Partially True",
+9850-        "Depends on the referee"
+9851-      ],
+9852-      [
+9853-        "How many players are typically on the field/court for one team in Athletics?",
+9854-        "3",
+9855-        "9",
+9856-        "11",
+9857-        "4"
+9858-      ],
+9859-      [
+9860:        "A standard football match is 90 minutes long",
+9861-        "True",
+9862-        "False",
+9863-        "Partially True",
+9864-        "Depends on the referee"
+9865-      ],
+9866-      [
+9867:        "A standard football match is 90 minutes long",
+9868-        "True",
+9869-        "False",
+9870-        "Partially True",
+9871-        "Depends on the referee"
+9872-      ],
+9873-      [
+9874:        "A standard football match is 90 minutes long",
+9875-        "True",
+9876-        "False",
+9877-        "Partially True",
+9878-        "Depends on the referee"
+9879-      ],
+9880-      [
+9881-        "How many players are typically on the field/court for one team in Athletics?",
+9882-        "7",
+9883-        "5",
+9884-        "8",
+9885-        "1"
+9886-      ],
+9887-      [
+9888:        "A standard football match is 90 minutes long",
+9889-        "True",
+9890-        "False",
+9891-        "Partially True",
+9892-        "Depends on the referee"
+9893-      ],
+9894-      [
+9895:        "A standard football match is 90 minutes long",
+9896-        "True",
+9897-        "False",
+9898-        "Partially True",
+9899-        "Depends on the referee"
+9900-      ],
+9901-      [
+9902-        "How many players are typically on the field/court for one team in Rugby?",
+9903-        "9",
+9904-        "1",
+9905-        "5",
+9906-        "2"
+9907-      ],
+9908-      [
+9909:        "A standard football match is 90 minutes long",
+9910-        "True",
+9911-        "False",
+9912-        "Partially True",
+9913-        "Depends on the referee"
+9914-      ],
+9915-      [
+9916-        "How many players are typically on the field/court for one team in Baseball?",
+9917-        "7",
+9918-        "2",
+9919-        "3",
+9920-        "4"
+9921-      ],
+9922-      [
+9923:        "A standard football match is 90 minutes long",
+9924-        "True",
+9925-        "False",
+9926-        "Partially True",
+9927-        "Depends on the referee"
+9928-      ],
+9929-      [
+9930-        "How many players are typically on the field/court for one team in Golf?",
+9931-        "4",
+9932-        "5",
+9933-        "10",
+9934-        "1"
+9935-      ],
+9936-      [
+9937:        "A standard football match is 90 minutes long",
+9938-        "True",
+9939-        "False",
+9940-        "Partially True",
+9941-        "Depends on the referee"
+9942-      ],
+9943-      [
+9944-        "How many players are typically on the field/court for one team in Football?",
+9945-        "8",
+9946-        "11",
+9947-        "5",
+9948-        "10"
+9949-      ],
+9950-      [
+9951:        "A standard football match is 90 minutes long",
+9952-        "True",
+9953-        "False",
+9954-        "Partially True",
+9955-        "Depends on the referee"
+9956-      ]
+9957-    ],
+9958-    "intermediate": [
+9959-      [
+9960-        "Most Ballon d'Or awards?",
+9961-        "Messi",
+--
+10398-        "Emerson Fittipaldi"
+10399-      ],
+10400-      [
+10401-        "Who is Manchester United's top premier league goal scorer?",
+10402-        "Wayne Rooney",
+10403-        "Sir Bobby Charlton",
+10404-        "Ryan Giggs",
+10405-        "David Beckham"
+10406-      ],
+10407-      [
+10408:        "A standard football match is 90 minutes long",
+10409-        "True",
+10410-        "False",
+10411-        "Partially True",
+10412-        "Depends on the referee"
+10413-      ],
+10414-      [
+10415-        "How many players are typically on the field/court for one team in Baseball?",
+10416-        "1",
+10417-        "11",
+10418-        "2",
+10419-        "10"
+10420-      ],
+10421-      [
+10422:        "A standard football match is 90 minutes long",
+10423-        "True",
+10424-        "False",
+10425-        "Partially True",
+10426-        "Depends on the referee"
+10427-      ],
+10428-      [
+10429:        "A standard football match is 90 minutes long",
+10430-        "True",
+10431-        "False",
+10432-        "Partially True",
+10433-        "Depends on the referee"
+10434-      ],
+10435-      [
+10436-        "How many players are typically on the field/court for one team in Baseball?",
+10437-        "8",
+10438-        "5",
+10439-        "3",
+10440-        "9"
+10441-      ],
+10442-      [
+10443:        "A standard football match is 90 minutes long",
+10444-        "True",
+10445-        "False",
+10446-        "Partially True",
+10447-        "Depends on the referee"
+10448-      ]
+10449-    ],
+10450-    "advanced": [
+10451-      [
+10452-        "First African Ballon d'Or?",
+10453-        "George Weah",
+--
+10561-        "Leeds United"
+10562-      ],
+10563-      [
+10564-        "Who holds the record for most goals in a single calendar year (91)?",
+10565-        "Lionel Messi",
+10566-        "Cristiano Ronaldo",
+10567-        "Pele",
+10568-        "Gerd Müller"
+10569-      ],
+10570-      [
+10571:        "A standard football match is 90 minutes long",
+10572-        "True",
+10573-        "False",
+10574-        "Partially True",
+10575-        "Depends on the referee"
+10576-      ],
+10577-      [
+10578-        "How many players are typically on the field/court for one team in Boxing?",
+10579-        "1",
+10580-        "2",
+10581-        "7",
+10582-        "9"
+10583-      ],
+10584-      [
+10585:        "A standard football match is 90 minutes long",
+10586-        "True",
+10587-        "False",
+10588-        "Partially True",
+10589-        "Depends on the referee"
+10590-      ],
+10591-      [
+10592-        "How many players are typically on the field/court for one team in Tennis?",
+10593-        "1",
+10594-        "10",
+10595-        "5",
+10596-        "11"
+10597-      ],
+10598-      [
+10599:        "A standard football match is 90 minutes long",
+10600-        "True",
+10601-        "False",
+10602-        "Partially True",
+10603-        "Depends on the referee"
+10604-      ],
+10605-      [
+10606-        "How many players are typically on the field/court for one team in Swimming?",
+10607-        "11",
+10608-        "7",
+10609-        "8",
+10610-        "2"
+10611-      ],
+10612-      [
+10613:        "A standard football match is 90 minutes long",
+10614-        "True",
+10615-        "False",
+10616-        "Partially True",
+10617-        "Depends on the referee"
+10618-      ],
+10619-      [
+10620-        "How many players are typically on the field/court for one team in Cricket?",
+10621-        "10",
+10622-        "2",
+10623-        "6",
+10624-        "8"
+10625-      ],
+10626-      [
+10627:        "A standard football match is 90 minutes long",
+10628-        "True",
+10629-        "False",
+10630-        "Partially True",
+10631-        "Depends on the referee"
+10632-      ],
+10633-      [
+10634-        "How many players are typically on the field/court for one team in Cricket?",
+10635-        "7",
+10636-        "11",
+10637-        "6",
+10638-        "9"
+10639-      ],
+10640-      [
+10641:        "A standard football match is 90 minutes long",
+10642-        "True",
+10643-        "False",
+10644-        "Partially True",
+10645-        "Depends on the referee"
+10646-      ],
+10647-      [
+10648:        "A standard football match is 90 minutes long",
+10649-        "True",
+10650-        "False",
+10651-        "Partially True",
+10652-        "Depends on the referee"
+10653-      ],
+10654-      [
+10655-        "How many players are typically on the field/court for one team in Swimming?",
+10656-        "5",
+10657-        "9",
+10658-        "10",
+10659-        "1"
+10660-      ],
+10661-      [
+10662-        "How many players are typically on the field/court for one team in Football?",
+10663-        "11",
+10664-        "1",
+10665-        "3",
+10666-        "5"
+10667-      ],
+10668-      [
+10669:        "A standard football match is 90 minutes long",
+10670-        "True",
+10671-        "False",
+10672-        "Partially True",
+10673-        "Depends on the referee"
+10674-      ],
+10675-      [
+10676:        "A standard football match is 90 minutes long",
+10677-        "True",
+10678-        "False",
+10679-        "Partially True",
+10680-        "Depends on the referee"
+10681-      ],
+10682-      [
+10683:        "A standard football match is 90 minutes long",
+10684-        "True",
+10685-        "False",
+10686-        "Partially True",
+10687-        "Depends on the referee"
+10688-      ],
+10689-      [
+10690-        "How many players are typically on the field/court for one team in Rugby?",
+10691-        "10",
+10692-        "9",
+10693-        "3",
+--
+10708-        "7"
+10709-      ],
+10710-      [
+10711-        "How many players are typically on the field/court for one team in Rugby?",
+10712-        "8",
+10713-        "11",
+10714-        "5",
+10715-        "4"
+10716-      ],
+10717-      [
+10718:        "A standard football match is 90 minutes long",
+10719-        "True",
+10720-        "False",
+10721-        "Partially True",
+10722-        "Depends on the referee"
+10723-      ],
+10724-      [
+10725-        "How many players are typically on the field/court for one team in Rugby?",
+10726-        "1",
+10727-        "5",
+10728-        "11",
+10729-        "6"
+10730-      ],
+10731-      [
+10732-        "How many players are typically on the field/court for one team in Swimming?",
+10733-        "9",
+10734-        "5",
+10735-        "1",
+10736-        "7"
+10737-      ],
+10738-      [
+10739:        "A standard football match is 90 minutes long",
+10740-        "True",
+10741-        "False",
+10742-        "Partially True",
+10743-        "Depends on the referee"
+10744-      ],
+10745-      [
+10746-        "How many players are typically on the field/court for one team in Basketball?",
+10747-        "10",
+10748-        "2",
+10749-        "6",
+10750-        "1"
+10751-      ],
+10752-      [
+10753:        "A standard football match is 90 minutes long",
+10754-        "True",
+10755-        "False",
+10756-        "Partially True",
+10757-        "Depends on the referee"
+10758-      ],
+10759-      [
+10760:        "A standard football match is 90 minutes long",
+10761-        "True",
+10762-        "False",
+10763-        "Partially True",
+10764-        "Depends on the referee"
+10765-      ],
+10766-      [
+10767:        "A standard football match is 90 minutes long",
+10768-        "True",
+10769-        "False",
+10770-        "Partially True",
+10771-        "Depends on the referee"
+10772-      ],
+10773-      [
+10774-        "How many players are typically on the field/court for one team in Boxing?",
+10775-        "9",
+10776-        "6",
+10777-        "11",
+10778-        "5"
+10779-      ],
+10780-      [
+10781:        "A standard football match is 90 minutes long",
+10782-        "True",
+10783-        "False",
+10784-        "Partially True",
+10785-        "Depends on the referee"
+10786-      ],
+10787-      [
+10788-        "How many players are typically on the field/court for one team in Boxing?",
+10789-        "3",
+10790-        "6",
+10791-        "9",
+10792-        "4"
+10793-      ],
+10794-      [
+10795-        "How many players are typically on the field/court for one team in Tennis?",
+10796-        "7",
+10797-        "3",
+10798-        "2",
+10799-        "8"
+10800-      ],
+10801-      [
+10802:        "A standard football match is 90 minutes long",
+10803-        "True",
+10804-        "False",
+10805-        "Partially True",
+10806-        "Depends on the referee"
+10807-      ],
+10808-      [
+10809-        "How many players are typically on the field/court for one team in Basketball?",
+10810-        "7",
+10811-        "6",
+10812-        "4",
+10813-        "2"
+10814-      ],
+10815-      [
+10816:        "A standard football match is 90 minutes long",
+10817-        "True",
+10818-        "False",
+10819-        "Partially True",
+10820-        "Depends on the referee"
+10821-      ],
+10822-      [
+10823:        "A standard football match is 90 minutes long",
+10824-        "True",
+10825-        "False",
+10826-        "Partially True",
+10827-        "Depends on the referee"
+10828-      ],
+10829-      [
+10830-        "How many players are typically on the field/court for one team in Golf?",
+10831-        "3",
+10832-        "9",
+10833-        "2",
+--
+10841-        "2"
+10842-      ],
+10843-      [
+10844-        "How many players are typically on the field/court for one team in Baseball?",
+10845-        "11",
+10846-        "1",
+10847-        "8",
+10848-        "3"
+10849-      ],
+10850-      [
+10851:        "A standard football match is 90 minutes long",
+10852-        "True",
+10853-        "False",
+10854-        "Partially True",
+10855-        "Depends on the referee"
+10856-      ],
+10857-      [
+10858-        "How many players are typically on the field/court for one team in Football?",
+10859-        "8",
+10860-        "1",
+10861-        "5",
+--
+10869-        "6"
+10870-      ],
+10871-      [
+10872-        "How many players are typically on the field/court for one team in Athletics?",
+10873-        "8",
+10874-        "2",
+10875-        "5",
+10876-        "11"
+10877-      ],
+10878-      [
+10879:        "A standard football match is 90 minutes long",
+10880-        "True",
+10881-        "False",
+10882-        "Partially True",
+10883-        "Depends on the referee"
+10884-      ],
+10885-      [
+10886:        "A standard football match is 90 minutes long",
+10887-        "True",
+10888-        "False",
+10889-        "Partially True",
+10890-        "Depends on the referee"
+10891-      ],
+10892-      [
+10893-        "How many players are typically on the field/court for one team in Rugby?",
+10894-        "8",
+10895-        "5",
+10896-        "2",
+10897-        "7"
+10898-      ],
+10899-      [
+10900:        "A standard football match is 90 minutes long",
+10901-        "True",
+10902-        "False",
+10903-        "Partially True",
+10904-        "Depends on the referee"
+10905-      ],
+10906-      [
+10907-        "How many players are typically on the field/court for one team in Football?",
+10908-        "3",
+10909-        "11",
+10910-        "6",
+10911-        "8"
+10912-      ],
+10913-      [
+10914:        "A standard football match is 90 minutes long",
+10915-        "True",
+10916-        "False",
+10917-        "Partially True",
+10918-        "Depends on the referee"
+10919-      ],
+10920-      [
+10921-        "How many players are typically on the field/court for one team in Athletics?",
+10922-        "2",
+10923-        "11",
+10924-        "9",
+10925-        "10"
+10926-      ],
+10927-      [
+10928:        "A standard football match is 90 minutes long",
+10929-        "True",
+10930-        "False",
+10931-        "Partially True",
+10932-        "Depends on the referee"
+10933-      ],
+10934-      [
+10935-        "How many players are typically on the field/court for one team in Tennis?",
+10936-        "10",
+10937-        "7",
+10938-        "11",

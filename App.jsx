@@ -39,6 +39,7 @@ function AppContent() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRegistering, setIsRegistering] = useState(false);
+  const [authError, setAuthError] = useState("");
 
   const bgMusic = useRef(typeof Audio !== "undefined" ? new Audio('/music.mp3') : null);
   if (bgMusic.current) bgMusic.current.loop = true;
@@ -109,7 +110,13 @@ function AppContent() {
 
     } catch (error) {
       console.error("Login failed:", error);
-      alert("Login failed. Please try again.");
+      let errMsg = "Login failed. Please try again.";
+      if (error?.message?.includes('auth/user-not-found') || error?.code === 'auth/user-not-found') {
+        errMsg = "Email not registered. Please sign up first.";
+      } else if (error?.message?.includes('auth/wrong-password') || error?.code === 'auth/wrong-password') {
+        errMsg = "Incorrect password. Please try again.";
+      }
+      setAuthError(errMsg);
       setIsLoading(false);
     }
   };
@@ -224,7 +231,7 @@ function AppContent() {
       )}
 
       {gameState === 'login' && (
-        <LoginScreen
+        <LoginScreen authError={authError} setAuthError={setAuthError}
           email={email}
           setEmail={setEmail}
           password={password}

@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "test": "vitest run",
-    "build": "vite build",
+    "verify-data": "node verify_data.js",
+    "build": "npm run verify-data && vite build",
     "cap:build": "npx cap sync android"
   },
   "dependencies": {
