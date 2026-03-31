@@ -1,4 +1,7 @@
 
-  VITE v8.0.1  ready in 365 ms
+  VITE v8.0.2   test   ready in 361 ms
 
   ➜  Local:   http://127.0.0.1:5173/
+8:03:56 AM [vite] (client) hmr update /index.css, /src/context/GameContext.jsx
+8:03:56 AM [vite] (client) hmr update /index.css, /src/context/GameContext.jsx
+8:07:45 AM [vite] (client) hmr update /index.css
