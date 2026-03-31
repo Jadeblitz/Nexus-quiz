@@ -1487,7 +1487,7 @@ export const rawQuizData = {
         "THE INFINITY STUDIOS™",
         "Nexus Graphics",
         "Ord-Gen",
-        "Crimson Archives" 
+        "Crimson Archives"
       ]
     ]
   },
@@ -4181,6 +4181,34 @@ export const rawQuizData = {
         "Hexagon",
         "Heptagon",
         "Octagon"
+      ],
+      [
+        "In the Ideal Gas Law equation, PV = nRT, what does the variable 'n' represent?",
+        "Number of Moles",
+        "Newton",
+        "Normal Pressure",
+        "Net Heat"
+      ],
+      [
+        "Which branch of engineering deals with the design and construction of bridges and dams?",
+        "Civil",
+        "Mechanical",
+        "Structural",
+        "Mechatronics"
+      ],
+      [
+        "Which scale is used by Mining Engineers to measure the scratch resistance of minerals?",
+        "Mohs",
+        "Richter",
+        "Kelvin",
+        "Pascal"
+      ],
+      [
+        "What is the SI unit of Force?",
+        "Newton",
+        "Joule",
+        "Watt",
+        "Pascal"
       ]
     ],
     "intermediate": [
@@ -4883,6 +4911,27 @@ export const rawQuizData = {
         "45",
         "43",
         "46"
+      ],
+      [
+        "Which dimensionless number predicts the transition from laminar to turbulent flow?",
+        "Reynolds",
+        "Nusselt",
+        "Prandtl",
+        "Froude"
+      ],
+      [
+        "In Software Engineering, what is the \"Big O\" time complexity of Binary Search on a sorted array?",
+        "O(\\log n)",
+        "O(n)",
+        "O(n^2)",
+        "O(1)"
+      ],
+      [
+        "What is the term for the ratio of stress to strain in the elastic region of a material?",
+        "Young's Modulus",
+        "Poisson's Ratio",
+        "Yield Point",
+        "Ductility"
       ]
     ],
     "advanced": [
@@ -5585,6 +5634,27 @@ export const rawQuizData = {
         "28",
         "26",
         "29"
+      ],
+      [
+        "In Chemical Engineering, what is an \"Isothermal\" process?",
+        "Constant temperature",
+        "No heat transfer",
+        "Constant pressure",
+        "Constant volume"
+      ],
+      [
+        "In Process Economics, what is the \"Payback Period\"?",
+        "Time to recover initial cost",
+        "Total interest paid",
+        "Annual profit margin",
+        "Tax duration"
+      ],
+      [
+        "Which electrical component is designed to store energy in a magnetic field?",
+        "Inductor",
+        "Capacitor",
+        "Resistor",
+        "Diode"
       ]
     ]
   },
@@ -9591,368 +9661,46 @@ export const rawQuizData = {
         "Mikel Obi"
       ],
       [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Tennis?",
-        "6",
-        "9",
-        "3",
-        "5"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Tennis?",
-        "11",
-        "9",
-        "1",
-        "3"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Boxing?",
-        "9",
-        "1",
-        "4",
-        "11"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Swimming?",
-        "7",
-        "10",
+        "How many players are on the court for one team in a standard NBA game?",
         "5",
-        "1"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Cricket?",
-        "10",
-        "3",
-        "7",
-        "1"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Cricket?",
-        "6",
-        "1",
-        "11",
-        "9"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Rugby?",
-        "6",
-        "7",
         "4",
-        "9"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Cricket?",
-        "8",
-        "3",
-        "10",
+        "6",
         "7"
       ],
       [
-        "How many players are typically on the field/court for one team in Swimming?",
-        "2",
-        "8",
-        "11",
-        "3"
+        "In Association Football, what is the maximum number of minutes in one half of standard regulation time?",
+        "45",
+        "30",
+        "60",
+        "90"
       ],
       [
-        "How many players are typically on the field/court for one team in Basketball?",
-        "2",
-        "4",
-        "11",
-        "3"
+        "Which player holds the record for the most goals scored in a single calendar year (91 goals in 2012)?",
+        "Lionel Messi",
+        "Cristiano Ronaldo",
+        "Pelé",
+        "Gerd Müller"
       ],
       [
-        "How many players are typically on the field/court for one team in Golf?",
-        "8",
-        "2",
-        "10",
-        "4"
+        "In Tennis, what is the score called when both players have won three points each in a game?",
+        "Deuce",
+        "Love-All",
+        "Set-Point",
+        "Break"
       ],
       [
-        "How many players are typically on the field/court for one team in Basketball?",
-        "3",
-        "6",
-        "9",
-        "2"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Boxing?",
-        "6",
-        "9",
-        "10",
-        "11"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Tennis?",
-        "10",
-        "5",
-        "9",
-        "4"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Swimming?",
-        "3",
-        "10",
-        "8",
-        "6"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Basketball?",
-        "1",
-        "6",
-        "9",
-        "10"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Athletics?",
-        "1",
-        "2",
-        "8",
-        "7"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Rugby?",
-        "5",
-        "10",
-        "7",
-        "1"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Tennis?",
-        "10",
-        "6",
-        "7",
-        "8"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Basketball?",
-        "11",
-        "10",
-        "7",
-        "2"
+        "Which country has won the most FIFA World Cup titles in history?",
+        "Brazil",
+        "Germany",
+        "Italy",
+        "Argentina"
       ],
       [
         "How many players are typically on the field/court for one team in Football?",
-        "4",
-        "1",
-        "7",
-        "5"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Basketball?",
-        "2",
         "11",
-        "7",
-        "4"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Swimming?",
-        "2",
-        "4",
-        "5",
-        "7"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Baseball?",
-        "8",
-        "5",
-        "4",
-        "2"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Boxing?",
-        "8",
-        "5",
-        "4",
-        "1"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Athletics?",
-        "3",
-        "9",
-        "11",
-        "4"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Athletics?",
-        "7",
-        "5",
-        "8",
-        "1"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Rugby?",
-        "9",
-        "1",
-        "5",
-        "2"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Baseball?",
-        "7",
-        "2",
-        "3",
-        "4"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Golf?",
-        "4",
-        "5",
         "10",
-        "1"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Football?",
-        "8",
-        "11",
-        "5",
-        "10"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
+        "12",
+        "7"
       ]
     ],
     "intermediate": [
@@ -10405,46 +10153,39 @@ export const rawQuizData = {
         "David Beckham"
       ],
       [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
+        "Which F1 flag indicates that a driver must return to the pits immediately due to a disqualification?",
+        "Black",
+        "Yellow",
+        "Blue",
+        "Green"
       ],
       [
-        "How many players are typically on the field/court for one team in Baseball?",
+        "In Fantasy Premier League (FPL), how many points is a \"Clean Sheet\" worth for a Defender?",
+        "4",
         "1",
-        "11",
         "2",
-        "10"
+        "6"
       ],
       [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
+        "What is the total distance of a standard Olympic Marathon?",
+        "42.195km",
+        "21.1km",
+        "50km",
+        "100km"
       ],
       [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
+        "In Basketball, a \"Technical Foul\" results in how many free throws for the opposing team?",
+        "1",
+        "2",
+        "3",
+        "0"
       ],
       [
-        "How many players are typically on the field/court for one team in Baseball?",
-        "8",
+        "How many substitutions are currently allowed in a standard Premier League match (as of 2024)?",
         "5",
         "3",
-        "9"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
+        "4",
+        "7"
       ]
     ],
     "advanced": [
@@ -10566,377 +10307,6 @@ export const rawQuizData = {
         "Cristiano Ronaldo",
         "Pele",
         "Gerd Müller"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Boxing?",
-        "1",
-        "2",
-        "7",
-        "9"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Tennis?",
-        "1",
-        "10",
-        "5",
-        "11"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Swimming?",
-        "11",
-        "7",
-        "8",
-        "2"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Cricket?",
-        "10",
-        "2",
-        "6",
-        "8"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Cricket?",
-        "7",
-        "11",
-        "6",
-        "9"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Swimming?",
-        "5",
-        "9",
-        "10",
-        "1"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Football?",
-        "11",
-        "1",
-        "3",
-        "5"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Rugby?",
-        "10",
-        "9",
-        "3",
-        "5"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Basketball?",
-        "6",
-        "3",
-        "8",
-        "9"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Football?",
-        "6",
-        "4",
-        "3",
-        "7"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Rugby?",
-        "8",
-        "11",
-        "5",
-        "4"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Rugby?",
-        "1",
-        "5",
-        "11",
-        "6"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Swimming?",
-        "9",
-        "5",
-        "1",
-        "7"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Basketball?",
-        "10",
-        "2",
-        "6",
-        "1"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Boxing?",
-        "9",
-        "6",
-        "11",
-        "5"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Boxing?",
-        "3",
-        "6",
-        "9",
-        "4"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Tennis?",
-        "7",
-        "3",
-        "2",
-        "8"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Basketball?",
-        "7",
-        "6",
-        "4",
-        "2"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Golf?",
-        "3",
-        "9",
-        "2",
-        "11"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Boxing?",
-        "5",
-        "9",
-        "1",
-        "2"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Baseball?",
-        "11",
-        "1",
-        "8",
-        "3"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Football?",
-        "8",
-        "1",
-        "5",
-        "10"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Basketball?",
-        "8",
-        "4",
-        "7",
-        "6"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Athletics?",
-        "8",
-        "2",
-        "5",
-        "11"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Rugby?",
-        "8",
-        "5",
-        "2",
-        "7"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Football?",
-        "3",
-        "11",
-        "6",
-        "8"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Athletics?",
-        "2",
-        "11",
-        "9",
-        "10"
-      ],
-      [
-        "A standard football match is 90 minutes long",
-        "True",
-        "False",
-        "Partially True",
-        "Depends on the referee"
-      ],
-      [
-        "How many players are typically on the field/court for one team in Tennis?",
-        "10",
-        "7",
-        "11",
-        "4"
       ]
     ]
   },

@@ -7,7 +7,7 @@ export default function QuizEngine() {
     user, stats, gameState, setGameState,
     isTimeAttack, timeLeft,
     streak, showStreakBonus,
-    score, questions, currentIndex, isChecking, selectedAnswerIndex, handleAnswer, handleShareWrapper,
+    score, questions, currentIndex, isChecking, selectedAnswerIndex, handleAnswer, finishQuiz, handleShareWrapper,
     sessionXp, recentXpChange, showXpChange, lastPassesNeeded, selectedSubject, selectedDifficulty
   } = useGame();
 
@@ -37,7 +37,20 @@ export default function QuizEngine() {
     if (xpChange !== 0 || isCorrect) {
       setTimeout(() => setFloatXp(null), 1000);
     }
-    handleAnswer(i, isCorrect);
+
+    Promise.resolve(handleAnswer(i, isCorrect)).then(() => {
+        if (currentIndex === questions.length - 1) {
+            let finalScore = score + (isCorrect ? 1 : 0);
+            let finalSessionXp = sessionXp + xpChange;
+            if (isCorrect && streak > 0 && (streak + 1) % 5 === 0) {
+               finalSessionXp += baseGain * 2;
+            }
+            // Add a small delay for UI animation, but not the long default one.
+            setTimeout(() => {
+                finishQuiz(finalScore, finalSessionXp);
+            }, 500);
+        }
+    });
   };
 
   return (

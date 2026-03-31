@@ -59,12 +59,14 @@ export const GameProvider = ({ children }) => {
   const [score, setScore] = useState(0);
   const [sessionXp, setSessionXp] = useState(0);
   const [lastPassesNeeded, setLastPassesNeeded] = useState(0);
+  const [baseXp, setBaseXp] = useState(0);
 
   const [recentXpChange, setRecentXpChange] = useState(0);
   const [showXpChange, setShowXpChange] = useState(false);
 
   const [showRankUp, setShowRankUp] = useState(false);
   const [newRankInfo, setNewRankInfo] = useState({});
+  const [seenQuestions, setSeenQuestions] = useState({});
 
   // Settings
   const [settings, setSettings] = useState({
@@ -205,21 +207,48 @@ export const GameProvider = ({ children }) => {
     }
 
     let pool = subjectData[selectedDifficulty.id];
+    const poolKey = `${selectedSubject.id}_${selectedDifficulty.id}`;
+    let currentSeen = seenQuestions[poolKey] || new Set();
+
+    // Reset seen questions if we exhausted the pool
+    if (currentSeen.size >= pool.length) {
+      currentSeen = new Set();
+    }
+
+    // Filter out already seen questions
+    let availablePool = pool.filter(q => !currentSeen.has(q.id));
     const limit = timeMode ? 20 : 10;
-    const actualLimit = Math.min(pool.length, limit);
-    const poolCopy = [...pool];
+
+    // If there aren't enough available questions, clear the seen set and use the full pool again
+    if (availablePool.length < limit && pool.length >= limit) {
+       currentSeen = new Set();
+       availablePool = [...pool];
+    }
+
+    const actualLimit = Math.min(availablePool.length, limit);
+    const poolCopy = [...availablePool];
     for (let i = 0; i < actualLimit; i++) {
       const j = i + Math.floor(Math.random() * (poolCopy.length - i));
       [poolCopy[i], poolCopy[j]] = [poolCopy[j], poolCopy[i]];
     }
-    const randomized = poolCopy.slice(0, actualLimit).map(q => ({
-      ...q, options: shuffle(q.options)
+
+    const randomized = poolCopy.slice(0, actualLimit).map(q => {
+      currentSeen.add(q.id); // Add to seen right away for this session
+      return {
+        ...q, options: shuffle(q.options)
+      };
+    });
+
+    setSeenQuestions(prev => ({
+      ...prev,
+      [poolKey]: currentSeen
     }));
 
     setQuestions(randomized);
     setCurrentIndex(0);
     setScore(0);
     setSessionXp(0);
+    setBaseXp(stats.totalXp);
     setShowXpChange(false);
     setGameState('playing');
   };
@@ -295,7 +324,6 @@ export const GameProvider = ({ children }) => {
         setSelectedAnswerIndex(null);
         setIsChecking(false);
       } else {
-        finishQuiz(newScore, updatedSessionXp);
         setIsChecking(false);
         setSelectedAnswerIndex(null);
       }
@@ -356,15 +384,10 @@ export const GameProvider = ({ children }) => {
   const finishQuiz = (finalScore, finalSessionXp) => {
     let finalXpGain = isTimeAttack ? finalSessionXp * 2 : finalSessionXp;
 
-    // Because updateLocalXP added sessionXp iteratively to totalXp during gameplay,
-    // totalXp is currently (oldTotalXp + finalSessionXp).
-    // We want the final totalXp to be (oldTotalXp + finalXpGain).
-    // So we subtract finalSessionXp from stats.totalXp, then add finalXpGain.
-    const oldXp = stats.totalXp - finalSessionXp;
-    let newXp = oldXp + finalXpGain;
+    let newXp = baseXp + finalXpGain;
     if (newXp < 0) newXp = 0;
 
-    const oldStep = Math.floor(oldXp / 1250);
+    const oldStep = Math.floor(baseXp / 1250);
     const newStep = Math.floor(newXp / 1250);
 
     if (newStep > oldStep) {
@@ -403,11 +426,7 @@ export const GameProvider = ({ children }) => {
     const newStats = { ...stats, completed: stats.completed + 1, passes: newPasses };
     setStats(newStats);
 
-    const storageKey = user ? 'nexus_stats' : 'guest_nexus_stats';
-    localStorage.setItem(storageKey, JSON.stringify(newStats));
-
-    const finalTotalXp = newXp;
-    saveProgress(finalTotalXp, newStats.completed, newPasses);
+    saveProgress(newXp, newStats.completed, newPasses);
 
     setSessionXp(finalXpGain);
     setGameState('results');
