@@ -199,3 +199,120 @@ describe('HubMenu Component', () => {
     expect(mockSetGameState).toHaveBeenCalledWith('difficulty_select');
   });
 });
+
+describe('HubMenu Component - Difficulty Disabled States', () => {
+  const mockSetGameState = vi.fn();
+  const mockSetSelectedDifficulty = vi.fn();
+
+  const baseMockGame = {
+    user: { uid: 'test_uid' },
+    gameState: 'difficulty_select',
+    selectedSubject: GameContextModule.SUBJECTS[0], // e.g., science
+    setGameState: mockSetGameState,
+    setSelectedDifficulty: mockSetSelectedDifficulty,
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('disables intermediate difficulty when foundational passes < 5', () => {
+    GameContextModule.useGame.mockReturnValue({
+      ...baseMockGame,
+      stats: {
+        passes: {
+          [GameContextModule.SUBJECTS[0].id]: {
+            foundational: 2,
+          },
+        },
+      },
+    });
+
+    render(<HubMenu />);
+
+    const intermediateBtn = screen.getByText('Intermediate').closest('button');
+    expect(intermediateBtn).toBeDisabled();
+    expect(screen.getByText('3 Passes Needed')).toBeInTheDocument();
+  });
+
+  it('enables intermediate difficulty when foundational passes >= 5', () => {
+    GameContextModule.useGame.mockReturnValue({
+      ...baseMockGame,
+      stats: {
+        passes: {
+          [GameContextModule.SUBJECTS[0].id]: {
+            foundational: 5,
+          },
+        },
+      },
+    });
+
+    render(<HubMenu />);
+
+    const intermediateBtn = screen.getByText('Intermediate').closest('button');
+    expect(intermediateBtn).not.toBeDisabled();
+    // Intermediate difficulty element has Intermediate title, so check this button doesn't have Passes Needed
+    expect(intermediateBtn).not.toHaveTextContent('Passes Needed');
+  });
+
+  it('disables advanced difficulty when intermediate passes < 5', () => {
+    GameContextModule.useGame.mockReturnValue({
+      ...baseMockGame,
+      stats: {
+        passes: {
+          [GameContextModule.SUBJECTS[0].id]: {
+            foundational: 5,
+            intermediate: 4,
+          },
+        },
+      },
+    });
+
+    render(<HubMenu />);
+
+    const advancedBtn = screen.getByText('Advanced').closest('button');
+    expect(advancedBtn).toBeDisabled();
+    expect(screen.getByText('1 Passes Needed')).toBeInTheDocument();
+  });
+
+  it('enables advanced difficulty when intermediate passes >= 5', () => {
+    GameContextModule.useGame.mockReturnValue({
+      ...baseMockGame,
+      stats: {
+        passes: {
+          [GameContextModule.SUBJECTS[0].id]: {
+            foundational: 5,
+            intermediate: 6,
+          },
+        },
+      },
+    });
+
+    render(<HubMenu />);
+
+    const advancedBtn = screen.getByText('Advanced').closest('button');
+    expect(advancedBtn).not.toBeDisabled();
+    expect(advancedBtn).not.toHaveTextContent('Passes Needed');
+  });
+
+  it('does not trigger actions when clicking a disabled difficulty button', () => {
+    GameContextModule.useGame.mockReturnValue({
+      ...baseMockGame,
+      stats: {
+        passes: {
+          [GameContextModule.SUBJECTS[0].id]: {
+            foundational: 0,
+          },
+        },
+      },
+    });
+
+    render(<HubMenu />);
+
+    const intermediateBtn = screen.getByText('Intermediate').closest('button');
+    fireEvent.click(intermediateBtn);
+
+    expect(mockSetSelectedDifficulty).not.toHaveBeenCalled();
+    expect(mockSetGameState).not.toHaveBeenCalled();
+  });
+});
