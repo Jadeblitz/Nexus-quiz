@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, BarChart3, ChevronLeft, Zap, Brain, Cpu, BookOpen, Lightbulb, Film, Trophy as SportIcon, Languages, Axe, Lock } from 'lucide-react';
+import { ArrowRight, BarChart3, ChevronLeft, Zap } from 'lucide-react';
 import { useGame, getRank, SUBJECTS, DIFFICULTIES } from '../context/GameContext.jsx';
 
 export default function HubMenu() {
