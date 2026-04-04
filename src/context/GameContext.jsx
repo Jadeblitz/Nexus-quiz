@@ -4,6 +4,7 @@ import { db } from '../config/firebase';
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 import { quizData, VAULT_CONSTANTS, SUBJECTS, DIFFICULTIES } from '../data/quizData';
+import { handleShare } from '../utils/shareUtils.js';
 
 export { SUBJECTS, DIFFICULTIES };
 
@@ -458,7 +459,6 @@ export const GameProvider = ({ children }) => {
 
   const handleShareWrapper = async () => {
     const rankData = getRank(stats.totalXp, user?.isAdmin);
-    const { handleShare } = await import('../utils/shareUtils.js');
     await handleShare(rankData, streak, stats.totalXp);
   };
 
