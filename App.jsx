@@ -119,7 +119,6 @@ function AppContent() {
       }
 
     } catch (error) {
-      console.error("Login failed:", error);
       let errorMessage = "Login failed. Please try again.";
       if (error?.code === 'auth/user-not-found' || error?.message?.includes('auth/user-not-found')) {
         errorMessage = "Email not registered. Please sign up first.";
