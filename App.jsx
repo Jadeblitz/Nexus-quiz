@@ -145,7 +145,7 @@ function AppContent() {
       setUser(null);
       setGameState('login');
     } catch (error) {
-      console.error("Logout failed", error);
+      console.error("Logout failed");
     }
   };
 
