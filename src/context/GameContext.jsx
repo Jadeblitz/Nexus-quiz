@@ -450,7 +450,6 @@ export const GameProvider = ({ children }) => {
 
   const handleShareWrapper = async () => {
     const rankData = getRank(stats.totalXp, user?.isAdmin);
-    const { handleShare } = await import('../utils/shareUtils.js');
     await handleShare(rankData, streak, stats.totalXp);
   };
 
