@@ -109,6 +109,10 @@ function AppContent() {
       } else if (provider === 'facebook') {
         result = await FirebaseAuthentication.signInWithFacebook();
       } else {
+        if (isRegistering && password.length < 6) {
+          setAuthError("Password must be at least 6 characters long.");
+          return;
+        }
         setIsLoading(true);
         if (isRegistering) {
           await FirebaseAuthentication.createUserWithEmailAndPassword({ email, password });
