@@ -109,6 +109,10 @@ function AppContent() {
       } else if (provider === 'facebook') {
         result = await FirebaseAuthentication.signInWithFacebook();
       } else {
+        if (isRegistering && password.length < 6) {
+          setAuthError("Password must be at least 6 characters long.");
+          return;
+        }
         setIsLoading(true);
         if (isRegistering) {
           await FirebaseAuthentication.createUserWithEmailAndPassword({ email, password });
@@ -119,7 +123,6 @@ function AppContent() {
       }
 
     } catch (error) {
-      console.error("Login failed:", error);
       let errorMessage = "Login failed. Please try again.";
       if (error?.code === 'auth/user-not-found' || error?.message?.includes('auth/user-not-found')) {
         errorMessage = "Email not registered. Please sign up first.";
@@ -145,7 +148,7 @@ function AppContent() {
       setUser(null);
       setGameState('login');
     } catch (error) {
-      console.error("Logout failed", error);
+      console.error("Logout failed");
     }
   };
 

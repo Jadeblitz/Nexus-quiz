@@ -4,6 +4,7 @@ import { db } from '../config/firebase';
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 import { quizData, VAULT_CONSTANTS, SUBJECTS, DIFFICULTIES } from '../data/quizData';
+import { calculateBaseGain } from '../utils/quizLogic';
 
 export { SUBJECTS, DIFFICULTIES };
 
@@ -284,16 +285,7 @@ export const GameProvider = ({ children }) => {
     setSelectedAnswerIndex(index);
     setIsChecking(true);
 
-    let baseGain = 10;
-    if (selectedDifficulty?.id === 'intermediate') {
-       if (selectedSubject?.id === 'lore') baseGain = 30;
-       else if (selectedSubject?.id === 'tech') baseGain = 20;
-       else baseGain = 15;
-    } else if (selectedDifficulty?.id === 'advanced') {
-       if (selectedSubject?.id === 'lore') baseGain = 50;
-       else if (selectedSubject?.id === 'tech') baseGain = 30;
-       else baseGain = 20;
-    }
+    const baseGain = calculateBaseGain(selectedDifficulty, selectedSubject);
 
     let xpEarnedThisQuestion = 0;
     let newScore = score;
@@ -458,7 +450,6 @@ export const GameProvider = ({ children }) => {
 
   const handleShareWrapper = async () => {
     const rankData = getRank(stats.totalXp, user?.isAdmin);
-    const { handleShare } = await import('../utils/shareUtils.js');
     await handleShare(rankData, streak, stats.totalXp);
   };
 
