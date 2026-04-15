@@ -1,6 +1,7 @@
 import React from 'react';
 import { Flame, Timer, Users } from 'lucide-react';
 import { useGame } from '../context/GameContext.jsx';
+import { calculateBaseGain } from "../utils/quizLogic.js";
 import QuizResults from './QuizResults.jsx';
 
 export default function QuizEngine() {
@@ -14,9 +15,9 @@ export default function QuizEngine() {
 
   const [floatXp, setFloatXp] = React.useState(null);
 
-  const localHandleAnswer = (i, isCorrect) => {
-    const baseGain = calculateBaseGain(selectedDifficulty, selectedSubject);
+  const baseGain = React.useMemo(() => calculateBaseGain(selectedDifficulty, selectedSubject), [selectedDifficulty, selectedSubject]);
 
+  const localHandleAnswer = React.useCallback((i, isCorrect) => {
     let xpChange = 0;
     if (isCorrect) {
        xpChange = isTimeAttack ? baseGain * 2 : baseGain;
@@ -30,7 +31,7 @@ export default function QuizEngine() {
       setTimeout(() => setFloatXp(null), 1000);
     }
     handleAnswer(i, isCorrect);
-  };
+  }, [baseGain, isTimeAttack, selectedDifficulty?.id, selectedSubject?.id, handleAnswer]);
 
   return (
     <>
