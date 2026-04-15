@@ -243,22 +243,16 @@ export const GameProvider = ({ children }) => {
 
     // Initialize or reset active pool if it's empty
     if (!activePools.current[poolKey] || activePools.current[poolKey].length === 0) {
-       activePools.current[poolKey] = [...subjectData[diffId]];
+       activePools.current[poolKey] = shuffle([...subjectData[diffId]]);
     }
 
     let pool = activePools.current[poolKey];
 
-    // Shuffle the pool
-    const shuffledPool = shuffle([...pool]);
-
     const limit = timeMode ? 20 : 10;
-    const actualLimit = Math.min(shuffledPool.length, limit);
+    const actualLimit = Math.min(pool.length, limit);
 
-    // Select questions
-    const selectedQuestions = shuffledPool.slice(0, actualLimit);
-
-    // Remove selected questions from the active pool
-    activePools.current[poolKey] = shuffledPool.slice(actualLimit);
+    // Select questions and remove them from the active pool
+    const selectedQuestions = pool.splice(0, actualLimit);
 
     const randomized = selectedQuestions.map(q => ({
       ...q, options: shuffle(q.options)
