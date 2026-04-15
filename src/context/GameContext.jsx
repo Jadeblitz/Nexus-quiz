@@ -478,7 +478,8 @@ export const GameProvider = ({ children }) => {
       showRankUp, setShowRankUp,
       newRankInfo, setNewRankInfo,
       startQuiz, handleAnswer, finishQuiz, handleShareWrapper, VAULT_CONSTANTS,
-      maintenanceMode, maintenanceMessage
+      maintenanceMode, maintenanceMessage,
+      manualSyncToCloud
     }}>
       {children}
     </GameContext.Provider>
