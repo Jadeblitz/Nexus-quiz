@@ -64,7 +64,7 @@ function AppContent() {
       if (s1) setStats(JSON.parse(s1));
       if (s2) setSettings(JSON.parse(s2));
     } catch (e) {
-      console.log("Corrupted save data detected. Resetting.");
+      console.warn("Corrupted save data detected. Resetting.");
       localStorage.removeItem(NEXUS_STATS_KEY);
       localStorage.removeItem(GUEST_STATS_KEY);
       localStorage.removeItem(NEXUS_SETTINGS_KEY);
