@@ -305,8 +305,8 @@ export const GameProvider = ({ children }) => {
          xpEarnedThisQuestion += baseGain * 2; // Proportionate bonus
       }
 
-      if (settings.sfxEnabled && correctSfx.current) correctSfx.current.play().catch(()=>{});
-      if (settings.hapticsEnabled) await Haptics.notification({ type: NotificationType.Success }).catch(()=>{});
+      if (settings.sfxEnabled && correctSfx.current) correctSfx.current.play().catch((e) => console.warn("SFX playback failed:", e));
+      if (settings.hapticsEnabled) await Haptics.notification({ type: NotificationType.Success }).catch((e) => console.warn("Haptics trigger failed:", e));
     } else {
       currentStreak = 0;
       setStreak(0);
@@ -315,8 +315,8 @@ export const GameProvider = ({ children }) => {
          xpEarnedThisQuestion = -Math.floor(baseGain / 2);
       }
 
-      if (settings.sfxEnabled && wrongSfx.current) wrongSfx.current.play().catch(()=>{});
-      if (settings.hapticsEnabled) await Haptics.impact({ style: ImpactStyle.Heavy }).catch(()=>{});
+      if (settings.sfxEnabled && wrongSfx.current) wrongSfx.current.play().catch((e) => console.warn("SFX playback failed:", e));
+      if (settings.hapticsEnabled) await Haptics.impact({ style: ImpactStyle.Heavy }).catch((e) => console.warn("Haptics trigger failed:", e));
     }
 
     const updatedSessionXp = sessionXp + xpEarnedThisQuestion;
