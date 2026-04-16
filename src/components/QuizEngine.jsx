@@ -9,7 +9,7 @@ export default function QuizEngine() {
     user, stats, gameState, setGameState,
     isTimeAttack, timeLeft,
     streak, showStreakBonus,
-    score, questions, currentIndex, isChecking, selectedAnswerIndex, handleAnswer, handleShareWrapper,
+    score, questions, currentIndex, isChecking, selectedAnswerIndex, handleAnswer, finishQuiz, handleShareWrapper,
     sessionXp, recentXpChange, showXpChange, lastPassesNeeded, selectedSubject, selectedDifficulty
   } = useGame();
 
@@ -30,7 +30,20 @@ export default function QuizEngine() {
     if (xpChange !== 0 || isCorrect) {
       setTimeout(() => setFloatXp(null), 1000);
     }
-    handleAnswer(i, isCorrect);
+
+    Promise.resolve(handleAnswer(i, isCorrect)).then(() => {
+        if (currentIndex === questions.length - 1) {
+            let finalScore = score + (isCorrect ? 1 : 0);
+            let finalSessionXp = sessionXp + xpChange;
+            if (isCorrect && streak > 0 && (streak + 1) % 5 === 0) {
+               finalSessionXp += baseGain * 2;
+            }
+            // Add a small delay for UI animation, but not the long default one.
+            setTimeout(() => {
+                finishQuiz(finalScore, finalSessionXp);
+            }, 500);
+        }
+    });
   };
 
   return (
@@ -103,7 +116,7 @@ export default function QuizEngine() {
               <div><p className="font-bold">{user?.displayName || "Unknown Warrior"}</p><p className="text-xs text-blue-400 italic">Level {Math.floor(stats.totalXp/100)}</p></div>
               <p className="text-2xl font-black text-white">{stats.totalXp} XP</p>
             </div>
-            {[{n: "Nichothéos", x: 99999}, {n: "Daragvener", x: 25000}, {n: "Thril_ler", x: 12000}].map((u, i) => (
+            {LEADERBOARD_DATA.map((u, i) => (
               <div key={i} className="p-5 bg-slate-900/50 border border-slate-800 rounded-3xl flex justify-between items-center opacity-60 text-left">
                 <p className="font-bold">{u.n}</p><p className="font-black">{u.x} XP</p>
               </div>
