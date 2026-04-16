@@ -48,7 +48,7 @@ function AppContent() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRegistering, setIsRegistering] = useState(false);
-  const [authError, setAuthError] = useState('');
+  const [loginError, setLoginError] = useState('');
 
   const bgMusic = useRef(typeof Audio !== "undefined" ? new Audio('/music.mp3') : null);
   if (bgMusic.current) bgMusic.current.loop = true;
@@ -101,6 +101,7 @@ function AppContent() {
   }, []);
 
   const handleLogin = async (provider) => {
+    setLoginError('');
     try {
       setAuthError('');
       let result;
@@ -123,18 +124,16 @@ function AppContent() {
       }
 
     } catch (error) {
-      let errorMessage = "Login failed. Please try again.";
-      if (error?.code === 'auth/user-not-found' || error?.message?.includes('auth/user-not-found')) {
-        errorMessage = "Email not registered. Please sign up first.";
-      } else if (error?.code === 'auth/wrong-password' || error?.message?.includes('auth/wrong-password')) {
-        errorMessage = "Incorrect password. Please try again.";
-      } else if (error?.code === 'auth/invalid-credential' || error?.message?.includes('auth/invalid-credential')) {
-        errorMessage = "Invalid credentials. Please check your email and password.";
-      } else if (error?.code === 'auth/invalid-email' || error?.message?.includes('auth/invalid-email')) {
-        errorMessage = "Invalid email format.";
+      console.error("Login failed:", error);
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
+        setLoginError("Email not registered. Please sign up first.");
+      } else if (error.code === 'auth/wrong-password') {
+        setLoginError("Incorrect password. Please try again.");
+      } else if (error.code === 'auth/invalid-email') {
+        setLoginError("Please enter a valid email address.");
+      } else {
+        setLoginError("Login failed. Please check your connection and try again.");
       }
-
-      setAuthError(errorMessage);
       setIsLoading(false);
     }
   };
@@ -262,7 +261,7 @@ function AppContent() {
           setIsRegistering={setIsRegistering}
           handleLogin={handleLogin}
           setGameState={setGameState}
-          authError={authError}
+          loginError={loginError}
         />
       )}
 
