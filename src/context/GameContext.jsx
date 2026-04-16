@@ -193,15 +193,6 @@ export const GameProvider = ({ children }) => {
       console.error("Failed to listen for maintenance mode:", error);
     });
 
-    if (import.meta.env.MODE === 'test') {
-      window._triggerMaintenanceMode = (mode, msg) => {
-         setMaintenanceMode(mode);
-         setMaintenanceMessage(msg);
-      };
-      window._triggerAdminMode = (mode) => {
-         setIsAdmin(mode);
-      };
-    }
 
     return () => unsubMaintenance();
   }, []);
