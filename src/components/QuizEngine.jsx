@@ -3,13 +3,14 @@ import { Flame, Timer, Users } from 'lucide-react';
 import { useGame } from '../context/GameContext.jsx';
 import { calculateBaseGain } from "../utils/quizLogic.js";
 import QuizResults from './QuizResults.jsx';
+import { calculateBaseGain } from '../utils/quizLogic.js';
 
 export default function QuizEngine() {
   const {
     user, stats, gameState, setGameState,
     isTimeAttack, timeLeft,
     streak, showStreakBonus,
-    score, questions, currentIndex, isChecking, selectedAnswerIndex, handleAnswer, handleShareWrapper,
+    score, questions, currentIndex, isChecking, selectedAnswerIndex, handleAnswer, finishQuiz, handleShareWrapper,
     sessionXp, recentXpChange, showXpChange, lastPassesNeeded, selectedSubject, selectedDifficulty
   } = useGame();
 
@@ -103,7 +104,7 @@ export default function QuizEngine() {
               <div><p className="font-bold">{user?.displayName || "Unknown Warrior"}</p><p className="text-xs text-blue-400 italic">Level {Math.floor(stats.totalXp/100)}</p></div>
               <p className="text-2xl font-black text-white">{stats.totalXp} XP</p>
             </div>
-            {[{n: "Nichothéos", x: 99999}, {n: "Daragvener", x: 25000}, {n: "Thril_ler", x: 12000}].map((u, i) => (
+            {LEADERBOARD_DATA.map((u, i) => (
               <div key={i} className="p-5 bg-slate-900/50 border border-slate-800 rounded-3xl flex justify-between items-center opacity-60 text-left">
                 <p className="font-bold">{u.n}</p><p className="font-black">{u.x} XP</p>
               </div>

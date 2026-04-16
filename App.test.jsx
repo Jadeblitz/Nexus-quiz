@@ -55,8 +55,8 @@ describe('App Component - localStorage fallback logic', () => {
   });
 
   it('should handle corrupted localStorage data and reset it', async () => {
-    // Spy on console.log
-    const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    // Spy on console.warn
+    const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
     // Mock localStorage
     const getItemSpy = vi.spyOn(Storage.prototype, 'getItem').mockImplementation((key) => {

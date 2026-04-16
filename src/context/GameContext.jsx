@@ -65,6 +65,7 @@ export const GameProvider = ({ children }) => {
   const [maintenanceMessage, setMaintenanceMessage] = useState("");
   const [sessionXp, setSessionXp] = useState(0);
   const [lastPassesNeeded, setLastPassesNeeded] = useState(0);
+  const [baseXp, setBaseXp] = useState(0);
 
   const [recentXpChange, setRecentXpChange] = useState(0);
   const [showXpChange, setShowXpChange] = useState(false);
@@ -192,15 +193,6 @@ export const GameProvider = ({ children }) => {
       console.error("Failed to listen for maintenance mode:", error);
     });
 
-    if (import.meta.env.MODE === 'test') {
-      window._triggerMaintenanceMode = (mode, msg) => {
-         setMaintenanceMode(mode);
-         setMaintenanceMessage(msg);
-      };
-      window._triggerAdminMode = (mode) => {
-         setIsAdmin(mode);
-      };
-    }
 
     return () => unsubMaintenance();
   }, []);
@@ -268,6 +260,7 @@ export const GameProvider = ({ children }) => {
     setCurrentIndex(0);
     setScore(0);
     setSessionXp(0);
+    setBaseXp(stats.totalXp);
     setShowXpChange(false);
     setGameState('playing');
   };
@@ -305,8 +298,8 @@ export const GameProvider = ({ children }) => {
          xpEarnedThisQuestion += baseGain * 2; // Proportionate bonus
       }
 
-      if (settings.sfxEnabled && correctSfx.current) correctSfx.current.play().catch(()=>{});
-      if (settings.hapticsEnabled) await Haptics.notification({ type: NotificationType.Success }).catch(()=>{});
+      if (settings.sfxEnabled && correctSfx.current) correctSfx.current.play().catch((e) => console.warn("SFX playback failed:", e));
+      if (settings.hapticsEnabled) await Haptics.notification({ type: NotificationType.Success }).catch((e) => console.warn("Haptics trigger failed:", e));
     } else {
       currentStreak = 0;
       setStreak(0);
@@ -315,8 +308,8 @@ export const GameProvider = ({ children }) => {
          xpEarnedThisQuestion = -Math.floor(baseGain / 2);
       }
 
-      if (settings.sfxEnabled && wrongSfx.current) wrongSfx.current.play().catch(()=>{});
-      if (settings.hapticsEnabled) await Haptics.impact({ style: ImpactStyle.Heavy }).catch(()=>{});
+      if (settings.sfxEnabled && wrongSfx.current) wrongSfx.current.play().catch((e) => console.warn("SFX playback failed:", e));
+      if (settings.hapticsEnabled) await Haptics.impact({ style: ImpactStyle.Heavy }).catch((e) => console.warn("Haptics trigger failed:", e));
     }
 
     const updatedSessionXp = sessionXp + xpEarnedThisQuestion;
@@ -334,7 +327,6 @@ export const GameProvider = ({ children }) => {
         setSelectedAnswerIndex(null);
         setIsChecking(false);
       } else {
-        finishQuiz(newScore, updatedSessionXp);
         setIsChecking(false);
         setSelectedAnswerIndex(null);
       }
@@ -395,15 +387,11 @@ export const GameProvider = ({ children }) => {
   const finishQuiz = (finalScore, finalSessionXp) => {
     let finalXpGain = isTimeAttack ? finalSessionXp * 2 : finalSessionXp;
 
-    // Because updateLocalXP added sessionXp iteratively to totalXp during gameplay,
-    // totalXp is currently (oldTotalXp + finalSessionXp).
-    // We want the final totalXp to be (oldTotalXp + finalXpGain).
-    // So we subtract finalSessionXp from stats.totalXp, then add finalXpGain.
-    const oldXp = stats.totalXp - finalSessionXp;
-    let newXp = oldXp + finalXpGain;
+    let newXp = baseXp + finalXpGain;
     if (newXp < 0) newXp = 0;
+    const finalTotalXp = newXp;
 
-    const oldStep = Math.floor(oldXp / 1250);
+    const oldStep = Math.floor(baseXp / 1250);
     const newStep = Math.floor(newXp / 1250);
 
     if (newStep > oldStep) {
