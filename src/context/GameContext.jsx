@@ -307,8 +307,8 @@ export const GameProvider = ({ children }) => {
          xpEarnedThisQuestion += baseGain * 2; // Proportionate bonus
       }
 
-      if (settings.sfxEnabled && correctSfx.current) correctSfx.current.play().catch((err) => console.warn('Failed to play correct SFX:', err));
-      if (settings.hapticsEnabled) await Haptics.notification({ type: NotificationType.Success }).catch((err) => console.warn('Failed to trigger haptics notification:', err));
+      if (settings.sfxEnabled && correctSfx.current) correctSfx.current.play().catch((e) => console.warn("SFX playback failed:", e));
+      if (settings.hapticsEnabled) await Haptics.notification({ type: NotificationType.Success }).catch((e) => console.warn("Haptics trigger failed:", e));
     } else {
       currentStreak = 0;
       setStreak(0);
@@ -317,8 +317,8 @@ export const GameProvider = ({ children }) => {
          xpEarnedThisQuestion = -Math.floor(baseGain / 2);
       }
 
-      if (settings.sfxEnabled && wrongSfx.current) wrongSfx.current.play().catch((err) => console.warn('Failed to play wrong SFX:', err));
-      if (settings.hapticsEnabled) await Haptics.impact({ style: ImpactStyle.Heavy }).catch((err) => console.warn('Failed to trigger haptics impact:', err));
+      if (settings.sfxEnabled && wrongSfx.current) wrongSfx.current.play().catch((e) => console.warn("SFX playback failed:", e));
+      if (settings.hapticsEnabled) await Haptics.impact({ style: ImpactStyle.Heavy }).catch((e) => console.warn("Haptics trigger failed:", e));
     }
 
     const updatedSessionXp = sessionXp + xpEarnedThisQuestion;

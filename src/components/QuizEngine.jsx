@@ -2,19 +2,7 @@ import React from 'react';
 import { Flame, Timer, Users } from 'lucide-react';
 import { useGame } from '../context/GameContext.jsx';
 import QuizResults from './QuizResults.jsx';
-import { calculateBaseGain } from '../utils/quizLogic.js';
-
-const LEADERBOARD_DATA = [
-  {n: "Nichothéos", x: 99999},
-  {n: "Daragvener", x: 25000},
-  {n: "Thril_ler", x: 12000}
-];
-
-const LEADERBOARD_DATA = [
-  {n: "Nichothéos", x: 99999},
-  {n: "Daragvener", x: 25000},
-  {n: "Thril_ler", x: 12000}
-];
+import { calculateBaseGain } from '../utils/quizLogic';
 
 export default function QuizEngine() {
   const {

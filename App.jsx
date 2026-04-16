@@ -74,7 +74,7 @@ function AppContent() {
 
   useEffect(() => {
     if (settings.musicEnabled && gameState !== 'playing' && bgMusic.current) {
-      bgMusic.current.play().catch(() => {});
+      bgMusic.current.play().catch((e) => console.warn("Audio playback failed:", e));
     } else if (bgMusic.current) {
       bgMusic.current.pause();
     }
@@ -87,7 +87,7 @@ function AppContent() {
           bgMusic.current.pause();
         } else {
           if (settings.musicEnabled && gameState !== 'playing' && bgMusic.current) {
-            bgMusic.current.play().catch(() => {});
+            bgMusic.current.play().catch((e) => console.warn("Audio playback failed:", e));
           }
         }
       });
