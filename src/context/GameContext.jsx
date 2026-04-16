@@ -65,6 +65,7 @@ export const GameProvider = ({ children }) => {
   const [maintenanceMessage, setMaintenanceMessage] = useState("");
   const [sessionXp, setSessionXp] = useState(0);
   const [lastPassesNeeded, setLastPassesNeeded] = useState(0);
+  const [baseXp, setBaseXp] = useState(0);
 
   const [recentXpChange, setRecentXpChange] = useState(0);
   const [showXpChange, setShowXpChange] = useState(false);
@@ -268,6 +269,7 @@ export const GameProvider = ({ children }) => {
     setCurrentIndex(0);
     setScore(0);
     setSessionXp(0);
+    setBaseXp(stats.totalXp);
     setShowXpChange(false);
     setGameState('playing');
   };
@@ -334,7 +336,6 @@ export const GameProvider = ({ children }) => {
         setSelectedAnswerIndex(null);
         setIsChecking(false);
       } else {
-        finishQuiz(newScore, updatedSessionXp);
         setIsChecking(false);
         setSelectedAnswerIndex(null);
       }
@@ -395,15 +396,10 @@ export const GameProvider = ({ children }) => {
   const finishQuiz = (finalScore, finalSessionXp) => {
     let finalXpGain = isTimeAttack ? finalSessionXp * 2 : finalSessionXp;
 
-    // Because updateLocalXP added sessionXp iteratively to totalXp during gameplay,
-    // totalXp is currently (oldTotalXp + finalSessionXp).
-    // We want the final totalXp to be (oldTotalXp + finalXpGain).
-    // So we subtract finalSessionXp from stats.totalXp, then add finalXpGain.
-    const oldXp = stats.totalXp - finalSessionXp;
-    let newXp = oldXp + finalXpGain;
+    let newXp = baseXp + finalXpGain;
     if (newXp < 0) newXp = 0;
 
-    const oldStep = Math.floor(oldXp / 1250);
+    const oldStep = Math.floor(baseXp / 1250);
     const newStep = Math.floor(newXp / 1250);
 
     if (newStep > oldStep) {
