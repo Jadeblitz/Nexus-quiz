@@ -398,6 +398,7 @@ export const GameProvider = ({ children }) => {
 
     let newXp = baseXp + finalXpGain;
     if (newXp < 0) newXp = 0;
+    const finalTotalXp = newXp;
 
     const oldStep = Math.floor(baseXp / 1250);
     const newStep = Math.floor(newXp / 1250);

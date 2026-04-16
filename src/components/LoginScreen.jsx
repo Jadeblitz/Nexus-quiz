@@ -1,7 +1,7 @@
 import React from 'react';
 import { Brain } from 'lucide-react';
 
-export default function LoginScreen({ email, setEmail, password, setPassword, isRegistering, setIsRegistering, handleLogin, setGameState, authError, setAuthError }) {
+export default function LoginScreen({ email, setEmail, password, setPassword, isRegistering, setIsRegistering, handleLogin, setGameState, loginError }) {
   return (
     <div className="w-full max-w-sm space-y-6 text-center animate-in zoom-in duration-300">
       <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-4 rounded-3xl inline-block mb-4 shadow-[0_0_30px_rgba(59,130,246,0.5)]">
@@ -10,10 +10,8 @@ export default function LoginScreen({ email, setEmail, password, setPassword, is
       <h1 className="text-4xl font-black italic tracking-tighter mb-2">NexusQuiz</h1>
       <p className="text-slate-400 mb-8">Prove your knowledge across the Ordverse.</p>
 
-      {authError && (
-        <p className="text-red-500 text-sm font-bold bg-red-500/10 p-3 rounded-xl border border-red-500/30">
-          {authError}
-        </p>
+      {loginError && (
+        <p className="text-rose-500 font-bold mb-4">{loginError}</p>
       )}
 
       <div className="space-y-4">
