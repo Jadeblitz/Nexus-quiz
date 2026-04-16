@@ -1,29 +1,21 @@
 import React from 'react';
-import { Flame, Timer, Trophy, Share2, Users } from 'lucide-react';
+import { Flame, Timer, Users } from 'lucide-react';
 import { useGame } from '../context/GameContext.jsx';
+import QuizResults from './QuizResults.jsx';
 
 export default function QuizEngine() {
   const {
     user, stats, gameState, setGameState,
     isTimeAttack, timeLeft,
     streak, showStreakBonus,
-    score, questions, currentIndex, isChecking, selectedAnswerIndex, handleAnswer, handleShareWrapper,
+    score, questions, currentIndex, isChecking, selectedAnswerIndex, handleAnswer, finishQuiz, handleShareWrapper,
     sessionXp, recentXpChange, showXpChange, lastPassesNeeded, selectedSubject, selectedDifficulty
   } = useGame();
 
   const [floatXp, setFloatXp] = React.useState(null);
 
   const localHandleAnswer = (i, isCorrect) => {
-    let baseGain = 10;
-    if (selectedDifficulty?.id === 'intermediate') {
-       if (selectedSubject?.id === 'lore') baseGain = 30;
-       else if (selectedSubject?.id === 'tech') baseGain = 20;
-       else baseGain = 15;
-    } else if (selectedDifficulty?.id === 'advanced') {
-       if (selectedSubject?.id === 'lore') baseGain = 50;
-       else if (selectedSubject?.id === 'tech') baseGain = 30;
-       else baseGain = 20;
-    }
+    const baseGain = calculateBaseGain(selectedDifficulty, selectedSubject);
 
     let xpChange = 0;
     if (isCorrect) {
@@ -37,7 +29,20 @@ export default function QuizEngine() {
     if (xpChange !== 0 || isCorrect) {
       setTimeout(() => setFloatXp(null), 1000);
     }
-    handleAnswer(i, isCorrect);
+
+    Promise.resolve(handleAnswer(i, isCorrect)).then(() => {
+        if (currentIndex === questions.length - 1) {
+            let finalScore = score + (isCorrect ? 1 : 0);
+            let finalSessionXp = sessionXp + xpChange;
+            if (isCorrect && streak > 0 && (streak + 1) % 5 === 0) {
+               finalSessionXp += baseGain * 2;
+            }
+            // Add a small delay for UI animation, but not the long default one.
+            setTimeout(() => {
+                finishQuiz(finalScore, finalSessionXp);
+            }, 500);
+        }
+    });
   };
 
   return (
@@ -89,53 +94,18 @@ export default function QuizEngine() {
         </div>
       )}
 
-      {gameState === 'results' && (function() {
-        const passThreshold = isTimeAttack ? 14 : 7;
-        const totalQ = questions.length;
-        const percentage = (score / totalQ) * 100;
-
-        let gradeText = "Failed";
-        let gradeColor = "text-rose-500";
-        if (percentage >= 70) {
-           gradeText = "Pass";
-           gradeColor = "text-emerald-400";
-        } else if (percentage >= 50) {
-           gradeText = "Average";
-           gradeColor = "text-yellow-400";
-        } else if (percentage >= 30) {
-           gradeText = "Fair";
-           gradeColor = "text-orange-400";
-        }
-
-        let xpColor = sessionXp >= 0 ? "text-emerald-400" : "text-rose-500";
-        if (selectedSubject?.id === 'lore') {
-           xpColor = sessionXp >= 0 ? "text-[#FBBF24]" : "text-[#6A0DAD]";
-        }
-
-        return (
-        <div className="text-center p-10 bg-slate-900 border border-slate-800 rounded-[40px] w-full max-w-sm animate-in zoom-in duration-300 shadow-2xl">
-          <Trophy className="mx-auto mb-4 text-amber-400" size={80} />
-          <h2 className="text-3xl font-black mb-2 text-white">Quiz Over!</h2>
-          <p className="text-6xl font-black mt-4 mb-2 text-white">{score}<span className="text-xl text-slate-700">/{totalQ}</span></p>
-
-          <div className="mb-6 space-y-1">
-             <p className={`text-3xl font-black uppercase tracking-widest ${gradeColor}`}>{gradeText}</p>
-             <p className={`text-2xl font-bold ${xpColor}`}>{sessionXp > 0 ? '+' : ''}{sessionXp} XP</p>
-             {lastPassesNeeded > 0 && percentage >= 70 && <p className="text-sm font-bold text-blue-400 mt-2">Need {lastPassesNeeded} more Pass(es) to unlock next difficulty!</p>}
-             {lastPassesNeeded === 0 && percentage >= 70 && <p className="text-sm font-bold text-emerald-400 mt-2">Difficulty Mastered!</p>}
-          </div>
-
-          <div className="space-y-3">
-            <button onClick={handleShareWrapper} className="w-full py-4 bg-emerald-600 rounded-2xl font-black text-lg flex items-center justify-center shadow-lg">
-              <Share2 className="mr-2" size={20}/> Share My Score
-            </button>
-            <button onClick={() => setGameState('subject_select')} className="w-full py-4 bg-blue-600 rounded-2xl font-black text-xl shadow-lg">
-              Return to Hub
-            </button>
-          </div>
-        </div>
-        );
-      })()}
+      {gameState === 'results' && (
+        <QuizResults
+          isTimeAttack={isTimeAttack}
+          questions={questions}
+          score={score}
+          sessionXp={sessionXp}
+          selectedSubject={selectedSubject}
+          lastPassesNeeded={lastPassesNeeded}
+          handleShareWrapper={handleShareWrapper}
+          setGameState={setGameState}
+        />
+      )}
 
       {gameState === 'leaderboard' && (
         <div className="w-full max-w-md">

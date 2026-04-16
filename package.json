@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "test": "vitest run",
-    "build": "vite build",
+    "verify-data": "node verify_data.js",
+    "build": "npm run verify-data && vite build",
     "cap:build": "npx cap sync android"
   },
   "dependencies": {
@@ -14,7 +15,7 @@
     "@capacitor/core": "latest",
     "@capacitor/haptics": "latest",
     "firebase": "^12.11.0",
-    "lucide-react": "^1.6.0",
+    "lucide-react": "^1.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

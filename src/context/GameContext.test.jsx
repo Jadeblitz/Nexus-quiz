@@ -8,7 +8,8 @@ import { Haptics, NotificationType, ImpactStyle } from '@capacitor/haptics';
 vi.mock('firebase/firestore', () => ({
   doc: vi.fn(),
   setDoc: vi.fn(),
-  getDoc: vi.fn()
+  getDoc: vi.fn(),
+  onSnapshot: vi.fn(() => vi.fn()) // returns unsubscribe function
 }));
 
 vi.mock('../config/firebase', () => ({

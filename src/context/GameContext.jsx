@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 import { quizData, VAULT_CONSTANTS, SUBJECTS, DIFFICULTIES } from '../data/quizData';
+import { calculateBaseGain } from '../utils/quizLogic';
 
 export { SUBJECTS, DIFFICULTIES };
 
@@ -48,6 +49,7 @@ export const GameProvider = ({ children }) => {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState(null);
 
+  const activePools = useRef({});
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isChecking, setIsChecking] = useState(false);
@@ -57,14 +59,20 @@ export const GameProvider = ({ children }) => {
   const [streak, setStreak] = useState(0);
   const [showStreakBonus, setShowStreakBonus] = useState(false);
   const [score, setScore] = useState(0);
+
+  // System Maintenance
+  const [maintenanceMode, setMaintenanceMode] = useState(false);
+  const [maintenanceMessage, setMaintenanceMessage] = useState("");
   const [sessionXp, setSessionXp] = useState(0);
   const [lastPassesNeeded, setLastPassesNeeded] = useState(0);
+  const [baseXp, setBaseXp] = useState(0);
 
   const [recentXpChange, setRecentXpChange] = useState(0);
   const [showXpChange, setShowXpChange] = useState(false);
 
   const [showRankUp, setShowRankUp] = useState(false);
   const [newRankInfo, setNewRankInfo] = useState({});
+  const [seenQuestions, setSeenQuestions] = useState({});
 
   // Settings
   const [settings, setSettings] = useState({
@@ -76,6 +84,7 @@ export const GameProvider = ({ children }) => {
   const correctSfx = useRef(typeof Audio !== "undefined" ? new Audio('/correct.mp3') : null);
   const wrongSfx = useRef(typeof Audio !== "undefined" ? new Audio('/wrong.mp3') : null);
 
+  const isInitialLoad = useRef(true);
 
   useEffect(() => {
     const handleUserPersistence = async (userObj) => {
@@ -86,7 +95,36 @@ export const GameProvider = ({ children }) => {
         if (userDocSnap.exists()) {
           const data = userDocSnap.data();
           userObj.isAdmin = data.isAdmin === true || data.role === 'admin';
-          setStats({ totalXp: data.score || 0, completed: data.completed || 0, passes: data.passes || {} });
+
+          let mergedStats = { totalXp: data.score || 0, completed: data.completed || 0, passes: data.passes || {} };
+
+          const guestDataStr = localStorage.getItem('guest_nexus_stats');
+          const guestData = guestDataStr ? JSON.parse(guestDataStr) : null;
+
+          if (guestData) {
+            if (guestData.totalXp > (data.score || 0)) {
+              if (window.confirm("We found unsaved progress. Would you like to sync it to this account?")) {
+                mergedStats = {
+                  totalXp: guestData.totalXp,
+                  completed: guestData.completed || 0,
+                  passes: guestData.passes || {}
+                };
+                // Fire and forget save to ensure the newly merged stats are persisted to the cloud
+                const rankData = getRank(mergedStats.totalXp, userObj.isAdmin);
+                setDoc(userDocRef, {
+                  score: mergedStats.totalXp,
+                  powerLevel: Math.floor(mergedStats.totalXp / 100),
+                  completed: mergedStats.completed,
+                  passes: mergedStats.passes,
+                  rank: rankData.level
+                }, { merge: true }).catch(err => console.error("Merge sync failed", err));
+              }
+            }
+            // Unconditionally clear guest storage after an active login so it never shadows the user's cache
+            localStorage.removeItem('guest_nexus_stats');
+          }
+
+          setStats(mergedStats);
         } else {
           setIsAdmin(false);
           await setDoc(userDocRef, {
@@ -115,6 +153,7 @@ export const GameProvider = ({ children }) => {
         .finally(() => {
           setGameState('subject_select');
           setIsLoading(false);
+          isInitialLoad.current = false;
         });
     };
 
@@ -133,10 +172,38 @@ export const GameProvider = ({ children }) => {
         resolveAuth(result.user);
       } else {
         setIsLoading(false);
+        isInitialLoad.current = false;
       }
     }).catch(() => {
       setIsLoading(false);
+      isInitialLoad.current = false;
     });
+
+    // Setup Maintenance Mode Listener
+    const unsubMaintenance = onSnapshot(doc(db, "system", "appConfig"), (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setMaintenanceMode(data.maintenanceMode === true);
+        setMaintenanceMessage(data.maintenanceMessage || "The Ordverse is currently undergoing a reality reset. Please check back later.");
+      } else {
+        setMaintenanceMode(false);
+        setMaintenanceMessage("");
+      }
+    }, (error) => {
+      console.error("Failed to listen for maintenance mode:", error);
+    });
+
+    if (import.meta.env.MODE === 'test') {
+      window._triggerMaintenanceMode = (mode, msg) => {
+         setMaintenanceMode(mode);
+         setMaintenanceMessage(msg);
+      };
+      window._triggerAdminMode = (mode) => {
+         setIsAdmin(mode);
+      };
+    }
+
+    return () => unsubMaintenance();
   }, []);
 
   useEffect(() => {
@@ -158,28 +225,43 @@ export const GameProvider = ({ children }) => {
     return shuffled;
   };
 
-  const startQuiz = (timeMode) => {
+      const startQuiz = (timeMode) => {
     setIsTimeAttack(timeMode);
     setTimeLeft(60);
     setStreak(0);
     setShowStreakBonus(false);
 
-    const subjectData = quizData[selectedSubject?.id];
-    if (!subjectData || !subjectData[selectedDifficulty?.id] || subjectData[selectedDifficulty?.id].length === 0) {
+    const subId = selectedSubject?.id;
+    const diffId = selectedDifficulty?.id;
+    const poolKey = `${subId}_${diffId}`;
+
+    const subjectData = quizData[subId];
+    if (!subjectData || !subjectData[diffId] || subjectData[diffId].length === 0) {
        alert("No questions available for this level yet!");
        setGameState('subject_select');
        return;
     }
 
-    let pool = subjectData[selectedDifficulty.id];
-    const limit = timeMode ? 20 : 10;
-    const actualLimit = Math.min(pool.length, limit);
-    const poolCopy = [...pool];
-    for (let i = 0; i < actualLimit; i++) {
-      const j = i + Math.floor(Math.random() * (poolCopy.length - i));
-      [poolCopy[i], poolCopy[j]] = [poolCopy[j], poolCopy[i]];
+    // Initialize or reset active pool if it's empty
+    if (!activePools.current[poolKey] || activePools.current[poolKey].length === 0) {
+       activePools.current[poolKey] = [...subjectData[diffId]];
     }
-    const randomized = poolCopy.slice(0, actualLimit).map(q => ({
+
+    let pool = activePools.current[poolKey];
+
+    // Shuffle the pool
+    const shuffledPool = shuffle([...pool]);
+
+    const limit = timeMode ? 20 : 10;
+    const actualLimit = Math.min(shuffledPool.length, limit);
+
+    // Select questions
+    const selectedQuestions = shuffledPool.slice(0, actualLimit);
+
+    // Remove selected questions from the active pool
+    activePools.current[poolKey] = shuffledPool.slice(actualLimit);
+
+    const randomized = selectedQuestions.map(q => ({
       ...q, options: shuffle(q.options)
     }));
 
@@ -187,6 +269,7 @@ export const GameProvider = ({ children }) => {
     setCurrentIndex(0);
     setScore(0);
     setSessionXp(0);
+    setBaseXp(stats.totalXp);
     setShowXpChange(false);
     setGameState('playing');
   };
@@ -204,16 +287,7 @@ export const GameProvider = ({ children }) => {
     setSelectedAnswerIndex(index);
     setIsChecking(true);
 
-    let baseGain = 10;
-    if (selectedDifficulty?.id === 'intermediate') {
-       if (selectedSubject?.id === 'lore') baseGain = 30;
-       else if (selectedSubject?.id === 'tech') baseGain = 20;
-       else baseGain = 15;
-    } else if (selectedDifficulty?.id === 'advanced') {
-       if (selectedSubject?.id === 'lore') baseGain = 50;
-       else if (selectedSubject?.id === 'tech') baseGain = 30;
-       else baseGain = 20;
-    }
+    const baseGain = calculateBaseGain(selectedDifficulty, selectedSubject);
 
     let xpEarnedThisQuestion = 0;
     let newScore = score;
@@ -233,8 +307,8 @@ export const GameProvider = ({ children }) => {
          xpEarnedThisQuestion += baseGain * 2; // Proportionate bonus
       }
 
-      if (settings.sfxEnabled && correctSfx.current) correctSfx.current.play().catch(()=>{});
-      if (settings.hapticsEnabled) await Haptics.notification({ type: NotificationType.Success }).catch(()=>{});
+      if (settings.sfxEnabled && correctSfx.current) correctSfx.current.play().catch((err) => console.warn('Failed to play correct SFX:', err));
+      if (settings.hapticsEnabled) await Haptics.notification({ type: NotificationType.Success }).catch((err) => console.warn('Failed to trigger haptics notification:', err));
     } else {
       currentStreak = 0;
       setStreak(0);
@@ -243,8 +317,8 @@ export const GameProvider = ({ children }) => {
          xpEarnedThisQuestion = -Math.floor(baseGain / 2);
       }
 
-      if (settings.sfxEnabled && wrongSfx.current) wrongSfx.current.play().catch(()=>{});
-      if (settings.hapticsEnabled) await Haptics.impact({ style: ImpactStyle.Heavy }).catch(()=>{});
+      if (settings.sfxEnabled && wrongSfx.current) wrongSfx.current.play().catch((err) => console.warn('Failed to play wrong SFX:', err));
+      if (settings.hapticsEnabled) await Haptics.impact({ style: ImpactStyle.Heavy }).catch((err) => console.warn('Failed to trigger haptics impact:', err));
     }
 
     const updatedSessionXp = sessionXp + xpEarnedThisQuestion;
@@ -262,7 +336,6 @@ export const GameProvider = ({ children }) => {
         setSelectedAnswerIndex(null);
         setIsChecking(false);
       } else {
-        finishQuiz(newScore, updatedSessionXp);
         setIsChecking(false);
         setSelectedAnswerIndex(null);
       }
@@ -287,19 +360,47 @@ export const GameProvider = ({ children }) => {
     }
   };
 
+  const manualSyncToCloud = async () => {
+    if (!user) return false;
+    try {
+      const userDocRef = doc(db, "users", user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+      const cloudData = userDocSnap.exists() ? userDocSnap.data() : null;
+      const cloudScore = cloudData?.score || 0;
+
+      if (stats.totalXp > cloudScore) {
+        const proceed = window.confirm("This will update your cloud profile with your current device progress. Proceed?");
+        if (!proceed) return false;
+
+        const rankData = getRank(stats.totalXp, user?.isAdmin);
+        const powerLevel = Math.floor(stats.totalXp / 100);
+        await setDoc(userDocRef, {
+          uid: user.uid,
+          rank: rankData.level,
+          score: stats.totalXp,
+          powerLevel: powerLevel,
+          completed: stats.completed,
+          passes: stats.passes,
+          lastSynced: new Date().toISOString()
+        }, { merge: true });
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      console.error("Manual sync failed", err);
+      return false;
+    }
+  };
+
   const finishQuiz = (finalScore, finalSessionXp) => {
     let finalXpGain = isTimeAttack ? finalSessionXp * 2 : finalSessionXp;
 
-    // Because updateLocalXP added sessionXp iteratively to totalXp during gameplay,
-    // totalXp is currently (oldTotalXp + finalSessionXp).
-    // We want the final totalXp to be (oldTotalXp + finalXpGain).
-    // So we subtract finalSessionXp from stats.totalXp, then add finalXpGain.
-    const oldXp = stats.totalXp - finalSessionXp;
-    let newXp = oldXp + finalXpGain;
+    let newXp = baseXp + finalXpGain;
     if (newXp < 0) newXp = 0;
     const finalTotalXp = newXp;
 
-    const oldStep = Math.floor(oldXp / 1250);
+    const oldStep = Math.floor(baseXp / 1250);
     const newStep = Math.floor(newXp / 1250);
 
     if (newStep > oldStep) {
@@ -337,9 +438,8 @@ export const GameProvider = ({ children }) => {
 
     const newStats = { ...stats, completed: stats.completed + 1, passes: newPasses };
     setStats(newStats);
-    localStorage.setItem('nexus_stats', JSON.stringify(newStats));
 
-    saveProgress(finalTotalXp, newStats.completed, newPasses);
+    saveProgress(newXp, newStats.completed, newPasses);
 
     setSessionXp(finalXpGain);
     setGameState('results');
@@ -347,7 +447,6 @@ export const GameProvider = ({ children }) => {
 
   const handleShareWrapper = async () => {
     const rankData = getRank(stats.totalXp, user?.isAdmin);
-    const { handleShare } = await import('../utils/shareUtils.js');
     await handleShare(rankData, streak, stats.totalXp);
   };
 
@@ -375,7 +474,8 @@ export const GameProvider = ({ children }) => {
       settings, setSettings,
       showRankUp, setShowRankUp,
       newRankInfo, setNewRankInfo,
-      startQuiz, handleAnswer, finishQuiz, handleShareWrapper, VAULT_CONSTANTS
+      startQuiz, handleAnswer, finishQuiz, handleShareWrapper, VAULT_CONSTANTS,
+      maintenanceMode, maintenanceMessage
     }}>
       {children}
     </GameContext.Provider>
