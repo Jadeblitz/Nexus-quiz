@@ -2,7 +2,7 @@ import React from 'react';
 import { Flame, Timer, Users } from 'lucide-react';
 import { useGame } from '../context/GameContext.jsx';
 import QuizResults from './QuizResults.jsx';
-import { calculateBaseGain } from '../utils/quizLogic';
+import { calculateBaseGain } from '../utils/quizLogic.js';
 
 export default function QuizEngine() {
   const {
