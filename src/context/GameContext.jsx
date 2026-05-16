@@ -235,7 +235,7 @@ export const GameProvider = ({ children }) => {
 
     // Initialize or reset active pool if it's empty
     if (!activePools.current[poolKey] || activePools.current[poolKey].length === 0) {
-       activePools.current[poolKey] = shuffle([...subjectData[diffId]]);
+       activePools.current[poolKey] = [...subjectData[diffId]];
     }
 
     let pool = activePools.current[poolKey];
@@ -243,12 +243,25 @@ export const GameProvider = ({ children }) => {
     const limit = timeMode ? 20 : 10;
     const actualLimit = Math.min(pool.length, limit);
 
-    // Select questions and remove them from the active pool
-    const selectedQuestions = pool.splice(0, actualLimit);
+    // Select questions and remove them from the active pool using partial Fisher-Yates
+    const randomized = new Array(actualLimit);
+    for (let i = 0; i < actualLimit; i++) {
+        const randomIndex = Math.floor(Math.random() * pool.length);
+        const q = pool[randomIndex];
 
-    const randomized = selectedQuestions.map(q => ({
-      ...q, options: shuffle(q.options)
-    }));
+        pool[randomIndex] = pool[pool.length - 1];
+        pool.pop();
+
+        const opts = [...q.options];
+        for (let j = opts.length - 1; j > 0; j--) {
+            const k = Math.floor(Math.random() * (j + 1));
+            const temp = opts[j];
+            opts[j] = opts[k];
+            opts[k] = temp;
+        }
+
+        randomized[i] = { ...q, options: opts };
+    }
 
     setQuestions(randomized);
     setCurrentIndex(0);
