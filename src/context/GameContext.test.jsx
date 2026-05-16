@@ -293,6 +293,59 @@ describe('GameContext - handleAnswer', () => {
   });
 });
 
+
+describe('GameContext - saveProgress error handling', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.clearAllMocks();
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('logs error when saveProgress sync fails', async () => {
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const { setDoc } = await import('firebase/firestore');
+    const error = new Error('Test sync error');
+    setDoc.mockRejectedValueOnce(error);
+
+    const action = (game) => {
+      // Expose game context for test manipulation
+      window.testGame = game;
+    };
+
+    render(
+      <GameProvider>
+        <TestComponent testAction={action} />
+      </GameProvider>
+    );
+
+    // Initial render
+    await act(async () => {
+      vi.advanceTimersByTime(1);
+    });
+
+    // Set user to bypass early return
+    await act(async () => {
+      window.testGame.setUser({ uid: 'test-uid' });
+    });
+
+    // Trigger finishQuiz to invoke saveProgress
+    await act(async () => {
+      window.testGame.finishQuiz(10, 100);
+    });
+
+    // Resolve promises
+    await act(async () => {
+        await Promise.resolve();
+        await Promise.resolve();
+    });
+
+    expect(consoleSpy).toHaveBeenCalledWith("Sync failed", error);
+    consoleSpy.mockRestore();
+  });
+});
+
 describe('GameContext - getRank', () => {
   it('should return Basic (Beginner) for 0 or negative xp', () => {
     expect(getRank(0)).toEqual({
