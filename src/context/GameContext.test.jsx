@@ -65,6 +65,43 @@ const TestComponent = ({ testAction }) => {
     </div>
   );
 };
+describe('GameContext - manualSyncToCloud', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('should return false and log error when getDoc throws', async () => {
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    // We need to import setDoc/getDoc, but they are mocked at the top.
+    const { getDoc } = await import('firebase/firestore');
+    getDoc.mockRejectedValueOnce(new Error('Sync failed'));
+
+    let gameRef;
+    render(
+      <GameProvider>
+        <TestComponent testAction={(g) => { gameRef = g; }} />
+      </GameProvider>
+    );
+
+    // Set user so manualSyncToCloud doesn't return early
+    act(() => {
+      gameRef.setUser({ uid: '123' });
+    });
+
+    // Provide some context values if needed, manualSyncToCloud uses getDoc/setDoc
+    let result;
+    await act(async () => {
+      result = await gameRef.manualSyncToCloud();
+    });
+
+    expect(result).toBe(false);
+    expect(consoleSpy).toHaveBeenCalledWith("Manual sync failed", expect.any(Error));
+
+    consoleSpy.mockRestore();
+  });
+});
+
 describe('GameContext - handleAnswer', () => {
   beforeEach(() => {
     vi.useFakeTimers();
