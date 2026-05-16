@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { render, screen, act } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { waitFor } from '@testing-library/react';
 import { GameProvider, useGame, getRank } from './GameContext';
+import { getDoc } from 'firebase/firestore';
+import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { Haptics, NotificationType, ImpactStyle } from '@capacitor/haptics';
 
 // Mocks
@@ -41,6 +44,16 @@ class MockAudio {
   pause() {}
 }
 global.Audio = MockAudio;
+
+const AuthTestComponent = () => {
+  const game = useGame();
+  return (
+    <div>
+      <div data-testid="isAdmin">{String(game.isAdmin)}</div>
+      <div data-testid="totalXp">{game.stats?.totalXp}</div>
+    </div>
+  );
+};
 
 const TestComponent = ({ testAction }) => {
   const game = useGame();
@@ -311,6 +324,34 @@ describe('GameContext - getRank', () => {
       title: 'Rank 12',
       level: 'Primordial (Beginner)',
       color: 'text-rose-500'
+    });
+  });
+});
+
+describe('GameContext - handleUserPersistence', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('falls back to Guest state when Firebase persistence fails', async () => {
+    // Override the mock to throw an error for this specific test
+    vi.mocked(getDoc).mockRejectedValueOnce(new Error('Firebase Error'));
+
+    // Override getCurrentUser to simulate a logged-in user so persistence logic is triggered
+    vi.mocked(FirebaseAuthentication.getCurrentUser).mockResolvedValueOnce({
+      user: { uid: 'test-uid' }
+    });
+
+    render(
+      <GameProvider>
+        <AuthTestComponent />
+      </GameProvider>
+    );
+
+    // After resolving auth and persistence failing, we should end up with Guest defaults
+    await waitFor(() => {
+      expect(screen.getByTestId('isAdmin').textContent).toBe('false');
+      expect(screen.getByTestId('totalXp').textContent).toBe('0');
     });
   });
 });
