@@ -60,7 +60,7 @@ export default function QuizEngine() {
 
           <div className="flex justify-between items-center mb-10">
             <div className="h-2 flex-1 bg-slate-800 rounded-full mr-4 overflow-hidden">
-               <div className="h-full bg-blue-500 transition-all duration-300" style={{width: `${(currentIndex/questions.length)*100}%`}} />
+               <div className="h-full bg-blue-500 transition-all duration-300" style={{width: `${Math.min(100, (currentIndex / (questions?.length || 1)) * 100)}%`}} />
             </div>
 
             <div className="flex items-center space-x-4">
