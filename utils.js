@@ -22,7 +22,7 @@ export const parseData = (data) => {
               });
             }
           } catch (err) {
-            console.log(`Skipped a broken question in ${subject}`);
+            console.error(`Skipped a broken question in ${subject}`);
           }
         });
       }

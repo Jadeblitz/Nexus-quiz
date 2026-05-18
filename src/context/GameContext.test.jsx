@@ -42,6 +42,16 @@ class MockAudio {
 }
 global.Audio = MockAudio;
 
+const AuthTestComponent = () => {
+  const game = useGame();
+  return (
+    <div>
+      <div data-testid="isAdmin">{String(game.isAdmin)}</div>
+      <div data-testid="totalXp">{game.stats?.totalXp}</div>
+    </div>
+  );
+};
+
 const TestComponent = ({ testAction }) => {
   const game = useGame();
 
@@ -283,5 +293,158 @@ describe('GameContext - handleAnswer', () => {
 
     expect(screen.getByTestId('isChecking').textContent).toBe('false');
     expect(screen.getByTestId('selectedAnswerIndex').textContent).toBe('');
+  });
+});
+
+
+describe('GameContext - saveProgress error handling', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.clearAllMocks();
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('logs error when saveProgress sync fails', async () => {
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const { setDoc } = await import('firebase/firestore');
+    const error = new Error('Test sync error');
+    setDoc.mockRejectedValueOnce(error);
+
+    const action = (game) => {
+      // Expose game context for test manipulation
+      window.testGame = game;
+    };
+
+    render(
+      <GameProvider>
+        <TestComponent testAction={action} />
+      </GameProvider>
+    );
+
+    // Initial render
+    await act(async () => {
+      vi.advanceTimersByTime(1);
+    });
+
+    // Set user to bypass early return
+    await act(async () => {
+      window.testGame.setUser({ uid: 'test-uid' });
+    });
+
+    // Trigger finishQuiz to invoke saveProgress
+    await act(async () => {
+      window.testGame.finishQuiz(10, 100);
+    });
+
+    // Resolve promises
+    await act(async () => {
+        await Promise.resolve();
+        await Promise.resolve();
+    });
+
+    expect(consoleSpy).toHaveBeenCalledWith("Sync failed", error);
+    consoleSpy.mockRestore();
+  });
+});
+
+describe('GameContext - getRank', () => {
+  it('should return Basic (Beginner) for 0 or negative xp', () => {
+    expect(getRank(0)).toEqual({
+      title: 'Rank 1',
+      level: 'Basic (Beginner)',
+      color: 'text-blue-400'
+    });
+    expect(getRank(-10)).toEqual({
+      title: 'Rank 1',
+      level: 'Basic (Beginner)',
+      color: 'text-blue-400'
+    });
+  });
+
+  it('should return correct rank for intermediate xp', () => {
+    // 1 step = 1250.
+    // 13 steps * 1250 = 16250 => stepIndex = 13
+    // rankIndex = Math.min(Math.floor(13 / 3), 12) = Math.min(4, 12) = 4 (Veteran)
+    // subLevelIndex = Math.min(13 % 3, 2) = 1 (Advanced)
+    expect(getRank(13 * 1250)).toEqual({
+      title: 'Rank 5',
+      level: 'Veteran (Advanced)',
+      color: 'text-blue-400'
+    });
+  });
+
+  it('should cap at God (Peak) for non-admins when xp is very high', () => {
+    // Cap is at 13 * 3 * 1250 = 48750
+    expect(getRank(48750, false)).toEqual({
+      title: 'Rank 13',
+      level: 'God (Peak)',
+      color: 'text-rose-500'
+    });
+    expect(getRank(50000, false)).toEqual({
+      title: 'Rank 13',
+      level: 'God (Peak)',
+      color: 'text-rose-500'
+    });
+  });
+
+  it('should return True God for admins when xp is at or above cap', () => {
+    expect(getRank(48750, true)).toEqual({
+      title: 'Rank 14',
+      level: 'True God',
+      color: 'text-amber-400 font-black'
+    });
+    expect(getRank(100000, true)).toEqual({
+      title: 'Rank 14',
+      level: 'True God',
+      color: 'text-amber-400 font-black'
+    });
+  });
+
+  it('should return proper color formatting for higher ranks', () => {
+    // rankIndex >= 8 is text-purple-400
+    // rankIndex 8 => 8 * 3 * 1250 = 30000 => Emperor
+    expect(getRank(30000)).toEqual({
+      title: 'Rank 9',
+      level: 'Emperor (Beginner)',
+      color: 'text-purple-400'
+    });
+
+    // rankIndex >= 11 is text-rose-500
+    // rankIndex 11 => 11 * 3 * 1250 = 41250 => Primordial
+    expect(getRank(41250)).toEqual({
+      title: 'Rank 12',
+      level: 'Primordial (Beginner)',
+      color: 'text-rose-500'
+    });
+  });
+});
+
+describe('GameContext - handleUserPersistence', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('falls back to Guest state when Firebase persistence fails', async () => {
+    // Override the mock to throw an error for this specific test
+    vi.mocked(getDoc).mockRejectedValueOnce(new Error('Firebase Error'));
+
+    // Override getCurrentUser to simulate a logged-in user so persistence logic is triggered
+    vi.mocked(FirebaseAuthentication.getCurrentUser).mockResolvedValueOnce({
+      user: { uid: 'test-uid' }
+    });
+
+    render(
+      <GameProvider>
+        <AuthTestComponent />
+      </GameProvider>
+    );
+
+    // After resolving auth and persistence failing, we should end up with Guest defaults
+    await waitFor(() => {
+      expect(screen.getByTestId('isAdmin').textContent).toBe('false');
+      expect(screen.getByTestId('totalXp').textContent).toBe('0');
+    });
   });
 });

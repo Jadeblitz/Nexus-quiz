@@ -8,10 +8,15 @@ import { calculateBaseGain } from '../utils/quizLogic';
 
 export { SUBJECTS, DIFFICULTIES };
 
+const XP_PER_SUBSTEP = 1250;
+const SUBLEVELS_PER_RANK = 3;
+const TOTAL_RANKS = 13;
+const MAX_XP = TOTAL_RANKS * SUBLEVELS_PER_RANK * XP_PER_SUBSTEP;
+
 export const getRank = (xp, isAdmin = false) => {
   const RANKS = ["Basic", "Novice", "Adept", "Elite", "Veteran", "Commander", "Knight", "King", "Emperor", "Saint", "Sage", "Primordial", "God"];
 
-  if (xp >= 13 * 3 * 1250) {
+  if (xp >= MAX_XP) {
       // True God is reserved
       if (isAdmin) {
           return { title: "Rank 14", level: "True God", color: "text-amber-400 font-black" };
@@ -20,11 +25,10 @@ export const getRank = (xp, isAdmin = false) => {
       return { title: "Rank 13", level: "God (Peak)", color: "text-rose-500" };
   }
 
-  const xpPerSubStep = 1250;
-  const stepIndex = Math.floor((xp < 0 ? 0 : xp) / xpPerSubStep);
+  const stepIndex = Math.floor((xp < 0 ? 0 : xp) / XP_PER_SUBSTEP);
   // Cap rank at 13 (index 12)
-  const rankIndex = Math.min(Math.floor(stepIndex / 3), 12);
-  const subLevelIndex = Math.min(stepIndex % 3, 2);
+  const rankIndex = Math.min(Math.floor(stepIndex / SUBLEVELS_PER_RANK), TOTAL_RANKS - 1);
+  const subLevelIndex = Math.min(stepIndex % SUBLEVELS_PER_RANK, SUBLEVELS_PER_RANK - 1);
   const subLevels = ["Beginner", "Advanced", "Peak"];
 
   const rankName = RANKS[rankIndex] || "Basic";
@@ -65,6 +69,7 @@ export const GameProvider = ({ children }) => {
   const [maintenanceMessage, setMaintenanceMessage] = useState("");
   const [sessionXp, setSessionXp] = useState(0);
   const [lastPassesNeeded, setLastPassesNeeded] = useState(0);
+  const [baseXp, setBaseXp] = useState(0);
 
   const [recentXpChange, setRecentXpChange] = useState(0);
   const [showXpChange, setShowXpChange] = useState(false);
@@ -192,15 +197,6 @@ export const GameProvider = ({ children }) => {
       console.error("Failed to listen for maintenance mode:", error);
     });
 
-    if (import.meta.env.MODE === 'test') {
-      window._triggerMaintenanceMode = (mode, msg) => {
-         setMaintenanceMode(mode);
-         setMaintenanceMessage(msg);
-      };
-      window._triggerAdminMode = (mode) => {
-         setIsAdmin(mode);
-      };
-    }
 
     return () => unsubMaintenance();
   }, []);
@@ -248,26 +244,34 @@ export const GameProvider = ({ children }) => {
 
     let pool = activePools.current[poolKey];
 
-    // Shuffle the pool
-    const shuffledPool = shuffle([...pool]);
-
     const limit = timeMode ? 20 : 10;
-    const actualLimit = Math.min(shuffledPool.length, limit);
+    const actualLimit = Math.min(pool.length, limit);
 
-    // Select questions
-    const selectedQuestions = shuffledPool.slice(0, actualLimit);
+    // Select questions and remove them from the active pool using partial Fisher-Yates
+    const randomized = new Array(actualLimit);
+    for (let i = 0; i < actualLimit; i++) {
+        const randomIndex = Math.floor(Math.random() * pool.length);
+        const q = pool[randomIndex];
 
-    // Remove selected questions from the active pool
-    activePools.current[poolKey] = shuffledPool.slice(actualLimit);
+        pool[randomIndex] = pool[pool.length - 1];
+        pool.pop();
 
-    const randomized = selectedQuestions.map(q => ({
-      ...q, options: shuffle(q.options)
-    }));
+        const opts = [...q.options];
+        for (let j = opts.length - 1; j > 0; j--) {
+            const k = Math.floor(Math.random() * (j + 1));
+            const temp = opts[j];
+            opts[j] = opts[k];
+            opts[k] = temp;
+        }
+
+        randomized[i] = { ...q, options: opts };
+    }
 
     setQuestions(randomized);
     setCurrentIndex(0);
     setScore(0);
     setSessionXp(0);
+    setBaseXp(stats.totalXp);
     setShowXpChange(false);
     setGameState('playing');
   };
@@ -305,8 +309,8 @@ export const GameProvider = ({ children }) => {
          xpEarnedThisQuestion += baseGain * 2; // Proportionate bonus
       }
 
-      if (settings.sfxEnabled && correctSfx.current) correctSfx.current.play().catch(()=>{});
-      if (settings.hapticsEnabled) await Haptics.notification({ type: NotificationType.Success }).catch(()=>{});
+      if (settings.sfxEnabled && correctSfx.current) correctSfx.current.play().catch((e) => console.warn("SFX playback failed:", e));
+      if (settings.hapticsEnabled) await Haptics.notification({ type: NotificationType.Success }).catch((e) => console.warn("Haptics trigger failed:", e));
     } else {
       currentStreak = 0;
       setStreak(0);
@@ -315,8 +319,8 @@ export const GameProvider = ({ children }) => {
          xpEarnedThisQuestion = -Math.floor(baseGain / 2);
       }
 
-      if (settings.sfxEnabled && wrongSfx.current) wrongSfx.current.play().catch(()=>{});
-      if (settings.hapticsEnabled) await Haptics.impact({ style: ImpactStyle.Heavy }).catch(()=>{});
+      if (settings.sfxEnabled && wrongSfx.current) wrongSfx.current.play().catch((e) => console.warn("SFX playback failed:", e));
+      if (settings.hapticsEnabled) await Haptics.impact({ style: ImpactStyle.Heavy }).catch((e) => console.warn("Haptics trigger failed:", e));
     }
 
     const updatedSessionXp = sessionXp + xpEarnedThisQuestion;
@@ -334,7 +338,6 @@ export const GameProvider = ({ children }) => {
         setSelectedAnswerIndex(null);
         setIsChecking(false);
       } else {
-        finishQuiz(newScore, updatedSessionXp);
         setIsChecking(false);
         setSelectedAnswerIndex(null);
       }
@@ -395,15 +398,11 @@ export const GameProvider = ({ children }) => {
   const finishQuiz = (finalScore, finalSessionXp) => {
     let finalXpGain = isTimeAttack ? finalSessionXp * 2 : finalSessionXp;
 
-    // Because updateLocalXP added sessionXp iteratively to totalXp during gameplay,
-    // totalXp is currently (oldTotalXp + finalSessionXp).
-    // We want the final totalXp to be (oldTotalXp + finalXpGain).
-    // So we subtract finalSessionXp from stats.totalXp, then add finalXpGain.
-    const oldXp = stats.totalXp - finalSessionXp;
-    let newXp = oldXp + finalXpGain;
+    let newXp = baseXp + finalXpGain;
     if (newXp < 0) newXp = 0;
+    const finalTotalXp = newXp;
 
-    const oldStep = Math.floor(oldXp / 1250);
+    const oldStep = Math.floor(baseXp / 1250);
     const newStep = Math.floor(newXp / 1250);
 
     if (newStep > oldStep) {
@@ -478,7 +477,8 @@ export const GameProvider = ({ children }) => {
       showRankUp, setShowRankUp,
       newRankInfo, setNewRankInfo,
       startQuiz, handleAnswer, finishQuiz, handleShareWrapper, VAULT_CONSTANTS,
-      maintenanceMode, maintenanceMessage
+      maintenanceMode, maintenanceMessage,
+      manualSyncToCloud
     }}>
       {children}
     </GameContext.Provider>

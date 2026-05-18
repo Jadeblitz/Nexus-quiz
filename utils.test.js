@@ -64,8 +64,8 @@ describe('utils.js', () => {
     });
 
     it('skips a broken question when data parsing throws an error', () => {
-      // Mock console.log to check if it's called with the correct message
-      const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+      // Mock console.error to check if it's called with the correct message
+      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
       // Create a mock proxy array that will throw an error when its first element is accessed
       // Since it's passed as `q` inside parseData: `q[0] || "Question text missing"`
@@ -103,10 +103,10 @@ describe('utils.js', () => {
       expect(parsed.science.advanced[1].id).toBe('science_advanced_2');
       expect(parsed.science.advanced[1].text).toBe('Another valid question');
 
-      // Ensure console.log was called
+      // Ensure console.error was called
       expect(consoleSpy).toHaveBeenCalledWith('Skipped a broken question in science');
 
-      // Restore console.log
+      // Restore console.error
       consoleSpy.mockRestore();
     });
 
