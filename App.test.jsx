@@ -10,8 +10,6 @@ vi.mock('@capacitor-firebase/authentication', () => ({
     getCurrentUser: vi.fn(() => Promise.resolve({ user: null })),
     signInWithEmailAndPassword: vi.fn(),
     createUserWithEmailAndPassword: vi.fn(),
-    signInWithGoogle: vi.fn(),
-    signInWithFacebook: vi.fn(),
     signOut: vi.fn(),
   }
 }));

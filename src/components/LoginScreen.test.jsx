@@ -28,8 +28,6 @@ describe('LoginScreen Component', () => {
     expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
 
     // Check buttons
-    expect(screen.getByRole('button', { name: /Continue with Google/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Continue with Facebook/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /^Login$/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Play as Guest/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Don't have an account\? Sign Up/i })).toBeInTheDocument();
@@ -60,26 +58,6 @@ describe('LoginScreen Component', () => {
     fireEvent.change(passwordInput, { target: { value: 'password123' } });
 
     expect(setPasswordMock).toHaveBeenCalledWith('password123');
-  });
-
-  it('calls handleLogin with "google" when Google button is clicked', () => {
-    const handleLoginMock = vi.fn();
-    render(<LoginScreen {...defaultProps} handleLogin={handleLoginMock} />);
-
-    const googleButton = screen.getByRole('button', { name: /Continue with Google/i });
-    fireEvent.click(googleButton);
-
-    expect(handleLoginMock).toHaveBeenCalledWith('google');
-  });
-
-  it('calls handleLogin with "facebook" when Facebook button is clicked', () => {
-    const handleLoginMock = vi.fn();
-    render(<LoginScreen {...defaultProps} handleLogin={handleLoginMock} />);
-
-    const facebookButton = screen.getByRole('button', { name: /Continue with Facebook/i });
-    fireEvent.click(facebookButton);
-
-    expect(handleLoginMock).toHaveBeenCalledWith('facebook');
   });
 
   it('calls handleLogin with "email" when Login button is clicked', () => {
