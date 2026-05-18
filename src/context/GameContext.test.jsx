@@ -43,6 +43,16 @@ class MockAudio {
 }
 global.Audio = MockAudio;
 
+const AuthTestComponent = () => {
+  const game = useGame();
+  return (
+    <div>
+      <div data-testid="isAdmin">{String(game.isAdmin)}</div>
+      <div data-testid="totalXp">{game.stats?.totalXp}</div>
+    </div>
+  );
+};
+
 const TestComponent = ({ testAction }) => {
   const game = useGame();
 
@@ -66,6 +76,49 @@ const TestComponent = ({ testAction }) => {
     </div>
   );
 };
+
+
+describe('GameContext - getRank', () => {
+  it('handles zero and negative xp', () => {
+    expect(getRank(0)).toEqual({ title: 'Rank 1', level: 'Basic (Beginner)', color: 'text-blue-400' });
+    expect(getRank(-100)).toEqual({ title: 'Rank 1', level: 'Basic (Beginner)', color: 'text-blue-400' });
+  });
+
+  it('handles basic progression (Beginner -> Advanced -> Peak)', () => {
+    expect(getRank(1249)).toEqual({ title: 'Rank 1', level: 'Basic (Beginner)', color: 'text-blue-400' });
+    expect(getRank(1250)).toEqual({ title: 'Rank 1', level: 'Basic (Advanced)', color: 'text-blue-400' });
+    expect(getRank(2500)).toEqual({ title: 'Rank 1', level: 'Basic (Peak)', color: 'text-blue-400' });
+  });
+
+  it('handles rank progression (Basic -> Novice)', () => {
+    expect(getRank(3750)).toEqual({ title: 'Rank 2', level: 'Novice (Beginner)', color: 'text-blue-400' });
+  });
+
+  it('handles color assignments correctly', () => {
+    // Rank 8 (index 7) is text-blue-400, Rank 9 (index 8) is text-purple-400
+    // Rank 9 starts at stepIndex = 8 * 3 = 24. 24 * 1250 = 30000
+    expect(getRank(29999).color).toBe('text-blue-400');
+    expect(getRank(30000).color).toBe('text-purple-400');
+
+    // Rank 11 starts at index 10 -> step 30. 30 * 1250 = 37500
+    // Rank 12 starts at index 11 -> step 33. 33 * 1250 = 41250
+    // wait, rankIndex >= 11 means rank 12.
+    expect(getRank(41249).color).toBe('text-purple-400');
+    expect(getRank(41250).color).toBe('text-rose-500');
+  });
+
+  it('handles max XP for non-admins', () => {
+    // Max XP logic: if xp >= 13 * 3 * 1250 = 48750
+    expect(getRank(48750)).toEqual({ title: 'Rank 13', level: 'God (Peak)', color: 'text-rose-500' });
+    expect(getRank(1000000)).toEqual({ title: 'Rank 13', level: 'God (Peak)', color: 'text-rose-500' });
+  });
+
+  it('handles max XP for admins', () => {
+    expect(getRank(48750, true)).toEqual({ title: 'Rank 14', level: 'True God', color: 'text-amber-400 font-black' });
+    expect(getRank(1000000, true)).toEqual({ title: 'Rank 14', level: 'True God', color: 'text-amber-400 font-black' });
+  });
+});
+
 describe('GameContext - handleAnswer', () => {
   beforeEach(() => {
     vi.useFakeTimers();
@@ -245,6 +298,8 @@ describe('GameContext - handleAnswer', () => {
 });
 
 describe('GameContext - saveProgress', () => {
+
+describe('GameContext - saveProgress error handling', () => {
   beforeEach(() => {
     vi.useFakeTimers();
     vi.clearAllMocks();
@@ -364,6 +419,34 @@ describe('GameContext - getRank', () => {
       title: 'Rank 12',
       level: 'Primordial (Beginner)',
       color: 'text-rose-500'
+    });
+  });
+});
+
+describe('GameContext - handleUserPersistence', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('falls back to Guest state when Firebase persistence fails', async () => {
+    // Override the mock to throw an error for this specific test
+    vi.mocked(getDoc).mockRejectedValueOnce(new Error('Firebase Error'));
+
+    // Override getCurrentUser to simulate a logged-in user so persistence logic is triggered
+    vi.mocked(FirebaseAuthentication.getCurrentUser).mockResolvedValueOnce({
+      user: { uid: 'test-uid' }
+    });
+
+    render(
+      <GameProvider>
+        <AuthTestComponent />
+      </GameProvider>
+    );
+
+    // After resolving auth and persistence failing, we should end up with Guest defaults
+    await waitFor(() => {
+      expect(screen.getByTestId('isAdmin').textContent).toBe('false');
+      expect(screen.getByTestId('totalXp').textContent).toBe('0');
     });
   });
 });
