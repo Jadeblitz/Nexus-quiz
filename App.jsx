@@ -34,6 +34,7 @@ function AppContent() {
   const [password, setPassword] = useState('');
   const [isRegistering, setIsRegistering] = useState(false);
   const [loginError, setLoginError] = useState('');
+  const [authError, setAuthError] = useState('');
 
   const bgMusic = useRef(typeof Audio !== "undefined" ? new Audio('/music.mp3') : null);
   if (bgMusic.current) bgMusic.current.loop = true;
@@ -89,24 +90,18 @@ function AppContent() {
     setLoginError('');
     try {
       setAuthError('');
-      let result;
-      if (provider === 'google') {
-        result = await FirebaseAuthentication.signInWithGoogle();
-      } else if (provider === 'facebook') {
-        result = await FirebaseAuthentication.signInWithFacebook();
-      } else {
-        if (isRegistering && password.length < 6) {
-          setAuthError("Password must be at least 6 characters long.");
-          return;
-        }
-        setIsLoading(true);
-        if (isRegistering) {
-          await FirebaseAuthentication.createUserWithEmailAndPassword({ email, password });
-        } else {
-          await FirebaseAuthentication.signInWithEmailAndPassword({ email, password });
-        }
-        return; // Listener handles state
+
+      if (isRegistering && password.length < 6) {
+        setAuthError("Password must be at least 6 characters long.");
+        return;
       }
+      setIsLoading(true);
+      if (isRegistering) {
+        await FirebaseAuthentication.createUserWithEmailAndPassword({ email, password });
+      } else {
+        await FirebaseAuthentication.signInWithEmailAndPassword({ email, password });
+      }
+      return; // Listener handles state
 
     } catch (error) {
       console.error("Login failed:", error);
