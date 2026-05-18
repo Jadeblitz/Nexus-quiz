@@ -3,6 +3,7 @@ import { render, screen, act } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { GameProvider, useGame, getRank } from './GameContext';
 import { Haptics, NotificationType, ImpactStyle } from '@capacitor/haptics';
+import { setDoc } from 'firebase/firestore';
 
 // Mocks
 vi.mock('firebase/firestore', () => ({
@@ -296,25 +297,42 @@ describe('GameContext - handleAnswer', () => {
   });
 });
 
+describe('GameContext - saveProgress', () => {
 
 describe('GameContext - saveProgress error handling', () => {
   beforeEach(() => {
     vi.useFakeTimers();
     vi.clearAllMocks();
   });
+
   afterEach(() => {
     vi.useRealTimers();
+    vi.restoreAllMocks();
   });
 
-  it('logs error when saveProgress sync fails', async () => {
+  it('logs an error when saveProgress fails', async () => {
+    const errorObj = new Error("Network Error");
+    setDoc.mockRejectedValueOnce(errorObj);
     const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    const { setDoc } = await import('firebase/firestore');
-    const error = new Error('Test sync error');
-    setDoc.mockRejectedValueOnce(error);
 
     const action = (game) => {
-      // Expose game context for test manipulation
-      window.testGame = game;
+      // Run the action once when user is null
+      if (!game.user && !game.isChecking && game.gameState !== 'results') {
+        act(() => {
+          // Setting the user is required to bypass the !user check in saveProgress
+          game.setUser({ uid: '123' });
+          // ensure stats.passes is defined
+          game.setStats({ totalXp: 0, completed: 0, passes: {} });
+          // Ensure valid selected subject/difficulty to avoid errors when saving passes
+          game.setSelectedSubject({ id: 'science' });
+          game.setSelectedDifficulty({ id: 'foundational' });
+        });
+      } else if (game.user && game.user.uid === '123' && game.gameState !== 'results') {
+         // Now user is set, we can finish quiz
+         act(() => {
+            game.finishQuiz(10, 50);
+         });
+      }
     };
 
     render(
@@ -323,29 +341,13 @@ describe('GameContext - saveProgress error handling', () => {
       </GameProvider>
     );
 
-    // Initial render
+    // Wait for state updates and promises
     await act(async () => {
-      vi.advanceTimersByTime(1);
+      vi.advanceTimersByTime(100);
+      await Promise.resolve(); // flush microtasks
     });
 
-    // Set user to bypass early return
-    await act(async () => {
-      window.testGame.setUser({ uid: 'test-uid' });
-    });
-
-    // Trigger finishQuiz to invoke saveProgress
-    await act(async () => {
-      window.testGame.finishQuiz(10, 100);
-    });
-
-    // Resolve promises
-    await act(async () => {
-        await Promise.resolve();
-        await Promise.resolve();
-    });
-
-    expect(consoleSpy).toHaveBeenCalledWith("Sync failed", error);
-    consoleSpy.mockRestore();
+    expect(consoleSpy).toHaveBeenCalledWith("Sync failed", errorObj);
   });
 });
 
