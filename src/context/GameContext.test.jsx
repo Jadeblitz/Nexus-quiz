@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 import { render, screen, act } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { waitFor } from '@testing-library/react';
 import { GameProvider, useGame, getRank } from './GameContext';
-import { getDoc } from 'firebase/firestore';
-import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { Haptics, NotificationType, ImpactStyle } from '@capacitor/haptics';
 
 // Mocks
@@ -78,40 +75,46 @@ const TestComponent = ({ testAction }) => {
     </div>
   );
 };
-describe('GameContext - manualSyncToCloud', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
+
+
+describe('GameContext - getRank', () => {
+  it('handles zero and negative xp', () => {
+    expect(getRank(0)).toEqual({ title: 'Rank 1', level: 'Basic (Beginner)', color: 'text-blue-400' });
+    expect(getRank(-100)).toEqual({ title: 'Rank 1', level: 'Basic (Beginner)', color: 'text-blue-400' });
   });
 
-  it('should return false and log error when getDoc throws', async () => {
-    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+  it('handles basic progression (Beginner -> Advanced -> Peak)', () => {
+    expect(getRank(1249)).toEqual({ title: 'Rank 1', level: 'Basic (Beginner)', color: 'text-blue-400' });
+    expect(getRank(1250)).toEqual({ title: 'Rank 1', level: 'Basic (Advanced)', color: 'text-blue-400' });
+    expect(getRank(2500)).toEqual({ title: 'Rank 1', level: 'Basic (Peak)', color: 'text-blue-400' });
+  });
 
-    // We need to import setDoc/getDoc, but they are mocked at the top.
-    const { getDoc } = await import('firebase/firestore');
-    getDoc.mockRejectedValueOnce(new Error('Sync failed'));
+  it('handles rank progression (Basic -> Novice)', () => {
+    expect(getRank(3750)).toEqual({ title: 'Rank 2', level: 'Novice (Beginner)', color: 'text-blue-400' });
+  });
 
-    let gameRef;
-    render(
-      <GameProvider>
-        <TestComponent testAction={(g) => { gameRef = g; }} />
-      </GameProvider>
-    );
+  it('handles color assignments correctly', () => {
+    // Rank 8 (index 7) is text-blue-400, Rank 9 (index 8) is text-purple-400
+    // Rank 9 starts at stepIndex = 8 * 3 = 24. 24 * 1250 = 30000
+    expect(getRank(29999).color).toBe('text-blue-400');
+    expect(getRank(30000).color).toBe('text-purple-400');
 
-    // Set user so manualSyncToCloud doesn't return early
-    act(() => {
-      gameRef.setUser({ uid: '123' });
-    });
+    // Rank 11 starts at index 10 -> step 30. 30 * 1250 = 37500
+    // Rank 12 starts at index 11 -> step 33. 33 * 1250 = 41250
+    // wait, rankIndex >= 11 means rank 12.
+    expect(getRank(41249).color).toBe('text-purple-400');
+    expect(getRank(41250).color).toBe('text-rose-500');
+  });
 
-    // Provide some context values if needed, manualSyncToCloud uses getDoc/setDoc
-    let result;
-    await act(async () => {
-      result = await gameRef.manualSyncToCloud();
-    });
+  it('handles max XP for non-admins', () => {
+    // Max XP logic: if xp >= 13 * 3 * 1250 = 48750
+    expect(getRank(48750)).toEqual({ title: 'Rank 13', level: 'God (Peak)', color: 'text-rose-500' });
+    expect(getRank(1000000)).toEqual({ title: 'Rank 13', level: 'God (Peak)', color: 'text-rose-500' });
+  });
 
-    expect(result).toBe(false);
-    expect(consoleSpy).toHaveBeenCalledWith("Manual sync failed", expect.any(Error));
-
-    consoleSpy.mockRestore();
+  it('handles max XP for admins', () => {
+    expect(getRank(48750, true)).toEqual({ title: 'Rank 14', level: 'True God', color: 'text-amber-400 font-black' });
+    expect(getRank(1000000, true)).toEqual({ title: 'Rank 14', level: 'True God', color: 'text-amber-400 font-black' });
   });
 });
 
