@@ -1441,7 +1441,7 @@ export const rawQuizData = {
         "Void Purple"
       ],
       [
-        "Nichothéos's Golden Axe is primarily known for its ability to cut through:",
+        "What is Nichothéos's Golden Axe primarily known for its ability to cut through?",
         "Anything and Everything",
         "Physical armor only",
         "Magical barriers only",
@@ -1476,7 +1476,7 @@ export const rawQuizData = {
         "The Void Nomad"
       ],
       [
-        "The weight of the Golden Axe is said to be equivalent to:",
+        "What is the weight of the Golden Axe said to be equivalent to?",
         "All of Existence",
         "A mountain",
         "The weight of ten dying stars",
@@ -1578,7 +1578,7 @@ export const rawQuizData = {
         "8"
       ],
       [
-        "A push or a pull acting on an object is called a...",
+        "What is a push or a pull acting on an object called?",
         "Force",
         "Mass",
         "Weight",
@@ -1823,7 +1823,7 @@ export const rawQuizData = {
         "Seaweed"
       ],
       [
-        "The Heisenberg Uncertainty Principle states you cannot know momentum and...",
+        "According to the Heisenberg Uncertainty Principle, what can you not simultaneously know along with momentum?",
         "Position",
         "Energy",
         "Spin",
@@ -1858,14 +1858,14 @@ export const rawQuizData = {
         "Mutation"
       ],
       [
-        "The Schrödinger equation calculates...",
+        "What does the Schrödinger equation calculate?",
         "The quantum state of a system",
         "Orbital velocity",
         "Gravitational waves",
         "Relativistic time dilation"
       ],
       [
-        "Non-superimposable mirror image molecules are called...",
+        "What are non-superimposable mirror image molecules called?",
         "Enantiomers",
         "Diastereomers",
         "Isotopes",
@@ -1893,7 +1893,7 @@ export const rawQuizData = {
         "Phenol"
       ],
       [
-        "During an action potential, depolarization is caused by influx of...",
+        "What causes depolarization during an action potential?",
         "Sodium",
         "Potassium",
         "Calcium",
@@ -1914,7 +1914,7 @@ export const rawQuizData = {
         "Endoplasmic Reticulum"
       ],
       [
-        "An SN2 reaction mechanism proceeds via...",
+        "How does an SN2 reaction mechanism proceed?",
         "A concerted 'backside attack'",
         "A carbocation intermediate",
         "A radical intermediate",
@@ -1991,21 +1991,21 @@ export const rawQuizData = {
         "Motherboard"
       ],
       [
-        "Perimeter of rectangle length 5 and width 4?",
+        "What is the perimeter of a rectangle with length 5 and width 4?",
         "18",
         "20",
         "9",
         "24"
       ],
       [
-        "Standard keyboard shortcut to 'Copy' text?",
+        "What is the standard keyboard shortcut to 'Copy' text?",
         "Ctrl + C",
         "Ctrl + V",
         "Ctrl + X",
         "Ctrl + P"
       ],
       [
-        "A prime number is a number divisible only by 1 and itself",
+        "Is a prime number a number divisible only by 1 and itself?",
         "TRUE",
         "FALSE",
         "Ends in 1, 3, 7, 9",
@@ -2019,14 +2019,14 @@ export const rawQuizData = {
         "Printing documents"
       ],
       [
-        "One Gigabyte (GB) is roughly equal to...",
+        "What is one Gigabyte (GB) roughly equal to?",
         "1000 Megabytes (MB)",
         "1000 Kilobytes (KB)",
         "1000 Terabytes (TB)",
         "1000 Bytes"
       ],
       [
-        "Physical, tangible parts of computer are called...",
+        "What are the physical, tangible parts of a computer called?",
         "Hardware",
         "Software",
         "Malware",
@@ -2040,14 +2040,14 @@ export const rawQuizData = {
         "100"
       ],
       [
-        "Main circuit board of computer called?",
+        "What is the main circuit board of a computer called?",
         "Motherboard",
         "Fatherboard",
         "Logic Board",
         "Central Board"
       ],
       [
-        "A widely used Search Engine?",
+        "What is a widely used search engine?",
         "Google",
         "Microsoft Word",
         "Photoshop",
@@ -2075,14 +2075,14 @@ export const rawQuizData = {
         "10000"
       ],
       [
-        "The global system of interconnected computer networks?",
+        "What is the global system of interconnected computer networks called?",
         "Internet",
         "Intranet",
         "Extranet",
         "Ethernet"
       ],
       [
-        "The approximate value of Pi to two decimal places?",
+        "What is the approximate value of Pi to two decimal places?",
         "3.14",
         "3.12",
         "3.16",
@@ -2357,7 +2357,7 @@ export const rawQuizData = {
         "Vacuole"
       ],
       [
-        "An organism's physical appearance is called its...",
+        "What is an organism's physical appearance called?",
         "Phenotype",
         "Genotype",
         "Allele",
@@ -2385,7 +2385,7 @@ export const rawQuizData = {
         "Lymphocytes"
       ],
       [
-        "Group 18 elements are known as...",
+        "What are Group 18 elements known as?",
         "Noble Gases",
         "Alkali Metals",
         "Halogens",
@@ -2476,7 +2476,7 @@ export const rawQuizData = {
         "Cylindrical"
       ],
       [
-        "In an ecosystem, fungi and bacteria serve as...",
+        "What role do fungi and bacteria serve in an ecosystem?",
         "Decomposers",
         "Producers",
         "Primary Consumers",
@@ -2581,7 +2581,7 @@ export const rawQuizData = {
         "Centriole"
       ],
       [
-        "Speed of a wave on string depends on tension and...",
+        "What does the speed of a wave on a string depend on besides tension?",
         "Linear mass density",
         "Amplitude",
         "Frequency",
@@ -2602,7 +2602,7 @@ export const rawQuizData = {
         "Gluons and Bosons"
       ],
       [
-        "Major product of a Markovnikov addition of HBr to an alkene?",
+        "What is the major product of a Markovnikov addition of HBr to an alkene?",
         "The more substituted alkyl bromide",
         "The less substituted alkyl bromide",
         "An alkane",
@@ -2637,7 +2637,7 @@ export const rawQuizData = {
         "To measure pH"
       ],
       [
-        "According to general relativity, gravity is described as...",
+        "According to general relativity, how is gravity described?",
         "The curvature of spacetime",
         "A force carrying particle",
         "A magnetic attraction",
@@ -2686,14 +2686,14 @@ export const rawQuizData = {
         "Spleen"
       ],
       [
-        "Mathematical operator describes total energy of quantum system?",
+        "What mathematical operator describes the total energy of a quantum system?",
         "Hamiltonian",
         "Lagrangian",
         "Laplacian",
         "Jacobian"
       ],
       [
-        "Term for an allele that only expressed in homozygous state?",
+        "What is the term for an allele that is only expressed in a homozygous state?",
         "Recessive",
         "Dominant",
         "Codominant",
@@ -2791,7 +2791,7 @@ export const rawQuizData = {
         "4/6"
       ],
       [
-        "Git is an example of a...",
+        "What is Git an example of?",
         "Version Control System",
         "Database Management System",
         "Operating System",
@@ -3351,7 +3351,7 @@ export const rawQuizData = {
         "Scratch reflex"
       ],
       [
-        "The Axiom of Preventive Medicine states that people with ___ risk for a disease should be screened and we should treat ___ of those people.",
+        "What does the Axiom of Preventive Medicine state about screening and treating people based on their risk for a disease?",
         "low, all",
         "low, some",
         "high, all",
@@ -3374,21 +3374,21 @@ export const rawQuizData = {
     ],
     "advanced": [
       [
-        "The fugacity of a component in an ideal gas mixture is equal to its:",
+        "What is the fugacity of a component in an ideal gas mixture equal to?",
         "Partial pressure",
         "Mole fraction",
         "Total pressure",
         "Chemical potential"
       ],
       [
-        "A PID controller's 'Integral' action is primarily used to eliminate:",
+        "What is a PID controller's 'Integral' action primarily used to eliminate?",
         "Steady-state offset",
         "Overshoot",
         "System noise",
         "Response lag"
       ],
       [
-        "For a zero-order reaction, the time required for 50% conversion is proportional to:",
+        "For a zero-order reaction, what is the time required for 50% conversion proportional to?",
         "Initial concentration",
         "Inverse of initial concentration",
         "Square root of concentration",
@@ -3430,14 +3430,14 @@ export const rawQuizData = {
         "Enthalpy"
       ],
       [
-        "The 'Arrhenius Equation' shows that the rate constant k increases ______ with temperature.",
+        "According to the 'Arrhenius Equation', how does the rate constant k increase with temperature?",
         "Exponentially",
         "Linearly",
         "Logarithmically",
         "Inversely"
       ],
       [
-        "In a cooling tower, the lowest temperature to which water can be cooled is the:",
+        "In a cooling tower, what is the lowest temperature to which water can be cooled?",
         "Wet-bulb temperature",
         "Dry-bulb temperature",
         "Dew point",
@@ -3451,28 +3451,28 @@ export const rawQuizData = {
         "Heavy Metals"
       ],
       [
-        "The 'Cloud Point' of a petroleum oil is the temperature at which:",
+        "What is the 'Cloud Point' of a petroleum oil?",
         "Wax crystals begin to form",
         "The oil ceases to flow",
         "Vapors ignite",
         "Moisture evaporates"
       ],
       [
-        "In 'Catalytic Reforming', the main goal is to increase the content of:",
+        "In 'Catalytic Reforming', what is the main goal to increase the content of?",
         "Aromatics",
         "Olefins",
         "Naphthenes",
         "Paraffins"
       ],
       [
-        "In safety engineering, 'BLEVE' stands for:",
+        "In safety engineering, what does 'BLEVE' stand for?",
         "Boiling Liquid Expanding Vapor Explosion",
         "Binary Liquid Evaporation Velocity Equation",
         "Basic Level Emergency Valve Entry",
         "Batch Liquid Extraction Vacuum Effect"
       ],
       [
-        "The 'Flash Point' of a liquid is the lowest temperature at which it produces:",
+        "What is the 'Flash Point' of a liquid?",
         "Enough vapor to ignite in air",
         "A continuous flame",
         "Spontaneous combustion",
@@ -3493,14 +3493,14 @@ export const rawQuizData = {
         "Oxygen, Water, Fuel"
       ],
       [
-        "A 'HAZOP' study is a structured technique used to identify:",
+        "What is a 'HAZOP' study used to identify?",
         "Process deviations and hazards",
         "Financial losses",
         "Equipment shipping costs",
         "Employee salaries"
       ],
       [
-        "The 'Lower Explosive Limit' (LEL) is the minimum concentration of fuel in air required for:",
+        "What is the 'Lower Explosive Limit' (LEL)?",
         "Combustion to occur",
         "The fuel to become too rich to burn",
         "The fuel to auto-ignite",
@@ -3514,7 +3514,7 @@ export const rawQuizData = {
         "Rotameter"
       ],
       [
-        "In the 'Galvanic Series', a metal that is more 'Noble' is:",
+        "In the 'Galvanic Series', what does it mean for a metal to be more 'Noble'?",
         "More resistant to corrosion",
         "More likely to corrode",
         "A better anode",
@@ -3549,7 +3549,7 @@ export const rawQuizData = {
         "Filter media"
       ],
       [
-        "The atmospheric layer where most weather events occur and temperature decreases with altitude is the:",
+        "What is the atmospheric layer where most weather events occur and temperature decreases with altitude called?",
         "Troposphere",
         "Stratosphere",
         "Mesosphere",
@@ -3563,7 +3563,7 @@ export const rawQuizData = {
         "Cadmium"
       ],
       [
-        "In air pollution control, a 'Venturi Scrubber' is most effective at removing:",
+        "In air pollution control, what is a 'Venturi Scrubber' most effective at removing?",
         "Fine particulates and gases",
         "Large grit",
         "Odors only",
@@ -3591,7 +3591,7 @@ export const rawQuizData = {
         "Transition Zone"
       ],
       [
-        "The 'Glass Transition Temperature' (Tg) is the point where a polymer transitions from:",
+        "What is the 'Glass Transition Temperature' (Tg)?",
         "Brittle/Glassy to Rubbery/Flexible",
         "Liquid to Solid",
         "Amorphous to Crystalline",
@@ -3605,21 +3605,21 @@ export const rawQuizData = {
         "Dissolution"
       ],
       [
-        "The 'Melt Flow Index' (MFI) is an indirect measure of a polymer's:",
+        "What is the 'Melt Flow Index' (MFI) an indirect measure of?",
         "Molecular weight and viscosity",
         "Density",
         "Tensile strength",
         "Glass transition"
       ],
       [
-        "In injection molding, the 'Sprue' is the channel through which the melt enters the:",
+        "In injection molding, what is the 'Sprue'?",
         "Runner system",
         "Cavity",
         "Hopper",
         "Ejector pin"
       ],
       [
-        "The Clapeyron equation relates the slope of the vapor pressure curve to the:",
+        "What does the Clapeyron equation relate the slope of the vapor pressure curve to?",
         "Enthalpy of vaporization and molar volume change",
         "Entropy of fusion and temperature",
         "Specific heat capacity and pressure",
@@ -3633,14 +3633,14 @@ export const rawQuizData = {
         "Molar Property"
       ],
       [
-        "The 'Acentric Factor' (omega) is a measure of the non-sphericity of a molecule's:",
+        "What is the 'Acentric Factor' (omega) a measure of?",
         "Force field",
         "Mass distribution",
         "Electron cloud",
         "Dipole moment"
       ],
       [
-        "For a binary mixture, the 'Wilson Equation' is primarily used to calculate:",
+        "For a binary mixture, what is the 'Wilson Equation' primarily used to calculate?",
         "Activity coefficients",
         "Fugacity coefficients",
         "Virial coefficients",
@@ -3654,7 +3654,7 @@ export const rawQuizData = {
         "Redlich-Kwong Equation"
       ],
       [
-        "The 'Exergy' of a system represents the maximum:",
+        "What does the 'Exergy' of a system represent?",
         "Useful work obtainable",
         "Heat transferable",
         "Entropy produced",
@@ -3668,21 +3668,21 @@ export const rawQuizData = {
         "Peng-Robinson EOS"
       ],
       [
-        "The chemical potential (mu_i) of a component is defined as the partial molar:",
+        "How is the chemical potential (mu_i) of a component defined?",
         "Gibbs Free Energy",
         "Enthalpy",
         "Entropy",
         "Internal Energy"
       ],
       [
-        "In the context of 'Residual Properties', the residual Gibbs energy is directly related to the:",
+        "In the context of 'Residual Properties', what is the residual Gibbs energy directly related to?",
         "Fugacity coefficient",
         "Activity coefficient",
         "Compressibility factor",
         "Virial coefficient"
       ],
       [
-        "The 'Clausius-Clapeyron' equation is a simplified version of the Clapeyron equation assuming:",
+        "What does the 'Clausius-Clapeyron' equation assume as a simplified version of the Clapeyron equation?",
         "Ideal gas vapor and negligible liquid volume",
         "Constant pressure and temperature",
         "Real gas behavior",
@@ -3703,21 +3703,21 @@ export const rawQuizData = {
         "Platinum"
       ],
       [
-        "The 'Tafel Equation' relates the overpotential (eta) to the logarithm of the:",
+        "What does the 'Tafel Equation' relate the overpotential (eta) to the logarithm of?",
         "Current density",
         "Temperature",
         "Pressure",
         "Concentration"
       ],
       [
-        "'Passivity' in metals like Aluminum and Stainless Steel is due to the formation of a:",
+        "What is 'Passivity' in metals like Aluminum and Stainless Steel is due to the formation of a?",
         "Protective oxide film",
         "Porous coating",
         "Sulfide layer",
         "Carbonate film"
       ],
       [
-        "In 'Cathodic Protection' by impressed current, the structure is connected to the:",
+        "In 'Cathodic Protection' by impressed current, to what is the structure connected?",
         "Negative terminal of a DC source",
         "Positive terminal of a DC source",
         "Ground wire",
@@ -3731,7 +3731,7 @@ export const rawQuizData = {
         "exp(-s)"
       ],
       [
-        "In plant design, the 'Six-Tenths Rule' is used to estimate:",
+        "In plant design, what is the 'Six-Tenths Rule' used to estimate?",
         "Equipment cost scaling",
         "Reflux ratio",
         "Pipe diameter",
@@ -3745,14 +3745,14 @@ export const rawQuizData = {
         "Solution Polymerization"
       ],
       [
-        "The temperature at which a polymer transitions from a brittle state to a rubbery state is the:",
+        "What is the temperature at which a polymer transitions from a brittle state to a rubbery state called?",
         "Glass Transition Temperature",
         "Melting Point",
         "Flash Point",
         "Cloud Point"
       ],
       [
-        "The 'Breakeven Point' in chemical plant economics is reached when:",
+        "When is the 'Breakeven Point' in chemical plant economics reached?",
         "Total revenue equals total costs",
         "Gross profit is maximized",
         "Net present value is zero",
@@ -3766,21 +3766,21 @@ export const rawQuizData = {
         "Superheat the steam"
       ],
       [
-        "The transfer function of a first-order system with time constant tau is:",
+        "What is the transfer function of a first-order system with a time constant tau?",
         "1 / (tau*s + 1)",
         "tau / (s + 1)",
         "1 / (s + tau)",
         "s / (tau + 1)"
       ],
       [
-        "In drying operations, the 'Constant Rate Period' ends at the:",
+        "What is the In drying operations, the 'Constant Rate Period' ends at?",
         "Critical moisture content",
         "Equilibrium moisture content",
         "Saturation point",
         "Free moisture limit"
       ],
       [
-        "In a P&ID, the abbreviation 'LC' typically stands for:",
+        "What does the abbreviation 'LC' typically stand for in a P&ID?",
         "Level Controller",
         "Liquid Catalyst",
         "Low Concentration",
@@ -3794,21 +3794,21 @@ export const rawQuizData = {
         "Infinite"
       ],
       [
-        "A 'Bode Plot' is a graphical tool used to analyze a system's:",
+        "What is a 'Bode Plot' used to analyze?",
         "Frequency response",
         "Heat duty",
         "Mass balance",
         "Phase equilibrium"
       ],
       [
-        "In plant safety, 'HAZOP' stands for:",
+        "In plant safety, what does 'HAZOP' stand for?",
         "Hazard and Operability Study",
         "Heat and Zone Operating Protocol",
         "High Altitude Zone of Pressure",
         "Hazardous Acid Oxidation Process"
       ],
       [
-        "The 'Gain' of a proportional controller is represented by the symbol:",
+        "What symbol represents the 'Gain' of a proportional controller?",
         "Kc",
         "tau_i",
         "tau_d",
@@ -3822,7 +3822,7 @@ export const rawQuizData = {
         "L^2/(mol^2·s)"
       ],
       [
-        "In an exothermic reaction, increasing the temperature will cause the equilibrium constant (K_eq) to:",
+        "In an exothermic reaction, what effect does increasing the temperature have on the equilibrium constant (K_eq)?",
         "Decrease",
         "Increase",
         "Remain unchanged",
@@ -3843,7 +3843,7 @@ export const rawQuizData = {
         "Enthalpy"
       ],
       [
-        "In Chemical Engineering economics, the 'Payback Period' is the time required for:",
+        "What is In Chemical Engineering economics, the 'Payback Period' is the time required for?",
         "Cumulative cash flow to equal investment",
         "The plant to reach full capacity",
         "Depreciation to reach zero",
@@ -3857,7 +3857,7 @@ export const rawQuizData = {
         "O(n log n)"
       ],
       [
-        "In CAP Theorem, a distributed system guarantees two out of...",
+        "In the CAP Theorem, what does a distributed system guarantee two out of?",
         "Consistency, Availability, Partition Tolerance",
         "Concurrency, Availability, Performance",
         "Capacity, Atomicity, Persistence",
@@ -3871,7 +3871,7 @@ export const rawQuizData = {
         "Decorator"
       ],
       [
-        "The Maclaurin series for sin(x) begins...",
+        "How does the Maclaurin series for sin(x) begin?",
         "x - x³/3! + x⁵/5! ...",
         "1 - x²/2! + x⁴/4! ...",
         "1 + x + x²/2! ...",
@@ -3885,14 +3885,14 @@ export const rawQuizData = {
         "Byzantine Fault Tolerance"
       ],
       [
-        "A JS function remembering variables in its lexical scope is a...",
+        "What is a JS function remembering variables in its lexical scope called?",
         "Closure",
         "Promise",
         "Callback",
         "Generator"
       ],
       [
-        "Euler's Identity is...",
+        "What is Euler's Identity?",
         "e^(iπ) + 1 = 0",
         "a² + b² = c²",
         "F - E + V = 2",
@@ -3906,21 +3906,21 @@ export const rawQuizData = {
         "To compress video files"
       ],
       [
-        "The Laplace transform of the constant function f(t) = 1 is...",
+        "What is the Laplace transform of the constant function f(t) = 1?",
         "1/s",
         "s",
         "1/s²",
         "e^(-s)"
       ],
       [
-        "In database transactions, ACID stands for...",
+        "In database transactions, what does ACID stand for?",
         "Atomicity, Consistency, Isolation, Durability",
         "Asynchrony, Concurrency, Integrity, Data",
         "Availability, Clustering, Indexing, Distribution",
         "Array, Character, Integer, Double"
       ],
       [
-        "The 'Halting Problem' proves that...",
+        "What does the 'Halting Problem' prove?",
         "It's impossible to build a general algorithm to determine if any program finishes",
         "Hardware will eventually overheat",
         "All programs have bugs",
@@ -3934,7 +3934,7 @@ export const rawQuizData = {
         "Threads rapidly acquire/release locks"
       ],
       [
-        "The gradient of a scalar field produces...",
+        "What does the gradient of a scalar field produce?",
         "A vector field",
         "A constant",
         "Another scalar field",
@@ -3948,7 +3948,7 @@ export const rawQuizData = {
         "Dependency Inversion"
       ],
       [
-        "The Four Color Theorem states the max chromatic number of a planar graph is...",
+        "What does the Four Color Theorem state the max chromatic number of a planar graph is?",
         "4",
         "3",
         "5",
@@ -3976,7 +3976,7 @@ export const rawQuizData = {
         "Application Layer"
       ],
       [
-        "The divergence of the curl of any vector field is always...",
+        "What is the divergence of the curl of any vector field always equal to?",
         "0",
         "1",
         "Infinity",
@@ -4004,7 +4004,7 @@ export const rawQuizData = {
         "UPDATE"
       ],
       [
-        "The Taylor series centered at x = 0 is commonly called the...",
+        "What is the Taylor series centered at x = 0 commonly called?",
         "Maclaurin series",
         "Fourier series",
         "Laurent series",
@@ -4060,7 +4060,7 @@ export const rawQuizData = {
         "Base Global Protocol"
       ],
       [
-        "In cryptography, RSA relies on the difficulty of...",
+        "What does RSA cryptography rely on the difficulty of?",
         "Factoring large prime numbers",
         "Reversing a hash",
         "Sorting large arrays",
@@ -4095,7 +4095,7 @@ export const rawQuizData = {
         "chmod"
       ],
       [
-        "A set with an associative binary operation, an identity, and inverses is a...",
+        "What is a set with an associative binary operation, an identity, and inverses called?",
         "Group",
         "Ring",
         "Field",
@@ -4155,7 +4155,7 @@ export const rawQuizData = {
         "Chord"
       ],
       [
-        "Solve for x: 3x - 7 = 14.",
+        "What is the value of x when you solve the equation 3x - 7 = 14?",
         "x = 7",
         "x = 5",
         "x = 9",
@@ -4220,7 +4220,7 @@ export const rawQuizData = {
         "Digestion"
       ],
       [
-        "According to Newton's Second Law, Force equals...",
+        "According to Newton's Second Law, what does Force equal?",
         "Mass x Acceleration",
         "Mass / Acceleration",
         "Mass x Velocity",
@@ -4241,14 +4241,14 @@ export const rawQuizData = {
         "2.99 x 10^8"
       ],
       [
-        "The atomic number of an element is determined by the number of...",
+        "What determines the atomic number of an element?",
         "Protons",
         "Neutrons",
         "Electrons",
         "Protons and Neutrons"
       ],
       [
-        "The Law of Conservation of Energy states energy cannot be...",
+        "What does the Law of Conservation of Energy state regarding energy?",
         "Created or destroyed",
         "Transferred",
         "Stored",
@@ -4346,7 +4346,7 @@ export const rawQuizData = {
         "Infinity"
       ],
       [
-        "A triangle with no equal sides is called...",
+        "What is a triangle with no equal sides called?",
         "Scalene",
         "Isosceles",
         "Equilateral",
@@ -4943,7 +4943,7 @@ export const rawQuizData = {
         "Planck's Law"
       ],
       [
-        "In mass transfer, the ratio of the boundary layer thickness to the thermal boundary layer is the:",
+        "In mass transfer, what is the ratio of the boundary layer thickness to thermal boundary layer called?",
         "Prandtl Number",
         "Lewis Number",
         "Schmidt Number",
@@ -4971,7 +4971,7 @@ export const rawQuizData = {
         "Ball valve"
       ],
       [
-        "In heat transfer, 'Fouling' in a heat exchanger results in an increase of:",
+        "In heat transfer, what does 'Fouling' in a heat exchanger result in an increase of?",
         "Thermal resistance",
         "Heat transfer coefficient",
         "Fluid velocity",
@@ -4985,7 +4985,7 @@ export const rawQuizData = {
         "Sherwood Number"
       ],
       [
-        "In distillation, the 'Feed Line' (q-line) for a saturated liquid feed has a slope of:",
+        "What is the In distillation, the 'Feed Line' (q-line) for a saturated liquid feed has a slope of?",
         "Vertical (Infinite)",
         "Horizontal (Zero)",
         "Negative",
@@ -4999,7 +4999,7 @@ export const rawQuizData = {
         "Eductor Pump"
       ],
       [
-        "In mass transfer, 'Equimolar Counter-Diffusion' occurs when mass flux Na is equal to:",
+        "When does 'Equimolar Counter-Diffusion' occur in mass transfer relative to mass flux Na?",
         "-Nb",
         "Nb",
         "Zero",
@@ -5020,7 +5020,7 @@ export const rawQuizData = {
         "Visbreaking"
       ],
       [
-        "The 'Octane Number' is a measure of a fuel's resistance to:",
+        "What is the 'Octane Number' a measure of?",
         "Knocking",
         "Freezing",
         "Evaporation",
@@ -5055,14 +5055,14 @@ export const rawQuizData = {
         "Cracking"
       ],
       [
-        "An 'Exothermic Runaway' reaction occurs when the rate of heat generation:",
+        "What is an 'Exothermic Runaway' reaction occurs when the rate of heat generation?",
         "Exceeds the rate of heat removal",
         "Equals the rate of heat removal",
         "Is less than the rate of heat removal",
         "Is zero"
       ],
       [
-        "In the 'Activated Sludge Process', the recycled solids from the clarifier are known as:",
+        "In the 'Activated Sludge Process', what are the recycled solids from the clarifier known as?",
         "RAS (Return Activated Sludge)",
         "WAS (Waste Activated Sludge)",
         "MLSS",
@@ -5083,14 +5083,14 @@ export const rawQuizData = {
         "Resin"
       ],
       [
-        "In polymer rheology, a fluid whose viscosity decreases as the shear rate increases is:",
+        "In polymer rheology, what is a fluid whose viscosity decreases as the shear rate increases called?",
         "Pseudoplastic (Shear-thinning)",
         "Dilatant (Shear-thickening)",
         "Bingham Plastic",
         "Newtonian"
       ],
       [
-        "The process of heating raw rubber with sulfur to improve its strength and elasticity is:",
+        "What is the process of heating raw rubber with sulfur to improve its strength and elasticity called?",
         "Vulcanization",
         "Polymerization",
         "Extrusion",
@@ -5111,14 +5111,14 @@ export const rawQuizData = {
         "Peclet Number"
       ],
       [
-        "In a galvanic cell, the metal that undergoes corrosion is the:",
+        "In a galvanic cell, which metal undergoes corrosion?",
         "Anode",
         "Cathode",
         "Electrolyte",
         "Salt bridge"
       ],
       [
-        "Corrosion that occurs in narrow gaps or under gaskets where oxygen is depleted is:",
+        "What is corrosion that occurs in narrow gaps or under gaskets where oxygen is depleted called?",
         "Crevice Corrosion",
         "Pitting Corrosion",
         "Galvanic Corrosion",
@@ -5132,14 +5132,14 @@ export const rawQuizData = {
         "De-alloying"
       ],
       [
-        "Corrosion caused by the simultaneous action of tensile stress and a corrosive environment is:",
+        "What is corrosion caused by the simultaneous action of tensile stress and a corrosive environment called?",
         "Stress Corrosion Cracking",
         "Fatigue Corrosion",
         "Fretting Corrosion",
         "Erosion"
       ],
       [
-        "According to Faraday's Law, the mass of metal lost to corrosion (m) is directly proportional to:",
+        "According to Faraday's Law, what is the mass of metal lost to corrosion (m) directly proportional to?",
         "Quantity of electricity (Q)",
         "Electrolyte volume",
         "Atmospheric pressure",
@@ -5160,7 +5160,7 @@ export const rawQuizData = {
         "Cascade Control"
       ],
       [
-        "In a centrifugal pump, the separating force is proportional to the square of the:",
+        "In a centrifugal pump, what is the separating force proportional to the square of?",
         "Angular velocity",
         "Pipe diameter",
         "Fluid density",
@@ -5174,14 +5174,14 @@ export const rawQuizData = {
         "304 Stainless Steel"
       ],
       [
-        "In process control, 'Transportation Lag' is also commonly referred to as:",
+        "In process control, what is 'Transportation Lag' also commonly referred to as?",
         "Dead Time",
         "Offset",
         "Overshoot",
         "Decay Ratio"
       ],
       [
-        "In a filtration process, the resistance offered by the filter cake:",
+        "In a filtration process, what defines the resistance offered by the filter cake?",
         "Increases with time",
         "Decreases with time",
         "Stays constant",
@@ -5202,7 +5202,7 @@ export const rawQuizData = {
         "Sherwood Number"
       ],
       [
-        "At constant temperature and pressure, a process is spontaneous if the change in Gibbs Free Energy (Delta G) is:",
+        "At constant temperature and pressure, when is a process considered spontaneous?",
         "Negative",
         "Positive",
         "Zero",
@@ -5237,7 +5237,7 @@ export const rawQuizData = {
         "Peclet Number"
       ],
       [
-        "In the design of a CSTR, the 'Space Time' is the ratio of reactor volume to:",
+        "In the design of a CSTR, what is 'Space Time'?",
         "Volumetric flow rate",
         "Mass flow rate",
         "Conversion rate",
@@ -5258,7 +5258,7 @@ export const rawQuizData = {
         "Throttling"
       ],
       [
-        "The 'HETP' concept in packed distillation columns stands for:",
+        "What does the 'HETP' concept in packed distillation columns stand for?",
         "Height Equivalent to a Theoretical Plate",
         "Heat Energy Transfer Protocol",
         "High Efficiency Thermal Process",
@@ -5272,21 +5272,21 @@ export const rawQuizData = {
         "Spiral"
       ],
       [
-        "In Mass Transfer, the 'Film Theory' assumes that the resistance to transfer lies entirely within:",
+        "In Mass Transfer, what does the 'Film Theory' assume regarding resistance to transfer?",
         "A stagnant thin film",
         "The bulk fluid",
         "The interface",
         "The turbulent core"
       ],
       [
-        "The 'McCabe-Thiele' method is used to graphically determine the number of:",
+        "What is the 'McCabe-Thiele' method used to graphically determine?",
         "Theoretical stages in distillation",
         "Plates in an absorber",
         "Heat transfer coefficients",
         "Reactor residence times"
       ],
       [
-        "In fluid flow, a 'Newtonian fluid' is one where the shear stress is linearly proportional to the:",
+        "In fluid flow, what defines a 'Newtonian fluid'?",
         "Velocity gradient",
         "Pressure drop",
         "Density",
@@ -5300,7 +5300,7 @@ export const rawQuizData = {
         "CSTR"
       ],
       [
-        "In Linear Algebra, Ax = λx represents finding...",
+        "In Linear Algebra, what does Ax = λx represent finding?",
         "Eigenvalues and Eigenvectors",
         "Determinant",
         "Cross Product",
@@ -5321,14 +5321,14 @@ export const rawQuizData = {
         "ab - cd"
       ],
       [
-        "Cauchy-Riemann equations are necessary for a complex function to be...",
+        "What are Cauchy-Riemann equations necessary for a complex function to be?",
         "Holomorphic (Analytic)",
         "Continuous",
         "Integrable",
         "A polynomial"
       ],
       [
-        "The Fundamental Theorem of Calculus connects...",
+        "What does the Fundamental Theorem of Calculus connect?",
         "Differentiation and Integration",
         "Addition and Subtraction",
         "Limits and Continuity",
@@ -5356,7 +5356,7 @@ export const rawQuizData = {
         "-1/x^2 + C"
       ],
       [
-        "A matrix is orthogonal if its transpose is equal to its...",
+        "A matrix is orthogonal if its transpose is equal to what?",
         "Inverse",
         "Determinant",
         "Eigenvalue",
@@ -5384,7 +5384,7 @@ export const rawQuizData = {
         "Constants"
       ],
       [
-        "The trace of a matrix is the sum of its...",
+        "What is the trace of a matrix the sum of?",
         "Diagonal elements",
         "Eigenvalues",
         "Rows",
@@ -6053,7 +6053,7 @@ export const rawQuizData = {
         "Henry VIII"
       ],
       [
-        "The original Roman alphabet lacked the following letters EXCEPT:",
+        "Which of the following letters did the original Roman alphabet NOT lack?",
         "X",
         "W",
         "U",
@@ -6144,7 +6144,7 @@ export const rawQuizData = {
         "First Sino-Japanese War"
       ],
       [
-        "In which year was Nelson Mandela released from prison",
+        "What is In which year was Nelson Mandela released from prison?",
         "1990",
         "1994",
         "1992",
@@ -6342,7 +6342,7 @@ export const rawQuizData = {
         "Bombing of Pearl Harbor"
       ],
       [
-        "The code name for the 1944 Allied invasion was...",
+        "What was the code name for the 1944 Allied invasion?",
         "Operation Overlord",
         "Operation Barbarossa",
         "Operation Market Garden",
@@ -6792,14 +6792,14 @@ export const rawQuizData = {
         "Treaty of Tordesillas"
       ],
       [
-        "Carthaginian general defeated at Battle of Zama?",
+        "Who was the Carthaginian general defeated at the Battle of Zama?",
         "Hannibal Barca",
         "Hasdrubal",
         "Hamilcar",
         "Mago"
       ],
       [
-        "Faction that became the Communist Party?",
+        "Which faction became the Communist Party?",
         "The Bolsheviks",
         "The Mensheviks",
         "The SRs",
@@ -6820,28 +6820,28 @@ export const rawQuizData = {
         "Battle of Salamis"
       ],
       [
-        "Cause of Defenestration of Prague?",
+        "What is the cause of defenestration of prague?",
         "Religious conflicts",
         "Tax dispute",
         "Assassination",
         "Border dispute"
       ],
       [
-        "Byzantine queen influential in Nika riots?",
+        "What is Byzantine queen influential in Nika riots?",
         "Empress Theodora",
         "Empress Irene",
         "Empress Zoe",
         "Empress Eudoxia"
       ],
       [
-        "Social system in France before 1789?",
+        "What is Social system in France before 1789?",
         "The Ancien Régime",
         "The Directory",
         "The Consulate",
         "The Bourbon Restoration"
       ],
       [
-        "Athenian general in Sicilian Expedition?",
+        "Who was the Athenian general in the Sicilian Expedition?",
         "Alcibiades",
         "Pericles",
         "Nicias",
@@ -6876,21 +6876,21 @@ export const rawQuizData = {
         "Heinrich Schliemann"
       ],
       [
-        "Purpose of Council of Trent?",
+        "What is the purpose of council of trent?",
         "Direct Counter-Reformation",
         "Excommunicate Luther",
         "Authorize Crusades",
         "Translate Bible"
       ],
       [
-        "Battle that established Octavian's sole rule?",
+        "What is Battle that established Octavian's sole rule?",
         "Battle of Actium",
         "Battle of Philippi",
         "Battle of Pharsalus",
         "Battle of Cannae"
       ],
       [
-        "Banking family that ruled Florence?",
+        "Which banking family ruled Florence?",
         "The Medici family",
         "The Borgia family",
         "The Sforza family",
@@ -6904,14 +6904,14 @@ export const rawQuizData = {
         "The Yalta Conference"
       ],
       [
-        "First king of unified Italy in 1861?",
+        "What was the First king of unified Italy in 1861?",
         "Victor Emmanuel II",
         "Giuseppe Garibaldi",
         "Camillo Cavour",
         "Umberto I"
       ],
       [
-        "Taiping Rebellion leader claimed to be...",
+        "What did the Taiping Rebellion leader claim to be?",
         "Brother of Jesus",
         "Reincarnated Buddha",
         "Ming Emperor",
@@ -6925,7 +6925,7 @@ export const rawQuizData = {
         "Trajan"
       ],
       [
-        "Code name for German invasion of USSR?",
+        "What is Code name for German invasion of USSR?",
         "Operation Barbarossa",
         "Operation Sealion",
         "Operation Citadel",
@@ -6939,7 +6939,7 @@ export const rawQuizData = {
         "Thomas More"
       ],
       [
-        "English monarch overthrown in 1688?",
+        "What is the english monarch overthrown in 1688?",
         "King James II",
         "King Charles I",
         "King Charles II",
@@ -6960,35 +6960,35 @@ export const rawQuizData = {
         "Mikhail Kutuzov"
       ],
       [
-        "German tactic of rapid concentrated attacks?",
+        "What is German tactic of rapid concentrated attacks?",
         "Blitzkrieg",
         "Schlieffen Plan",
         "Guerre de Course",
         "Pincer Movement"
       ],
       [
-        "Edict that granted rights to Huguenots?",
+        "What was the Edict that granted rights to Huguenots?",
         "Edict of Nantes",
         "Edict of Worms",
         "Edict of Milan",
         "Edict of Restitution"
       ],
       [
-        "First female PM of the UK?",
+        "What was the First female PM of the UK?",
         "Margaret Thatcher",
         "Theresa May",
         "Indira Gandhi",
         "Golda Meir"
       ],
       [
-        "Oldest surviving library city?",
+        "What is the oldest surviving library city?",
         "Nineveh",
         "Babylon",
         "Ur",
         "Uruk"
       ],
       [
-        "Event triggered by defenestration in Prague?",
+        "What is Event triggered by defenestration in Prague?",
         "The Thirty Years' War",
         "The Hussite Wars",
         "The Bohemian Revolt",
@@ -7233,7 +7233,7 @@ export const rawQuizData = {
         "October 6, 1939"
       ],
       [
-        "List the following Iranic empires in chronological order:",
+        "List the following Iranic empires in chronological order.",
         "Median, Achaemenid, Parthian, Sassanid",
         "Median, Achaemenid, Sassanid, Parthian",
         "Achaemenid, Median, Parthian, Sassanid",
@@ -7338,7 +7338,7 @@ export const rawQuizData = {
         "1918"
       ],
       [
-        "The ontological argument for the proof of God's existence is first attributed to whom?",
+        "To whom is the ontological argument for the proof of God's existence first attributed?",
         "Anselm of Canterbury",
         "René Descartes",
         "Immanuel Kant",
@@ -7349,7 +7349,7 @@ export const rawQuizData = {
   "funfact": {
     "foundational": [
       [
-        "Fastest land animal?",
+        "What is the fastest land animal?",
         "Cheetah",
         "Lion",
         "Horse",
@@ -7363,7 +7363,7 @@ export const rawQuizData = {
         "8"
       ],
       [
-        "Largest organ in human body?",
+        "What is the largest organ in human body?",
         "Skin",
         "Liver",
         "Brain",
@@ -7384,56 +7384,56 @@ export const rawQuizData = {
         "Dinosaur"
       ],
       [
-        "Colors in a rainbow?",
+        "How many colors are in a rainbow?",
         "7",
         "6",
         "5",
         "8"
       ],
       [
-        "Only mammal capable of sustained flight?",
+        "What is Only mammal capable of sustained flight?",
         "Bat",
         "Flying squirrel",
         "Sugar glider",
         "Lemur"
       ],
       [
-        "Hardest natural substance?",
+        "What is the hardest natural substance?",
         "Diamond",
         "Gold",
         "Iron",
         "Quartz"
       ],
       [
-        "Days in a leap year?",
+        "How many days are in a leap year?",
         "366",
         "365",
         "364",
         "367"
       ],
       [
-        "United States flag star color?",
+        "What is the united states flag star color?",
         "White",
         "Red",
         "Blue",
         "Gold"
       ],
       [
-        "Animal with humps?",
+        "What is the animal with humps?",
         "Camel",
         "Elephant",
         "Rhino",
         "Hippopotamus"
       ],
       [
-        "Chemical symbol for water?",
+        "What is the chemical symbol for water?",
         "H2O",
         "CO2",
         "O2",
         "HO"
       ],
       [
-        "Legs of an octopus?",
+        "What is the legs of an octopus?",
         "8",
         "6",
         "10",
@@ -7447,49 +7447,49 @@ export const rawQuizData = {
         "Pollen"
       ],
       [
-        "Tallest animal?",
+        "What is the tallest animal?",
         "Giraffe",
         "Elephant",
         "Ostrich",
         "Kangaroo"
       ],
       [
-        "Group of wolves?",
+        "What is the group of wolves?",
         "Pack",
         "Herd",
         "Flock",
         "Pride"
       ],
       [
-        "Largest ocean?",
+        "What is the largest ocean in the world?",
         "Pacific",
         "Atlantic",
         "Indian",
         "Arctic"
       ],
       [
-        "Opposite of nocturnal?",
+        "What is the opposite of nocturnal?",
         "Diurnal",
         "Crepuscular",
         "Matutinal",
         "Vespertine"
       ],
       [
-        "Teeth in adult human?",
+        "How many teeth does an adult human have?",
         "32",
         "30",
         "28",
         "34"
       ],
       [
-        "Fruit to keep doctor away?",
+        "What is the fruit to keep doctor away?",
         "Apple",
         "Banana",
         "Orange",
         "Grape"
       ],
       [
-        "Guacamole main ingredient?",
+        "What is the guacamole main ingredient?",
         "Avocado",
         "Tomato",
         "Onion",
@@ -7503,56 +7503,56 @@ export const rawQuizData = {
         "Flies"
       ],
       [
-        "Stop sign shape?",
+        "What is the stop sign shape?",
         "Octagon",
         "Hexagon",
         "Pentagon",
         "Circle"
       ],
       [
-        "Primary colors count?",
+        "What is the primary colors count?",
         "3",
         "4",
         "5",
         "2"
       ],
       [
-        "Closest star to Earth?",
+        "What is the closest star to earth?",
         "The Sun",
         "Sirius",
         "Alpha Centauri",
         "Proxima Centauri"
       ],
       [
-        "Largest bone in human body?",
+        "What is the largest bone in human body?",
         "Femur",
         "Humerus",
         "Tibia",
         "Fibula"
       ],
       [
-        "Panda's main food?",
+        "What is the panda's main food?",
         "Bamboo",
         "Eucalyptus",
         "Fish",
         "Berries"
       ],
       [
-        "Freezing point in Fahrenheit?",
+        "What is the freezing point of water in Fahrenheit?",
         "32°F",
         "0°F",
         "100°F",
         "212°F"
       ],
       [
-        "Zeros in a million?",
+        "How many zeros are in a million?",
         "6",
         "5",
         "7",
         "8"
       ],
       [
-        "School bus color?",
+        "What is the school bus color?",
         "Yellow",
         "Orange",
         "Red",
@@ -7561,210 +7561,210 @@ export const rawQuizData = {
     ],
     "intermediate": [
       [
-        "Letter not in any US state name?",
+        "What is Letter not in any US state name?",
         "Q",
         "Z",
         "X",
         "J"
       ],
       [
-        "Animal with fingerprints like humans?",
+        "What is the animal with fingerprints like humans?",
         "Koala",
         "Chimpanzee",
         "Gorilla",
         "Orangutan"
       ],
       [
-        "Rarest human blood type?",
+        "What is the rarest human blood type?",
         "AB-negative",
         "O-negative",
         "B-negative",
         "A-negative"
       ],
       [
-        "Group of flamingos name?",
+        "What is the group of flamingos name?",
         "Flamboyance",
         "Flock",
         "Murder",
         "Parliament"
       ],
       [
-        "Fear of spiders?",
+        "What is the fear of spiders called?",
         "Arachnophobia",
         "Claustrophobia",
         "Agoraphobia",
         "Acrophobia"
       ],
       [
-        "Dot over 'i' or 'j'?",
+        "What is the dot over an 'i' or 'j' called?",
         "Tittle",
         "Speck",
         "Point",
         "Jot"
       ],
       [
-        "Hearts in an octopus?",
+        "How many hearts does an octopus have?",
         "3",
         "2",
         "4",
         "1"
       ],
       [
-        "First toy advertised on US TV?",
+        "What was the first toy advertised on US TV?",
         "Mr. Potato Head",
         "Barbie",
         "G.I. Joe",
         "Slinky"
       ],
       [
-        "National animal of Scotland?",
+        "What is the national animal of scotland?",
         "Unicorn",
         "Lion",
         "Stag",
         "Dragon"
       ],
       [
-        "Fruit that floats because of air?",
+        "What is Fruit that floats because of air?",
         "Apple",
         "Orange",
         "Watermelon",
         "Grape"
       ],
       [
-        "Planet that rolls on its side?",
+        "What is Planet that rolls on its side?",
         "Uranus",
         "Neptune",
         "Saturn",
         "Venus"
       ],
       [
-        "Animal with highest BP?",
+        "What is the animal with highest bp?",
         "Giraffe",
         "Elephant",
         "Cheetah",
         "Blue Whale"
       ],
       [
-        "Pneumonoultramicroscopicsilicovolcanoconiosis is?",
+        "What is Pneumonoultramicroscopicsilicovolcanoconiosis?",
         "Lung disease",
         "Skin condition",
         "Metal type",
         "Plant"
       ],
       [
-        "Fear of long words?",
+        "What is the fear of long words?",
         "Hippopotomonstrosesquippedaliophobia",
         "Verbophobia",
         "Logophobia",
         "Lexophobia"
       ],
       [
-        "Bird with eyes larger than brain?",
+        "What is Bird with eyes larger than brain?",
         "Ostrich",
         "Owl",
         "Emu",
         "Penguin"
       ],
       [
-        "Rarest M&M color?",
+        "What is the rarest m&m color?",
         "Brown",
         "Red",
         "Yellow",
         "Blue"
       ],
       [
-        "Phenomenon measured by Fujita scale?",
+        "What is the phenomenon measured by fujita scale?",
         "Tornadoes",
         "Hurricanes",
         "Earthquakes",
         "Tsunamis"
       ],
       [
-        "Shoelace tip name?",
+        "What is the shoelace tip name?",
         "Aglet",
         "Tip",
         "Cap",
         "Lace-lock"
       ],
       [
-        "Mammal with thickest fur?",
+        "What is the mammal with thickest fur?",
         "Sea Otter",
         "Polar Bear",
         "Arctic Fox",
         "Chinchilla"
       ],
       [
-        "Wallpaper cleaner turned toy?",
+        "What wallpaper cleaner turned into a popular toy?",
         "Play-Doh",
         "Silly Putty",
         "Slime",
         "Magic Eraser"
       ],
       [
-        "Food that doesn't expire?",
+        "What is the food that doesn't expire?",
         "Honey",
         "Salt",
         "Sugar",
         "Rice"
       ],
       [
-        "Human blinks per minute?",
+        "What is the human blinks per minute?",
         "15-20",
         "5-10",
         "25-30",
         "30-40"
       ],
       [
-        "Hot water freezes faster effect?",
+        "What is the hot water freezes faster effect?",
         "Mpemba effect",
         "Doppler effect",
         "Coriolis effect",
         "Leidenfrost effect"
       ],
       [
-        "Group of porcupines name?",
+        "What is the group of porcupines name?",
         "Prickle",
         "Herd",
         "Pack",
         "Spine"
       ],
       [
-        "Animal with pink milk?",
+        "What is the animal with pink milk?",
         "Hippopotamus",
         "Yak",
         "Water Buffalo",
         "Flamingo"
       ],
       [
-        "Most common letter in English?",
+        "What is the most common letter in English?",
         "E",
         "A",
         "T",
         "O"
       ],
       [
-        "Smell of rain name?",
+        "What is the smell of rain name?",
         "Petrichor",
         "Ozone",
         "Geosmin",
         "Aerosol"
       ],
       [
-        "Body part with most active muscles?",
+        "What is Body part with most active muscles?",
         "Eyes",
         "Heart",
         "Hands",
         "Tongue"
       ],
       [
-        "First practical telephone inventor?",
+        "What was the First practical telephone inventor?",
         "Alexander Graham Bell",
         "Thomas Edison",
         "Nikola Tesla",
         "Guglielmo Marconi"
       ],
       [
-        "Country with most islands?",
+        "What is the country with most islands?",
         "Sweden",
         "Canada",
         "Norway",
@@ -7773,77 +7773,77 @@ export const rawQuizData = {
     ],
     "advanced": [
       [
-        "Protein that makes fireflies glow?",
+        "What is the protein that makes fireflies glow?",
         "Luciferin",
         "Biolumin",
         "Phosphorin",
         "Luminol"
       ],
       [
-        "The Golden Ratio is roughly?",
+        "What is the approximate value of the Golden Ratio?",
         "1.618",
         "3.14",
         "2.71",
         "1.41"
       ],
       [
-        "Symbol & name?",
+        "What is the symbol & name?",
         "Ampersand",
         "Octothorpe",
         "Asterism",
         "Caret"
       ],
       [
-        "Second most abundant element in universe?",
+        "What is the second most abundant element in the universe?",
         "Helium",
         "Neon",
         "Argon",
         "Krypton"
       ],
       [
-        "Tendency to overestimate abilities?",
+        "What is the tendency to overestimate abilities?",
         "Dunning-Kruger",
         "Baader-Meinhof",
         "Mandela",
         "Placebo"
       ],
       [
-        "Scientific name for 'brain freeze'?",
+        "What is the scientific name for 'brain freeze'?",
         "Sphenopalatine ganglioneuralgia",
         "Cryogenic cephalalgia",
         "Cerebral hypothermia",
         "Trigeminal neuralgia"
       ],
       [
-        "Biologically immortal jellyfish?",
+        "What is the biologically immortal jellyfish?",
         "Turritopsis dohrnii",
         "Chironex fleckeri",
         "Physalia physalis",
         "Aurelia aurita"
       ],
       [
-        "Deepest point in oceans?",
+        "What is the deepest point in oceans?",
         "Challenger Deep",
         "Mariana Trench",
         "Sirena Deep",
         "Tonga Trench"
       ],
       [
-        "Fear of number 13?",
+        "What is the fear of the number 13 called?",
         "Triskaidekaphobia",
         "Tetraphobia",
         "Octophobia",
         "Hexakosioihexekontahexaphobia"
       ],
       [
-        "Compound that colors blueberries?",
+        "What is the compound that colors blueberries?",
         "Anthocyanins",
         "Carotenoids",
         "Chlorophyll",
         "Betalains"
       ],
       [
-        "Sentence using every letter of alphabet?",
+        "What is Sentence using every letter of alphabet?",
         "Pangram",
         "Anagram",
         "Palindrome",
@@ -7857,126 +7857,126 @@ export const rawQuizData = {
         "Twin Paradox"
       ],
       [
-        "Microscopic 'water bear' name?",
+        "What is the microscopic 'water bear' name?",
         "Tardigrade",
         "Rotifer",
         "Nematode",
         "Copepod"
       ],
       [
-        "Liquid metal at room temp?",
+        "Which metal is liquid at room temperature?",
         "Mercury",
         "Gallium",
         "Bromine",
         "Francium"
       ],
       [
-        "Luminous electrical energy in storms?",
+        "What is the luminous electrical energy in storms?",
         "Ball lightning",
         "St Elmo fire",
         "Sprite lightning",
         "Auroral sub-storm"
       ],
       [
-        "Funny bone anatomical term?",
+        "What is the funny bone anatomical term?",
         "Ulnar nerve",
         "Humerus",
         "Radius",
         "Medial epicondyle"
       ],
       [
-        "Word that reads same backwards?",
+        "What is the word that reads same backwards?",
         "Palindrome",
         "Anagram",
         "Ambigram",
         "Portmanteau"
       ],
       [
-        "Planet with day longer than year?",
+        "Which planet has a day longer than its year?",
         "Venus",
         "Mercury",
         "Jupiter",
         "Uranus"
       ],
       [
-        "Word that imitates sound?",
+        "What is the word that imitates sound?",
         "Onomatopoeia",
         "Alliteration",
         "Assonance",
         "Hyperbole"
       ],
       [
-        "Black hole light escape boundary?",
+        "What is the black hole light escape boundary?",
         "Event horizon",
         "Singularity",
         "Accretion disk",
         "Photon sphere"
       ],
       [
-        "Oldest living tree name?",
+        "What is the name of the oldest living tree?",
         "Methuselah",
         "Hyperion",
         "General Sherman",
         "Prometheus"
       ],
       [
-        "Potato browning process?",
+        "What is the potato browning process?",
         "Enzymatic browning",
         "Caramelization",
         "Fermentation",
         "Maillard reaction"
       ],
       [
-        "Words with same root different meanings?",
+        "What is Words with same root different meanings?",
         "Cognates",
         "Synonyms",
         "Homophones",
         "Antonyms"
       ],
       [
-        "Straight lines appear curved illusion?",
+        "What is the straight lines appear curved illusion?",
         "Hering illusion",
         "Müller-Lyer illusion",
         "Ponzo illusion",
         "Ebbinghaus illusion"
       ],
       [
-        "Cell programmed death process?",
+        "What is the cell programmed death process?",
         "Apoptosis",
         "Necrosis",
         "Autophagy",
         "Mitosis"
       ],
       [
-        "Theoretical sphere of comets?",
+        "What is theoretical sphere of comets?",
         "Oort Cloud",
         "Kuiper Belt",
         "Asteroid Belt",
         "Scattered Disc"
       ],
       [
-        "Fear of being without phone?",
+        "What is the fear of being without a mobile phone called?",
         "Nomophobia",
         "Technophobia",
         "Telephonophobia",
         "Cyberphobia"
       ],
       [
-        "Crust and mantle boundary?",
+        "What is the boundary between the Earth's crust and mantle called?",
         "Moho",
         "Gutenberg",
         "Lehmann",
         "Conrad"
       ],
       [
-        "Remember first and last list items effect?",
+        "What is the effect of remembering the first and last items on a list called?",
         "Serial position",
         "Recency",
         "Primacy",
         "Von Restorff"
       ],
       [
-        "Dark red liquid non-metallic element?",
+        "Which non-metallic element is a dark red liquid at room temperature?",
         "Bromine",
         "Iodine",
         "Mercury",
@@ -7987,91 +7987,91 @@ export const rawQuizData = {
   "entertainment": {
     "foundational": [
       [
-        "Mickey Mouse creator?",
+        "Who is the creator of Mickey Mouse?",
         "Walt Disney",
         "Mighty Mouse",
         "Jerry",
         "Stuart Little"
       ],
       [
-        "'Man of Steel'?",
+        "What is the 'man of steel'?",
         "Superman",
         "Batman",
         "Iron Man",
         "Spider-Man"
       ],
       [
-        "Clownfish movie?",
+        "What is the name of the Clownfish movie?",
         "Finding Nemo",
         "Shark Tale",
         "Little Mermaid",
         "Moana"
       ],
       [
-        "'Queen of Pop'?",
+        "What is the 'queen of pop'?",
         "Madonna",
         "Lady Gaga",
         "Whitney Houston",
         "Britney Spears"
       ],
       [
-        "Darth Vader lightsaber color?",
+        "What is the darth vader lightsaber color?",
         "Red",
         "Blue",
         "Green",
         "Purple"
       ],
       [
-        "Harry Potter school?",
+        "What is the harry potter school?",
         "Hogwarts",
         "Beauxbatons",
         "Durmstrang",
         "Ilvermorny"
       ],
       [
-        "Jack Sparrow actor?",
+        "Who played Jack Sparrow?",
         "Johnny Depp",
         "Orlando Bloom",
         "Brad Pitt",
         "Tom Cruise"
       ],
       [
-        "Toy Story cowboy?",
+        "What is the name of the cowboy in Toy Story?",
         "Woody",
         "Buzz Lightyear",
         "Jessie",
         "Andy"
       ],
       [
-        "Glass slipper princess?",
+        "Which princess is known for wearing a glass slipper?",
         "Cinderella",
         "Snow White",
         "Ariel",
         "Belle"
       ],
       [
-        "Building block surviving game?",
+        "What is the building block surviving game?",
         "Minecraft",
         "Roblox",
         "Fortnite",
         "Terraria"
       ],
       [
-        "Queen lead singer?",
+        "Who is the singer of Queen lead?",
         "Freddie Mercury",
         "Mick Jagger",
         "David Bowie",
         "Elton John"
       ],
       [
-        "Batman's city?",
+        "What is the name of the city where Batman lives?",
         "Gotham City",
         "Metropolis",
         "Star City",
         "Central City"
       ],
       [
-        "Highest grossing film as of 2024?",
+        "What is the Highest grossing film as of 2024?",
         "Avatar",
         "Avengers Endgame",
         "Titanic",
@@ -8085,112 +8085,112 @@ export const rawQuizData = {
         "Mark Twain"
       ],
       [
-        "Springfield yellow family?",
+        "What is the springfield yellow family?",
         "The Simpsons",
         "Family Guy",
         "Bob's Burgers",
         "Futurama"
       ],
       [
-        "Lion King villain?",
+        "What is the lion king villain?",
         "Scar",
         "Jafar",
         "Ursula",
         "Gaston"
       ],
       [
-        "Pac-Man color?",
+        "What is the pac-man color?",
         "Yellow",
         "Red",
         "Blue",
         "Green"
       ],
       [
-        "Drummer plays?",
+        "What is the drummer plays?",
         "Drums",
         "Guitar",
         "Piano",
         "Bass"
       ],
       [
-        "Green swamp ogre?",
+        "What is the green swamp ogre?",
         "Shrek",
         "Donkey",
         "Lord Farquaad",
         "Puss in Boots"
       ],
       [
-        "John Paul George Ringo band?",
+        "Which band is known for John Paul George Ringo?",
         "The Beatles",
         "Rolling Stones",
         "The Who",
         "The Kinks"
       ],
       [
-        "MCU Iron Man actor?",
+        "Who played MCU Iron Man?",
         "Robert Downey Jr",
         "Chris Evans",
         "Chris Hemsworth",
         "Mark Ruffalo"
       ],
       [
-        "Game of Thrones continent?",
+        "What is the game of thrones continent?",
         "Westeros",
         "Middle-earth",
         "Narnia",
         "Tamriel"
       ],
       [
-        "'Shake It Off' singer?",
+        "Who is the singer of 'Shake It Off'?",
         "Taylor Swift",
         "Katy Perry",
         "Ariana Grande",
         "Miley Cyrus"
       ],
       [
-        "Aladdin lamp source?",
+        "What is the aladdin lamp source?",
         "Cave of Wonders",
         "Agrabah Market",
         "Sultan Palace",
         "Magic Carpet"
       ],
       [
-        "Zelda protagonist?",
+        "What is the zelda protagonist?",
         "Link",
         "Zelda",
         "Ganon",
         "Mario"
       ],
       [
-        "Theme park dinosaur movie?",
+        "What is the name of the Theme park dinosaur movie?",
         "Jurassic Park",
         "Godzilla",
         "King Kong",
         "Land Before Time"
       ],
       [
-        "Harry Potter author?",
+        "Who is the author of Harry Potter?",
         "JK Rowling",
         "Stephen King",
         "Suzanne Collins",
         "JR Tolkien"
       ],
       [
-        "Gramophone award?",
+        "What is the gramophone award?",
         "Grammy Award",
         "Oscar",
         "Emmy",
         "Tony"
       ],
       [
-        " Spielberg 1982 alien?",
+        "What is the spielberg 1982 alien?",
         "ET",
         "Alf",
         "Stitch",
         "Yoda"
       ],
       [
-        "Avengers publisher?",
+        "Who is the publisher of Avengers?",
         "Marvel",
         "DC",
         "Dark Horse",
@@ -8549,210 +8549,210 @@ export const rawQuizData = {
     ],
     "intermediate": [
       [
-        "Inception and Titanic director?",
+        "Who directed Inception and Titanic?",
         "James Cameron",
         "Steven Spielberg",
         "Christopher Nolan",
         "Quentin Tarantino"
       ],
       [
-        "American Idol season 1 winner?",
+        "Who was the winner of American Idol Season 1?",
         "Kelly Clarkson",
         "Carrie Underwood",
         "Adam Lambert",
         "Fantasia Barrino"
       ],
       [
-        "'Dark Side of the Moon' band?",
+        "Which band recorded the album 'Dark Side of the Moon'?",
         "Pink Floyd",
         "Led Zeppelin",
         "The Who",
         "Rolling Stones"
       ],
       [
-        "Neo's wake up pill color?",
+        "What color is the pill Neo takes to wake up in The Matrix?",
         "Red",
         "Blue",
         "Green",
         "Yellow"
       ],
       [
-        "Black Panther country?",
+        "What is the name of the fictional country in Black Panther?",
         "Wakanda",
         "Zamunda",
         "Genosha",
         "Latveria"
       ],
       [
-        "'Here's Johnny!' improviser?",
+        "Who improvised the line 'Here's Johnny!'?",
         "Jack Nicholson",
         "Robert De Niro",
         "Al Pacino",
         "Marlon Brando"
       ],
       [
-        "Pulp Fiction director?",
+        "Who directed the movie Pulp Fiction?",
         "Quentin Tarantino",
         "Martin Scorsese",
         "Stanley Kubrick",
         "David Fincher"
       ],
       [
-        "First feature length animated movie?",
+        "What was the first feature length animated movie?",
         "Snow White",
         "Pinocchio",
         "Fantasia",
         "Bambi"
       ],
       [
-        "Most Grammys by female artist?",
+        "Who holds the record for the most Grammys won by a female artist?",
         "Beyoncé",
         "Taylor Swift",
         "Adele",
         "Aretha Franklin"
       ],
       [
-        "Highest selling console?",
+        "What is the highest selling video game console of all time?",
         "PlayStation 2",
         "Nintendo DS",
         "Xbox 360",
         "Nintendo Wii"
       ],
       [
-        "2008 Joker actor?",
+        "Who played 2008 Joker?",
         "Heath Ledger",
         "Joaquin Phoenix",
         "Jared Leto",
         "Jack Nicholson"
       ],
       [
-        "Harry Potter prison?",
+        "What is the name of the prison in the Harry Potter series?",
         "Azkaban",
         "Nurmengard",
         "Gringotts",
         "Askaban"
       ],
       [
-        "Star Wars composer?",
+        "Who is the composer of Star Wars?",
         "John Williams",
         "Hans Zimmer",
         "Ennio Morricone",
         "Alan Silvestri"
       ],
       [
-        "Longest running US live comedy?",
+        "What is the longest running US live comedy show?",
         "It's Always Sunny",
         "The Simpsons",
         "South Park",
         "Saturday Night Live"
       ],
       [
-        "'21' album singer?",
+        "Who is the singer of the album '21'?",
         "Adele",
         "Taylor Swift",
         "Lady Gaga",
         "Katy Perry"
       ],
       [
-        "1994 Best Picture starring Tom Hanks?",
+        "What 1994 Best Picture winner starred Tom Hanks?",
         "Forrest Gump",
         "Pulp Fiction",
         "Shawshank Redemption",
         "Schindler's List"
       ],
       [
-        "Mufasa voice actor?",
+        "Who is the voice actor for Mufasa?",
         "James Earl Jones",
         "Jeremy Irons",
         "Matthew Broderick",
         "Rowan Atkinson"
       ],
       [
-        "Stranger Things town?",
+        "What is the name of the town in Stranger Things?",
         "Hawkins",
         "Riverdale",
         "Sunnydale",
         "Derry"
       ],
       [
-        "'Stairway to Heaven' band?",
+        "Which band recorded 'Stairway to Heaven'?",
         "Led Zeppelin",
         "Pink Floyd",
         "Eagles",
         "Doors"
       ],
       [
-        "Walter White actor?",
+        "Who played Walter White?",
         "Bryan Cranston",
         "Robert Downey Jr",
         "Chris Evans",
         "Mark Ruffalo"
       ],
       [
-        "'Princess of Pop'?",
+        "Who is often referred to as the 'Princess of Pop'?",
         "Britney Spears",
         "Christina Aguilera",
         "Madonna",
         "Janet Jackson"
       ],
       [
-        "Captain America shield metal?",
+        "What is the metal used for Captain America's shield?",
         "Vibranium",
         "Adamantium",
         "Uru",
         "Nth Metal"
       ],
       [
-        "Grand Budapest Hotel director?",
+        "Who directed Grand Budapest Hotel?",
         "Wes Anderson",
         "Tim Burton",
         "Guillermo del Toro",
         "Edgar Wright"
       ],
       [
-        "Harry Potter broomstick sport?",
+        "What is the broomstick sport played in Harry Potter?",
         "Quidditch",
         "Quadpot",
         "Gobstones",
         "Broom-racing"
       ],
       [
-        "The Matrix Neo actor?",
+        "Who played The Matrix Neo?",
         "Keanu Reeves",
         "Tom Cruise",
         "Will Smith",
         "Brad Pitt"
       ],
       [
-        "Wizarding newspaper name?",
+        "What is the name of the wizarding newspaper in Harry Potter?",
         "The Daily Prophet",
         "The Quibbler",
         "The Daily Bugle",
         "The Wizarding Times"
       ],
       [
-        "'1989' album artist?",
+        "Who is the artist behind the album '1989'?",
         "Taylor Swift",
         "Katy Perry",
         "Ariana Grande",
         "Miley Cyrus"
       ],
       [
-        "The Simpsons town?",
+        "What is the name of the town where The Simpsons live?",
         "Springfield",
         "Shelbyville",
         "Quahog",
         "South Park"
       ],
       [
-        "'Bohemian Rhapsody' band?",
+        "Which band recorded 'Bohemian Rhapsody'?",
         "Queen",
         "Led Zeppelin",
         "Rolling Stones",
         "The Beatles"
       ],
       [
-        "Wolverine actor?",
+        "Who played Wolverine?",
         "Hugh Jackman",
         "Patrick Stewart",
         "Ian McKellen",
@@ -9041,210 +9041,210 @@ export const rawQuizData = {
     ],
     "advanced": [
       [
-        "First Best Animated Feature Oscar winner?",
+        "Which film won the first Best Animated Feature Oscar?",
         "Shrek",
         "Monsters Inc",
         "Jimmy Neutron",
         "Spirited Away"
       ],
       [
-        "Oscar Emmy Grammy Tony Pulitzer winner?",
+        "Who is the winner of an Oscar, Emmy, Grammy, Tony, and Pulitzer?",
         "Richard Rodgers",
         "Marvin Hamlisch",
         "Mel Brooks",
         "Audrey Hepburn"
       ],
       [
-        "Tolkien Elven language?",
+        "What is the name of the Elven language created by Tolkien?",
         "Sindarin",
         "Dothraki",
         "Klingon",
         "Valyrian"
       ],
       [
-        "'Rumours' album band?",
+        "Which band recorded the album 'Rumours'?",
         "Fleetwood Mac",
         "Pink Floyd",
         "Eagles",
         "Led Zeppelin"
       ],
       [
-        "First movie to gross over $1B?",
+        "What was the first movie to gross over $1 billion?",
         "Titanic",
         "Jurassic Park",
         "Episode I",
         "Avatar"
       ],
       [
-        "Most Oscar nominations actor?",
+        "Who is the actor with the most Oscar nominations?",
         "Meryl Streep",
         "Jack Nicholson",
         "Katharine Hepburn",
         "Daniel Day-Lewis"
       ],
       [
-        "Highest grossing indie film?",
+        "What is the highest grossing indie film of all time?",
         "Passion of Christ",
         "My Big Fat Greek Wedding",
         "Slumdog Millionaire",
         "Juno"
       ],
       [
-        "'Four Seasons' composer?",
+        "Who is the composer of 'Four Seasons'?",
         "Vivaldi",
         "Mozart",
         "Beethoven",
         "Bach"
       ],
       [
-        "First Mario appearance game?",
+        "What was the first game to feature Mario?",
         "Donkey Kong",
         "Super Mario Bros",
         "Mario Bros",
         "Space Invaders"
       ],
       [
-        "'Frankly my dear I don't give a damn' movie?",
+        "Which movie features the quote 'Frankly, my dear, I don't give a damn'?",
         "Gone with the Wind",
         "Casablanca",
         "Wizard of Oz",
         "Citizen Kane"
       ],
       [
-        "TARDIS fuel name?",
+        "What is the name of the fuel used for the TARDIS?",
         "Artron Energy",
         "Dilithium",
         "Kyber crystals",
         "Tachyon particles"
       ],
       [
-        "'Purple Rain' artist?",
+        "Who is the artist behind 'Purple Rain'?",
         "Prince",
         "Michael Jackson",
         "David Bowie",
         "James Brown"
       ],
       [
-        "First feature length computer animated film?",
+        "What was the first feature length computer animated film?",
         "Toy Story",
         "A Bug's Life",
         "Antz",
         "Shrek"
       ],
       [
-        "'Reservoir Dogs' director?",
+        "Who directed 'Reservoir Dogs'?",
         "Quentin Tarantino",
         "Martin Scorsese",
         "Paul Anderson",
         "Guy Ritchie"
       ],
       [
-        "Highest grossing Broadway musical?",
+        "What is the highest grossing Broadway musical of all time?",
         "The Lion King",
         "Wicked",
         "Phantom of Opera",
         "Hamilton"
       ],
       [
-        "Posthumous Oscar winner for 'Network'?",
+        "What is the posthumous oscar winner for 'network'?",
         "Peter Finch",
         "Heath Ledger",
         "James Dean",
         "Massimo Troisi"
       ],
       [
-        "Stephen King fictional town?",
+        "What is the stephen king fictional town?",
         "Castle Rock",
         "Derry",
         "Jerusalem's Lot",
         "Haven"
       ],
       [
-        "'Lemonade' artist?",
+        "Who is the artist behind the album 'Lemonade'?",
         "Beyoncé",
         "Adele",
         "Rihanna",
         "Lady Gaga"
       ],
       [
-        "First film to win 'Big Five' Oscars?",
+        "What was the first film to win the 'Big Five' Oscars?",
         "It Happened One Night",
         "One Flew Over Cuckoo's Nest",
         "Silence of Lambs",
         "Gone with the Wind"
       ],
       [
-        "'Nevermind' band?",
+        "Which band recorded the album 'Nevermind'?",
         "Nirvana",
         "Pearl Jam",
         "Soundgarden",
         "Alice in Chains"
       ],
       [
-        "Arrakis movie?",
+        "What is the name of the movie set on the planet Arrakis?",
         "Dune",
         "Tatooine",
         "Hoth",
         "Cybertron"
       ],
       [
-        "Symmetrical framing director?",
+        "Which director is famous for their symmetrical framing?",
         "Wes Anderson",
         "Stanley Kubrick",
         "Alfred Hitchcock",
         "Steven Spielberg"
       ],
       [
-        "First console with built-in HDD?",
+        "What was the first video game console with a built-in HDD?",
         "Xbox",
         "PlayStation 2",
         "GameCube",
         "Dreamcast"
       ],
       [
-        "'Here's looking at you kid' movie?",
+        "Which movie features the quote 'Here's looking at you, kid'?",
         "Casablanca",
         "Gone with the Wind",
         "Maltese Falcon",
         "The Big Sleep"
       ],
       [
-        "Avatar language name?",
+        "What is the name of the language created for Avatar?",
         "Na'vi",
         "Klingon",
         "Dothraki",
         "Valyrian"
       ],
       [
-        "'King of Rock and Roll'?",
+        "Who is known as the 'King of Rock and Roll'?",
         "Elvis Presley",
         "Chuck Berry",
         "Little Richard",
         "Jerry Lee Lewis"
       ],
       [
-        "First animated film nominated for Best Picture?",
+        "What was the first animated film nominated for Best Picture?",
         "Beauty and the Beast",
         "The Lion King",
         "Toy Story",
         "Up"
       ],
       [
-        "'Evil Dead' director?",
+        "Who directed the movie 'Evil Dead'?",
         "Sam Raimi",
         "Quentin Tarantino",
         "Robert Rodriguez",
         "Kevin Smith"
       ],
       [
-        "Highest grossing documentary?",
+        "What is the highest grossing documentary film?",
         "Fahrenheit 9/11",
         "March of Penguins",
         "Super Size Me",
         "Inconvenient Truth"
       ],
       [
-        "Hannibal Lecter Oscar winner?",
+        "Who won an Oscar for playing Hannibal Lecter?",
         "Anthony Hopkins",
         "Mads Mikkelsen",
         "Brian Cox",
