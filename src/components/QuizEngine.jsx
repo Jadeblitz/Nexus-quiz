@@ -4,6 +4,8 @@ import { useGame } from '../context/GameContext.jsx';
 import { calculateBaseGain } from "../utils/quizLogic.js";
 import QuizResults from './QuizResults.jsx';
 
+const LEADERBOARD_DATA = [{n: "Nichothéos", x: 99999}, {n: "Daragvener", x: 25000}, {n: "Thril_ler", x: 12000}];
+
 export default function QuizEngine() {
   const {
     user, stats, gameState, setGameState,
@@ -97,6 +99,10 @@ export default function QuizEngine() {
 
       {gameState === 'leaderboard' && (
         <div className="w-full max-w-md">
+          {!LEADERBOARD_DATA ? (
+            <div className="text-center text-xl text-blue-400 font-bold my-10 animate-pulse">Loading scores...</div>
+          ) : (
+            <>
           <h2 className="text-3xl font-black mb-8 flex items-center"><Users className="mr-3 text-purple-400" /> Hall of Fame</h2>
           <div className="space-y-3">
             <div className="p-5 bg-blue-500/10 border border-blue-500/40 rounded-3xl flex justify-between items-center text-left">
@@ -110,6 +116,8 @@ export default function QuizEngine() {
             ))}
           </div>
           <button onClick={() => setGameState('subject_select')} className="w-full mt-10 py-4 font-bold text-slate-500 underline">Back Home</button>
+          </>
+          )}
         </div>
       )}
     </>
