@@ -333,13 +333,14 @@ export const GameProvider = ({ children }) => {
 
     setTimeout(() => {
       setShowXpChange(false);
-      if (currentIndex < questions.length - 1) {
+      if (currentIndex + 1 < questions.length) {
         setCurrentIndex(c => c + 1);
         setSelectedAnswerIndex(null);
         setIsChecking(false);
       } else {
         setIsChecking(false);
         setSelectedAnswerIndex(null);
+        finishQuiz(newScore, updatedSessionXp);
       }
     }, isTimeAttack ? 500 : 1200);
   };
